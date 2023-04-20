@@ -13,6 +13,7 @@ import AdminUsers from './pages/AdminUsers';
 //jannith
 import Gemhome from './pages/Gemhome';
 import GemScreen from './pages/GemScreen';
+import ReqMain from './pages/ReqMain';
 
 function App() {
   const { user } = useAuthContext();
@@ -34,6 +35,7 @@ function App() {
             />
             <Route path="/gems" element={<Gemhome />}></Route>
             <Route path="/gems/:id" element={<GemScreen />}></Route>
+            <Route path="/reqM" element={<ReqMain />}></Route>
             {/* <Route 
                 path="/signup" 
                 element={!user ? <Signup /> : <Navigate to="/" />} 

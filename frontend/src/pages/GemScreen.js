@@ -107,7 +107,7 @@ function GemScreen() {
           <div className="req-box">
             <p className="req-txt-1">Can't find something you like?</p>
             <p className="req-txt-2">Let us help you</p>
-            <Link>
+            <Link to={'/reqM'}>
               <button className="req-btn">Request Gems</button>
             </Link>
           </div>
