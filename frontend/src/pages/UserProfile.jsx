@@ -22,7 +22,7 @@ const  UserProfile = ()  => {
     const { dispatch } = useAuthContext()
 
     const HandleDeleteAccount = async() => {
-        const response = await fetch(`http://localhost:4000/users/${user._id}` , {
+        const response = await fetch(`/api/users/${user._id}` , {
             method: 'DELETE',
         })
 
@@ -47,7 +47,7 @@ const  UserProfile = ()  => {
    const [userData, setUserData] = useState({});
 
    useEffect(() => {
-    axios.get(`http://localhost:4000/users/${user._id}`)
+    axios.get(`/api/users/${user._id}`)
       .then(res => setUserData(res.data))
       .catch(err => console.log(err));
   }, []);

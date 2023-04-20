@@ -1,7 +1,7 @@
-import User from '../models/users.model.js';
-import generateToken from '../utils/generateToken.js';
+const User = require('../models/users.model.js');
+const generateToken = require('../utils/generateToken.js');
 // import jwt from 'jsonwebtoken'
-import asyncHandler from 'express-async-handler';
+const asyncHandler = require('express-async-handler');
 
 // @desc    Auth user & get token
 // @route   POST /users/login
@@ -229,7 +229,7 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
-export {
+module.exports =  {
   authUser,
   registerUser,
   getUserProfile,

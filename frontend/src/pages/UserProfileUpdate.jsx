@@ -18,7 +18,7 @@ function UserProfileUpdate() {
   const [userData, setUserData] = useState({});
 
    useEffect(() => {
-    axios.get(`http://localhost:4000/users/${user._id}`)
+    axios.get(`/api/users/${user._id}`)
       .then(res => setUserData(res.data),
             res => setUserType(res.data.userType),
             res => setFirstName(res.data.firstName),
@@ -49,7 +49,7 @@ function UserProfileUpdate() {
                     };
 
                     await axios
-                      .patch(`http://localhost:4000/users/${user._id}`, updatedUser)
+                      .patch(`/api/users/${user._id}`, updatedUser)
                       .then((res) => {
                         document.location.href = `/profile/${user._id}`
                       })

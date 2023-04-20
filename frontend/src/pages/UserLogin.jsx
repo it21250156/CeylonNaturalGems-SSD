@@ -16,7 +16,7 @@ function UserLogin() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('http://localhost:4000/users/login', {
+      const { data } = await axios.post('/api/users/login', {
         email,
         password,
       });

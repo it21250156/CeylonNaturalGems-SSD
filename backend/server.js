@@ -1,10 +1,12 @@
-import dotenv from 'dotenv/config';
-import cors from 'cors';
+require('dotenv').config()
 
-import express from 'express';
-import mongoose from 'mongoose';
 
-import userRoutes from './routes/userRoutes.js';
+const cors = require('cors');
+
+const express = require('express');
+const mongoose = require('mongoose');
+
+const userRoutes = require('./routes/userRoutes.js');
 
 //janith
 const gemRoutes = require('./routes/gems');
@@ -22,7 +24,9 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.use('/users', userRoutes);
+
+//kalinga
+app.use('/api/users', userRoutes);
 
 //janith
 app.use('/api/gems&jewelleries', gemRoutes);

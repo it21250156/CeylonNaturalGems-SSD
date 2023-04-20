@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 // import validator from 'validator' // kalinga add validator
 
 const userSchema = mongoose.Schema(
@@ -103,4 +103,4 @@ userSchema.pre('save', async function (next) {
 
 const User = mongoose.model('users', userSchema);
 
-export default User;
+module.exports =  User;
