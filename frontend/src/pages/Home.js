@@ -32,7 +32,7 @@ const Home = () => {
                 <div className="darkBlueTopicBox">
                     <h3 className="pageTopic">HOME</h3>
                 </div>
-                <h1>Home Body</h1>
+                <h1>Home Body yakooow</h1>
             </div>
         </div>
       )
