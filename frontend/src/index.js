@@ -7,6 +7,7 @@ import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
 import ReqMain from './pages/ReqMain';
+import { FeedbacksContextProvider } from './context/FeedbackContext';
 
 
 import {
@@ -42,8 +43,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
+    <FeedbacksContextProvider>
     {/* <RouterProvider router={router}/> */}
       <App />
+    </FeedbacksContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

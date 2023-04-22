@@ -95,7 +95,7 @@ const Header = () => {
               <a href="#">Blog</a>
             </li>
             <li>
-              <a href="#">Feedbacks</a>
+            <Link to="/feedbacks">Feedbacks</Link>
             </li>
           </ul>
         </nav>

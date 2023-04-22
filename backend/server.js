@@ -8,6 +8,9 @@ const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/userRoutes.js');
 
+// malika
+const feedbackRoutes = require('./routes/feedbacks')
+
 //janith
 const gemRoutes = require('./routes/gems');
 
@@ -30,6 +33,8 @@ app.use((req, res, next) => {
 
 // routes
 // routes
+//malika
+app.use('/api/feedbacks',feedbackRoutes)
 
 //bimsara
 app.get("/getUsers", (req, res) => {
@@ -154,3 +159,5 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+  process.env
