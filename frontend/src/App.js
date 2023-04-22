@@ -4,13 +4,15 @@ import Header from './components/Header';
 
 // pages & components
 import Home from './pages/Home';
+
+//Kalinga
 import UserLogin from './pages/UserLogin';
 import UserRegistration from './pages/UserRegistration';
 import UserProfile from './pages/UserProfile';
 import UserProfileUpdate from './pages/UserProfileUpdate';
 import AdminUsers from './pages/AdminUsers';
 
-//jannith
+//janith
 import Gemhome from './pages/Gemhome';
 import GemScreen from './pages/GemScreen';
 import ReqMain from './pages/ReqMain';
@@ -19,6 +21,10 @@ import ReqMain from './pages/ReqMain';
 import FeedbackForm from './pages/FeedbackPage';
 import UpdateFeedback from './pages/UpdateFeedback';
 import AllFeedbacks from './pages/AllFeedbacks'
+
+//Vidxni
+import MyPayments from './pages/MyPayments';
+import PaymentForm from './components/PaymentForm';
 
 function App() {
   const { user } = useAuthContext();
@@ -55,6 +61,10 @@ function App() {
             <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
             <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
             <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
+
+            {/* vidxni */}
+            <Route path="/payments" element={<PaymentForm/>} />
+            <Route path="/MyPayments" element={<MyPayments/>}/>
           </Routes>
         </div>
       </BrowserRouter>

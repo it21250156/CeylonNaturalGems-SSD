@@ -6,6 +6,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 
+//Kalinga
 const userRoutes = require('./routes/userRoutes.js');
 
 // malika
@@ -18,6 +19,9 @@ const gemRoutes = require('./routes/gems');
 const UserModel = require("./models/Users");
 
 const ReplyModel = require("./models/reply");
+
+//Vidxni
+const paymentRoutes = require('./routes/payments')
 
 // express app
 const app = express();
@@ -32,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 // routes
-// routes
+
 //malika
 app.use('/api/feedbacks',feedbackRoutes)
 
@@ -141,11 +145,14 @@ app.delete("/delete/:id",async (req,res) => {
   res.send("deleted");
 })
 
-//kalinga
+//Kalinga
 app.use('/api/users', userRoutes);
 
 //janith
 app.use('/api/gems&jewelleries', gemRoutes);
+
+//Vidxni
+app.use('/api/payments' , paymentRoutes)
 
 // connect to db
 mongoose

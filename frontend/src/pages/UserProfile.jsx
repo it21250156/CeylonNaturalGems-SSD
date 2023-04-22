@@ -92,7 +92,7 @@ const  UserProfile = ()  => {
                     <button onClick={() => {navigate(`/profile/editProfile/${user._id}`)}}>EDIT PROFILE</button>
                     <button>MY REQUESTS</button>
                     <button>MY FEEDBACKS</button>
-                    <button>MY PAYMENTS</button>
+                    <button onClick={() => {navigate(`/MyPayments`)}}>MY PAYMENTS</button>
                 </div>
             </div>
     </div>
