@@ -21,6 +21,11 @@ import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
 
+//malika
+import FeedbackForm from './pages/FeedbackPage';
+import UpdateFeedback from './pages/UpdateFeedback';
+import AllFeedbacks from './pages/AllFeedbacks'
+
 function App() {
   const { user } = useAuthContext();
 
@@ -56,6 +61,9 @@ function App() {
               element={<UserProfileUpdate />}
             />
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
+            <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
+            <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
+            <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
           </Routes>
         </div>
       </BrowserRouter>
