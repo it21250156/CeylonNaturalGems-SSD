@@ -23,6 +23,10 @@ const ReplyModel = require('./models/reply');
 //Vidxni
 const paymentRoutes = require('./routes/payments')
 
+// Ruchira
+const jewelleryRoutes = require('./routes/jewelleryes');
+
+
 // express app
 const app = express();
 
@@ -153,6 +157,10 @@ app.use('/api/cart', cartRoutes);
 
 //Vidxni
 app.use('/api/payments' , paymentRoutes)
+
+// Ruchira
+app.use('/api/jewelleryes', jewelleryRoutes);
+
 
 // connect to db
 mongoose

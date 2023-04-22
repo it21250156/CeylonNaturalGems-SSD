@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 // components
 
-const Home = () => {
+const AdminHome = () => {
     const {user} = useAuthContext()
     const navigate = useNavigate()
 
@@ -27,16 +27,11 @@ const Home = () => {
         }
       }, [user])
     return (
-        <div className="lightBlueBodyBG">
-            <div className="whiteBodyBG">
-                <div className="darkBlueTopicBox">
-                    <h3 className="pageTopic">ADMIN HOME</h3>
-                </div>
-                <h1>Home Body</h1>
-                <button onClick={() => {navigate(`/UserProfile/${user._id}`)}}>My Profile</button>
-            </div>
-        </div>
+      <div className="home">
+      <h1>hi Admin</h1>
+      <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Jewellery</button>
+    </div>
       )
 }
 
-export default Home
+export default AdminHome
