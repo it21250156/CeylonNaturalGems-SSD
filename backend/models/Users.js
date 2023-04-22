@@ -47,15 +47,15 @@ const UserSchema = new mongoose.Schema({
     },
 });
 
-const ReplySchema = new mongoose.Schema({
+// const ReplySchema = new mongoose.Schema({
 
 
-    Reply:{
-        type: String,
-        required: true,
-    },
+//     Reply:{
+//         type: String,
+//         required: true,
+//     },
 
-})
+// })
 
 const UserModel = mongoose.model("requests", UserSchema);
 module.exports = UserModel;
