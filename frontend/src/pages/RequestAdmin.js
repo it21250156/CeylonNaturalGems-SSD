@@ -2,6 +2,7 @@ import '../CSS/AppBW.css';
 import {useState, useEffect} from "react";
 import React from 'react';
 import Axios from "axios";
+import { Link, useParams } from 'react-router-dom';
 
   
 
