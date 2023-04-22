@@ -14,29 +14,29 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App/>,
-  },
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App/>,
+//   },
 
-  {
-    path: "myreq",
-    element: <MyReq/>,
-  },
-  {
-    path: "reqAd",
-    element: <RequestAdmin/>,
-  },
-  {
-    path: "reqRp",
-    element: <ReplyRequest/>,
-  },
-  {
-    path: "reqM",
-    element: <ReqMain/>,
-  },
-]);
+//   {
+//     path: "myreq",
+//     element: <MyReq/>,
+//   },
+//   {
+//     path: "reqAd",
+//     element: <RequestAdmin/>,
+//   },
+//   {
+//     path: "reqRp",
+//     element: <ReplyRequest/>,
+//   },
+//   {
+//     path: "reqM",
+//     element: <ReqMain/>,
+//   },
+// ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

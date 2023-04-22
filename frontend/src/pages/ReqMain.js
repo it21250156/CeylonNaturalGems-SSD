@@ -5,6 +5,7 @@ import {useForm} from 'react-hook-form';
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Header from '../components/Header';
+import { Link, useParams } from 'react-router-dom';
 
 const validationSchema = yup.object().shape({
   // requestID: yup.number().required("Request ID is required"),
@@ -38,14 +39,14 @@ function ReqMain() {
   
 
   useEffect(() => {
-    Axios.get("http://localhost:3002/getUsers").then((response) => {
+    Axios.get("/getUsers").then((response) => {
       setListOfRequests(response.data);
     });
   }, []);
 
 
   const createRequest = (data) => {
-    Axios.post("http://localhost:3002/createUser", data).then((response) => {
+    Axios.post("/createUser", data).then((response) => {
       alert("Request Added!");
     });
   };
@@ -142,7 +143,10 @@ function ReqMain() {
           </form>
             </div>
 
-          <button className='viewreqbt' onClick={() => {window.location.href = "./MyReq"}}>View My Requests</button>
+          {/* <button className='viewreqbt' onClick={() => {window.location.href = "./MyReq"}}>View My Requests</button> */}
+          <Link to={'/MyReq'}>
+              <button className="req-btn">View My Requests</button>
+            </Link>
 
           
           
