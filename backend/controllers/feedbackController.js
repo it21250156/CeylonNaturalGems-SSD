@@ -90,6 +90,7 @@ const deleteFeedback = async (req, res) => {
 //update a feedback
 const updateFeedback = async(req, res) => {
     const { id } = req.params
+    console.log(req.body.reply)
 
   if(!mongoose.Types.ObjectId.isValid(id)){
 
@@ -98,7 +99,7 @@ const updateFeedback = async(req, res) => {
 
   const feedback = await Feedback.findOneAndUpdate({_id: id}, {
     ...req.body
-  })
+  },{new:true})
   
   if(!feedback) {
     return res.status(400).json({error: 'No such feedback'})

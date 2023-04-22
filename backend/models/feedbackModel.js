@@ -25,7 +25,14 @@ const feedbackSchema = new Schema({
 
         type:Number,
         required: true
+    },
+
+    reply: {
+
+        type:String,
+        required: false
     }
+
 
 }, {timestamps: true})
 
