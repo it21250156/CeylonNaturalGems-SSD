@@ -16,9 +16,9 @@ import AdminUsers from './pages/AdminUsers';
 import Gemhome from './pages/Gemhome';
 import GemScreen from './pages/GemScreen';
 
-
 //bimsara
 import ReqMain from './pages/ReqMain';
+
 import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
@@ -26,11 +26,13 @@ import ReplyRequest from './pages/ReplyRequest';
 //malika
 import FeedbackForm from './pages/FeedbackPage';
 import UpdateFeedback from './pages/UpdateFeedback';
-import AllFeedbacks from './pages/AllFeedbacks'
+import AllFeedbacks from './pages/AllFeedbacks';
 
 //Vidxni
 import MyPayments from './pages/MyPayments';
 import PaymentForm from './components/PaymentForm';
+
+import CartPage from './pages/CartPage';
 
 function App() {
   const { user } = useAuthContext();
@@ -50,12 +52,16 @@ function App() {
               path="/Register"
               element={!user ? <UserRegistration /> : <Navigate to="/" />}
             />
+
+            {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
             <Route path="/gems/:id" element={<GemScreen />}></Route>
+            <Route path="/mycart" element={<CartPage />}></Route>
+
             <Route path="/reqM" element={<ReqMain />}></Route>
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
-            
+
             {/* <Route 
                 path="/signup" 
                 element={!user ? <Signup /> : <Navigate to="/" />} 
@@ -67,13 +73,13 @@ function App() {
               element={<UserProfileUpdate />}
             />
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
-            <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
-            <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
-            <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
+            <Route path="/feedbacks" element={<AllFeedbacks />} />
+            <Route path="/FeedbackForm" element={<FeedbackForm />} />
+            <Route path="/UpdateFeedback/:_id" element={<UpdateFeedback />} />
 
             {/* vidxni */}
-            <Route path="/payments" element={<PaymentForm/>} />
-            <Route path="/MyPayments" element={<MyPayments/>}/>
+            <Route path="/payments" element={<PaymentForm />} />
+            <Route path="/MyPayments" element={<MyPayments />} />
           </Routes>
         </div>
       </BrowserRouter>

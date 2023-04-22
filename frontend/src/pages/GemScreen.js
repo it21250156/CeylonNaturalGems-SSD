@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import logger from 'use-reducer-logger';
 import '../CSS/GemScreen.css';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 export const gemsReducer = (state, action) => {
   switch (action.type) {
@@ -28,6 +29,7 @@ export const gemsReducer = (state, action) => {
 };
 
 function GemScreen() {
+  const { user, cartData, setCartData, handleAddToCart } = useAuthContext();
   const params = useParams();
   const { id } = params;
   const [{ loading, error, gem }, dispatch] = useReducer(logger(gemsReducer), {
@@ -49,6 +51,24 @@ function GemScreen() {
     };
     fetchGems();
   }, [id]);
+
+  // const handleAddToCart = async (itemid) => {
+  //   const data = {
+  //     cartitemid: itemid,
+  //     cartquantity: 1,
+  //     cartuserid: JSON.parse(localStorage.getItem('userInfo'))._id,
+  //   };
+  //   const response = await fetch(`/api/cart/`, {
+  //     method: 'POST',
+  //     body: JSON.stringify(data),
+  //     headers: { 'Content-Type': 'application/json' },
+  //   });
+  //   await fetch(`/api/cart/user/${data.cartuserid}`)
+  //     .this((res) => res.json())
+  //     .this((json) => setCartData(json));
+  //   // setCartData();
+  // };
+
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
@@ -64,7 +84,12 @@ function GemScreen() {
               <p className="gem-price">${gem.price}</p>
 
               <div className="btns">
-                <button className="btn-add-to-cart">Add to cart</button>
+                <button
+                  onClick={() => handleAddToCart(gem._id)}
+                  className="btn-add-to-cart"
+                >
+                  Add to cart
+                </button>
                 <button className="btn-pay-in-installments">
                   Pay in Installments
                 </button>
