@@ -1,0 +1,178 @@
+.profileBodyContainer {
+  margin: 2%;
+}
+
+.lightBlueBodyBGUserprofile {
+  background-color: #cadefc;
+  margin: 0 100px;
+  padding: 30px 0;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.darkBlueTopicBoxUserprofile {
+  background-color: #144272;
+  margin: 0 100px;
+  padding: 40px 0;
+  border-radius: 20px;
+  margin-bottom: 1%;
+}
+
+.pageTopicUserprofile {
+  color: white;
+  font-family: Bebas Neue;
+  font-weight: 100;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+}
+
+.top-pic-btns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profilePhotoDiv {
+  margin: 20px 50px;
+}
+
+.profilePhotoDiv img {
+  width: 150px;
+  height: 150px;
+}
+
+.top-btns {
+  margin-left: auto;
+}
+
+.deleteAccountBtn {
+  margin: 0 5px 0 0;
+  padding: 20px;
+  border: 2px solid red;
+  background-color: red;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 25px;
+  border-radius: 15px;
+}
+
+.deleteAccountBtn:hover {
+  border: 2px solid red;
+  background-color: white;
+  color: red;
+  transition: 0.5s;
+}
+
+.logoutbtn {
+  margin: 0 20px 0 5px;
+  padding: 20px;
+  border: 2px solid #144272;
+  background-color: #144272;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 25px;
+  border-radius: 15px;
+  width: 150px;
+}
+
+.logoutbtn:hover {
+  border: 2px solid #144272;
+  background-color: white;
+  color: #144272;
+  transition: 0.5s;
+}
+
+.details-area {
+  margin: 20px 60px;
+}
+
+.UserName {
+  margin-bottom: 40px;
+}
+
+.username-h1 {
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-family: bpreplay;
+  font-weight: 100;
+  font-size: 50px;
+}
+
+table {
+  width: 700px;
+  margin: auto;
+}
+
+.detail-label {
+  font-family: Bebas Neue;
+  font-size: 30px;
+}
+
+.detail-prop {
+  font-family: bpreplay;
+  font-size: 20px;
+  background-color: white;
+  padding: 10px 6px 6px 10px;
+  border-radius: 10px;
+}
+
+.edt-andreset-pw-btns {
+  margin: 20px;
+}
+
+.reset-pw-btn {
+  background-color: #2c74b3;
+  border: 2px solid #2c74b3;
+  padding: 10px;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  border-radius: 10px;
+  width: 150px;
+  margin: 20px 10px;
+}
+
+.reset-pw-btn:hover {
+  background-color: white;
+  border: 2px solid #2c74b3;
+  color: #2c74b3;
+  transition: 0.5s;
+}
+
+.edt-prof-btn {
+  background-color: #2c74b3;
+  border: 2px solid #2c74b3;
+  padding: 10px;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.edt-prof-btn:hover {
+  background-color: white;
+  border: 2px solid #2c74b3;
+  color: #2c74b3;
+  transition: 0.5s;
+}
+
+.my---btn {
+  border: 2px solid #144272;
+  background-color: #144272;
+  margin: 0 10px;
+  padding: 20px;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 25px;
+  border-radius: 15px;
+}
+
+.my---btn:hover {
+  border: 2px solid #144272;
+  background-color: white;
+  color: #144272;
+  transition: 0.5s;
+}

@@ -10,7 +10,7 @@ const Header = () => {
   const { logout } = useLogout();
   const { user, cartData, setCartData } = useAuthContext();
 
-  // const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   // const [userData, setUserData] = useState({});
 
@@ -27,7 +27,7 @@ const Header = () => {
     logout();
     navigate('/');
   };
-  const userid = JSON.parse(localStorage.getItem('userInfo'))._id;
+  // const userid = JSON.parse(localStorage.getItem('userInfo'))._id;
 
   var cart = [];
 
@@ -52,7 +52,8 @@ const Header = () => {
             {user && (
               <div className="navEmal">
                 <span>
-                  Hello {user.title} {user.firstName} {user.lastName}
+                  Hello {userInfo.title} {userInfo.firstName}{' '}
+                  {userInfo.lastName}
                 </span>
                 <button onClick={handleClick}>Log out</button>
                 <button
@@ -106,7 +107,7 @@ const Header = () => {
               <a href="#">Blog</a>
             </li>
             <li>
-            <Link to="/feedbacks">Feedbacks</Link>
+              <Link to="/feedbacks">Feedbacks</Link>
             </li>
             <li>
               <Link to="/mycart">Cart {cartData?.length}</Link>
