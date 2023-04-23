@@ -27,6 +27,7 @@ import ReplyRequest from './pages/ReplyRequest';
 import FeedbackForm from './pages/FeedbackPage';
 import UpdateFeedback from './pages/UpdateFeedback';
 import AllFeedbacks from './pages/AllFeedbacks'
+import UserFeedbacks from './pages/UserFeedbacks'
 
 //Vidxni
 import MyPayments from './pages/MyPayments';
@@ -70,6 +71,8 @@ function App() {
             <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
             <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
             <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
+            {/* <Route path ='/UserFeedbacks/:_id' element ={<UserFeedbacks/>}/>  */}
+
 
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm/>} />
