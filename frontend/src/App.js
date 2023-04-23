@@ -47,6 +47,7 @@ import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan'
 import AllInstallments from './pages/AllInstallments'
 import AdminInstallmentPlans from './pages/AdminInstallmentPlans'
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
+import MyInstallments from './pages/MyInstallments';
 
 function App() {
   const { user } = useAuthContext();
@@ -111,6 +112,7 @@ function App() {
             
             <Route path = "/AdminInstallmentPlans" element={ <AdminInstallmentPlans />} />  
             <Route path= "/AdminInstallmentPlans/adminUpdatePlan/:id" element={ <AdminUpdatePlan /> } />
+            <Route path= "/profile/MyPayments/MyInstallments/:id" element={ <MyInstallments /> } />
 
           </Routes>
         </div>

@@ -30,6 +30,6 @@ router.patch('/:id', updateInstallment)
 
 
 //GET installments for a specific user
-router.get('/:user', getUserInstallment)
+router.get('/userInstallments/:user', getUserInstallment)
 
 module.exports = router
