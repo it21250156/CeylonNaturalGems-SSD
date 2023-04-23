@@ -26,6 +26,10 @@ const paymentRoutes = require('./routes/payments')
 // Ruchira
 const jewelleryRoutes = require('./routes/jewelleryes');
 
+// vihangi
+const planRoutes = require('./routes/plans')
+const installmentsRoutes = require('./routes/installments')
+
 
 // express app
 const app = express();
@@ -160,6 +164,10 @@ app.use('/api/payments' , paymentRoutes)
 
 // Ruchira
 app.use('/api/jewelleryes', jewelleryRoutes);
+
+// vihangi
+app.use('/api/plans', planRoutes)
+app.use('/api/installments', installmentsRoutes)
 
 
 // connect to db

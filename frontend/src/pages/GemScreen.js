@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import logger from 'use-reducer-logger';
 import '../CSS/GemScreen.css';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const gemsReducer = (state, action) => {
   switch (action.type) {
@@ -29,6 +30,8 @@ export const gemsReducer = (state, action) => {
 };
 
 function GemScreen() {
+  const navigate= useNavigate();
+
   const { user, cartData, setCartData, handleAddToCart } = useAuthContext();
   const params = useParams();
   const { id } = params;
@@ -90,7 +93,9 @@ function GemScreen() {
                 >
                   Add to cart
                 </button>
-                <button className="btn-pay-in-installments">
+                <button 
+                  onClick={() => navigate(`/InstallmentPlans`)}
+                  className="btn-pay-in-installments">
                   Pay in Installments
                 </button>
               </div>
