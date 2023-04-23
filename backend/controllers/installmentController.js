@@ -81,21 +81,21 @@ const updateInstallment = async (req, res) => {
 /*****************************/
 
 //GET installments for a specific user
-// const getUserInstallment = async (req, res) => {
-//     const {user} = req.params
+const getUserInstallment = async (req, res) => {
+    const {user} = req.params
 
-//     if(!mongoose.Types.ObjectId.isValid(user)) {
-//         return res.status(404).json({error:'No such user'})
-//     }
+    if(!mongoose.Types.ObjectId.isValid(user)) {
+        return res.status(404).json({error:'No such user'})
+    }
 
-//     const installment = await Installment.find({user:user})
+    const installment = await Installment.find({user:user})
 
-//     if (!installment) {
-//         return res.status(404).json({error: 'No installments'})
-//     }
+    if (!installment) {
+        return res.status(404).json({error: 'No installments'})
+    }
     
-//     res.status(200).json(installment)
-// }
+    res.status(200).json(installment)
+}
 
 
 module.exports = {
