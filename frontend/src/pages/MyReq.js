@@ -6,6 +6,7 @@ import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
 
 
 const schema = yup.object().shape({
@@ -90,9 +91,9 @@ function MyReq(){
     return(
         <div className="MyRequests">
 
-            <div className='headding'>
-                     <h1>My Requests</h1>
-            </div>
+        <div className='headding'>
+          My Requests
+        </div>
 
             <div className="requestM">
 
@@ -133,8 +134,8 @@ function MyReq(){
                             setNewGemColour(event.target.value);
                         }}/>
                     
-                    <input 
-                        type='text' 
+                    <TextareaAutosize  minRows={2} maxRows={6} type="textbox"  
+                         
                         placeholder='Edit description....' 
                         className='edtds'
                         onChange={(event) => {

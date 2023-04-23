@@ -20,6 +20,7 @@ import ReqMain from './pages/ReqMain';
 import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
+import Myreply from './pages/Myreply';
 
 //malika
 import FeedbackForm from './pages/FeedbackPage';
@@ -49,6 +50,8 @@ function App() {
             <Route path="/reqM" element={<ReqMain />}></Route>
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
+            <Route path="/reqReply" element={<ReplyRequest />}></Route>
+            <Route path="/Myrep" element={<Myreply />}></Route>
             
             {/* <Route 
                 path="/signup" 

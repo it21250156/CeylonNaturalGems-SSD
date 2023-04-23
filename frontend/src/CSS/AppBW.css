@@ -198,6 +198,27 @@
   color: wheat;
 }
 
+.Srepbtn{
+  float: center;
+  width: 250px;
+  font-size: 30px;
+  margin-bottom: 20px;
+  
+  margin-top: 30px;
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  background-color: orange;
+  color: white;
+}
+
+.Srepbtn:hover{
+  background-color: blue;
+  color: wheat;
+}
+
 .edtsp{
   float: left;
   margin-top: -20%;
@@ -224,7 +245,7 @@
 
 .edtds{
   float: left;
-  margin-top: -14%;
+  margin-top: -11%;
   margin-left: 35%;
   border-radius: 5px;
   padding-top: 5px;
@@ -236,7 +257,7 @@
 
 .edtwt{
   float: left;
-  margin-top: -11%;
+  margin-top: -14%;
   margin-left: 35%;
   border-radius: 5px;
   padding-top: 5px;
@@ -249,3 +270,4 @@
 .validation{
   color: red;
 }
+

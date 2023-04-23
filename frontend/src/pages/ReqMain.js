@@ -6,6 +6,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Header from '../components/Header';
 import { Link, useParams } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const validationSchema = yup.object().shape({
   // requestID: yup.number().required("Request ID is required"),
@@ -65,6 +66,7 @@ function ReqMain() {
         <div className='requestM'>
 
         <form onSubmit={handleSubmit(createRequest)}>
+        
             <div className='requantent'>
             {/* <p>Request ID</p>
               <input className='tb' type="number"  placeholder="Request ID..." {...register("requestID")} onChange={(event) =>{
@@ -91,7 +93,7 @@ function ReqMain() {
               {errors.GemShape && <p className='validation'>{errors.GemShape.message}</p>}
 
               <p>Description</p>
-              <input className='tb' type="textbox"  placeholder="Description..." {...register("Description")} onChange={(event) =>{
+              <TextareaAutosize className="tb" minRows={3} maxRows={6}  style={{ width: '100%' }} type="textbox"  placeholder="Description..." {...register("Description")} onChange={(event) => {
                 setDescription(event.target.value);
               }}/>
               {errors.Description && <p className='validation'>{errors.Description.message}</p>}
