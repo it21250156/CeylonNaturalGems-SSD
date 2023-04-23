@@ -52,8 +52,7 @@ const Header = () => {
             {user && (
               <div className="navEmal">
                 <span>
-                  Hello {userInfo.title} {userInfo.firstName}{' '}
-                  {userInfo.lastName}
+                  Hello {user.title} {user.firstName} {user.lastName}
                 </span>
                 <button onClick={handleClick}>Log out</button>
                 <button

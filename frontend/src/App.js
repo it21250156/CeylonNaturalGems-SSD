@@ -34,6 +34,12 @@ import PaymentForm from './components/PaymentForm';
 
 import CartPage from './pages/CartPage';
 
+// ruchira
+import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
+import AddJewelleryes from './pages/AddJewelleryes';
+import JewelleryDetails from './components/JewelleryDetails';
+import UpdateJewellery from './pages/UpdateJewellery'
+
 function App() {
   const { user } = useAuthContext();
 
@@ -80,6 +86,14 @@ function App() {
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
             <Route path="/MyPayments" element={<MyPayments />} />
+
+            {/* ruchira */}
+            <Route path='/JewelleryAdminDashboard' element={<JewelleryAdminDashboard/>}/>
+
+            <Route path='/AddJewelleryes' element={<AddJewelleryes/>}/>
+
+            <Route path='/UpdateJewelleryes/:_id' element={<UpdateJewellery/>}/>            
+
           </Routes>
         </div>
       </BrowserRouter>
