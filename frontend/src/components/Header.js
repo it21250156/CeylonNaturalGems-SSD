@@ -29,7 +29,7 @@ const Header = () => {
   };
   // const userid = JSON.parse(localStorage.getItem('userInfo'))._id;
 
-  var cart = [];
+  var crt = [];
 
   // useEffect(() => {
   // //   fetch(`/api/cart/user/${userid}`)
