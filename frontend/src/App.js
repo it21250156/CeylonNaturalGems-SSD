@@ -40,6 +40,14 @@ import AddJewelleryes from './pages/AddJewelleryes';
 import JewelleryDetails from './components/JewelleryDetails';
 import UpdateJewellery from './pages/UpdateJewellery'
 
+
+//vihangi
+import InstallmentPlans from './pages/InstallmentPlans'
+import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan'
+import AllInstallments from './pages/AllInstallments'
+import AdminInstallmentPlans from './pages/AdminInstallmentPlans'
+import AdminUpdatePlan from './pages/AdminUpdatePlan';
+
 function App() {
   const { user } = useAuthContext();
 
@@ -93,6 +101,16 @@ function App() {
             <Route path='/AddJewelleryes' element={<AddJewelleryes/>}/>
 
             <Route path='/UpdateJewelleryes/:_id' element={<UpdateJewellery/>}/>            
+
+            {/* Vihangi  */}
+            <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
+            <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
+
+            {/* admin */}
+            <Route path = "/AllInstallments" element={ <AllInstallments />} />
+            
+            <Route path = "/AdminInstallmentPlans" element={ <AdminInstallmentPlans />} />  
+            <Route path= "/AdminInstallmentPlans/adminUpdatePlan/:id" element={ <AdminUpdatePlan /> } />
 
           </Routes>
         </div>
