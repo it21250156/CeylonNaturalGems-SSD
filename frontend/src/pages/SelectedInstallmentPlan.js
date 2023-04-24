@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import firstPayment from './firstPayment'
 
 //components
 
@@ -26,9 +27,8 @@ const SelectedInstallmentPlan = () => {
         fetchPlans()
     },[])
 
-    
-
     return (
+        <>
         <div className="selectedInstalmentPlan">
             <center> 
             <h2>Selected Installment Plan</h2>
@@ -43,10 +43,13 @@ const SelectedInstallmentPlan = () => {
                 <hr></hr>
                 <div className="slected-plan-details">
                     <h4> {plans.name} </h4>
-                    <p><strong>Months : </strong> {plans.months} </p>
+                    <p><strong>No of Months : </strong> {plans.months} </p>
 
                     {/* calculate the initial payment and display it here */}
                     <p><strong>Initial Payment : </strong> {plans.initialPayment} %</p>
+                    <div>
+                    <firstPayment plans={plans} gem={gem}></firstPayment>
+                    </div>
                     <p><strong>Amount to be paid per month : </strong> </p>
                     <button onClick={() => {navigate(`/payments`)}}> proceed to pay </button>
                 </div>
@@ -54,7 +57,22 @@ const SelectedInstallmentPlan = () => {
             </div>
             </center>
         </div>
+        </>
     )
 }
+
+// const firstPayment = ({ plans , gem }) => {
+//     let fpay=0;
+
+//     let price = gem.price;
+//     let initial = plans.initialPayment;
+
+//     fpay = (price * initial) / 100;
+
+//     console.log(fpay)
+
+//     return fpay;
+
+// }
 
 export default SelectedInstallmentPlan
