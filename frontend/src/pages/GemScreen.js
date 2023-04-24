@@ -3,6 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import logger from 'use-reducer-logger';
 import '../CSS/GemScreen.css';
 import { useAuthContext } from '../hooks/useAuthContext';
+
+import Header from '../components/Header';
+
 import { useNavigate } from 'react-router-dom';
 
 export const gemsReducer = (state, action) => {
@@ -77,6 +80,8 @@ function GemScreen() {
   ) : error ? (
     { error }
   ) : (
+    <>
+    <Header/>
     <div>
       <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
@@ -144,6 +149,7 @@ function GemScreen() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
