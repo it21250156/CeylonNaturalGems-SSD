@@ -32,14 +32,30 @@ const PaymentSchema = new Schema({
         required: true
       },
       dStatus:{
-        type:Number
+        type:String,
+        default:"pending"
       },
       orderID:{
-        type:String
+        type:[String],
+        required: true
       },
+      // userID:{
+      //   type:String
+      // }
       userID:{
-        type:String
-      }
+        type: Schema.Types.ObjectId,
+        ref:'user',
+       
+      },
+      // gemID:{
+      //   type: Schema.Types.ObjectId,
+      //   ref:'gem',
+      //   required: true
+      // },
+      // quantity:{
+      //   type: Number,
+      //   required: true
+      // }
 }, {timestamps: true})
 
 module.exports = mongoose.model('Payment' , PaymentSchema)

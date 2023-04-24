@@ -65,21 +65,44 @@ const MyPayments = () => {
 }
 
 const PaymentRow = ({payment}) => {
+     const navigate = useNavigate()
 
-    const {dispatch} = usePaymentContext()
+    // const {dispatch} = usePaymentContext()
+
+    // const handleDelete = async () => {
+    //     const response = await fetch('api/payments/' + payment._id , {
+    //         method: 'DELETE'
+    //     })
+    //     const json = await response.json()
+
+    //     if (response.ok) {
+    //         dispatch({type:'DELETE_PAYMENT' , payload: json})
+    //         window.location.reload();
+    //     }
+    // }
+
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const handleDelete = async () => {
-        const response = await fetch('api/payments/' + payment._id , {
-            method: 'DELETE'
-        })
-        const json = await response.json()
-
-        if (response.ok) {
-            dispatch({type:'DELETE_PAYMENT' , payload: json})
+        try {
+          setIsDeleting(true);
+          const response = await fetch(`api/payments/${payment._id}`, {
+            method: 'DELETE',
+          });
+          if (response.ok) {
             window.location.reload();
+          } else {
+            const json = await response.json();
+            // Handle error response
+            console.error(json.error);
+          }
+        } catch (error) {
+          // Handle fetch error
+          console.error(error);
+        } finally {
+          setIsDeleting(false);
         }
-    }
-    
+      };
 
     return (
     <tr key={payment._id}>
@@ -89,8 +112,11 @@ const PaymentRow = ({payment}) => {
         <td>{payment.dmethod}</td>
         <td>{payment.dStatus}</td>
         <td>{payment.createdAt}</td>
-        <td><button onClick={handleDelete}>DELETE</button></td>
-        <td><button >UPDATE</button></td>
+        <td><button onClick={handleDelete} disabled={isDeleting}>
+        {isDeleting ? 'Deleting...' : 'Delete'}
+      </button></td>
+        <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
+        <td><button> FEEDBACK </button></td>
     </tr>
     )
 }

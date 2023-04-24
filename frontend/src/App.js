@@ -32,7 +32,7 @@ import AllFeedbacks from './pages/AllFeedbacks';
 //Vidxni
 import MyPayments from './pages/MyPayments';
 import PaymentForm from './components/PaymentForm';
-
+import PaymentUpdate from './components/PaymentUpdate';
 import CartPage from './pages/CartPage';
 
 // ruchira
@@ -98,6 +98,7 @@ function App() {
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
             <Route path="/MyPayments" element={<MyPayments />} />
+            <Route path="/MyPayments/PaymentUpdate/:id" element={<PaymentUpdate/>}/>
 
             {/* ruchira */}
             <Route path='/JewelleryAdminDashboard' element={<JewelleryAdminDashboard/>}/>
