@@ -30,6 +30,8 @@ import Myreply from './pages/Myreply';
 import FeedbackForm from './pages/FeedbackPage';
 import UpdateFeedback from './pages/UpdateFeedback';
 import AllFeedbacks from './pages/AllFeedbacks';
+import UserFeedbacks from './pages/UserFeedbacks';
+import AdminFeedbacks from './pages/AdminFeedbacks';
 
 //Vidxni
 import MyPayments from './pages/MyPayments';
@@ -57,11 +59,14 @@ import AdminInstallmentPlans from './pages/AdminInstallmentPlans'
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
 import MyInstallments from './pages/MyInstallments';
 
+<<<<<<< Updated upstream
 //ammaar
 import GemAdminHome from './pages/GemAdminHome'
 import AddGem from './pages/AddGem';
 import UpdateGems from './pages/UpdateGems';
 
+=======
+>>>>>>> Stashed changes
 
 function App() {
   const { user } = useAuthContext();
@@ -104,9 +109,14 @@ function App() {
               element={<UserProfileUpdate />}
             />
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
+
+            {/* Malika */}
             <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
-            <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
+            <Route path ="/Userfeedbacks" element={<UserFeedbacks/>}/> 
+            <Route path ="/AdminFeedbacks" element={<AdminFeedbacks/>}/> 
+            <Route path ='/FeedbackForm/:_id' element ={<FeedbackForm/>}/> 
             <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
+            
 
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />

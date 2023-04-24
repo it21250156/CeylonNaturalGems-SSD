@@ -45,7 +45,10 @@ function UpdateFeedback() {
         })
         const json = await response.json()
 
-        nav('/feedbacks')
+        // nav('/feedbacks')
+        nav('/UserFeedbacks')
+
+        
 
 
     }

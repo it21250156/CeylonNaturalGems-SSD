@@ -1,13 +1,12 @@
 import { useFeedbacksContext } from "../hooks/useFeedbackContext"
 import { Link } from 'react-router-dom'
 import StarRating from 'react-star-ratings';
-import axios from 'axios';
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { useEffect, useState } from "react";
 
-const FeedbackDetails = ({feedback}) =>{
+const FeedbackDetailsAdmin = ({feedback}) =>{
 
   const[feedbackReply,setFeedbackReply] = useState('')
   
@@ -56,26 +55,12 @@ const FeedbackDetails = ({feedback}) =>{
        dispatch({type: 'DELETE_FEEDBACK', payload: json})
     }
   }
-//=========================================================
-  const user = JSON.parse(localStorage.getItem('userInfo'));
 
-  /*******************************************************/
-
-  const [userData, setUserData] = useState({});
-
-  useEffect(() => {
-    axios
-      .get(`/api/users/${user._id}`)
-      .then((res) => setUserData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-//=============================================
 
   return (
-    <div className="feedback-details">
+    <div className="feedback-details-Admin">
       <h4>{feedback.gemType}</h4>
       {/* {JSON.stringify(feedbacks)} */}
-      <p><strong>User Name: </strong>{userData.firstName}</p>
       <p><strong>Gem Quantity: </strong>{feedback.gemQty}</p>
       <p><strong>Feedback: </strong>{feedback.fbInfo}</p>
       {/* <p><strong>Rating: </strong>{feedback.rating}</p> */}
@@ -100,10 +85,7 @@ const FeedbackDetails = ({feedback}) =>{
         <input type="submit" />
 
       </form>
-      {/* <Link to = {"/UpdateFeedback/:_id"}> */}
-      <Link to = {`/UpdateFeedback/${feedback._id}`}>
-      <span >Update</span>
-      </Link>
+      
 
 
       
@@ -112,4 +94,4 @@ const FeedbackDetails = ({feedback}) =>{
 
 }
 
-export default FeedbackDetails
+export default FeedbackDetailsAdmin
