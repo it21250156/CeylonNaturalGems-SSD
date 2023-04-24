@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
-import Header from '../components/Header';
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
@@ -22,6 +21,8 @@ function MyReq() {
   const [newGemColour, setNewGemColour] = useState('');
   const [newGemDescription, setNewnewGemDescription] = useState('');
   const [newGemWeight, setNewnewGemWeight] = useState('');
+  const gemShapes = ['round', 'oval', 'pear', 'marquise', 'emerald', 'heart', 'princess', 'cushion'];
+
 
   const deletereq = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
@@ -45,6 +46,7 @@ function MyReq() {
       });
     }
   };
+  
 
   const updateGemColour = (id) => {
     if (newGemColour) {
@@ -88,8 +90,6 @@ function MyReq() {
   });
 
   return (
-    <>
-    <Header/>
     <div className="MyRequests">
       <div className="darkBlueTopicBoxReq">
           <h1 className="pageTopicReq">My Requests</h1>
@@ -148,14 +148,20 @@ function MyReq() {
 
                   <div className="myreq-column-2">
                     <form>
-                      <input
-                        type="text"
-                        placeholder="Edit gem shape...."
-                        className="input"
-                        onChange={(event) => {
-                          setNewGemShape(event.target.value);
-                        }}
-                      />
+                    <select
+                      className="input"
+                      onChange={(event) => {
+                        setNewGemShape(event.target.value);
+                      }}
+                    >
+                      <option value="">Select a shape</option>
+                      {gemShapes.map((shape) => (
+                        <option key={shape} value={shape}>
+                          {shape}
+                        </option>
+                      ))}
+                    </select>
+
 
                       <input
                         type="text"
@@ -236,7 +242,6 @@ function MyReq() {
         Create a new request
       </button>
     </div>
-    </>
   );
 }
 

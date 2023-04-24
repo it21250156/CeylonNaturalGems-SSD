@@ -106,18 +106,27 @@ function ReqMain() {
 
                 {/* shape */}
                 <label className="label">Gem Shape</label>
-                <input
+                <select
                   className="input"
-                  autoComplete="on"
-                  type="text"
                   {...register('GemShape')}
                   onChange={(event) => {
                     setGemShape(event.target.value);
                   }}
-                />
+                >
+                  <option value="">Select a shape</option>
+                  <option value="Round">Round</option>
+                  <option value="Oval">Oval</option>
+                  <option value="Pear">Pear</option>
+                  <option value="Marquise">Marquise</option>
+                  <option value="Emerald">Emerald</option>
+                  <option value="Heart">Heart</option>
+                  <option value="Trillion">Trillion</option>
+                  <option value="Princess">Princess</option>
+                </select>
                 {errors.GemShape && (
                   <p className="validation">{errors.GemShape.message}</p>
                 )}
+
 
                 {/* description */}
                 <label className="label">Description</label>
