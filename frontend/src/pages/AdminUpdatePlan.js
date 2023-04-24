@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { usePlansContext } from "../hooks/usePlanContext"
+import { useNavigate } from 'react-router-dom'
 
 
 const AdminUpdatePlan = () => {
     const { dispatch } = usePlansContext()
+    const navigate = useNavigate()
 
     const [name, setName] = useState('')
     const [months, setMonths] = useState('')
@@ -62,6 +64,7 @@ const AdminUpdatePlan = () => {
             // dispatch({type: 'UPDATE_PLANS' , payload: json})
 
             console.log('Plan Updated' , json ) 
+            navigate('/AdminInstallmentPlans')
         }
         
 

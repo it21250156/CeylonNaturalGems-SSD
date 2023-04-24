@@ -1,6 +1,6 @@
 import React from 'react';
 
-const firstPayment = ({ plans , gem }) => {
+const FirstPayment = ({ plans , gem }) => {
     const cal = () => {
         let fpay=0;
 
@@ -8,8 +8,6 @@ const firstPayment = ({ plans , gem }) => {
         let initial = plans.initialPayment;
     
         fpay = (price * initial) / 100;
-    
-        console.log(fpay)
     
         return fpay;
     };
@@ -21,4 +19,4 @@ const firstPayment = ({ plans , gem }) => {
 
 }
 
-export default firstPayment
+export default FirstPayment
