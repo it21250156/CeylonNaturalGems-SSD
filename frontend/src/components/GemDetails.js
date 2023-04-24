@@ -1,22 +1,21 @@
-import { useState } from "react";
-import { useGemsContext } from "../hooks/useGemsContext";
-import { Link } from "react-router-dom";
-import ConfirmationModal from "./ConfirmationModal";
-import '../CSS/GemAdmin.css';
+import { useState } from 'react';
+import { useGemsContext } from '../hooks/useGemsContext';
+import { Link } from 'react-router-dom';
+import ConfirmationModal from './ConfirmationModal';
 
 const GemDetails = ({ gem }) => {
   const { dispatch } = useGemsContext();
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = async () => {
-    const response = await fetch("/api/gems/" + gem._id, {
-      method: "DELETE"
+    const response = await fetch('/api/gems/' + gem._id, {
+      method: 'DELETE',
     });
 
     const json = await response.json();
 
     if (response.ok) {
-      dispatch({ type: "DELETE_GEM", payload: json });
+      dispatch({ type: 'DELETE_GEM', payload: json });
     }
   };
 
@@ -28,8 +27,6 @@ const GemDetails = ({ gem }) => {
   const handleCancel = () => {
     setShowModal(false);
   };
-
-  
 
   return (
     <div className="gem-details">
@@ -81,7 +78,7 @@ const GemDetails = ({ gem }) => {
       <Link to={`/UpdateGems/${gem._id}`}>
         <button className="updateButton">update</button>
       </Link>
-      
+
       {showModal && (
         <ConfirmationModal
           message="Are you sure you want to delete this gem?"

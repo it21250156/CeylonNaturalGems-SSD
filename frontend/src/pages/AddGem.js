@@ -1,14 +1,12 @@
 // components
-import GemAddForm from "../components/GemAddForm"
-import '../CSS/GemAdmin.css';
+import GemAddForm from '../components/GemAddForm';
 
 const AddGem = () => {
-
   return (
     <div className="addGem">
-      <GemAddForm/>
+      <GemAddForm />
     </div>
-  )
-}
+  );
+};
 
-export default AddGem
+export default AddGem;
