@@ -13,6 +13,7 @@ import UserProfile from './pages/UserProfile';
 import UserProfileUpdate from './pages/UserProfileUpdate';
 import AdminUsers from './pages/AdminUsers';
 import AdminHome from './pages/AdminHome';
+import ResetPassword from './pages/ChangePassword'
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -30,6 +31,8 @@ import Myreply from './pages/Myreply';
 import FeedbackForm from './pages/FeedbackPage';
 import UpdateFeedback from './pages/UpdateFeedback';
 import AllFeedbacks from './pages/AllFeedbacks';
+import UserFeedbacks from './pages/UserFeedbacks';
+import AdminFeedbacks from './pages/AdminFeedbacks';
 
 //Vidxni
 import MyPayments from './pages/MyPayments';
@@ -71,16 +74,14 @@ function App() {
       <BrowserRouter>
         <div className="pages">
           <Routes>
+            {/* kalinga */}
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
-            <Route
-              path="/login"
-              element={!user ? <UserLogin /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/Register"
-              element={!user ? <UserRegistration /> : <Navigate to="/" />}
-            />
+            <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
+            <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
+            <Route path="/profile/:id" element={<UserProfile />} />
+            <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
+            <Route path="/profile/resetPassword/:id" element={<ResetPassword />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
@@ -93,20 +94,17 @@ function App() {
             <Route path="/reqReply" element={<ReplyRequest />}></Route>
             <Route path="/Myrep" element={<Myreply />}></Route> 
             
-            {/* <Route 
-                path="/signup" 
-                element={!user ? <Signup /> : <Navigate to="/" />} 
-              /> */}
 
-            <Route path="/profile/:id" element={<UserProfile />} />
-            <Route
-              path="/profile/editProfile/:id"
-              element={<UserProfileUpdate />}
-            />
+           
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
+
+            {/* Malika */}
             <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
-            <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
+            <Route path ="/Userfeedbacks" element={<UserFeedbacks/>}/> 
+            <Route path ="/AdminFeedbacks" element={<AdminFeedbacks/>}/> 
+            <Route path ='/FeedbackForm/:_id' element ={<FeedbackForm/>}/> 
             <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
+            
 
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
@@ -120,9 +118,7 @@ function App() {
 
             <Route path='/UpdateJewelleryes/:_id' element={<UpdateJewellery/>}/>            
 
-            {/* Vihangi  */}
-            <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
-            <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
+
 
             {/* daham */}
             <Route path="/jwellhomeM" element={<JewelhomeMen/>}/>
@@ -134,10 +130,12 @@ function App() {
             <Route path='/AddGem' element={<AddGem/>}/>
             <Route path='/UpdateGems/:_id' element={<UpdateGems/>}/>
 
+            {/* Vihangi  */}
+            <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
+            <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
 
             {/* admin */}
-            <Route path = "/AllInstallments" element={ <AllInstallments />} />
-            
+            <Route path = "/AdminInstallmentPlans/AllInstallments" element={ <AllInstallments />} />
             <Route path = "/AdminInstallmentPlans" element={ <AdminInstallmentPlans />} />  
             <Route path= "/AdminInstallmentPlans/adminUpdatePlan/:id" element={ <AdminUpdatePlan /> } />
             <Route path= "/profile/MyPayments/MyInstallments/:id" element={ <MyInstallments /> } />

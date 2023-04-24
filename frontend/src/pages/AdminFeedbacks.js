@@ -2,10 +2,10 @@ import {useEffect }from 'react'
 import { useFeedbacksContext }from '../hooks/useFeedbackContext'
 
 //components
-import FeedbackDetails from '../components/FeedbackDetails'
-import FeedbackForm from '../components/FeedbackForm'
 
-const AllFeedbacks = () =>{
+import FeedbackDetailsAdmin from '../components/FeedbackDetailsAdmin'
+
+const AdminFeedbacks = () =>{
   const {feedbacks, dispatch} = useFeedbacksContext()
 
   useEffect(() =>{
@@ -25,10 +25,10 @@ const AllFeedbacks = () =>{
 
     return (
 
-        <div className="Allfeedbacks">
+        <div className="Adminfeedbacks">
           <div classname = "feedbacks">
             {feedbacks && feedbacks.map((feedback) =>(
-              <FeedbackDetails key={feedback._id} feedback={feedback} />
+              <FeedbackDetailsAdmin key={feedback._id} feedback={feedback} />
             ))}
 
           </div>
@@ -39,4 +39,4 @@ const AllFeedbacks = () =>{
         
     )
 }
-export default  AllFeedbacks 
+export default  AdminFeedbacks 

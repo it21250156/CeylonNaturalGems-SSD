@@ -33,11 +33,11 @@ const feedbackSchema = new Schema({
         required: false
     },
 
-    // user_id: {
-
-    //     type:String,
-    //     required: true
-    // },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+    }
 
 }, {timestamps: true})
 

@@ -49,6 +49,26 @@ function JewelScreen() {
     };
     fetchJewels();
   }, [id]);
+  const handleAddToCart = async (itemid) => {
+    const data = {
+      cartitemid: itemid,
+      cartquantity: 1,
+      cartuserid: JSON.parse(localStorage.getItem('userInfo'))._id,
+    };
+    const response = await fetch(`/api/cart/`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    // await fetch(`/api/cart/user/${data.cartuserid}`)
+    //   .this((res) => res.json())
+    //   .this((json) => setCartData(json));
+    // setCartData();
+
+    // const temp = await response.json();
+    // setCartData([...cartData, temp]);
+  };
+
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
@@ -64,11 +84,12 @@ function JewelScreen() {
               <p className="gem-price">${Jwl.price}</p>
 
               <div className="btns">
-           
-                  <button className="btn-add-to-cart">Add to cart</button>
-            
-                
-         
+                <button
+                  onClick={() => handleAddToCart(Jwl._id)}
+                  className="btn-add-to-cart"
+                >
+                  Add to cart
+                </button>
               </div>
 
               <div className="gem-desc">
@@ -93,7 +114,7 @@ function JewelScreen() {
                     <td className="cl1">Gender</td>
                     <td className="cl2">: {Jwl.gender}</td>
                   </tr>
-               
+
                   <tr>
                     <td className="cl1">Stone</td>
                     <td className="cl2">: {Jwl.gemstone}ct</td>
@@ -118,7 +139,6 @@ function JewelScreen() {
               <button className="card-button">Read More...</button>
             </Link>
           </div>
-        
         </div>
       </div>
     </div>

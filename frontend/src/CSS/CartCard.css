@@ -1,4 +1,29 @@
+.cartcard-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cartimg-section {
+  flex: 1;
+  height: 100px;
+  width: 150px;
+  background-color: brown;
+}
+
+.name-price {
+  flex: 1;
+}
+
+.update-section {
+  flex: 1;
+}
+
+.btn-delete {
+  flex: 1;
+}
+
 .cartcard {
   border: 2px solid black;
-  width: 300px;
+  width: 500px;
 }

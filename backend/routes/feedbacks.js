@@ -4,7 +4,8 @@ const {
   getFeedback,
   getFeedbacks,
   deleteFeedback,
-  updateFeedback
+  updateFeedback,
+  getUserFeedbacks
 
 } = require('../controllers/feedbackController')
 const Feedback = require('../models/feedbackModel')
@@ -17,6 +18,9 @@ router.get('/', getFeedbacks)
 
 //GET a single feedback
 router.get('/:id', getFeedback)
+
+//GET feedbacks to a single user
+router.get('/user/:user', getUserFeedbacks)
 
 //POST a new feedback
 router.post('/', createFeedback)

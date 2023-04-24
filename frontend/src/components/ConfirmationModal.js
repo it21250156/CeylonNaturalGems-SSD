@@ -1,5 +1,4 @@
-import React from "react";
-import '../CSS/GemAdmin.css';
+import React from 'react';
 
 const ConfirmationModal = ({ message, onConfirm, onCancel }) => {
   return (

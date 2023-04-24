@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CartTotal = ({ gems, cartData }) => {
+const CartTotal = ({ gems, cartData, Jwl }) => {
   const cal = () => {
     let sum = 0;
     cartData.map(
