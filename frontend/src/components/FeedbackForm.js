@@ -140,9 +140,7 @@ const FeedbackForm = () => {
 
       <button type="submit">Add Feedback</button>
       {error && <div className="error">{error}</div>}
-
     </form>
-
   )
 }
 

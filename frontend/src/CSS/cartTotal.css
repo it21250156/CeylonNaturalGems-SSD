@@ -1,0 +1,62 @@
+.tot-content {
+  background-color: #0b62a8;
+  margin-left: 20px;
+  padding: 25px;
+  border-radius: 20px;
+}
+
+.title {
+  margin: 0;
+  color: white;
+  font-family: bpreplay;
+  font-size: 25px;
+}
+
+.amount {
+  margin: 20px 0;
+  font-family: Bebas Neue;
+  color: white;
+  font-size: 40px;
+}
+
+/* checkout-btn */
+
+.checkout-btn {
+  font-family: Bebas Neue;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #2c74b3;
+  transition: all 1000ms;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
+}
+
+.checkout-btn:hover {
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px #268391;
+}
+
+.checkout-btn::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #144272;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.checkout-btn:hover::before {
+  width: 250%;
+}

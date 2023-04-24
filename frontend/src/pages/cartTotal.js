@@ -1,6 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../CSS/cartTotal.css';
 
-const CartTotal = ({ gems, cartData }) => {
+const CartTotal = ({ gems, cartData, Jwl }) => {
+  const navigate = useNavigate();
+
   const cal = () => {
     let sum = 0;
     cartData.map(
@@ -14,7 +18,20 @@ const CartTotal = ({ gems, cartData }) => {
   };
   return (
     <div className="total">
-      <p>Total amount : {gems && cartData && cal()}</p>
+      <div className="tot-content">
+        <p className="title">Total Amount</p>
+
+        <p className="amount">${gems && cartData && cal()}</p>
+
+        <button
+          className="checkout-btn"
+          onClick={() => {
+            navigate('/payments');
+          }}
+        >
+          PROCEED TO CHECKOUT
+        </button>
+      </div>
     </div>
   );
 };

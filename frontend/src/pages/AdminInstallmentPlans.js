@@ -2,10 +2,24 @@ import { useEffect  } from "react"
 import { usePlansContext } from "../hooks/usePlanContext"
 import { useNavigate } from "react-router-dom"
 
+import { useAuthContext } from "../hooks/useAuthContext"
+import React from "react";
+
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import axios from 'axios';
+
 //components
 import PlanForm from "../components/PlanForm"
 
 const AdminInstallmentPlans = () => {
+
+    const { logout } = useLogout();
+    const {user} = useAuthContext()
+    const handleClick = () => {
+      logout();
+      navigate('/');
+    };
     const navigate = useNavigate()
     const { plans, dispatch} = usePlansContext()
 
@@ -24,6 +38,33 @@ const AdminInstallmentPlans = () => {
     
 
     return (
+        <>
+      <header>
+      <div>
+        <div className="background">
+          <div className="headerNameDiv">
+            <h1 className="headerName">Ceylon Natural Gems</h1>
+          </div>
+        </div>
+
+        <nav>
+          <div className="navprofileDiv">
+              <div className="navEmal">
+                <span>
+                  Hello Admin
+                </span>
+                <button onClick={handleClick}>Log out</button>
+              </div>
+          </div>
+
+          <ul>
+            <li>
+              <Link to={'/adminHome'}>Home</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
         <div className="instalmentPlans">
             <center> 
             <button onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button>
@@ -40,6 +81,7 @@ const AdminInstallmentPlans = () => {
 
             
         </div>
+        </>
     )
 }
 
