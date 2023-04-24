@@ -121,4 +121,16 @@
     border-radius: 4px;
     cursor: pointer;
   }
-  
+
+  div.insBtn {
+    background: #2c74b3;
+    border: 0;
+    width: 25%;
+    height: 8%;
+    color: white;
+    padding: 5px;
+    font-size: large;
+    font-family: "Poppins";
+    border-radius: 4px;
+    cursor: pointer;
+  }

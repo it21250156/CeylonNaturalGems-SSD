@@ -74,7 +74,7 @@ const PaymentUpdate = () => {
         <div className="lightBlueBodyBG">
             <div className="whiteBodyBG">
                 <div className="darkBlueTopicBox">
-                    <h3 className="pageTopic">Page Topic Here</h3>
+                    <h3 className="pageTopic">UPDATE PAYMENT</h3>
                 </div>
 
                 <form className="edit" onSubmit={handleUpdate}>
