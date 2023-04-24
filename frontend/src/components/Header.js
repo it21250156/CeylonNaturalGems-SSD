@@ -8,9 +8,9 @@ import axios from 'axios';
 
 const Header = () => {
   const { logout } = useLogout();
-  const { user } = useAuthContext();
+  const { user, cartData, setCartData } = useAuthContext();
 
-  // const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   // const [userData, setUserData] = useState({});
 
@@ -21,11 +21,22 @@ const Header = () => {
   // }, []);
 
   const navigate = useNavigate();
+  // const [cartData, setCartData] = useState([]);
 
   const handleClick = () => {
     logout();
     navigate('/');
   };
+  // const userid = JSON.parse(localStorage.getItem('userInfo'))._id;
+
+  var crt = [];
+
+  // useEffect(() => {
+  // //   fetch(`/api/cart/user/${userid}`)
+  // //     .then((res) => res.json())
+  // //     .then((json) => setCartData(json));
+  // // }, []);
+  // const cart = JSON.parse(localStorage.getItem('cartInfo')) || {};
 
   return (
     <header>
@@ -95,7 +106,10 @@ const Header = () => {
               <a href="#">Blog</a>
             </li>
             <li>
-            <Link to="/feedbacks">Feedbacks</Link>
+              <Link to="/feedbacks">Feedbacks</Link>
+            </li>
+            <li>
+              <Link to="/mycart">Cart {cartData?.length}</Link>
             </li>
           </ul>
         </nav>

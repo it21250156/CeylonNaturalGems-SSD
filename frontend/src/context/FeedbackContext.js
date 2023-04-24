@@ -18,7 +18,7 @@ export const feedbacksReducer = (state, action) => {
             }
         case 'UPDATE_FEEDBACK':
             return {
-                feedbacks: state.feedbacks.filter((w) => w._id !== action.payload._id)
+                feedbacks: [...state.feedbacks.filter((w) => w._id !== action.payload._id),action.payload]
             }
         
         default:
