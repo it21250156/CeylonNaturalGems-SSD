@@ -54,7 +54,7 @@ const getCartByID = asyncHandler(async (req, res) => {
     _id: _id,
   }).exec();
   console.log(cartItemExists);
-  if (cartItemExists) res.json(cartItemExists);
+  if (cartItemExists) res.status(201).json(cartItemExists);
   else {
     res.json('No matching cart in the database!');
   }
@@ -73,9 +73,32 @@ const deleteCartItem = asyncHandler(async (req, res) => {
   }
 });
 
+const updateCartByID = asyncHandler(async (req, res) => {
+  const { _id } = req.params;
+
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).json({ error: 'No such plan' });
+  // }
+  console.log(req.body);
+  const cart = await Cart.findOneAndUpdate(
+    { _id: _id },
+    {
+      ...req.body,
+    },
+    { new: true }
+  );
+
+  if (!cart) {
+    return res.status(404).json({ error: 'Update fail' });
+  }
+
+  res.status(200).json(cart);
+});
+
 module.exports = {
   addToCart,
   getUserCart,
   deleteCartItem,
   getCartByID,
+  updateCartByID,
 };

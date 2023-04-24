@@ -4,6 +4,7 @@ const {
   getUserCart,
   deleteCartItem,
   getCartByID,
+  updateCartByID,
 } = require('../controllers/cartController');
 
 const router = express.Router();
@@ -22,6 +23,9 @@ router.get('/user/:_id', getUserCart);
 
 //GET  cart by id
 router.get('/:_id', getCartByID);
+
+//GET  cart by id
+router.patch('/:_id', updateCartByID);
 
 // //GET user cart item
 // router.get('/user/', getAllUserParts);

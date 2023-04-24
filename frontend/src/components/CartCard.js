@@ -23,15 +23,30 @@ function CartCard({ cartid, gem }) {
       </div>
       <div className="update-section">
         <div className="decrease-btn">
-          <button onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}>
+          {/* {cartData.find((item) => item._id === cartid)?.cartquantity > 1 && ( */}
+          <button
+            onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
+            disabled={
+              !(cartData.find((item) => item._id === cartid)?.cartquantity > 1)
+            }
+          >
             -
           </button>
+          {/* )} */}
         </div>
         <div className="quantity">
           {cartData.find((item) => item._id === cartid)?.cartquantity}
         </div>
         <div className="increase-btn">
-          <button onClick={() => handleChangeQuantityCart(cartid, 'INCREASE')}>
+          <button
+            onClick={() => handleChangeQuantityCart(cartid, 'INCREASE')}
+            disabled={
+              !(
+                cartData.find((item) => item._id === cartid)?.cartquantity <
+                gem.quantity
+              )
+            }
+          >
             +
           </button>
         </div>
