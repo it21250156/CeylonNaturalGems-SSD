@@ -186,7 +186,8 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @route   GET /users/:id
 // @access  Private/Admin
 const getUserById = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id).select('-password');
+  const user = await User.findById(req.params.id);
+  // const user = await User.findById(req.params.id).select('-password');
 
   if (user) {
     res.json(user);
@@ -209,6 +210,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.title = req.body.title || user.title;
     user.phone = req.body.phone || user.phone;
+    user.password = req.body.password || user.password;
     user.confirmPassword = req.body.confirmPassword || user.confirmPassword;
 
     const updatedUser = await user.save();
@@ -221,6 +223,7 @@ const updateUser = asyncHandler(async (req, res) => {
         phone: updatedUser.phone,
         title: updatedUser.title,
         userType: updatedUser.userType,
+        password:updateUser.password,
         confirmPassword: updatedUser.confirmPassword,
         token: generateToken(updatedUser._id),
     });
@@ -229,6 +232,30 @@ const updateUser = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
 });
+
+
+// reset password
+
+const resetpassword = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.password = req.body.password || user.password;
+    user.confirmPassword = req.body.confirmPassword || user.confirmPassword;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      password: updatedUser.password,
+      confirmPassword: updatedUser.confirmPassword,
+      
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
 
 module.exports =  {
   authUser,
@@ -239,4 +266,5 @@ module.exports =  {
   deleteUser,
   getUserById,
   updateUser,
+  resetpassword
 };

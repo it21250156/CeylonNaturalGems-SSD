@@ -10,6 +10,7 @@ const {
   deleteUser,
   getUserById,
   updateUser,
+  resetpassword,
 } = require('../controllers/users.controller.js');
 const { protect } = require('../middleware/authMiddleware.js');
 
@@ -57,6 +58,7 @@ router.get('/' , getUsers)
 router.get('/:id' , getUserById)
 router.delete('/:id' , deleteUser)
 router.patch('/:id' , updateUser)
+router.patch('/:id' , resetpassword)
 
 router
   .route('/profile/:id')

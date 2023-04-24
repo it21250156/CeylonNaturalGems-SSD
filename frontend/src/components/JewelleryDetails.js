@@ -39,7 +39,7 @@ const JewelleryDetails = ({jewellery}) => {
             <p><strong>Gemstone: </strong>{jewellery.gemstone}</p>
             <p><strong>Metal: </strong>{jewellery.metal}</p>
             <p><strong>Description: </strong>{jewellery.description}</p>
-            <p><strong>Price: Rs.</strong>{jewellery.price}/=</p>
+            <p><strong>Price: $.</strong>{jewellery.price}/=</p>
             <p><strong>Added Date: </strong>{jewellery.createdAt}</p>
             <button onClick={handleDelete}>delete</button>
            

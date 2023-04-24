@@ -111,7 +111,9 @@ const UserProfile = () => {
           </div>
 
           <div className="edt-andreset-pw-btns">
-            <button className="reset-pw-btn">RESET PASSWORD</button>
+            <button className="reset-pw-btn" onClick={() => {
+                navigate(`/profile/resetPassword/${user._id}`);
+              }}>RESET PASSWORD</button>
             <button
               className="edt-prof-btn"
               onClick={() => {

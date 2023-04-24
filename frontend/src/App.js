@@ -13,6 +13,7 @@ import UserProfile from './pages/UserProfile';
 import UserProfileUpdate from './pages/UserProfileUpdate';
 import AdminUsers from './pages/AdminUsers';
 import AdminHome from './pages/AdminHome';
+import ResetPassword from './pages/ChangePassword'
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -71,16 +72,14 @@ function App() {
       <BrowserRouter>
         <div className="pages">
           <Routes>
+            {/* kalinga */}
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
-            <Route
-              path="/login"
-              element={!user ? <UserLogin /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/Register"
-              element={!user ? <UserRegistration /> : <Navigate to="/" />}
-            />
+            <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
+            <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
+            <Route path="/profile/:id" element={<UserProfile />} />
+            <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
+            <Route path="/profile/resetPassword/:id" element={<ResetPassword />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
@@ -93,16 +92,8 @@ function App() {
             <Route path="/reqReply" element={<ReplyRequest />}></Route>
             <Route path="/Myrep" element={<Myreply />}></Route> 
             
-            {/* <Route 
-                path="/signup" 
-                element={!user ? <Signup /> : <Navigate to="/" />} 
-              /> */}
 
-            <Route path="/profile/:id" element={<UserProfile />} />
-            <Route
-              path="/profile/editProfile/:id"
-              element={<UserProfileUpdate />}
-            />
+           
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
             <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
             <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 

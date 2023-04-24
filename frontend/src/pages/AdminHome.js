@@ -16,7 +16,7 @@ const AdminHome = () => {
 
     const handleClick = () => {
       logout();
-      navigate('/adminHome');
+      navigate('/');
     };
     
 
@@ -42,7 +42,7 @@ const AdminHome = () => {
 
           <ul>
             <li>
-              <Link to={'/'}>Home</Link>
+              <Link to={'/adminHome'}>Home</Link>
             </li>
           </ul>
         </nav>
