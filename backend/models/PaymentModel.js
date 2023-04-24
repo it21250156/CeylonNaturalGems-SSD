@@ -39,9 +39,6 @@ const PaymentSchema = new Schema({
         type:[String],
         required: true
       },
-      // userID:{
-      //   type:String
-      // }
       userID:{
         type: Schema.Types.ObjectId,
         ref:'user',

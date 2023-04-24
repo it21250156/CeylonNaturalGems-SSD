@@ -3,6 +3,8 @@ import { useGemsContext } from '../hooks/useGemsContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 
+import '../CSS/GemAdmin1.css';
+
 function UpdateGems() {
   const { _id } = useParams();
   const { gems, dispatch } = useGemsContext();
