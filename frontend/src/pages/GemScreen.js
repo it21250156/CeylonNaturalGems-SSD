@@ -50,6 +50,9 @@ function GemScreen() {
       try {
         const response = await fetch(`/api/gems&jewelleries/gems/${id}`);
         const json = await response.json();
+
+        localStorage.setItem('gemInfo', JSON.stringify(json));
+
         dispatch({ type: 'FETCH_SUCCESS', payload: json });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });

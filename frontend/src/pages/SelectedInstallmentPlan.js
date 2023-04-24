@@ -5,10 +5,10 @@ import { useParams } from 'react-router-dom'
 
 const SelectedInstallmentPlan = () => {
     const [plans , setPlans] = useState({name: "", months: "", initialPayment: ""}) //put 0 for a number
-    const [gem , setGem] = useState({name: "", price: ""})
+    
+    const gem = JSON.parse(localStorage.getItem('gemInfo'));
 
     const {id} = useParams();
-    const {gemid} = useParams();
 
     useEffect(() => {
         const fetchPlans = async () => {
@@ -23,18 +23,7 @@ const SelectedInstallmentPlan = () => {
         fetchPlans()
     },[])
 
-    useEffect(() => {
-        const fetchGems = async () => {
-            const response = await fetch(`/api/gems&jewelleries/gems/${gemid}`)
-            const json = await response.json()
-
-            if(response.ok){
-                setGem(json)
-            }
-        }
-
-        fetchGems()
-    },[])
+    
 
     return (
         <div className="selectedInstalmentPlan">
