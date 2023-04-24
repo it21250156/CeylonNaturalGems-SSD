@@ -30,6 +30,7 @@ const jewelleryRoutes = require('./routes/jewelleryes');
 const planRoutes = require('./routes/plans')
 const installmentsRoutes = require('./routes/installments')
 
+const ReplyModel = require("./models/Replies");
 
 // express app
 const app = express();
@@ -77,15 +78,18 @@ app.get('/getReply', (req, res) => {
   });
 });
 
-app.post('/createReply', async (req, res) => {
-  const Reply = req.body;
-  const newReply = new ReplyModel(Reply);
-  await newReply.save();
-
-  res.json(Reply);
+app.post("/createReply",async (req, res) => {
+  const user = req.body;
+  const newUser = new ReplyModel(user);
+  await newUser.save();
+  
+  res.json(user);
 });
 
-app.put('/updateGshape', async (req, res) => {
+
+
+
+app.put("/updateGshape",async (req, res) => {
   const newGemShape = req.body.newGemShape;
   const id = req.body.id;
 

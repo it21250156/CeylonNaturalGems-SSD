@@ -21,9 +21,9 @@ function MyReq(){
     return(
         <div className="MyRequests">
 
-            <div className='headding'>
-                     <h1>All Requests</h1>
-            </div>
+        <div className='headding'>
+          All Requests
+        </div>
 
             <div className="requestM">
 
@@ -44,12 +44,15 @@ function MyReq(){
                         <pre className='txt1'>Quantity             : {user.Quantity}</pre>
                     </div>
                     
-                    <button className='repbtn' onClick={() => {window.location.href = "./reqRp"}}>Reply</button>
+                    <button className='repbtn' onClick={() => {window.location.href = "./reqReply"}}>Reply</button>
                 
                 </div>
+                
             );
             })}
-
+            <Link to={'/Myrep'}>
+              <button className="req-btn">View My Requests</button>
+            </Link>
             </div>
         </div>
     )

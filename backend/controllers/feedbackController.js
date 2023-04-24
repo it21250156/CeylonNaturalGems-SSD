@@ -54,7 +54,7 @@ const createFeedback = async (req,res) => {
 
     //add doc to DB
     try{
-
+      
         const feedback = await Feedback.create({gemType, gemQty, fbInfo, rating})
         res.status(200).json(feedback)
 

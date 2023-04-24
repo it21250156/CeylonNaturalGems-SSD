@@ -25,7 +25,7 @@ const AllFeedbacks = () =>{
 
     return (
 
-        <div className="home">
+        <div className="Adminfeedback">
           <div classname = "feedbacks">
             {feedbacks && feedbacks.map((feedback) =>(
               <FeedbackDetails key={feedback._id} feedback={feedback} />

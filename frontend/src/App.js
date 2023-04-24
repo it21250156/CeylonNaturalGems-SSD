@@ -22,6 +22,7 @@ import ReqMain from './pages/ReqMain';
 import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
+import Myreply from './pages/Myreply';
 
 //malika
 import FeedbackForm from './pages/FeedbackPage';
@@ -47,6 +48,7 @@ import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan'
 import AllInstallments from './pages/AllInstallments'
 import AdminInstallmentPlans from './pages/AdminInstallmentPlans'
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
+import MyInstallments from './pages/MyInstallments';
 
 function App() {
   const { user } = useAuthContext();
@@ -75,7 +77,9 @@ function App() {
             <Route path="/reqM" element={<ReqMain />}></Route>
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
-
+            <Route path="/reqReply" element={<ReplyRequest />}></Route>
+            <Route path="/Myrep" element={<Myreply />}></Route>
+            
             {/* <Route 
                 path="/signup" 
                 element={!user ? <Signup /> : <Navigate to="/" />} 
@@ -87,9 +91,9 @@ function App() {
               element={<UserProfileUpdate />}
             />
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
-            <Route path="/feedbacks" element={<AllFeedbacks />} />
-            <Route path="/FeedbackForm" element={<FeedbackForm />} />
-            <Route path="/UpdateFeedback/:_id" element={<UpdateFeedback />} />
+            <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
+            <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
+            <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
 
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
@@ -111,6 +115,7 @@ function App() {
             
             <Route path = "/AdminInstallmentPlans" element={ <AdminInstallmentPlans />} />  
             <Route path= "/AdminInstallmentPlans/adminUpdatePlan/:id" element={ <AdminUpdatePlan /> } />
+            <Route path= "/profile/MyPayments/MyInstallments/:id" element={ <MyInstallments /> } />
 
           </Routes>
         </div>

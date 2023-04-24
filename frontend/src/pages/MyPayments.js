@@ -1,10 +1,14 @@
 import React, { useEffect, useState  } from "react"
 //import { BodyTemp } from "../components/BodyTemp"
 import { usePaymentContext } from "../hooks/usePaymentsContext"
+import { useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 const MyPayments = () => {
 
     // const {payments , dispatch} = usePaymentContext()
+    const navigate = useNavigate()
+    const {id} = useParams();
 
     const [payments , setPayments] = useState(null)
 
@@ -32,7 +36,7 @@ const MyPayments = () => {
             <div className="mypayments">
             <div className="paymentlist">
 
-                <div className="insBtn"> MY INSTALLMENTS </div>
+                <div className="insBtn" onClick={() => {navigate(`/profile/MyPayments/MyInstallments/${id}`)}}> MY INSTALLMENTS </div>
 
       <table>
 

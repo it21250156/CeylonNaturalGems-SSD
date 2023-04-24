@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
@@ -86,10 +87,8 @@ function MyReq() {
   });
 
   return (
-    <div>
-      <div className="darkBlueTopicBoxReq">
-        <h1 className="pageTopic">My Requests</h1>
-      </div>
+    <div className="MyRequests">
+      <div className="headding">My Requests</div>
 
       <div className="lightBlueBodyBG">
         {listOfRequests.map((user) => {
@@ -165,7 +164,7 @@ function MyReq() {
                       <input
                         type="text"
                         placeholder="Edit description...."
-                        className="input"
+                        className="edtds"
                         onChange={(event) => {
                           setNewnewGemDescription(event.target.value);
                         }}

@@ -31,6 +31,7 @@ const createInstallment = async (req, res) => {
 
     //add doc to db
     try{
+        // const user_id = req.user._id
         const installment = await Installment.create({ user, gemID, monthlyPayment })
         res.status(200).json(installment)
     } catch (error) {
@@ -81,7 +82,7 @@ const updateInstallment = async (req, res) => {
 
 //GET installments for a specific user
 const getUserInstallment = async (req, res) => {
-    const user = req.params
+    const {user} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(user)) {
         return res.status(404).json({error:'No such user'})

@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Header from '../components/Header';
 import { Link, useParams } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const validationSchema = yup.object().shape({
   // requestID: yup.number().required("Request ID is required"),
