@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 //Kalinga
 const userRoutes = require('./routes/userRoutes.js');
+const adminRoutes = require('./routes/adminRoutes.js')
 
 // malika
 const feedbackRoutes = require('./routes/feedbacks');
@@ -14,6 +15,7 @@ const feedbackRoutes = require('./routes/feedbacks');
 //janith
 const gemRoutes = require('./routes/gems');
 const cartRoutes = require('./routes/cartRoutes.js');
+//Daham
 
 //bimsara
 const UserModel = require('./models/Users');
@@ -28,6 +30,12 @@ const jewelleryRoutes = require('./routes/jewelleryes');
 // vihangi
 const planRoutes = require('./routes/plans');
 const installmentsRoutes = require('./routes/installments');
+
+//daham
+const jwellRoutes = require('./routes/jewellers');
+
+//ammaar
+const gemAdminRoutes = require('./routes/gemsAdmin');
 
 // express app
 const app = express();
@@ -152,6 +160,7 @@ app.delete('/delete/:id', async (req, res) => {
 
 //Kalinga
 app.use('/api/users', userRoutes);
+app.use('/api/admin' , adminRoutes) ;
 
 //janith
 app.use('/api/gems&jewelleries', gemRoutes);
@@ -166,6 +175,16 @@ app.use('/api/jewelleryes', jewelleryRoutes);
 // vihangi
 app.use('/api/plans', planRoutes);
 app.use('/api/installments', installmentsRoutes);
+
+//daham
+
+app.use('/api/jewelleryes',jwellRoutes);
+
+//ammaar
+app.use('/api/gems', gemAdminRoutes);
+
+//routes
+
 
 // connect to db
 mongoose

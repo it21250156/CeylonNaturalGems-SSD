@@ -9,6 +9,11 @@ import { AuthContextProvider } from './context/AuthContext'
 // import ReqMain from './pages/ReqMain';
 import { FeedbacksContextProvider } from './context/FeedbackContext';
 
+import { JewelContextProvider } from './context/JewelPageContext'; 
+
+import { JewelleryesContextProvider} from './context/JewelleryContext'
+
+import { GemsContextProvider } from './context/GemContext';
 
 import {
   createBrowserRouter,
@@ -43,10 +48,18 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
+    <GemsContextProvider>
     <FeedbacksContextProvider>
+      <JewelleryesContextProvider>
+      <JewelContextProvider>
+        
     {/* <RouterProvider router={router}/> */}
       <App />
+      
+    </JewelContextProvider>
+      </JewelleryesContextProvider>
     </FeedbacksContextProvider>
+    </GemsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

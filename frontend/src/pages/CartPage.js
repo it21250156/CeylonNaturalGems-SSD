@@ -2,6 +2,9 @@ import React, { useEffect, useReducer, useState } from 'react';
 import logger from 'use-reducer-logger';
 import CartCard from '../components/CartCard';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Header from '../components/Header';
+
+import CartTotal from './cartTotal';
 
 // const reducer = (state, action) => {
 //   switch (action.type) {
@@ -31,6 +34,8 @@ const CartPage = () => {
   //     }
   //   );
 
+  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     const fetchGems = async () => {
       try {
@@ -42,6 +47,7 @@ const CartPage = () => {
       }
     };
     fetchGems();
+
     // const userId = JSON.parse(localStorage.getItem('userInfo'))._id;
     // console.log(userId);
     // const fetchGems = async () => {
@@ -68,20 +74,38 @@ const CartPage = () => {
     // fetchCart();
   }, []);
 
+  // useEffect(() => {
+  //   // const cal = () => {
+  //   //   let sum = 0;
+  //   //   cartData.map(
+  //   //     (cartIns) =>
+  //   //       (sum +=
+  //   //         cartIns.cartquantity *
+  //   //         gems.find((gem) => gem._id === cartIns.cartitemid).price)
+  //   //   );
+  //   //   setTotal(sum);
+  //   // };
+  //   if (gems && cartData) cal();
+  // }, [gems, cartData]);
+
   return (
-    <div>
-      <h1>my cart</h1>
-      {gems?.length &&
-        cartData.map((item) => (
-          <CartCard
-            key={item._id}
-            cartid={item._id}
-            gem={gems.find((gem) => gem._id === item.cartitemid)}
-            // gemid={item.cartitemid}
-          ></CartCard>
-        ))}
-      {JSON.stringify(cartData)}
-    </div>
+    <>
+      <Header />
+
+      <div>
+        <h1>my cart</h1>
+        {gems?.length &&
+          cartData.map((item) => (
+            <CartCard
+              key={item._id}
+              cartid={item._id}
+              gem={gems.find((gem) => gem._id === item.cartitemid)}
+              // gemid={item.cartitemid}
+            ></CartCard>
+          ))}
+        <CartTotal gems={gems} cartData={cartData}></CartTotal>
+      </div>
+    </>
   );
 };
 

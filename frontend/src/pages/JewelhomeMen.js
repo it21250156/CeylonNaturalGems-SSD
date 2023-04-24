@@ -2,18 +2,16 @@ import React, { useEffect, useReducer } from 'react';
 import logger from 'use-reducer-logger';
 // import { useGemsContext } from '../hooks/useGemsContext';
 import '../CSS/Gemhome.css';
-import Header from '../components/Header';
-
 
 //components
-import GemCard from '../components/GemCard';
+import JewelCard from '../components/jwellCard';
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
-      return { ...state, gems: action.payload, loading: false };
+      return { ...state, Jewel: action.payload, loading: false };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
     default:
@@ -21,48 +19,45 @@ const reducer = (state, action) => {
   }
 };
 
-const Gemhome = () => {
+const Jewelhome = () => {
   // const {gems, dispatch} = useGemsContext()
-  const [{ loading, error, gems }, dispatch] = useReducer(logger(reducer), {
-    gems: [],
+  const [{ loading, error, Jewel }, dispatch] = useReducer(logger(reducer), {
+    Jewel: [],
     loading: true,
     error: '',
   });
 
   useEffect(() => {
-    const fetchGems = async () => {
+    const fetchJewels = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const response = await fetch('/api/gems&jewelleries/gems');
+        const response = await fetch('/api/jewelleryes');
         const json = await response.json();
         dispatch({ type: 'FETCH_SUCCESS', payload: json });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });
       }
     };
-    fetchGems();
+    fetchJewels();
   }, []);
 
   return (
-    <>
-    <Header/>
     <div className="gemhome">
       <div className="gems">
         <div className="lightBlueBodyBG">
           <div className="whiteBodyBG">
             <div className="darkBlueTopicBox">
-              <h3 className="pageTopic">Gemstones</h3>
+              <h3 className="pageTopic">Men's Jewellery</h3>
             </div>
             <div className="gem-cards">
-              {gems &&
-                gems.map((gem) => <GemCard key={gem._id} gem={gem}></GemCard>)}
+              {Jewel &&
+                Jewel.map((Jwl) => <JewelCard key={Jwl._id} Jwl={Jwl}></JewelCard>)}
             </div>
           </div>
         </div>
       </div>
     </div>
-    </>
   );
 };
 
-export default Gemhome;
+export default Jewelhome;

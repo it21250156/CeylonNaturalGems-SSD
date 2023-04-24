@@ -4,12 +4,14 @@ const Schema = mongoose.Schema
 
 const installmentSchema = new Schema({
     user: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'user',
         required: true,
     },
 
     gemID: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'gem',
         required: true,
     },
 

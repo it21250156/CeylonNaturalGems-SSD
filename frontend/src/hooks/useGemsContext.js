@@ -1,4 +1,4 @@
-import { GemsContext } from "../context/GemPageContext"
+import { GemsContext } from "../context/GemContext"
 import { useContext } from "react"
 
 export const useGemsContext = () => {

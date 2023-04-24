@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import '../CSS/BodyTemp.css'
 
 //components
 
 const MyInstallments = () => {
     const [Installments , setInstallments] = useState(null)
+    const [Gem , setGem] = useState(null)
     //const {userID} =  useParams()
     const user = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -28,7 +30,6 @@ const MyInstallments = () => {
             {<div className="instalments">
                 <table border='1' >
                     <tr> 
-                        <th>User</th>
                         <th>Gem</th>
                         <th>Monthly Payment</th>
                         <th>Payment Date</th>
@@ -58,5 +59,20 @@ const InstallmentTableRow = ({ installment }) => {
         </tr>
     )
 }
+
+// const findName = async({id}) => {
+//     useEffect(() => {
+//         const fetchInstallments = async () => {
+//             const response = await fetch(`/api/gems&jewelleries/gems/${id}`)
+//             const json = await response.json()
+
+//             if(response.ok){
+//                 setGem(json)
+//             }
+//         }
+
+//         fetchInstallments()
+//     },[])
+// }
 
 export default MyInstallments

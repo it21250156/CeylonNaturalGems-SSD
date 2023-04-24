@@ -95,10 +95,11 @@ const Header = () => {
               <a href="#">Jewelleries</a>
               <ul className="jewelleryDropdownContent">
                 <li>
-                  <a href="#">Men's Jewellery</a>
+                  <Link to="/jwellhomeM">Men's Jewellery</Link>
+                  
                 </li>
                 <li>
-                  <a href="#">Women's Jewellery</a>
+                  <Link to="/jwellhomeW">Women's Jewellery</Link>
                 </li>
               </ul>
             </li>

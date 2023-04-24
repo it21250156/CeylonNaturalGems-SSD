@@ -6,6 +6,8 @@ import { useLogout } from '../hooks/useLogout';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import '../CSS/UserProfile.css';
+import Header from '../components/Header';
+
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -50,6 +52,8 @@ const UserProfile = () => {
   /*******************************************************/
 
   return (
+    <>
+    <Header/>
     <div className="profileBodyContainer">
       <div className="darkBlueTopicBoxUserprofile">
         <h3 className="pageTopicUserprofile">MY PROFILE</h3>
@@ -131,6 +135,7 @@ const UserProfile = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

@@ -3,6 +3,10 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import { useSignup } from "../hooks/useSignup"
+import ValidateUserRegistration from '../components/ValidateUserRegistration'
+import Header from '../components/Header';
+
+
 
 
 function UserRegistration() {
@@ -20,8 +24,13 @@ function UserRegistration() {
 
   const {signup, error, isLoading} = useSignup()
 
+  const [regiValidationError , setRegiValidationError ] = useState({})
+
+
 
   return (
+    <>
+    <Header/>
     <div className="lightBlueBodyBG">
             <div className="whiteBodyBG">
                 <div className="darkBlueTopicBox">
@@ -30,6 +39,8 @@ function UserRegistration() {
                 <form className="signup" 
                   onSubmit={async (e) => {
                   e.preventDefault();
+
+                  setRegiValidationError(ValidateUserRegistration(title, userType ,firstName , lastName ,  email, phone , password , confirmPassword))
 
                   await signup(title, userType ,firstName , lastName ,  email, phone , password , confirmPassword)
 
@@ -65,6 +76,8 @@ function UserRegistration() {
                     <option value="Mrs.">Mrs.</option>
                     <option value="Rev.">Rev.</option>
                   </select>
+                  {regiValidationError && <div className="error">{regiValidationError.title}</div>}
+
 
                   <label className="iAmLabel">I Am:</label>
                   <select className="iAmDropDown" onChange={(e) => setUserType(e.target.value)}>
@@ -73,6 +86,8 @@ function UserRegistration() {
                     <option value="A Gem Collector">A Gem Collector</option>
                     <option value="A Jeweller">A Jeweller</option>
                   </select>
+                  {regiValidationError && <div className="error">{regiValidationError.userType}</div>}
+
 
                   <label className="fNameLabel">First Name:</label>
                   <input className="fNameInput"
@@ -82,6 +97,8 @@ function UserRegistration() {
                     required="required"
                     placeholder="Enter your first name hear..."
                   />
+                  {regiValidationError && <div className="error">{regiValidationError.firstName}</div>}
+
 
                   <label className="lNameLabel">Last Name:</label>
                   <input className="lNameInput"
@@ -91,6 +108,8 @@ function UserRegistration() {
                     required="required"
                     placeholder="Enter your last name hear..."
                   />
+                  {regiValidationError && <div className="error">{regiValidationError.lastName}</div>}
+
 
                   <label className="emailLabel">Email address:</label>
                   <input className="emailInput"
@@ -100,6 +119,8 @@ function UserRegistration() {
                     required="required"
                     placeholder="Enter your Email hear..."
                   />
+                  {regiValidationError && <div className="error">{regiValidationError.email}</div>}
+
 
                   <label className="phoneLabel">Phone Number:</label>
                   <input className="phoneInput" 
@@ -109,6 +130,8 @@ function UserRegistration() {
                     required="required"
                     placeholder="0761760579 or +94761760579"
                   />
+                  {regiValidationError && <div className="error">{regiValidationError.phone}</div>}
+
 
                   <label className="pwLabel">Password:</label>
                   <input 
@@ -118,6 +141,8 @@ function UserRegistration() {
                     required="required"
                     placeholder="Password..."
                   />
+                  {regiValidationError && <div className="error">{regiValidationError.password}</div>}
+
 
                   <label>Confirm Password:</label>
                   <input 
@@ -127,6 +152,8 @@ function UserRegistration() {
                     required="required"
                     placeholder="Confirm Password..."
                   />
+                  {regiValidationError && <div className="error">{regiValidationError.confirmPassword}</div>}
+
 
                   {error && <div className="error">{error}</div>}
                   <button type="submit" disabled={isLoading}>REGISTER</button>
@@ -137,7 +164,7 @@ function UserRegistration() {
                 </form>
             </div>
     </div>
-    
+    </>
   )
 }
 
