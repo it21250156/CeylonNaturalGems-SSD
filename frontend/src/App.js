@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 import Header from './components/Header';
 
+
 // pages & components
 import Home from './pages/Home';
 
@@ -11,6 +12,7 @@ import UserRegistration from './pages/UserRegistration';
 import UserProfile from './pages/UserProfile';
 import UserProfileUpdate from './pages/UserProfileUpdate';
 import AdminUsers from './pages/AdminUsers';
+import AdminHome from './pages/AdminHome';
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -41,6 +43,11 @@ import AddJewelleryes from './pages/AddJewelleryes';
 import JewelleryDetails from './components/JewelleryDetails';
 import UpdateJewellery from './pages/UpdateJewellery'
 
+//Daham
+import JewelhomeMen from './pages/JewelhomeMen';
+import JewelScreen from './pages/JewelScreen';
+import JewelhomeWomen from './pages/JewelhomeWomen';
+
 
 //vihangi
 import InstallmentPlans from './pages/InstallmentPlans'
@@ -56,10 +63,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
         <div className="pages">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/adminHome" element={<AdminHome />} />
             <Route
               path="/login"
               element={!user ? <UserLogin /> : <Navigate to="/" />}
@@ -78,7 +85,7 @@ function App() {
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
             <Route path="/reqReply" element={<ReplyRequest />}></Route>
-            <Route path="/Myrep" element={<Myreply />}></Route>
+            <Route path="/Myrep" element={<Myreply />}></Route> 
             
             {/* <Route 
                 path="/signup" 
@@ -109,6 +116,11 @@ function App() {
             {/* Vihangi  */}
             <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
             <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
+
+            {/* daham */}
+            <Route path="/jwellhomeM" element={<JewelhomeMen/>}/>
+            <Route path="/jwellhomeWm" element={<JewelhomeWomen/>}/>
+            <Route path="/jwellscreen/:id" element={<JewelScreen/>}/>
 
             {/* admin */}
             <Route path = "/AllInstallments" element={ <AllInstallments />} />

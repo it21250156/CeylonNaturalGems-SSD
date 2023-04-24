@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useState } from 'react';
 import logger from 'use-reducer-logger';
 import CartCard from '../components/CartCard';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Header from '../components/Header';
+
 import CartTotal from './cartTotal';
 
 // const reducer = (state, action) => {
@@ -87,19 +89,23 @@ const CartPage = () => {
   // }, [gems, cartData]);
 
   return (
-    <div>
-      <h1>my cart</h1>
-      {gems?.length &&
-        cartData.map((item) => (
-          <CartCard
-            key={item._id}
-            cartid={item._id}
-            gem={gems.find((gem) => gem._id === item.cartitemid)}
-            // gemid={item.cartitemid}
-          ></CartCard>
-        ))}
-      <CartTotal gems={gems} cartData={cartData}></CartTotal>
-    </div>
+    <>
+      <Header />
+
+      <div>
+        <h1>my cart</h1>
+        {gems?.length &&
+          cartData.map((item) => (
+            <CartCard
+              key={item._id}
+              cartid={item._id}
+              gem={gems.find((gem) => gem._id === item.cartitemid)}
+              // gemid={item.cartitemid}
+            ></CartCard>
+          ))}
+        <CartTotal gems={gems} cartData={cartData}></CartTotal>
+      </div>
+    </>
   );
 };
 
