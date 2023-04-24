@@ -43,8 +43,9 @@ import JewelleryDetails from './components/JewelleryDetails';
 import UpdateJewellery from './pages/UpdateJewellery'
 
 //Daham
-import Jewelhome from './pages/Jewelhome';
+import JewelhomeMen from './pages/JewelhomeMen';
 import JewelScreen from './pages/JewelScreen';
+import JewelhomeWomen from './pages/JewelhomeWomen';
 
 
 //vihangi
@@ -116,7 +117,8 @@ function App() {
             <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
 
             {/* daham */}
-            <Route path="/jwellhome" element={<Jewelhome/>}/>
+            <Route path="/jwellhomeM" element={<JewelhomeMen/>}/>
+            <Route path="/jwellhomeWm" element={<JewelhomeWomen/>}/>
             <Route path="/jwellscreen/:id" element={<JewelScreen/>}/>
 
             {/* admin */}
