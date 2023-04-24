@@ -4,6 +4,8 @@ import { Navigate } from "react-router-dom"
 
 const PaymentForm = () => {
 
+  const [user, setUser] = useState('')
+  const[orderID, setOrderID ] = useState('')
     const [amount , setAmount] = useState('')
     const [pmethod , setPmethod] = useState('')
     const [ cardNo , setCardNO] = useState('')
@@ -29,7 +31,7 @@ const PaymentForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const payment = {amount , pmethod, dmethod, address,district, country ,phoneNo, dStatus}
+        const payment = {user: JSON.parse(localStorage.getItem('userInfo'))?._id || null, orderID, amount:JSON.parse(localStorage.getItem('TamountInfo')) , pmethod, dmethod, address,district, country ,phoneNo, dStatus}
 
         const response = await fetch('/api/payments' , {
             method:'POST' ,
@@ -130,7 +132,7 @@ const PaymentForm = () => {
         <label> Payment Amount : </label>
                 <input type="text"
                 onChange={(e) => setAmount(e.target.value)}
-                value={amount}
+                value={JSON.parse(localStorage.getItem('TamountInfo'))}
                 />
         
         {/* <label> Payment Method : </label>

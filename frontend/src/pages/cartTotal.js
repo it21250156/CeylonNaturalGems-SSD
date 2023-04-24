@@ -14,6 +14,9 @@ const CartTotal = ({ gems, cartData, Jwl }) => {
           (gems.find((gem) => gem._id === cartIns.cartitemid)?.price || 0))
     );
     // setTotal(sum);
+  
+    localStorage.setItem('TamountInfo', sum);
+
     return sum;
   };
   return (

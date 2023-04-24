@@ -4,7 +4,8 @@ const {
     getPayment,
     getPayments,
     deletePayment,
-    updatePayment
+    updatePayment,
+    getUserPayments
 } = require('../controllers/paymentController')
 
 const router = express.Router()
@@ -24,4 +25,7 @@ router.delete('/:id' , deletePayment)
 //UPDATE a payment
 router.patch('/:id' , updatePayment)
  
+//GET payments for specific user
+router.get('/user/:user' , getUserPayments)
+
 module.exports = router
