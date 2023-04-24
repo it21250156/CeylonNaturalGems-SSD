@@ -94,25 +94,28 @@ const CartPage = () => {
       <Header />
 
       <div>
-        <div className="darkBlueTopicBox">
-          <h1 className="pageTopic">My Cart</h1>
+        <div className="darkBlueTopicBoxcart">
+          <h1 className="pageTopiccart">My Cart</h1>
         </div>
-        <div className="lightBlueBodyBG">
-          {gems?.length &&
-            cartData &&
-            cartData.map((item) => (
-              <CartCard
-                key={item._id}
-                cartid={item._id}
-                gem={gems.find((gem) => gem._id === item.cartitemid)}
-                // gemid={item.cartitemid}
-              ></CartCard>
-            ))}
+        <div className="lightBlueBodyBGcart">
+          <div className="cart-col-1">
+            {gems?.length &&
+              cartData &&
+              cartData.map((item) => (
+                <CartCard
+                  key={item._id}
+                  cartid={item._id}
+                  gem={gems.find((gem) => gem._id === item.cartitemid)}
+                  // gemid={item.cartitemid}
+                ></CartCard>
+              ))}
+          </div>
+          <div className="cart-col-2">
+            {/* {JSON.stringify(gems)}
+              {JSON.stringify(cartData)} */}
+            <CartTotal gems={gems} cartData={cartData}></CartTotal>
+          </div>
         </div>
-
-        {/* {JSON.stringify(gems)}
-        {JSON.stringify(cartData)} */}
-        <CartTotal gems={gems} cartData={cartData}></CartTotal>
       </div>
     </>
   );
