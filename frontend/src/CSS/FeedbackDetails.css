@@ -1,0 +1,56 @@
+.feedback-card {
+  background-color: white;
+  padding: 30px;
+  margin: 10px;
+  border-radius: 20px;
+  width: auto;
+}
+
+.feedback-name {
+  font-family: Bebas Neue;
+  text-align: left;
+  font-size: 25px;
+  padding: 0;
+  margin: 0 0 5px 0;
+}
+
+.cols {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.feedback-col-1 {
+  flex: 1;
+  background-color: blue;
+}
+.feedback-col-2 {
+  flex: 3;
+  padding: 0 10px;
+}
+
+.feedback-img {
+  background-color: blue;
+}
+
+.feedback-description {
+  margin: 0;
+  text-align: left;
+  font-family: bpreplay;
+  margin: 10px;
+  color: #144272;
+}
+
+.g-quantity-tag {
+  text-align: left;
+  font-family: bpreplay;
+  margin: 10px;
+  color: #144272;
+}
+
+.time-stamp-feedback {
+  text-align: right;
+  font-family: bpreplay;
+  margin: 0 20px;
+  color: #0b62a8;
+  font-style: italic;
+}

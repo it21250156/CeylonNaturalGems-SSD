@@ -1,0 +1,25 @@
+.title-box-feedback {
+  background-color: #144272;
+  margin: 20px 150px;
+  padding: 40px 0;
+  border-radius: 20px;
+}
+
+.title-feedback {
+  color: white;
+  font-family: Bebas Neue;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.light-blue-bg {
+  background-color: #cadefc;
+  margin: 20px 150px;
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
