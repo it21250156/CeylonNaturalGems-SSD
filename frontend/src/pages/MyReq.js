@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
+import Header from '../components/Header';
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
