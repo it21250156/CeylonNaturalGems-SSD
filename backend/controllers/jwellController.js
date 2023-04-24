@@ -1,5 +1,6 @@
 const Jewell = require('../models/jewelleryModel')
 const Jewellw = require('../models/jewelleryModelW')
+const Jewellery = require('../models/jewelleryModel')
 const mongoose = require('mongoose')
 
 //get all gems
