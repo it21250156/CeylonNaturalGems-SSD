@@ -91,9 +91,9 @@ function App() {
               element={<UserProfileUpdate />}
             />
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
-            <Route path="/feedbacks" element={<AllFeedbacks />} />
-            <Route path="/FeedbackForm" element={<FeedbackForm />} />
-            <Route path="/UpdateFeedback/:_id" element={<UpdateFeedback />} />
+            <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
+            <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
+            <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
 
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
