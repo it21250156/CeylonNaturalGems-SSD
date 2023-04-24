@@ -26,7 +26,7 @@ const getPayment = async(req , res) => {
 
 //create a new payment
 const createPayment = async (req , res) =>{
-    const { amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus, orderID, userID} = req.body
+    const { amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus, orderID, userID  } = req.body
 
     //add doc to db
     try{
