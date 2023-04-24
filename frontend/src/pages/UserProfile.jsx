@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import profilePic from '../images/UserProfilePhoto.png';
 import { useLogout } from '../hooks/useLogout';
 import { useEffect, useState } from 'react';
@@ -126,7 +126,9 @@ const UserProfile = () => {
         </div>
         <div className="bottom-btns-3"></div>
         <button className="my---btn">MY REQUESTS</button>
+        <Link to = {'/UserFeedbacks'}>
         <button className="my---btn">MY FEEDBACKS</button>
+        </Link>
         <button
           className="my---btn"
           onClick={() => {

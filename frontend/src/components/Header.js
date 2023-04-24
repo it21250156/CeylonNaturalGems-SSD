@@ -107,7 +107,7 @@ const Header = () => {
               <a href="#">Blog</a>
             </li>
             <li>
-              <Link to="/feedbacks">Feedbacks</Link>
+              <Link to="/feedbacks">All Feedbacks</Link>
             </li>
             <li>
               <Link to="/mycart">Cart {cartData?.length}</Link>
