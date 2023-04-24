@@ -97,7 +97,14 @@ const AdminUpdatePlan = () => {
                 <lable>Initial payment (as a percentage):</lable>
                 <input 
                     type="number"
-                    onChange={(e) => setInitialPayment(e.target.value)}
+                    onChange={(e) => {
+                        const value = parseInt(e.target.value);
+                        if (value < 100) {
+                            setInitialPayment(value);
+                        } else {
+                            setError("Initial payment must be less than 100");
+                        }
+                    }}
                     value = {initialPayment}
                     // placeholder={plans.initialPayment}
                 />
