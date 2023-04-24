@@ -75,7 +75,7 @@ const FeedbackDetails = ({feedback}) =>{
     <div className="feedback-details">
       <h4>{feedback.gemType}</h4>
       {/* {JSON.stringify(feedbacks)} */}
-      <p><strong>User Name: </strong>{userData.firstName}</p>
+      {/* <p><strong>User Name: </strong>{userData.firstName}</p> */}
       <p><strong>Gem Quantity: </strong>{feedback.gemQty}</p>
       <p><strong>Feedback: </strong>{feedback.fbInfo}</p>
       {/* <p><strong>Rating: </strong>{feedback.rating}</p> */}
