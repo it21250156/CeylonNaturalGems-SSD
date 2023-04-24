@@ -1,14 +1,12 @@
 const mongoose = require("mongoose");
 
 const ReplySchema = new mongoose.Schema({
-
-
-    Reply:{
+    reply:{
         type: String,
         required: true,
     },
+    
+});
 
-})
-
-const ReplyModel = mongoose.model("reply", ReplySchema);
+const ReplyModel = mongoose.model("replies", ReplySchema);
 module.exports = ReplyModel;

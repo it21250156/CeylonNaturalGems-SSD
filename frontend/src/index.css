@@ -68,8 +68,9 @@ header .container {
 } */
 
 /* new workout form */
-label, input {
- display: block;
+label,
+input {
+  display: block;
 }
 input {
   padding: 10px;
@@ -85,10 +86,10 @@ form button {
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   border-radius: 4px;
   cursor: pointer;
-} 
+}
 div.error {
   background: #ffefef;
   /* border: 1px solid #e7195a; */
@@ -98,7 +99,7 @@ div.error {
 }
 input.error {
   border: 1px solid #e7195a;
-} 
+}
 
 /* navbar */
 /*
@@ -133,31 +134,30 @@ nav button {
   border-radius: 4px;
 } */
 
-
 /* BodyTemp css */
 
-.lightBlueBodyBG{
+.lightBlueBodyBG {
   background-color: #cadefc;
   margin: 30px 10%;
   padding: 20px;
   border-radius: 20px;
 }
 
-.whiteBodyBG{
+.whiteBodyBG {
   background-color: white;
   margin: 20px;
   padding: 20px;
   border-radius: 20px;
 }
 
-.darkBlueTopicBox{
+.darkBlueTopicBox {
   background-color: #144272;
   margin: 10px;
   padding: 30px;
   border-radius: 10px;
 }
 
-.pageTopic{
+.pageTopic {
   color: white;
   font-family: Bebas Neue;
   margin: 0;
@@ -168,29 +168,28 @@ nav button {
 
 /* Header CSS */
 
-body{
+body {
   margin: 0px;
 }
 
-.background{
+.background {
   margin: 0px;
-  height: 100px;     /*  kali change 200px to 100px  */
+  height: 100px; /*  kali change 200px to 100px  */
   background-color: #0a2647;
   text-align: center;
-
 }
 
-.headerName{
+.headerName {
   margin: 0px;
   color: white;
   font-family: lobster;
   font-weight: 100;
 }
 
-.headerNameDiv{
-  height: 100px;      /*  kali change 200px to 100px  */
+.headerNameDiv {
+  height: 100px; /*  kali change 200px to 100px  */
   width: 100%;
-  padding: 25px 0px 25px 0px;    /*  kali change 50px to 25px  */
+  padding: 25px 0px 25px 0px; /*  kali change 50px to 25px  */
 }
 
 nav {
@@ -204,13 +203,12 @@ nav button {
   float: right;
 }
 
-.navprofileDiv{
+.navprofileDiv {
   float: right;
   overflow: hidden;
   margin-right: 5%;
   padding-top: 15px;
 }
-
 
 nav ul {
   list-style-type: none;
@@ -250,7 +248,6 @@ nav li a:hover {
   border: 2px;
   border-color: black;
 }
-
 
 /* App CSS */
 
@@ -294,71 +291,3 @@ nav li a:hover {
 }
 
 /* userProfile CSS */
-
-.profileBodyContainer{
-  margin: 2%;
-}
-
-.lightBlueBodyBGUserprofile{
-  background-color: #cadefc;
-  margin: 30px 10%;
-  height: 100%;
-  padding: 20px;
-  border-radius: 20px;
-}
-
-.whiteBodyBGUserprofile{
-  background-color: #cadefc;
-  margin: 20px;
-  padding: 5px;
-  border-radius: 20px;
-  height: fit-content;
-}
-
-.darkBlueTopicBoxUserprofile{
-  background-color: #144272;
-  margin-left: 10%;
-  margin-right: 10%;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 1%;
-}
-
-.pageTopicUserprofile{
-  color: white;
-  font-family: Bebas Neue;
-  margin: 0;
-  padding: 0;
-  font-size: 40px;
-  font-style: normal;
-}
-.profilePhotoDiv{
-  width: 100px;
-  height: 100px;
-}
-.UserName{
-  max-width: fit-content;
-  max-height: fit-content;
-}
-
-.deleteAccountBtn{
-  position: absolute;
-  margin-top: -200px;
-  margin-left: 15%;
-}
-
-.logoutbtn{
-  position: absolute;
-  margin-top: -200px;
-  margin-left: 30%;
-}
-
-.UserDetails{
-  margin: 0;
-  padding: 0;
-}
-
-.UserDetailsTitle{
-  margin: 0;
-  text-align: left;
-}

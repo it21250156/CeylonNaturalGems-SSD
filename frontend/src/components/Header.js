@@ -10,7 +10,7 @@ const Header = () => {
   const { logout } = useLogout();
   const { user, cartData, setCartData } = useAuthContext();
 
-   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   // const [userData, setUserData] = useState({});
 
@@ -29,7 +29,7 @@ const Header = () => {
   };
   // const userid = JSON.parse(localStorage.getItem('userInfo'))._id;
 
-  var cart = [];
+  var crt = [];
 
   // useEffect(() => {
   // //   fetch(`/api/cart/user/${userid}`)
@@ -52,7 +52,7 @@ const Header = () => {
             {user && (
               <div className="navEmal">
                 <span>
-                  Hello {userInfo.title} {userInfo.firstName} {userInfo.lastName}
+                  Hello {user.title} {user.firstName} {user.lastName}
                 </span>
                 <button onClick={handleClick}>Log out</button>
                 <button
@@ -95,7 +95,8 @@ const Header = () => {
               <a href="#">Jewelleries</a>
               <ul className="jewelleryDropdownContent">
                 <li>
-                  <a href="#">Men's Jewellery</a>
+                  <Link to="/jwellhome">Men's Jewellery</Link>
+                  
                 </li>
                 <li>
                   <a href="#">Women's Jewellery</a>
@@ -106,7 +107,7 @@ const Header = () => {
               <a href="#">Blog</a>
             </li>
             <li>
-            <Link to="/feedbacks">Feedbacks</Link>
+              <Link to="/feedbacks">Feedbacks</Link>
             </li>
             <li>
               <Link to="/mycart">Cart {cartData?.length}</Link>

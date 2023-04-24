@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { AuthContextProvider } from './context/AuthContext'
-import MyReq from './pages/MyReq';
-import RequestAdmin from './pages/RequestAdmin';
-import ReplyRequest from './pages/ReplyRequest';
-import ReqMain from './pages/ReqMain';
+// import MyReq from './pages/MyReq';
+// import RequestAdmin from './pages/RequestAdmin';
+// import ReplyRequest from './pages/ReplyRequest';
+// import ReqMain from './pages/ReqMain';
 import { FeedbacksContextProvider } from './context/FeedbackContext';
-import { JewelleryesContextProvider } from './context/JewelleryContext';
+
+import { JewelContextProvider } from './context/JewelPageContext';
+
 
 
 import {
@@ -45,10 +47,10 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
     <FeedbacksContextProvider>
-      <JewelleryesContextProvider>
-        <App />
-      </JewelleryesContextProvider>
+    <JewelContextProvider>
     {/* <RouterProvider router={router}/> */}
+      <App />
+    </JewelContextProvider>
     </FeedbacksContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

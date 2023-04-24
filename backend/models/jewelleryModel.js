@@ -33,4 +33,4 @@ const jewellerySchema = new Schema({
     }
 }, {timestamps: true})
 
-module.exports = mongoose.model('Jewellery', jewellerySchema);
+module.exports = mongoose.model('jewelleries', jewellerySchema);
