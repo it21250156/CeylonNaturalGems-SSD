@@ -12,7 +12,7 @@ function JewelCard(Jewel) {
         <p className="card-price">${Jwl.price}</p>
       </div>
       <Link to={`/jwellscreen/${Jwl._id}`}>
-        <button className="card-button">Read More...</button>
+        <button className="card-button">Read More....</button>
       </Link>
     </div>
   );
