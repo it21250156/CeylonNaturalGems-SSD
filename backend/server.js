@@ -14,6 +14,7 @@ const feedbackRoutes = require('./routes/feedbacks');
 //janith
 const gemRoutes = require('./routes/gems');
 const cartRoutes = require('./routes/cartRoutes.js');
+//Daham
 
 //bimsara
 const UserModel = require('./models/Users');
@@ -28,6 +29,9 @@ const jewelleryRoutes = require('./routes/jewelleryes');
 // vihangi
 const planRoutes = require('./routes/plans');
 const installmentsRoutes = require('./routes/installments');
+
+//daham
+const jwellRoutes = require('./routes/jewellers');
 
 // express app
 const app = express();
@@ -166,6 +170,12 @@ app.use('/api/jewelleryes', jewelleryRoutes);
 // vihangi
 app.use('/api/plans', planRoutes);
 app.use('/api/installments', installmentsRoutes);
+
+//daham
+
+app.use('/api/jewelleryes',jwellRoutes);
+//routes
+
 
 // connect to db
 mongoose

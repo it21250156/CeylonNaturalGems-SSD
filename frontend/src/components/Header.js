@@ -95,7 +95,8 @@ const Header = () => {
               <a href="#">Jewelleries</a>
               <ul className="jewelleryDropdownContent">
                 <li>
-                  <a href="#">Men's Jewellery</a>
+                  <Link to="/jwellhome">Men's Jewellery</Link>
+                  
                 </li>
                 <li>
                   <a href="#">Women's Jewellery</a>

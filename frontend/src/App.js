@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 import Header from './components/Header';
 
+
 // pages & components
 import Home from './pages/Home';
 
@@ -40,6 +41,10 @@ import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
 import AddJewelleryes from './pages/AddJewelleryes';
 import JewelleryDetails from './components/JewelleryDetails';
 import UpdateJewellery from './pages/UpdateJewellery'
+
+//Daham
+import Jewelhome from './pages/Jewelhome';
+import JewelScreen from './pages/JewelScreen';
 
 
 //vihangi
@@ -109,6 +114,10 @@ function App() {
             {/* Vihangi  */}
             <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
             <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
+
+            {/* daham */}
+            <Route path="/jwellhome" element={<Jewelhome/>}/>
+            <Route path="/jwellscreen/:id" element={<JewelScreen/>}/>
 
             {/* admin */}
             <Route path = "/AllInstallments" element={ <AllInstallments />} />

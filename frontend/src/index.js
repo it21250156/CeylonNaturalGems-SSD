@@ -8,6 +8,8 @@ import { AuthContextProvider } from './context/AuthContext'
 // import ReplyRequest from './pages/ReplyRequest';
 // import ReqMain from './pages/ReqMain';
 import { FeedbacksContextProvider } from './context/FeedbackContext';
+import { JewelContextProvider } from './context/JewelPageContext';
+
 
 
 import {
@@ -44,8 +46,10 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
     <FeedbacksContextProvider>
+    <JewelContextProvider>
     {/* <RouterProvider router={router}/> */}
       <App />
+    </JewelContextProvider>
     </FeedbacksContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
