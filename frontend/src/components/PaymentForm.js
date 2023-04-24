@@ -91,14 +91,22 @@ const PaymentForm = () => {
         }
       };
 
-      const handleSecCodeChange = (e) => {
-        const inputValue = e.target.value;
-        // Check if input value is a valid 4-digit number
-        if (/^\d{4}$/.test(inputValue)) {
-          setSecCode(inputValue);
-        }
-      };
+      // const handleSecCodeChange = (e) => {
+      //   const inputValue = e.target.value;
+      //   // Check if input value is a valid 4-digit number
+      //   if (/^\d{4}$/.test(inputValue)) {
+      //     setSecCode(inputValue);
+      //   }
+      // };
 
+
+      const handleSecCodeChange = (event) => {
+        const inputSecCode = event.target.value;
+        
+        const numericSecCode = inputSecCode.replace(/\D/g, '');
+        const trimmedSecCode = numericSecCode.slice(0, 4);
+        setSecCode(trimmedSecCode);
+      }
 
 
     return (

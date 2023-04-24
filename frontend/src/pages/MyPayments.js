@@ -117,7 +117,7 @@ const PaymentRow = ({payment}) => {
         <td>{payment.dStatus}</td>
         <td>{payment.createdAt}</td>
         <td><button onClick={handleDelete} disabled={isDeleting}>
-        {isDeleting ? 'Deleting...' : 'Delete'}
+        {isDeleting ? 'Deleting...' : 'DELETE'}
       </button></td>
         <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
         <td><button> FEEDBACK </button></td>
