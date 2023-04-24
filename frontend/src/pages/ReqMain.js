@@ -58,7 +58,6 @@ function ReqMain() {
 
   return (
     <>
-<<<<<<< Updated upstream
       <Header />
       <div className="App">
         <div className="requestDisplay">
@@ -69,18 +68,6 @@ function ReqMain() {
             <form onSubmit={handleSubmit(createRequest)}>
               <div className="requantent">
                 {/* <p>Request ID</p>
-=======
-    <Header/>
-    <div className="App">
-      <div className="requestDisplay">
-        <div className="darkBlueTopicBoxReq">
-          <h1 className="pageTopicReq">REQUEST GEMS</h1>
-        </div>
-        <div className="lightBlueBodyBGUserprofile">
-          <form onSubmit={handleSubmit(createRequest)}>
-            <div className="requantent">
-              {/* <p>Request ID</p>
->>>>>>> Stashed changes
               <input className='tb' type="number"  placeholder="Request ID..." {...register("requestID")} onChange={(event) =>{
                 setRequestID(event.target.value);
               }} />
@@ -269,17 +256,6 @@ function ReqMain() {
           All Requests
         </button>
       </div>
-<<<<<<< Updated upstream
-=======
-      <button
-        onClick={() => {
-          window.location.href = './reqAd';
-        }}
-      >
-        All Requests
-      </button>
-    </div>
->>>>>>> Stashed changes
     </>
   );
 }

@@ -1,0 +1,87 @@
+.title-box-feedback {
+  background-color: #144272;
+  margin: 20px 300px;
+  padding: 40px 0;
+  border-radius: 20px;
+}
+
+.title-feedback {
+  color: white;
+  font-family: Bebas Neue;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.light-blue-bg {
+  background-color: #cadefc;
+  margin: 20px 300px;
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cols {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-col-1 {
+  flex: 1;
+}
+
+.form-col-2 {
+  flex: 1;
+}
+
+#input {
+  width: 500px;
+  height: 44px;
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.label {
+  font-family: legendum;
+  color: #144272;
+  font-weight: bold;
+  text-align: left;
+}
+
+#input:hover,
+#input:focus,
+#input-group:hover #input {
+  outline: none;
+  border-color: #144272;
+}
+
+#input-group:hover .label,
+#input:focus {
+  color: #144272;
+}
+
+.add-feedbackform-btn {
+  background-color: #144272;
+  border: 2px solid #144272;
+  padding: 15px 40px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.add-feedbackform-btn:hover {
+  border: 2px solid #144272;
+  background-color: white;
+  color: #144272;
+  transition: 0.5s;
+}

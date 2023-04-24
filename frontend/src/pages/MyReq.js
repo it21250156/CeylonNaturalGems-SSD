@@ -8,10 +8,6 @@ import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 import Header from '../components/Header';
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
@@ -103,15 +99,9 @@ function MyReq() {
 
   return (
     <>
-<<<<<<< Updated upstream
       <Header />
       <div className="MyRequests">
         <div className="darkBlueTopicBoxReq">
-=======
-    <Header/>
-    <div className="MyRequests">
-      <div className="darkBlueTopicBoxReq">
->>>>>>> Stashed changes
           <h1 className="pageTopicReq">My Requests</h1>
         </div>
 
@@ -259,19 +249,6 @@ function MyReq() {
           })}
         </div>
       </div>
-<<<<<<< Updated upstream
-=======
-
-      <button
-        className="viewreqbt"
-        onClick={() => {
-          window.location.href = './reqM';
-        }}
-      >
-        Create a new request
-      </button>
-    </div>
->>>>>>> Stashed changes
     </>
   );
 }

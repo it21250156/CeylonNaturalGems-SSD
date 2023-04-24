@@ -96,7 +96,6 @@ const Header = () => {
               <ul className="jewelleryDropdownContent">
                 <li>
                   <Link to="/jwellhomeM">Men's Jewellery</Link>
-                  
                 </li>
                 <li>
                   <Link to="/jwellhomeW">Women's Jewellery</Link>
@@ -107,7 +106,7 @@ const Header = () => {
               <a href="#">Blog</a>
             </li>
             <li>
-              <Link to="/feedbacks">All Feedbacks</Link>
+              <Link to="/feedbacks">Feedbacks</Link>
             </li>
             <li>
               <Link to="/mycart">Cart {cartData?.length}</Link>

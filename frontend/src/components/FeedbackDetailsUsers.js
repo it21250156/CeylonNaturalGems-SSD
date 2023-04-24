@@ -1,64 +1,84 @@
-import { useFeedbacksContext } from "../hooks/useFeedbackContext"
-import { Link } from 'react-router-dom'
+import { useFeedbacksContext } from '../hooks/useFeedbackContext';
+import { Link } from 'react-router-dom';
 import StarRating from 'react-star-ratings';
+import '../CSS/UserFeedbacks.css';
 
 //date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import { useEffect, useState } from "react";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { useEffect, useState } from 'react';
 
-const FeedbackDetailsUsers = ({feedback}) =>{
+const FeedbackDetailsUsers = ({ feedback }) => {
+  const { feedbacks, dispatch } = useFeedbacksContext();
 
-  const {feedbacks, dispatch} = useFeedbacksContext()
-  
   const handleClick = async () => {
-    const response = await fetch('/api/feedbacks/' +feedback._id, {
-      method: 'DELETE'
-    })
-    const json = await response.json()
+    const response = await fetch('/api/feedbacks/' + feedback._id, {
+      method: 'DELETE',
+    });
+    const json = await response.json();
 
-    if(response.ok) {
-       dispatch({type: 'DELETE_FEEDBACK', payload: json})
+    if (response.ok) {
+      dispatch({ type: 'DELETE_FEEDBACK', payload: json });
     }
-  }
-
+  };
 
   return (
     <div className="feedback-details-users">
-      <h4>{feedback.gemType}</h4>
+      <p className="feedback-name">{feedback.gemType}</p>
+      <div className="cols">
+        <div className="feedback-col-1">
+          <div className="img-section"></div>
+        </div>
+        <div className="feedback-col-2">
+          <p className="feedback-description">{feedback.fbInfo}</p>
+          <StarRating
+            readOnly
+            id="rating"
+            name="rating"
+            rating={Number(feedback.rating)}
+            starRatedColor="#0a2647"
+            starHoverColor="orange"
+            starDimension="25px"
+            starSpacing="5px"
+          />
+          <p className="g-quantity-tag">
+            Gem Quantity:
+            {feedback.gemQty}
+          </p>
+        </div>
+        <div className="feedback-col-3">
+          <Link to={`/UpdateFeedback/${feedback._id}`}>
+            <span className="material-symbols-outlined" id="edit">
+              edit
+            </span>
+          </Link>
+          <span
+            className="material-symbols-outlined"
+            id="delete"
+            onClick={handleClick}
+          >
+            delete
+          </span>
+
+          {/* <Link to = {"/UpdateFeedback/:_id"}> */}
+        </div>
+      </div>
+      <p className="time-stamp-feedback">
+        {formatDistanceToNow(new Date(feedback.createdAt), {
+          addSuffix: true,
+        })}
+      </p>
+
       {/* {JSON.stringify(feedbacks)} */}
-      <p><strong>Gem Quantity: </strong>{feedback.gemQty}</p>
-      <p><strong>Feedback: </strong>{feedback.fbInfo}</p>
+
       {/* <p><strong>Rating: </strong>{feedback.rating}</p> */}
-      <StarRating 
-                    readOnly
-                    id="rating"
-                    name="rating"
-                    rating = {Number(feedback.rating)}                    
-                    starRatedColor="#0a2647"
-                    starHoverColor="orange"
-                    starDimension="25px"
-                    starSpacing="5px"
-                    
-                />
+
       {feedback.reply && (
-  <p>
-    <strong>Feedback Reply:</strong> {feedback.reply}
-  </p>
-)}
-
-      <p>{formatDistanceToNow(new Date(feedback.createdAt), { addSuffix: true })}</p>
-      <span className="material-symbols-outlined" onClick = {handleClick}>delete</span>
-      
-      {/* <Link to = {"/UpdateFeedback/:_id"}> */}
-      <Link to = {`/UpdateFeedback/${feedback._id}`}>
-      <span >Update</span>
-      </Link>
-
-
-      
+        <p>
+          <strong>Feedback Reply:</strong> {feedback.reply}
+        </p>
+      )}
     </div>
-  )
+  );
+};
 
-}
-
-export default FeedbackDetailsUsers
+export default FeedbackDetailsUsers;
