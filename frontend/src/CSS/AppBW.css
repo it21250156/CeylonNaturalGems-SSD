@@ -42,7 +42,7 @@
   background-color: #144272;
   margin: 20px 100px;
   padding: 40px 0;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .pageTopicReq {
@@ -156,43 +156,39 @@
 }
 
 .delbtn {
-  float: right;
-  width: 170px;
-  font-size: 30px;
-  margin-top: -13%;
-  padding-top: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  margin-right: 10%;
-  border-radius: 10px;
+  margin: 0 5px 0 0;
+  padding: 20px;
+  border: 2px solid red;
   background-color: red;
   color: white;
+  font-family: Bebas Neue;
+  font-size: 25px;
+  border-radius: 15px;
 }
 
 .delbtn:hover {
-  background-color: rgb(251, 255, 0);
-  color: black;
+  border: 2px solid red;
+  background-color: white;
+  color: red;
+  transition: 0.5s;
 }
 
 .updatebtn {
-  float: right;
-  width: 170px;
-  font-size: 30px;
-  margin-top: -18%;
-  padding-top: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  margin-right: 10%;
-  border-radius: 10px;
-  background-color: green;
+  background-color: #2c74b3;
+  border: 2px solid #2c74b3;
+  padding: 10px;
   color: white;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  border-radius: 10px;
+  width: 150px;
 }
 
 .updatebtn:hover {
-  background-color: blue;
-  color: wheat;
+  background-color: white;
+  border: 2px solid #2c74b3;
+  color: #2c74b3;
+  transition: 0.5s;
 }
 
 .repbtn {
@@ -215,12 +211,12 @@
   color: wheat;
 }
 
-.Srepbtn{
+.Srepbtn {
   float: center;
   width: 250px;
   font-size: 30px;
   margin-bottom: 20px;
-  
+
   margin-top: 30px;
   padding-top: 10px;
   padding-left: 30px;
@@ -231,7 +227,7 @@
   color: white;
 }
 
-.Srepbtn:hover{
+.Srepbtn:hover {
   background-color: blue;
   color: wheat;
 }
@@ -291,7 +287,7 @@
 /* janith - css */
 
 .input {
-  width: 400px;
+  width: 300px;
   height: 44px;
   background-color: white;
   border-radius: 0.5rem;
@@ -316,10 +312,154 @@
 .input:focus,
 .input-group:hover .input {
   outline: none;
-  border-color: #05060f;
+  border-color: #144272;
 }
 
 .input-group:hover .label,
 .input:focus {
-  color: #05060fc2;
+  color: #144272;
+}
+
+.lightBlueBodyBG {
+  background-color: #cadefc;
+  margin: 20px 100px;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+.pageTopic {
+  color: white;
+  font-family: Bebas Neue;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.whiteBodyBG {
+  background-color: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 40px;
+}
+
+.white-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.myreq-column-1 {
+  flex: 1;
+}
+
+.myreq-column-2 {
+  flex: 1;
+}
+
+.myreq-column-3 {
+  flex: 1;
+}
+
+.req-lable {
+  font-family: legendum;
+  color: #144272;
+  font-weight: bold;
+}
+
+.req-value {
+  font-family: legendum;
+  color: #144272;
+}
+
+table {
+  margin: 10px;
+}
+
+.myreq-column-2 {
+  padding: 15px;
+  border: 2px solid #cadefc;
+  border-radius: 20px;
+}
+
+/* delete btn */
+
+.btn {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border: none;
+  position: relative;
+  border-radius: 10px;
+  -webkit-box-shadow: 2px 2px 5px 0.2px red;
+  box-shadow: 2px 2px 5px 0.2px red;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+  transition-delay: 0.2s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: space-between;
+  margin: 20px 0 0 0;
+}
+
+.btn:hover {
+  width: 150px;
+  transition-delay: 0.2s;
+}
+
+.btn:hover > .paragraph {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+}
+
+.btn:hover > .icon-wrapper .icon {
+  transform: scale(1.1);
+}
+
+.bnt:hover > .icon-wrapper .icon path {
+  stroke: red;
+}
+
+.paragraph {
+  color: red;
+  visibility: hidden;
+  opacity: 0;
+  font-size: 18px;
+  margin-right: 20px;
+  padding-left: 20px;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.icon-wrapper {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  transform: scale(0.9);
+  transition: 0.2s linear;
+}
+
+.icon path {
+  stroke: red;
+  stroke-width: 2px;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
 }
