@@ -1,6 +1,9 @@
 import React, { useEffect, useState  } from "react"
 //import { BodyTemp } from "../components/BodyTemp"
 import { usePaymentContext } from "../hooks/usePaymentsContext"
+
+import Header from '../components/Header';
+
 import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 
@@ -27,7 +30,8 @@ const MyPayments = () => {
     }, [])  
 
     return (
-      
+      <>
+      <Header/>
       <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
             <div className="darkBlueTopicBox">
@@ -60,7 +64,7 @@ const MyPayments = () => {
             </div>
         </div>
     </div>
-    
+    </>
     )
 }
 

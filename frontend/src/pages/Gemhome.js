@@ -2,6 +2,8 @@ import React, { useEffect, useReducer } from 'react';
 import logger from 'use-reducer-logger';
 // import { useGemsContext } from '../hooks/useGemsContext';
 import '../CSS/Gemhome.css';
+import Header from '../components/Header';
+
 
 //components
 import GemCard from '../components/GemCard';
@@ -42,6 +44,8 @@ const Gemhome = () => {
   }, []);
 
   return (
+    <>
+    <Header/>
     <div className="gemhome">
       <div className="gems">
         <div className="lightBlueBodyBG">
@@ -57,6 +61,7 @@ const Gemhome = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

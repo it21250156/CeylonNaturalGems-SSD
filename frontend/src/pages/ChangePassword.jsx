@@ -1,6 +1,7 @@
 import React, { useEffect , useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../components/Header';
 
 
 function ChangePassword() {
@@ -27,6 +28,8 @@ function ChangePassword() {
 
 
   return (
+    <>
+    <Header/>
     <div className="lightBlueBodyBG">
             <div className="whiteBodyBG">
                 <div className="darkBlueTopicBox">
@@ -105,7 +108,7 @@ function ChangePassword() {
                 </form>
             </div>
     </div>
-    
+    </>
   )
 }
 

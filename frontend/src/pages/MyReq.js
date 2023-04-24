@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
+import Header from '../components/Header';
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
@@ -87,6 +88,8 @@ function MyReq() {
   });
 
   return (
+    <>
+    <Header/>
     <div className="MyRequests">
       <div className="darkBlueTopicBoxReq">
           <h1 className="pageTopicReq">My Requests</h1>
@@ -233,6 +236,7 @@ function MyReq() {
         Create a new request
       </button>
     </div>
+    </>
   );
 }
 
