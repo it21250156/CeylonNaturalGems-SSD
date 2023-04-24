@@ -1,0 +1,124 @@
+.mypayments{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 100px;
+    padding-top: 50px;
+  }
+  
+  .payment-details{
+    background: #fff;
+    border-radius: 4px;
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    box-shadow: 2px 2px 5px;
+  }
+  
+  .payment-details p{
+    margin: 0;
+    font-size: 0.9em;
+    color:#555;
+  }
+  
+  .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    min-height: 100vh; 
+    padding-bottom: 70px;
+  }
+  
+  .container form {
+     padding: 20px;
+     width: 1000px;
+     background: #cadefc;
+     border-radius: 7px;
+  }
+  
+  .container form .row{
+     display: flex;
+     flex-wrap: wrap;
+     gap: 15px;
+  
+  }
+  
+  .container form .row .col{
+     flex: 1 1 250px;
+  }
+  
+  label , input {
+    display: block;
+  }
+  
+  input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  form button{
+    background: #2c74b3;
+    border: 0;
+    width: 50%;
+    height: 10%;
+    color: white;
+    padding: 10px;
+    font-size: large;
+    font-family: "Poppins";
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  div.error {
+    padding: 10px;
+    background: #ffefef;
+    border: 1px solid var(--error);
+    color: var(--error);
+    border-radius: 4px;
+    margin: 20px 0;
+  }
+  
+  input.error {
+    border : 1px solid var(--error);
+  }
+  
+  table {
+    width: 1025px;
+    text-align: left;
+    background: #cadefc;
+    margin: 10px;
+    padding: 30px;
+    border-radius: 10px;
+    height: 50px;
+    vertical-align: bottom;
+  }
+  
+  table tbody tr td button{
+    background: #2c74b3;
+    border: 0;
+    width: 100%;
+    height: 70%;
+    color: white;
+    padding: 10px;
+    font-family: "Poppins";
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  thead tr th {
+    background: #144272;
+    border: 0;
+    width: 100%;
+    height: 70%;
+    color: white;
+    padding: 10px;
+    font-family: "Poppins";
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

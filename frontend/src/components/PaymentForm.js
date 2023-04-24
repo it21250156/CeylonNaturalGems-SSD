@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { Navigate } from "react-router-dom"
-
+import '../CSS/Payment.css';
 
 const PaymentForm = () => {
 
+  const [isValid, setIsValid] = useState(true);
   const [user, setUser] = useState('')
   const[orderID, setOrderID ] = useState('')
     const [amount , setAmount] = useState('')
@@ -86,20 +87,22 @@ const PaymentForm = () => {
 
       const handleExYearChange = (e) => {
         const inputValue = e.target.value;
-        // Check if input value is a valid year (current year or future years)
-        const currentYear = new Date().getFullYear();
-        if (/^20.{2}$/.test(inputValue) && parseInt(inputValue) >= currentYear) {
+        // Check if input value is a valid year (4 digits starting from 20)
+        if (/^20\d{2}$/.test(inputValue)) {
           setExYear(inputValue);
         }
       };
+      
 
-      // const handleSecCodeChange = (e) => {
-      //   const inputValue = e.target.value;
-      //   // Check if input value is a valid 4-digit number
-      //   if (/^\d{4}$/.test(inputValue)) {
-      //     setSecCode(inputValue);
-      //   }
-      // };
+      const handlePhoneNoChange = (e) => {
+        const inputPhoneNo = e.target.value;
+        setPhoneNo(inputPhoneNo);
+    
+        // Regular expression pattern for validating phone numbers with multiple country codes
+        const phoneNoPattern = /^(\+|00)(1|91|44|61|65|86)(\d{6,16})$/;
+    
+        setIsValid(phoneNoPattern.test(inputPhoneNo));
+      };
 
 
       const handleSecCodeChange = (event) => {
@@ -190,7 +193,7 @@ const PaymentForm = () => {
         <label>Expiry Year:</label>
       <input
         type="number"
-        onChange={handleExYearChange}
+        onChange={(e) => setExYear(e.target.value)}
         value={exYear}
       />
         
@@ -250,11 +253,19 @@ const PaymentForm = () => {
                 value={country}
                 />
         
-        <label> Phone Number : </label>
+        {/* <label> Phone Number : </label>
                 <input type="text"
                 onChange={(e) => setPhoneNo(e.target.value)}
                 value={phoneNo}
-                />
+                /> */}
+
+<label>Phone Number:</label>
+      <input
+        type="text"
+        onChange={handlePhoneNoChange}
+        value={phoneNo}
+      />
+      {!isValid && <small>Please enter a valid phone number with country code (+1, +91, +44, +61, +65, +86, etc.)</small>}
         
             <button> CONFIRM PAYMENT </button>
             {error && <div className="error"> {error}</div>}
