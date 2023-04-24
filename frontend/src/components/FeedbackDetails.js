@@ -91,7 +91,12 @@ const FeedbackDetails = ({feedback}) =>{
                     
                 />
       <p>{formatDistanceToNow(new Date(feedback.createdAt), { addSuffix: true })}</p>
-      <span className="material-symbols-outlined" onClick = {handleClick}>delete</span>
+      {feedback.reply && (
+  <p>
+    <strong>Feedback Reply:</strong> {feedback.reply}
+  </p>
+)}
+      {/* <span className="material-symbols-outlined" onClick = {handleClick}>delete</span>
       <span>Reply</span>
       <form onSubmit={(e)=> handleFeedbackReply(e, feedback._id)}>
 
@@ -99,11 +104,11 @@ const FeedbackDetails = ({feedback}) =>{
 
         <input type="submit" />
 
-      </form>
+      </form> */}
       {/* <Link to = {"/UpdateFeedback/:_id"}> */}
-      <Link to = {`/UpdateFeedback/${feedback._id}`}>
+      {/* <Link to = {`/UpdateFeedback/${feedback._id}`}>
       <span >Update</span>
-      </Link>
+      </Link> */}
 
 
       

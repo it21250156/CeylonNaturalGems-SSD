@@ -89,15 +89,15 @@ const FeedbackForm = () => {
     <form className="create" onSubmit={handleSubmit} enctype="multipart/form-data">
 
       <br /><br />
-      {JSON.stringify(payment.data)}
+      {/* {JSON.stringify(payment.data)} */}
       <label>Gem/Jewellery Name:</label>
-      {/* <input
+      <input
         type="text"
         onChange={(e) => setGemType(e.target.value)}
         value={gemType}
         className={emptyFields?.find(f => f === 'gemType') ? 'error' : ''}
-      /> */}
-      {JSON.stringify(orders)}
+      />
+      {/* {JSON.stringify(orders)} */}
       <br /><br />
 
       <label>Gem Quantity:</label>
