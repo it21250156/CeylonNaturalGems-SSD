@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import PlanForm from "../components/PlanForm"
 
 const AdminInstallmentPlans = () => {
+    const navigate = useNavigate()
     const { plans, dispatch} = usePlansContext()
 
     useEffect(() => {
@@ -25,7 +26,7 @@ const AdminInstallmentPlans = () => {
     return (
         <div className="instalmentPlans">
             <center> 
-            <h2>Admin</h2>
+            <button onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button>
             <div className="plans">
                 <h3>Installment Plans </h3>
                 <hr></hr>

@@ -119,9 +119,7 @@ function App() {
 
             <Route path='/UpdateJewelleryes/:_id' element={<UpdateJewellery/>}/>            
 
-            {/* Vihangi  */}
-            <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
-            <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
+
 
             {/* daham */}
             <Route path="/jwellhomeM" element={<JewelhomeMen/>}/>
@@ -133,10 +131,12 @@ function App() {
             <Route path='/AddGem' element={<AddGem/>}/>
             <Route path='/UpdateGems/:_id' element={<UpdateGems/>}/>
 
+            {/* Vihangi  */}
+            <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
+            <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
 
             {/* admin */}
-            <Route path = "/AllInstallments" element={ <AllInstallments />} />
-            
+            <Route path = "/AdminInstallmentPlans/AllInstallments" element={ <AllInstallments />} />
             <Route path = "/AdminInstallmentPlans" element={ <AdminInstallmentPlans />} />  
             <Route path= "/AdminInstallmentPlans/adminUpdatePlan/:id" element={ <AdminUpdatePlan /> } />
             <Route path= "/profile/MyPayments/MyInstallments/:id" element={ <MyInstallments /> } />
