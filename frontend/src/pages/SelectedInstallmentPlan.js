@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 //components
 
 const SelectedInstallmentPlan = () => {
+    const navigate=useNavigate()
+
     const [plans , setPlans] = useState({name: "", months: "", initialPayment: ""}) //put 0 for a number
     
     const gem = JSON.parse(localStorage.getItem('gemInfo'));
@@ -45,7 +48,7 @@ const SelectedInstallmentPlan = () => {
                     {/* calculate the initial payment and display it here */}
                     <p><strong>Initial Payment : </strong> {plans.initialPayment} %</p>
                     <p><strong>Amount to be paid per month : </strong> </p>
-                    <button> proceed to pay </button>
+                    <button onClick={() => {navigate(`/payments`)}}> proceed to pay </button>
                 </div>
                     
             </div>
