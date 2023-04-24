@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import gemVid from '../video/vid.mp4';
 import '../CSS/Home.css';
+import Header from '../components/Header';
+
 
 // components
 
@@ -14,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch('/api/user', {
+      const response = await fetch('/api/users', {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const json = await response.json();
@@ -25,6 +27,8 @@ const Home = () => {
     }
   }, [user]);
   return (
+    <>
+    <Header/>
     <div>
       <div className="slider-space">
         <video>
@@ -40,6 +44,7 @@ const Home = () => {
         <p className="Section Name"></p>
       </div>
     </div>
+    </>
   );
 };
 

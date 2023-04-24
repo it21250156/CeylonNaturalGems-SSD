@@ -1,6 +1,8 @@
 import React, { useEffect , useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../components/Header';
+
 
 
 function UserProfileUpdate() {
@@ -30,6 +32,8 @@ function UserProfileUpdate() {
 
 
   return (
+    <>
+    <Header/>
     <div className="lightBlueBodyBG">
             <div className="whiteBodyBG">
                 <div className="darkBlueTopicBox">
@@ -108,7 +112,7 @@ function UserProfileUpdate() {
                 </form>
             </div>
     </div>
-    
+    </>
   )
 }
 

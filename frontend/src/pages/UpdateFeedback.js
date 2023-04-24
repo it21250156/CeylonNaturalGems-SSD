@@ -3,6 +3,7 @@ import FeedbackForm from '../components/FeedbackForm'
 import { useFeedbacksContext } from '../hooks/useFeedbackContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import StarRating from 'react-star-ratings';
+import Header from '../components/Header';
 
 
 
@@ -81,6 +82,8 @@ function UpdateFeedback() {
     }, [])
 
     return (
+        <>
+        <Header/>
         <div className="UpdateFeedback">
 
             {JSON.stringify(feedback)}
@@ -141,7 +144,7 @@ function UpdateFeedback() {
             </form>
 
         </div>
-
+        </>
     )
 
 

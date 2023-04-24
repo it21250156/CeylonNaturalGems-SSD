@@ -6,6 +6,8 @@ import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
+import Header from '../components/Header';
+
 
 
 const schema = yup.object().shape({
@@ -88,6 +90,8 @@ function MyReq(){
       
     
     return(
+    <>
+    <Header/>
         <div className="MyRequests">
 
             <div className='headding'>
@@ -169,6 +173,7 @@ function MyReq(){
 
             <button className='viewreqbt' onClick={() => {window.location.href = "./reqM"}}>Create a new request</button>
         </div>
+      </>
     )
 
 }

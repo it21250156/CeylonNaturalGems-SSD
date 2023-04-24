@@ -1,6 +1,8 @@
 import React, { useEffect, useState  } from "react"
 //import { BodyTemp } from "../components/BodyTemp"
 import { usePaymentContext } from "../hooks/usePaymentsContext"
+import Header from '../components/Header';
+
 
 const MyPayments = () => {
 
@@ -23,7 +25,8 @@ const MyPayments = () => {
     }, [])  
 
     return (
-      
+      <>
+      <Header/>
       <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
             <div className="darkBlueTopicBox">
@@ -56,7 +59,7 @@ const MyPayments = () => {
             </div>
         </div>
     </div>
-    
+    </>
     )
 }
 

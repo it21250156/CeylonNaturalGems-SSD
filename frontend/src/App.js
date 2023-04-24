@@ -11,6 +11,7 @@ import UserRegistration from './pages/UserRegistration';
 import UserProfile from './pages/UserProfile';
 import UserProfileUpdate from './pages/UserProfileUpdate';
 import AdminUsers from './pages/AdminUsers';
+import AdminHome from './pages/AdminHome';
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -46,10 +47,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
         <div className="pages">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/adminHome" element={<AdminHome />} />
             <Route
               path="/login"
               element={!user ? <UserLogin /> : <Navigate to="/" />}

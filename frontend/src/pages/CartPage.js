@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useState } from 'react';
 import logger from 'use-reducer-logger';
 import CartCard from '../components/CartCard';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Header from '../components/Header';
+
 
 // const reducer = (state, action) => {
 //   switch (action.type) {
@@ -69,6 +71,11 @@ const CartPage = () => {
   }, []);
 
   return (
+
+    <>
+
+    <Header/>
+
     <div>
       <h1>my cart</h1>
       {gems?.length &&
@@ -82,6 +89,8 @@ const CartPage = () => {
         ))}
       {JSON.stringify(cartData)}
     </div>
+
+    </>
   );
 };
 

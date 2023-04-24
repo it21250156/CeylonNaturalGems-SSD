@@ -5,6 +5,8 @@ import profilePic from '../images/UserProfilePhoto.png'
 import { useLogout } from '../hooks/useLogout'
 import { useEffect, useState } from 'react';
 import {useAuthContext} from  '../hooks/useAuthContext'
+import Header from '../components/Header';
+
 
 
 const  UserProfile = ()  => {
@@ -56,6 +58,8 @@ const  UserProfile = ()  => {
 
   return (
   
+    <>
+    <Header/>
     <div className='profileBodyContainer'>
             <div className="darkBlueTopicBoxUserprofile">
                 <h3 className="pageTopicUserprofile">MY PROFILE</h3>
@@ -96,10 +100,7 @@ const  UserProfile = ()  => {
                 </div>
             </div>
     </div>
-    
-
-        
-    
+    </>
 
   );
 };

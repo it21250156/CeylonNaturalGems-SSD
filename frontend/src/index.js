@@ -8,6 +8,7 @@ import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
 import ReqMain from './pages/ReqMain';
 import { FeedbacksContextProvider } from './context/FeedbackContext';
+import { JewelleryesContextProvider } from './context/JewelleryContext';
 
 
 import {
@@ -44,8 +45,10 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
     <FeedbacksContextProvider>
+      <JewelleryesContextProvider>
+        <App />
+      </JewelleryesContextProvider>
     {/* <RouterProvider router={router}/> */}
-      <App />
     </FeedbacksContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

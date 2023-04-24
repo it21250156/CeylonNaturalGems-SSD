@@ -30,6 +30,7 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
+
 // @desc    Register a new user
 // @route   POST /users
 // @access  Public
