@@ -1,6 +1,7 @@
 import '../CSS/AppBW.css';
 import {useState, useEffect} from "react";
 import Axios from "axios";
+import TextareaAutosize from 'react-textarea-autosize';
 
 
 function ReplyRequest(){
@@ -47,22 +48,20 @@ function ReplyRequest(){
                 
 
                 <div>
-                    {/* <TextareaAutosize
+                    <TextareaAutosize
                         className="replytxt"
                         minRows={3}
                         maxRows={6}
                         placeholder="Enter your reply here"
                         style={{ width: "90%" }}
-                        {...register("GemReply")}
-                        value={GemReply}
                         onChange={(event) =>{
                             setReply(event.target.value);
                         }}
-                        /> */}
+                        />
 
-                    <input type="text" placeholder="Name...." onChange={(event) => {
+                    {/* <input type="text" placeholder="Name...." onChange={(event) => {
                             setReply(event.target.value);
-                            }}></input>
+                            }}></input> */}
                     
                 </div>
                 
