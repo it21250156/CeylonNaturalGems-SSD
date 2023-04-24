@@ -51,7 +51,7 @@ const AdminHome = () => {
     <body>
       <div className="home">
         <h1>hi Admin</h1>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Gem Stones</button>
+        <button onClick={() => {navigate("/GemAdminHome")}}>Gem Stones</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Jewellery</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Gem Requests</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Feedbacks</button>

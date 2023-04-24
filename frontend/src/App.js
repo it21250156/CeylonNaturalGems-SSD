@@ -57,6 +57,12 @@ import AdminInstallmentPlans from './pages/AdminInstallmentPlans'
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
 import MyInstallments from './pages/MyInstallments';
 
+//ammaar
+import GemAdminHome from './pages/GemAdminHome'
+import AddGem from './pages/AddGem';
+import UpdateGems from './pages/UpdateGems';
+
+
 function App() {
   const { user } = useAuthContext();
 
@@ -121,6 +127,12 @@ function App() {
             <Route path="/jwellhomeM" element={<JewelhomeMen/>}/>
             <Route path="/jwellhomeWm" element={<JewelhomeWomen/>}/>
             <Route path="/jwellscreen/:id" element={<JewelScreen/>}/>
+
+            {/* ammaar */}
+            <Route path='/GemAdminHome' element={<GemAdminHome/>}/>
+            <Route path='/AddGem' element={<AddGem/>}/>
+            <Route path='/UpdateGems/:_id' element={<UpdateGems/>}/>
+
 
             {/* admin */}
             <Route path = "/AllInstallments" element={ <AllInstallments />} />

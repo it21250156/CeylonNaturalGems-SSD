@@ -34,6 +34,9 @@ const installmentsRoutes = require('./routes/installments');
 //daham
 const jwellRoutes = require('./routes/jewellers');
 
+//ammaar
+const gemAdminRoutes = require('./routes/gemsAdmin');
+
 // express app
 const app = express();
 
@@ -176,6 +179,10 @@ app.use('/api/installments', installmentsRoutes);
 //daham
 
 app.use('/api/jewelleryes',jwellRoutes);
+
+//ammaar
+app.use('/api/gems', gemAdminRoutes);
+
 //routes
 
 
