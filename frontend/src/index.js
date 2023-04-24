@@ -9,7 +9,9 @@ import { AuthContextProvider } from './context/AuthContext'
 // import ReqMain from './pages/ReqMain';
 import { FeedbacksContextProvider } from './context/FeedbackContext';
 
-import { JewelContextProvider } from './context/JewelPageContext';
+import { JewelContextProvider } from './context/JewelPageContext'; 
+
+import { JewelleryesContextProvider} from './context/JewelleryContext'
 
 
 
@@ -47,10 +49,12 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
     <FeedbacksContextProvider>
-    <JewelContextProvider>
+      <JewelleryesContextProvider>
+      <JewelContextProvider>
     {/* <RouterProvider router={router}/> */}
       <App />
     </JewelContextProvider>
+      </JewelleryesContextProvider>
     </FeedbacksContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
