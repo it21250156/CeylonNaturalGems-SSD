@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes.js');
 
 // malika
-const feedbackRoutes = require('./routes/feedbacks')
+const feedbackRoutes = require('./routes/feedbacks');
 
 //janith
 const gemRoutes = require('./routes/gems');
@@ -17,20 +17,17 @@ const cartRoutes = require('./routes/cartRoutes.js');
 
 //bimsara
 const UserModel = require('./models/Users');
-
-const ReplyModel = require('./models/reply');
+const ReplyModel = require('./models/Replies');
 
 //Vidxni
-const paymentRoutes = require('./routes/payments')
+const paymentRoutes = require('./routes/payments');
 
 // Ruchira
 const jewelleryRoutes = require('./routes/jewelleryes');
 
 // vihangi
-const planRoutes = require('./routes/plans')
-const installmentsRoutes = require('./routes/installments')
-
-const ReplyModel = require("./models/Replies");
+const planRoutes = require('./routes/plans');
+const installmentsRoutes = require('./routes/installments');
 
 // express app
 const app = express();
@@ -47,7 +44,7 @@ app.use((req, res, next) => {
 // routes
 
 //malika
-app.use('/api/feedbacks',feedbackRoutes)
+app.use('/api/feedbacks', feedbackRoutes);
 
 //bimsara
 app.get('/getUsers', (req, res) => {
@@ -78,18 +75,15 @@ app.get('/getReply', (req, res) => {
   });
 });
 
-app.post("/createReply",async (req, res) => {
+app.post('/createReply', async (req, res) => {
   const user = req.body;
   const newUser = new ReplyModel(user);
   await newUser.save();
-  
+
   res.json(user);
 });
 
-
-
-
-app.put("/updateGshape",async (req, res) => {
+app.put('/updateGshape', async (req, res) => {
   const newGemShape = req.body.newGemShape;
   const id = req.body.id;
 
@@ -164,15 +158,14 @@ app.use('/api/gems&jewelleries', gemRoutes);
 app.use('/api/cart', cartRoutes);
 
 //Vidxni
-app.use('/api/payments' , paymentRoutes)
+app.use('/api/payments', paymentRoutes);
 
 // Ruchira
 app.use('/api/jewelleryes', jewelleryRoutes);
 
 // vihangi
-app.use('/api/plans', planRoutes)
-app.use('/api/installments', installmentsRoutes)
-
+app.use('/api/plans', planRoutes);
+app.use('/api/installments', installmentsRoutes);
 
 // connect to db
 mongoose
@@ -187,4 +180,4 @@ mongoose
     console.log(error);
   });
 
-  process.env
+process.env;

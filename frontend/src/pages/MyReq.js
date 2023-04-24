@@ -164,7 +164,7 @@ function MyReq() {
                       <input
                         type="text"
                         placeholder="Edit description...."
-                        className="edtds"
+                        className="input"
                         onChange={(event) => {
                           setNewnewGemDescription(event.target.value);
                         }}
