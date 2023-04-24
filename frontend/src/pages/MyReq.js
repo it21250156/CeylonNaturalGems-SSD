@@ -1,176 +1,238 @@
 import '../CSS/AppBW.css';
-import {useState, useEffect} from "react";
+import { useState, useEffect } from 'react';
 import React from 'react';
-import Axios from "axios";
-import {useForm} from 'react-hook-form';
+import Axios from 'axios';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link, useParams } from 'react-router-dom';
 
-
 const schema = yup.object().shape({
-    newGemShape: yup.string(),
-    newGemColour: yup.string(),
-    newGemDescription: yup.string(),
-    newGemWeight: yup.number().positive(),
-  });
-  
+  newGemShape: yup.string(),
+  newGemColour: yup.string(),
+  newGemDescription: yup.string(),
+  newGemWeight: yup.number().positive(),
+});
 
-function MyReq(){
+function MyReq() {
+  const [listOfRequests, setListOfRequests] = useState([]);
+  const [newGemShape, setNewGemShape] = useState('');
+  const [newGemColour, setNewGemColour] = useState('');
+  const [newGemDescription, setNewnewGemDescription] = useState('');
+  const [newGemWeight, setNewnewGemWeight] = useState('');
 
-    const [listOfRequests, setListOfRequests] = useState([]);
-    const [newGemShape, setNewGemShape] = useState('');
-    const [newGemColour, setNewGemColour] = useState('');
-    const [newGemDescription, setNewnewGemDescription] = useState('');
-    const [newGemWeight, setNewnewGemWeight] = useState('');
+  const deletereq = (id) => {
+    Axios.delete(`/delete/${id}`).then((response) => {
+      alert('Deleted Successuflly! Please refresh the page');
+    });
+  };
 
-    const deletereq = (id) => {
-        Axios.delete(`/delete/${id}`).then((response) => {
-            alert("Deleted Successuflly! Please refresh the page");
-          });;
-    };
+  useEffect(() => {
+    Axios.get('/getUsers').then((response) => {
+      setListOfRequests(response.data);
+    });
+  }, []);
 
-    useEffect(() => {
-        Axios.get("/getUsers").then((response) => {
-          setListOfRequests(response.data);
-        });
-      }, []);
-    
-
-      const updateGemShape = (id) => {
-        if (newGemShape) {
-          Axios.put("/updateGshape", {
-            id: id,
-            newGemShape: newGemShape,
-          }).then((response) => {
-            alert("Updated Successfully! Please refresh the page");
-          });
-        }
-      }
-      
-      const updateGemColour = (id) => {
-        if (newGemColour) {
-          Axios.put("/updateGsCl", {
-            id: id,
-            newGemColour: newGemColour,
-          }).then((response) => {
-            alert("Updated Successfully! Please refresh the page");
-          });
-        }
-      }
-      
-      const updateGemDescription = (id) => {
-        if (newGemDescription) {
-          Axios.put("/updateDes", {
-            id: id,
-            newGemDescription: newGemDescription,
-          }).then((response) => {
-            alert("Updated Successfully! Please refresh the page");
-          });
-        }
-      }
-      
-      const updateGemWeight = (id) => {
-        if (newGemWeight) {
-          Axios.put("/updateWt", {
-            id: id,
-            newGemWeight: newGemWeight,
-          }).then((response) => {
-            alert("Updated Successfully! Please refresh the page");
-          });
-        }
-      }
-      
-
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema)
+  const updateGemShape = (id) => {
+    if (newGemShape) {
+      Axios.put('/updateGshape', {
+        id: id,
+        newGemShape: newGemShape,
+      }).then((response) => {
+        alert('Updated Successfully! Please refresh the page');
       });
-      
-    
-    return(
-        <div className="MyRequests">
+    }
+  };
 
-            <div className='headding'>
-                     <h1>My Requests</h1>
-            </div>
+  const updateGemColour = (id) => {
+    if (newGemColour) {
+      Axios.put('/updateGsCl', {
+        id: id,
+        newGemColour: newGemColour,
+      }).then((response) => {
+        alert('Updated Successfully! Please refresh the page');
+      });
+    }
+  };
 
-            <div className="requestM">
+  const updateGemDescription = (id) => {
+    if (newGemDescription) {
+      Axios.put('/updateDes', {
+        id: id,
+        newGemDescription: newGemDescription,
+      }).then((response) => {
+        alert('Updated Successfully! Please refresh the page');
+      });
+    }
+  };
 
-                
-                
+  const updateGemWeight = (id) => {
+    if (newGemWeight) {
+      Axios.put('/updateWt', {
+        id: id,
+        newGemWeight: newGemWeight,
+      }).then((response) => {
+        alert('Updated Successfully! Please refresh the page');
+      });
+    }
+  };
 
-            {listOfRequests.map((user) => {
-            return(
-                <div className='requestL'>
-                    <div className='reqtextbox'>
-                        {/* <pre className='txt1'>Request ID        : {user.requestID}</pre> */}
-                        <pre className='txt1'>FirstName         : {user.FirstName}</pre>
-                        <pre className='txt1'>LastName          : {user.LastName}</pre>
-                        <pre className='txt1'>Email                 : {user.Email}</pre>
-                        <pre className='txt1'>PhoneNo           : {user.PhoneNo}</pre>
-                        <pre className='txt1'>GemType           : {user.GemType}</pre>
-                        <pre className='txt1'>GemColor          : {user.GemColor}</pre>
-                        <pre className='txt1'>GemShape        : {user.GemShape}</pre>
-                        <p className='txt1'>Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {user.Description}</p>
-                        <pre className='txt1'>Weight               : {user.Weight}</pre>
-                        <pre className='txt1'>Quantity             : {user.Quantity}</pre>
-                    </div>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
+  return (
+    <div>
+      <div className="darkBlueTopicBoxReq">
+        <h1 className="pageTopic">My Requests</h1>
+      </div>
+
+      <div className="lightBlueBodyBG">
+        {listOfRequests.map((user) => {
+          return (
+            <div>
+              <div className="whiteBodyBG">
+                <div className="white-content">
+                  <div className="myreq-column-1">
+                    <table>
+                      <tr>
+                        <td className="req-lable">First Name</td>
+                        <td className="req-value">{user.FirstName}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Last Name</td>
+                        <td className="req-value">{user.LastName}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Email</td>
+                        <td className="req-value">{user.Email}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Mobile Number</td>
+                        <td className="req-value">{user.PhoneNo}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Gem Type</td>
+                        <td className="req-value">{user.GemType}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Gem Color</td>
+                        <td className="req-value">{user.GemColor}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Gem Shape</td>
+                        <td className="req-value">{user.GemShape}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Description</td>
+                        <td className="req-value">{user.Description}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Weight</td>
+                        <td className="req-value">{user.Weight}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Quantity</td>
+                        <td className="req-value">{user.Quantity}</td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <div className="myreq-column-2">
                     <form>
-                    <input 
-                        type='text' 
-                        placeholder='Edit gem shape....' 
-                        className='edtsp'
+                      <input
+                        type="text"
+                        placeholder="Edit gem shape...."
+                        className="input"
                         onChange={(event) => {
-                            setNewGemShape(event.target.value);
-                        }}/>
+                          setNewGemShape(event.target.value);
+                        }}
+                      />
 
-                    <input 
-                        type='text' 
-                        placeholder='Edit gem colour....' 
-                        className='edtcl'
+                      <input
+                        type="text"
+                        placeholder="Edit gem colour...."
+                        className="input"
                         onChange={(event) => {
-                            setNewGemColour(event.target.value);
-                        }}/>
-                    
-                    <input 
-                        type='text' 
-                        placeholder='Edit description....' 
-                        className='edtds'
-                        onChange={(event) => {
-                            setNewnewGemDescription(event.target.value);
-                        }}/>
+                          setNewGemColour(event.target.value);
+                        }}
+                      />
 
-                    <input 
-                        type='number' 
-                        placeholder='Edit weight....' 
-                        className='edtwt'
+                      <input
+                        type="text"
+                        placeholder="Edit description...."
+                        className="input"
                         onChange={(event) => {
-                            setNewnewGemWeight(event.target.value);
-                        }}/>
+                          setNewnewGemDescription(event.target.value);
+                        }}
+                      />
 
-                    <button className='updatebtn' onClick={() => {
-                        updateGemColour(user._id)
-                        updateGemShape(user._id)
-                        updateGemDescription(user._id)
-                        updateGemWeight(user._id)
-                        }}>Update</button>
+                      <input
+                        type="number"
+                        placeholder="Edit weight...."
+                        className="input"
+                        onChange={(event) => {
+                          setNewnewGemWeight(event.target.value);
+                        }}
+                      />
+
+                      <button
+                        className="updatebtn"
+                        onClick={() => {
+                          updateGemColour(user._id);
+                          updateGemShape(user._id);
+                          updateGemDescription(user._id);
+                          updateGemWeight(user._id);
+                        }}
+                      >
+                        Update
+                      </button>
                     </form>
-                    
-
-                    
-                    <button className='delbtn' onClick={() => deletereq(user._id)} >Delete</button>
-                
+                  </div>
                 </div>
-            );
-            })}
-
+                <center>
+                  <button class="btn" onClick={() => deletereq(user._id)}>
+                    <p class="paragraph"> delete </p>
+                    <span class="icon-wrapper">
+                      <svg
+                        class="icon"
+                        width="30px"
+                        height="30px"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
+                          stroke="#000000"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                    </span>
+                  </button>
+                </center>
+              </div>
             </div>
+          );
+        })}
+      </div>
 
-            <button className='viewreqbt' onClick={() => {window.location.href = "./reqM"}}>Create a new request</button>
-        </div>
-    )
-
+      <button
+        className="viewreqbt"
+        onClick={() => {
+          window.location.href = './reqM';
+        }}
+      >
+        Create a new request
+      </button>
+    </div>
+  );
 }
 
 export default MyReq;
