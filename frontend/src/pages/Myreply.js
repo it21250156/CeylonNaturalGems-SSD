@@ -14,10 +14,10 @@ function Myreply(){
 
     return(
         <div>
-            <div className='usersDisplay'>
+            <div className='lightBlueBodyBG'>
                     {listOfReplies.map((user) => {
                     return(
-                        <div>
+                        <div className="whiteBodyBG">
                         <h1>Reply: {user.reply}</h1>
                         
                         </div>

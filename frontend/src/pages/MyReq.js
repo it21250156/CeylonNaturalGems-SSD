@@ -88,7 +88,9 @@ function MyReq() {
 
   return (
     <div className="MyRequests">
-      <div className="headding">My Requests</div>
+      <div className="darkBlueTopicBoxReq">
+          <h1 className="pageTopicReq">My Requests</h1>
+        </div>
 
       <div className="lightBlueBodyBG">
         {listOfRequests.map((user) => {

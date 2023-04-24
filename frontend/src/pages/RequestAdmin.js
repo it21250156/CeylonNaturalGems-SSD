@@ -21,27 +21,60 @@ function MyReq(){
     return(
         <div className="MyRequests">
 
-        <div className='headding'>
-          All Requests
+        <div className="darkBlueTopicBoxReq">
+          <h1 className="pageTopicReq">All requests</h1>
         </div>
 
             <div className="requestM">
 
             {listOfRequests.map((user) => {
             return(
-                <div className='requestL'>
-                    <div className='reqtextbox'>
-                        {/* <pre className='txt1'>Request ID        : {user.requestID}</pre> */}
-                        <pre className='txt1'>FirstName         : {user.FirstName}</pre>
-                        <pre className='txt1'>LastName          : {user.LastName}</pre>
-                        <pre className='txt1'>Email                 : {user.Email}</pre>
-                        <pre className='txt1'>PhoneNo           : {user.PhoneNo}</pre>
-                        <pre className='txt1'>GemType           : {user.GemType}</pre>
-                        <pre className='txt1'>GemColor          : {user.GemColor}</pre>
-                        <pre className='txt1'>GemShape        : {user.GemShape}</pre>
-                        <p className='txt1'>Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {user.Description}</p>
-                        <pre className='txt1'>Weight               : {user.Weight}</pre>
-                        <pre className='txt1'>Quantity             : {user.Quantity}</pre>
+                <div className='lightBlueBodyBG'>
+                    <div className='whiteBodyBG'>
+                    <div className="myreq-column-1">
+                    <table>
+                      <tr>
+                        <td className="req-lable">First Name</td>
+                        <td className="req-value">{user.FirstName}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Last Name</td>
+                        <td className="req-value">{user.LastName}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Email</td>
+                        <td className="req-value">{user.Email}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Mobile Number</td>
+                        <td className="req-value">{user.PhoneNo}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Gem Type</td>
+                        <td className="req-value">{user.GemType}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Gem Color</td>
+                        <td className="req-value">{user.GemColor}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Gem Shape</td>
+                        <td className="req-value">{user.GemShape}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Description</td>
+                        <td className="req-value">{user.Description}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Weight</td>
+                        <td className="req-value">{user.Weight}</td>
+                      </tr>
+                      <tr>
+                        <td className="req-lable">Quantity</td>
+                        <td className="req-value">{user.Quantity}</td>
+                      </tr>
+                    </table>
+                  </div>
                     </div>
                     
                     <button className='repbtn' onClick={() => {window.location.href = "./reqReply"}}>Reply</button>
@@ -51,7 +84,7 @@ function MyReq(){
             );
             })}
             <Link to={'/Myrep'}>
-              <button className="req-btn">View My Requests</button>
+              <button className="req-btn">View My Replies</button>
             </Link>
             </div>
         </div>

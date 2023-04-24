@@ -27,8 +27,8 @@ function ReplyRequest(){
 
     return(
         <div>
-            <div className='headding'>
-                Reply
+            <div className="darkBlueTopicBoxReq">
+                <h1 className="pageTopicReq">Reply</h1>
             </div>
 
             {/* <div className='usersDisplay'>
@@ -42,7 +42,7 @@ function ReplyRequest(){
                     })}
             </div> */}
 
-            <div className="requestM">
+            <div className="lightBlueBodyBG">
                 Wtite your reply:
 
                 
