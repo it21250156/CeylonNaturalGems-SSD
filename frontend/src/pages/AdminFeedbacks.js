@@ -33,7 +33,7 @@ const AdminFeedbacks = () =>{
 
           </div>
           {/* <FeedbackForm/> */}
-          <button onClick= {() => {window.location.href = "./FeedbackForm"}}> Add Feedback</button>
+          {/* <button onClick= {() => {window.location.href = "./FeedbackForm"}}> Add Feedback</button> */}
         </div>
 
         
