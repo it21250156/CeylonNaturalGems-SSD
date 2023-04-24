@@ -38,31 +38,32 @@
   }
 } */
 
-.headding{
+.darkBlueTopicBoxReq {
   background-color: #144272;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  margin-left: 30%;
-  margin-right: 30%;
-  text-align: center;
-  font-size: 50px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin: 20px 100px;
+  padding: 40px 0;
   border-radius: 20px;
+}
+
+.pageTopicReq {
   color: white;
+  font-family: Bebas Neue;
+  font-weight: 100;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
 }
 
-.requestM{
+.lightBlueBodyBGUserprofile {
   background-color: #cadefc;
-  padding-top: 20px;
-  margin-right: 10%;
-  margin-left: 10%;
-  margin-bottom: 5%;
-  padding-bottom: 20px;
-  border-radius: 30px;
+  margin: 0 100px;
+  padding: 30px 0;
+  height: 100%;
+  border-radius: 20px;
 }
 
-.requestL{
+.requestL {
   font-size: 15px;
   text-align: left;
   background-color: white;
@@ -76,48 +77,65 @@
   font-style: inherit;
 }
 
-.reqtextbox{
+.reqtextbox {
   width: 500px;
 }
 
-.txt1{
+.txt1 {
   font-family: sans-serif;
 }
 
-.requestL2{
+.requestL2 {
   padding-left: 3%;
 }
 
-.requantent{
-  margin-left: 5%;
-  margin-right: 5%;
+.requantent {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: legendum;
 }
 
-.tb{
-  width: 100%;
-  height: 30px;
-  border-radius: 10px;
+.column-1 {
+  flex: 1;
+  text-align: left;
+  padding-left: 40px;
 }
 
-.reqbtn{
+.column-2 {
+  flex: 1;
+  text-align: left;
+  padding-left: 40px;
+  border-left: 2px solid white;
+}
+
+.column-title {
+  font-family: Bebas Neue;
   font-size: 30px;
-  margin-top: 2%;
-  padding-top: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  margin-left: 87%;
-  border-radius: 10px;
-  background-color: #144272;
+  padding: 0;
+  margin: 0 0 20px 0;
   color: white;
+  text-shadow: 2px 2px 5px #05060f;
 }
 
-.reqbtn:hover{
-  background-color: orange;
-  color: black;
+.reqbtn {
+  border: 2px solid #144272;
+  background-color: #144272;
+  margin: 20px 0 0 0;
+  padding: 20px;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 25px;
+  border-radius: 20px;
 }
 
-.viewreqbt{
+.reqbtn:hover {
+  border: 2px solid #144272;
+  background-color: white;
+  color: #144272;
+  transition: 0.5s;
+}
+
+.viewreqbt {
   font-size: 30px;
   margin-top: 0%;
   padding-top: 10px;
@@ -130,15 +148,14 @@
   color: white;
   margin-left: 42%;
   margin-bottom: 5%;
- 
 }
 
-.viewreqbt:hover{
+.viewreqbt:hover {
   background-color: orange;
   color: black;
 }
 
-.delbtn{
+.delbtn {
   float: right;
   width: 170px;
   font-size: 30px;
@@ -153,12 +170,12 @@
   color: white;
 }
 
-.delbtn:hover{
+.delbtn:hover {
   background-color: rgb(251, 255, 0);
   color: black;
 }
 
-.updatebtn{
+.updatebtn {
   float: right;
   width: 170px;
   font-size: 30px;
@@ -173,12 +190,12 @@
   color: white;
 }
 
-.updatebtn:hover{
+.updatebtn:hover {
   background-color: blue;
   color: wheat;
 }
 
-.repbtn{
+.repbtn {
   float: right;
   width: 170px;
   font-size: 30px;
@@ -193,12 +210,12 @@
   color: white;
 }
 
-.repbtn:hover{
+.repbtn:hover {
   background-color: blue;
   color: wheat;
 }
 
-.edtsp{
+.edtsp {
   float: left;
   margin-top: -20%;
   margin-left: 35%;
@@ -210,7 +227,7 @@
   width: 300px;
 }
 
-.edtcl{
+.edtcl {
   float: left;
   margin-top: -17%;
   margin-left: 35%;
@@ -222,7 +239,7 @@
   width: 300px;
 }
 
-.edtds{
+.edtds {
   float: left;
   margin-top: -14%;
   margin-left: 35%;
@@ -234,7 +251,7 @@
   width: 300px;
 }
 
-.edtwt{
+.edtwt {
   float: left;
   margin-top: -11%;
   margin-left: 35%;
@@ -246,6 +263,42 @@
   width: 300px;
 }
 
-.validation{
+.validation {
   color: red;
+}
+
+/* janith - css */
+
+.input {
+  width: 400px;
+  height: 44px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #05060f99;
+  transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.input:hover,
+.input:focus,
+.input-group:hover .input {
+  outline: none;
+  border-color: #05060f;
+}
+
+.input-group:hover .label,
+.input:focus {
+  color: #05060fc2;
 }

@@ -16,9 +16,9 @@ import AdminUsers from './pages/AdminUsers';
 import Gemhome from './pages/Gemhome';
 import GemScreen from './pages/GemScreen';
 
-
 //bimsara
 import ReqMain from './pages/ReqMain';
+
 import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
@@ -26,12 +26,28 @@ import ReplyRequest from './pages/ReplyRequest';
 //malika
 import FeedbackForm from './pages/FeedbackPage';
 import UpdateFeedback from './pages/UpdateFeedback';
-import AllFeedbacks from './pages/AllFeedbacks'
-import UserFeedbacks from './pages/UserFeedbacks'
+import AllFeedbacks from './pages/AllFeedbacks';
 
 //Vidxni
 import MyPayments from './pages/MyPayments';
 import PaymentForm from './components/PaymentForm';
+
+import CartPage from './pages/CartPage';
+
+// ruchira
+import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
+import AddJewelleryes from './pages/AddJewelleryes';
+import JewelleryDetails from './components/JewelleryDetails';
+import UpdateJewellery from './pages/UpdateJewellery'
+
+
+//vihangi
+import InstallmentPlans from './pages/InstallmentPlans'
+import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan'
+import AllInstallments from './pages/AllInstallments'
+import AdminInstallmentPlans from './pages/AdminInstallmentPlans'
+import AdminUpdatePlan from './pages/AdminUpdatePlan';
+import MyInstallments from './pages/MyInstallments';
 
 function App() {
   const { user } = useAuthContext();
@@ -51,12 +67,16 @@ function App() {
               path="/Register"
               element={!user ? <UserRegistration /> : <Navigate to="/" />}
             />
+
+            {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
             <Route path="/gems/:id" element={<GemScreen />}></Route>
+            <Route path="/mycart" element={<CartPage />}></Route>
+
             <Route path="/reqM" element={<ReqMain />}></Route>
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
-            
+
             {/* <Route 
                 path="/signup" 
                 element={!user ? <Signup /> : <Navigate to="/" />} 
@@ -71,12 +91,29 @@ function App() {
             <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
             <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
             <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
-            {/* <Route path ='/UserFeedbacks/:_id' element ={<UserFeedbacks/>}/>  */}
-
 
             {/* vidxni */}
-            <Route path="/payments" element={<PaymentForm/>} />
-            <Route path="/MyPayments" element={<MyPayments/>}/>
+            <Route path="/payments" element={<PaymentForm />} />
+            <Route path="/MyPayments" element={<MyPayments />} />
+
+            {/* ruchira */}
+            <Route path='/JewelleryAdminDashboard' element={<JewelleryAdminDashboard/>}/>
+
+            <Route path='/AddJewelleryes' element={<AddJewelleryes/>}/>
+
+            <Route path='/UpdateJewelleryes/:_id' element={<UpdateJewellery/>}/>            
+
+            {/* Vihangi  */}
+            <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
+            <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
+
+            {/* admin */}
+            <Route path = "/AllInstallments" element={ <AllInstallments />} />
+            
+            <Route path = "/AdminInstallmentPlans" element={ <AdminInstallmentPlans />} />  
+            <Route path= "/AdminInstallmentPlans/adminUpdatePlan/:id" element={ <AdminUpdatePlan /> } />
+            <Route path= "/profile/MyPayments/MyInstallments/:id" element={ <MyInstallments /> } />
+
           </Routes>
         </div>
       </BrowserRouter>

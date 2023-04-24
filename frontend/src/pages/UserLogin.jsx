@@ -1,16 +1,13 @@
-import React, { useState , useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-
 function UserLogin() {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const location = useLocation();
 
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
 
   const submitHandler = async (e) => {
@@ -21,8 +18,11 @@ function UserLogin() {
         password,
       });
       localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(location.state?.from || '/' && window.location.reload());
-      
+
+      //loading cart - janith
+      // const cart = await axios.get(`/api/cart/user/${data._id}`, {});
+      // localStorage.setItem('cartInfo', JSON.stringify(cart.data));
+      navigate(location.state?.from || ('/' && window.location.reload()));
     } catch (errors) {
       setError(true);
     }
@@ -31,33 +31,44 @@ function UserLogin() {
   return (
     <form className="login" onSubmit={submitHandler}>
       <h3>Log In</h3>
-      
+
       <label>Email address:</label>
-      <input 
-        type="email" 
-        onChange={(e) => setEmail(e.target.value)} 
-        value={email} 
+      <input
+        type="email"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
         required="required"
       />
       <label>Password:</label>
-      <input 
-        type="password" 
-        onChange={(e) => setPassword(e.target.value)} 
-        value={password} 
+      <input
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
         required="required"
       />
 
-      {error &&  <div className="error">Please check your email and password.</div>}
-      
-      
+      {error && (
+        <div className="error">Please check your email and password.</div>
+      )}
 
-      <button >Log in</button>
-      <button onClick={() => {navigate("/");}}>Cancel</button>
+      <button>Log in</button>
+      <button
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Cancel
+      </button>
 
-      <p className="">Don't have an account?{'  '}<Link to="/Register" className=""> Register </Link></p>
-      
+      <p className="">
+        Don't have an account?{'  '}
+        <Link to="/Register" className="">
+          {' '}
+          Register{' '}
+        </Link>
+      </p>
     </form>
   );
 }
 
-export default UserLogin ;
+export default UserLogin;
