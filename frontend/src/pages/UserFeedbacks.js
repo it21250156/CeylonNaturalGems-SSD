@@ -1,45 +1,47 @@
-// import {useEffect }from 'react'
-// import { useFeedbacksContext }from '../hooks/useFeedbackContext'
+import {useEffect }from 'react'
+import { useFeedbacksContext }from '../hooks/useFeedbackContext'
 
-// //components
-// import FeedbackDetails from '../components/FeedbackDetails'
-// import FeedbackForm from '../components/FeedbackForm'
+//components
+import FeedbackDetailsUsers from '../components/FeedbackDetailsUsers'
+import { Link } from 'react-router-dom'
 
-// const UserFeedbacks = () =>{
-//   const {feedbacks, dispatch} = useFeedbacksContext()
+const UserFeedbacks = () =>{
+  const {feedbacks, dispatch} = useFeedbacksContext()
 
-//   useEffect(() =>{
-//     const fetchFeedbacks = async () => {
-//       const response = await fetch('/api/feedbacks')
-//       const json = await response.json()
+  useEffect(() =>{
+    const fetchFeedbacks = async () => {
+      const response = await fetch(`/api/feedbacks/user/${JSON.parse(localStorage.getItem('userInfo'))._id}`)
+      const json = await response.json()
 
-//       if(response.ok) {
+      if(response.ok) {
 
-//         dispatch({type: 'SET_FEEDBACKS', payload: json})
+        dispatch({type: 'SET_FEEDBACKS', payload: json})
         
-//       }
-//     }
+      }
+    }
 
-//     fetchFeedbacks()
-//   },[dispatch])
+    fetchFeedbacks()
+  },[dispatch])
 
-//     return (
+    return (
 
-//         <div className="Adminfeedback">
-//           <div classname = "feedbacks">
-//             {feedbacks && feedbacks.map((feedback) =>(
-//               <FeedbackDetails key={feedback._id} feedback={feedback} />
-//             ))}
+        <div className="Userfeedbacks">
+          <div classname = "feedbacks">
+            {feedbacks && feedbacks.map((feedback) =>(
+              <FeedbackDetailsUsers key={feedback._id} feedback={feedback} />
+            ))}
 
-//           </div>
-//           {/* <FeedbackForm/> */}
-//           <button onClick= {() => {window.location.href = "./FeedbackForm"}}> Add Feedback</button>
-//         </div>
+          </div>
+          {/* <FeedbackForm/> */}
+          <Link to = {'/FeedbackForm/644673394e7e2b940937df7b'}>
+          <button> Add Feedback</button>
+          </Link>
+        </div>
 
         
-//     )
-// }
-// export default  UserFeedbacks 
+    )
+}
+export default  UserFeedbacks 
 
 
 

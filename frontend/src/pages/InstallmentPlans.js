@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom'
-
+import '../CSS/InstPlans.css'
 
 //components
 
@@ -25,17 +25,24 @@ const InstallmentPlans = () => {
 
     return (
         <div className="instalmentPlans">
-            <center> 
-            <h2>Installment Plans</h2>
-            <div className="plans">
+
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">InstallmentPlans</h3>
+            </div>
+
+            <div className="lightBlueBodyBG">
                 <h3>Please select your desired installment plan </h3>
                 <hr></hr>
-                {plans && plans.map((plan) => (
-                    <PlanDetailBox key={plan._id} plan={plan} />
-                ))}
+                <div>
+                    {plans && plans.map((plan) => (
+                        <PlanDetailBox key={plan._id} plan={plan} />
+                    ))}
+                </div>
+
             </div>
-            </center>
+            
         </div>
+        
     )
 }
 

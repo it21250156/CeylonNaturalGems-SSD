@@ -16,7 +16,7 @@ const AdminHome = () => {
 
     const handleClick = () => {
       logout();
-      navigate('/adminHome');
+      navigate('/');
     };
     
 
@@ -42,7 +42,7 @@ const AdminHome = () => {
 
           <ul>
             <li>
-              <Link to={'/'}>Home</Link>
+              <Link to={'/adminHome'}>Home</Link>
             </li>
           </ul>
         </nav>
@@ -54,8 +54,8 @@ const AdminHome = () => {
         <button onClick={() => {navigate("/GemAdminHome")}}>Gem Stones</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Jewellery</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Gem Requests</button>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Feedbacks</button>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Installments</button>
+        <button onClick={() => {navigate("/AdminFeedbacks")}}>Feedbacks</button>
+        <button onClick={() => {navigate("/AdminInstallmentPlans")}}>Installments</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Payments</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Deliveries</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Customer Details</button>

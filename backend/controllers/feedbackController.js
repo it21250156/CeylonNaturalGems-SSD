@@ -31,7 +31,7 @@ const getFeedback = async (req, res) => {
 //create a new feedback
 const createFeedback = async (req,res) => {
 
-    const{gemType, gemQty, fbInfo, rating} = req.body
+    const{gemType, gemQty, fbInfo, rating,user} = req.body
 
     let emptyFields = []
 
@@ -47,6 +47,7 @@ const createFeedback = async (req,res) => {
     if(!rating) {
       emptyFields.push('rating')
     }
+    
     if(emptyFields.length > 0){
       return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
 
@@ -55,7 +56,7 @@ const createFeedback = async (req,res) => {
     //add doc to DB
     try{
       
-        const feedback = await Feedback.create({gemType, gemQty, fbInfo, rating})
+        const feedback = await Feedback.create({gemType, gemQty, fbInfo, rating, user})
         res.status(200).json(feedback)
 
     }catch(error){
@@ -110,11 +111,31 @@ const updateFeedback = async(req, res) => {
 
 }
 
+//GET feedbacks for a specific user
+const getUserFeedbacks = async (req, res) => {
+  const {user} = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(user)) {
+      return res.status(404).json({error:'User Not Found',user})
+  }
+
+  const feedback = await Feedback.find({user:user})
+
+  if (!feedback) {
+      return res.status(404).json({error: 'No Feedbacks'})
+  }
+  
+  res.status(200).json(feedback)
+}
+
+
 module.exports = {
 
     getFeedbacks,
     getFeedback,
     createFeedback,
     deleteFeedback,
-    updateFeedback
+    updateFeedback,
+
+    getUserFeedbacks
 }

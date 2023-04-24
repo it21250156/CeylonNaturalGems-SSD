@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useGemsContext } from '../hooks/useGemsContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
+import '../CSS/GemAdmin.css';
 
 function UpdateGems() {
   const { _id } = useParams();

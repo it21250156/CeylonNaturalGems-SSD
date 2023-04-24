@@ -16,6 +16,7 @@ const PaymentForm = () => {
     const [district , setDistrict] = useState('')
     const [country , setCountry] = useState('')
     const [phoneNo , setPhoneNo] = useState('')
+    const [dStatus, setStatus] = useState('')
     const [error , setError] = useState(null)
     const [gotoPaymentlist , setGotopaymentList] = useState(false)
 
@@ -28,7 +29,7 @@ const PaymentForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const payment = {amount , pmethod, dmethod, address,district, country ,phoneNo}
+        const payment = {amount , pmethod, dmethod, address,district, country ,phoneNo, dStatus}
 
         const response = await fetch('/api/payments' , {
             method:'POST' ,
@@ -51,6 +52,7 @@ const PaymentForm = () => {
             setDistrict('')
             setCountry('')
             setPhoneNo('')
+            setStatus('')
             setError(null)
             console.log('new payment added' , json)
         }
