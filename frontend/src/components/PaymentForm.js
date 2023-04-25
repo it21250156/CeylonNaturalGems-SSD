@@ -1,13 +1,7 @@
-<<<<<<< Updated upstream
-import { useState } from "react"
-import { Navigate } from "react-router-dom"
-import '../CSS/Payment.css';
-=======
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Header from './Header';
 import '../CSS/PaymentForm.css';
->>>>>>> Stashed changes
 
 const PaymentForm = () => {
   const [user, setUser] = useState('');
@@ -28,30 +22,9 @@ const PaymentForm = () => {
   const [error, setError] = useState(null);
   const [gotoPaymentlist, setGotopaymentList] = useState(false);
 
-<<<<<<< Updated upstream
-  const [isValid, setIsValid] = useState(true);
-  const [user, setUser] = useState('')
-  const[orderID, setOrderID ] = useState('')
-    const [amount , setAmount] = useState('')
-    const [pmethod , setPmethod] = useState('')
-    const [ cardNo , setCardNO] = useState('')
-    const [ cardName , setCardName] = useState('')
-    const [ exMonth , setExMonth] = useState('')
-    const [ exYear , setExYear] = useState('')
-    const [ secCode , setSecCode] = useState('')
-    const [dmethod , setDmethod] = useState('')
-    const [address , setAddress] = useState('')
-    const [district , setDistrict] = useState('')
-    const [country , setCountry] = useState('')
-    const [phoneNo , setPhoneNo] = useState('')
-    const [dStatus, setStatus] = useState('')
-    const [error , setError] = useState(null)
-    const [gotoPaymentlist , setGotopaymentList] = useState(false)
-=======
   if (gotoPaymentlist) {
     return <Navigate to="/MyPayments" />;
   }
->>>>>>> Stashed changes
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,26 +85,6 @@ const PaymentForm = () => {
     setCardNO(sanitizedValue);
   };
 
-<<<<<<< Updated upstream
-      const handleExYearChange = (e) => {
-        const inputValue = e.target.value;
-        // Check if input value is a valid year (4 digits starting from 20)
-        if (/^20\d{2}$/.test(inputValue)) {
-          setExYear(inputValue);
-        }
-      };
-      
-
-      const handlePhoneNoChange = (e) => {
-        const inputPhoneNo = e.target.value;
-        setPhoneNo(inputPhoneNo);
-    
-        // Regular expression pattern for validating phone numbers with multiple country codes
-        const phoneNoPattern = /^(\+|00)(1|91|44|61|65|86)(\d{6,16})$/;
-    
-        setIsValid(phoneNoPattern.test(inputPhoneNo));
-      };
-=======
   const handleExMonthChange = (e) => {
     const inputValue = e.target.value;
     // Check if input value is a valid month (1 to 12)
@@ -148,7 +101,6 @@ const PaymentForm = () => {
       setExYear(inputValue);
     }
   };
->>>>>>> Stashed changes
 
   // const handleSecCodeChange = (e) => {
   //   const inputValue = e.target.value;
@@ -196,44 +148,6 @@ const PaymentForm = () => {
                 value={pmethod}
                 /> */}
 
-<<<<<<< Updated upstream
-<label>Card Number:</label>
-      <input
-        type="number" // Use text type to allow input of non-numeric characters
-        pattern="[0-9]{13,19}" // Use a pattern attribute to specify the allowed input format
-        title="Please enter a valid card number" // Display a tooltip with a custom error message
-        onChange={handleCardNoChange} // Call a custom handler to sanitize the input value
-        value={cardNo}
-      />            
-        
-        <label> Card Holder's Name : </label>
-                    <input type="text"
-                    onChange={(e) => setCardName(e.target.value)}
-                    value={cardName}
-                    />
-        
-        <label>Expiry Month:</label>
-      <input
-        type="number"
-        onChange={handleExMonthChange}
-        value={exMonth}
-      />
-        
-        <label>Expiry Year:</label>
-      <input
-        type="number"
-        onChange={(e) => setExYear(e.target.value)}
-        value={exYear}
-      />
-        
-        <label>Security Code:</label>
-      <input
-        type="number"
-        onChange={handleSecCodeChange}
-        value={secCode}
-      />
-                   </div>
-=======
               <div className="Pmeth">
                 <label className="label">Payment Method:</label>
                 <label htmlFor="paymentMethodCash" className="label">
@@ -248,7 +162,6 @@ const PaymentForm = () => {
                   checked={pmethod === 'Credit card'}
                   onChange={handlePaymentMethodChange}
                 />
->>>>>>> Stashed changes
 
                 <label htmlFor="paymentMethodCard" className="label">
                   Debit card
@@ -359,26 +272,6 @@ const PaymentForm = () => {
                 type="text"
                 onChange={(e) => setCountry(e.target.value)}
                 value={country}
-<<<<<<< Updated upstream
-                />
-        
-        {/* <label> Phone Number : </label>
-                <input type="text"
-                onChange={(e) => setPhoneNo(e.target.value)}
-                value={phoneNo}
-                /> */}
-
-<label>Phone Number:</label>
-      <input
-        type="text"
-        onChange={handlePhoneNoChange}
-        value={phoneNo}
-      />
-      {!isValid && <small>Please enter a valid phone number with country code (+1, +91, +44, +61, +65, +86, etc.)</small>}
-        
-            <button> CONFIRM PAYMENT </button>
-            {error && <div className="error"> {error}</div>}
-=======
               />
 
               <label className="label"> Phone Number : </label>
@@ -388,7 +281,6 @@ const PaymentForm = () => {
                 onChange={(e) => setPhoneNo(e.target.value)}
                 value={phoneNo}
               />
->>>>>>> Stashed changes
 
               <button className="confirm-btn"> CONFIRM PAYMENT </button>
               {error && <div className="error"> {error}</div>}
@@ -405,3 +297,5 @@ const PaymentForm = () => {
        
     )
 }
+
+export default PaymentForm
