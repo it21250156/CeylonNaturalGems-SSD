@@ -40,9 +40,9 @@ const MyPayments = () => {
             </div>
             <div className="mypayments">
             <div className="paymentlist">
-
+                <center>
                 <div className="insBtn" onClick={() => {navigate(`/profile/MyPayments/MyInstallments/${id}`)}}> MY INSTALLMENTS </div>
-
+                </center>
       <table>
 
             <thead>
