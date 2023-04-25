@@ -1,7 +1,7 @@
 import React, { useEffect, useState  } from "react"
 //import { BodyTemp } from "../components/BodyTemp"
 import { usePaymentContext } from "../hooks/usePaymentsContext"
-import '../CSS/Payment.css';
+import '../CSS/table.css';
 
 import Header from '../components/Header';
 

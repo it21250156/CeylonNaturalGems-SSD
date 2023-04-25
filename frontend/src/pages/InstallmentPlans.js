@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom'
-import '../CSS/InstPlans.css'
+//import '../CSS/InstPlans.css'
+import '../CSS/Gemhome.css';
+import '../CSS/GemCard.css';
 import Header from '../components/Header';
 
 //components
@@ -27,7 +29,25 @@ const InstallmentPlans = () => {
     return (
         <>
     <Header/>
-        <div className="instalmentPlans">
+    <div className="gemhome">
+      <div className="gems">
+        <div className="lightBlueBodyBG">
+          <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+              <h3 className="pageTopic">Installment Plans</h3>
+            </div>
+            <h3>Please select your desired installment plan </h3>
+                <hr></hr>
+            <div className="gem-cards">
+            {plans && plans.map((plan) => (
+                        <PlanDetailBox key={plan._id} plan={plan} />
+                    ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        {/* <div className="gemhome">
 
             <div className="darkBlueTopicBox">
                 <h3 className="pageTopic">InstallmentPlans</h3>
@@ -44,7 +64,7 @@ const InstallmentPlans = () => {
 
             </div>
             
-        </div>
+        </div> */}
         </>
     )
 }
@@ -55,11 +75,13 @@ const PlanDetailBox = ({ plan }) => {
     const navigate = useNavigate()
 
     return(
-        <div className="plan-detail-box">
-            <h4> {plan.name} </h4>
-            <p><strong>Months : </strong> {plan.months} </p>
-            <p><strong>Initial Payment : </strong> {plan.initialPayment} %</p>
-            <button onClick={() => {navigate(`/InstallmentPlans/selectedInstallmentPlan/${plan._id}`)}}> Select </button>
+        <div className="card">
+            <div className="card-content">
+                <h1 className="card-name-installment"><strong>{plan.name}</strong></h1>
+                <h4>Months : {plan.months} </h4>
+                <h4>Initial Payment :  {plan.initialPayment} %</h4>
+            </div>
+            <button className="card-button" onClick={() => {navigate(`/InstallmentPlans/selectedInstallmentPlan/${plan._id}`)}}> Select </button>
         </div>
     )
 }
