@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Navigate } from "react-router-dom"
 import '../CSS/Payment.css';
 
+import Header from './Header';
+
 const PaymentForm = () => {
 
   const [isValid, setIsValid] = useState(true);
@@ -115,7 +117,8 @@ const PaymentForm = () => {
 
 
     return (
-
+      <>
+      <Header/>
         <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
             <div className="darkBlueTopicBox">
@@ -279,7 +282,7 @@ const PaymentForm = () => {
             </div>
         </div>
     </div>
-
+</>
        
     )
 }

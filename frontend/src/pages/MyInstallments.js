@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import '../CSS/BodyTemp.css'
+import Header from '../components/Header';
 
 //components
 
@@ -25,6 +26,8 @@ const MyInstallments = () => {
     
 
     return (
+        <>
+        <Header/>
         <div className="allInstallments">
             <h2>My Installments </h2>
             {<div className="instalments">
@@ -43,6 +46,7 @@ const MyInstallments = () => {
                 </table>
             </div> }
         </div>
+        </>
     )
 }
 

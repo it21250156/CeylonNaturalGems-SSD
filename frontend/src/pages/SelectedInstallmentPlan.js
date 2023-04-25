@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 import FirstPayment from '../components/firstPayment'
 import MonthlyPayment from '../components/monthlyPayment';
@@ -29,6 +30,7 @@ const SelectedInstallmentPlan = () => {
 
     return (
         <>
+    <Header/>
         <div className="selectedInstalmentPlan">
             <center> 
             <h2>Selected Installment Plan</h2>
