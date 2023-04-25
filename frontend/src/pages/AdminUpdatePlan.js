@@ -71,12 +71,13 @@ const AdminUpdatePlan = () => {
     }
 
     return (
-        <div className="selectedInstalmentPlan">
-            <center> 
-            <h2>Admin</h2>
-            <div className="plans">
+        <div className="lightBlueBodyBG">
+        <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">Update installment plan</h3>
+            </div>
                 <form className="create-plans" onSubmit={handleSubmit}>
-                <h3> Update installment plan </h3>
+                
 
                 <lable>Plan name:</lable>
                 <input 
@@ -109,15 +110,16 @@ const AdminUpdatePlan = () => {
                     // placeholder={plans.initialPayment}
                 />
 
-                <button className="btn">Save changes</button>
+                <button className="confirm-btn">Save changes</button>
 
                 {error && <div className = "error">{error}</div>}
 
             </form>
                     
             </div>
-            </center>
+        
         </div>
+
     )
 }
 

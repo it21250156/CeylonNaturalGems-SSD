@@ -67,7 +67,7 @@ const AllUsers = () => {
     <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
             <div className="darkBlueTopicBox">
-                <h3 className="pageTopic">All Installments</h3>
+                <h3 className="pageTopic">All Users</h3>
             </div>
 
                 <table >
