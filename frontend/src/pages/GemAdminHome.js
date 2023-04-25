@@ -11,6 +11,7 @@ import axios from 'axios';
 
 // components
 import GemDetails from '../components/GemDetails';
+import '../CSS/GemAdminHome.css';
 
 const GemAdminHome = () => {
   const { gems, dispatch } = useGemsContext();
