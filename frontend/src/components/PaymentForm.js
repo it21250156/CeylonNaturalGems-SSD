@@ -166,13 +166,16 @@ const PaymentForm = () => {
     setSecCode(trimmedSecCode);
   };
 
-  return (
-    <>
-      <Header />
-      <div className="title-box-payment">
-        <h3 className="title-payment">PAYMENT FORM</h3>
-      </div>
-      <div className="light-blue-bg">
+    return (
+
+        <div className="lightBlueBodyBG">
+        <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">PAYMENT FORM</h3>
+            </div>
+
+            <div className="container">
+
         <form className="create" onSubmit={handleSubmit}>
           <div className="form-fields">
             <div className="col-1">
@@ -393,16 +396,12 @@ const PaymentForm = () => {
           </div>
         </form>
 
-        {/* <button
-          onClick={() => {
-            setGotopaymentList(true);
-          }}
-        >
-          MY PAYMENTS
-        </button> */}
-      </div>
-    </>
-  );
-};
+            <button onClick={() => {setGotopaymentList(true)}}>MY PAYMENTS</button>
 
-export default PaymentForm;
+            </div>
+        </div>
+    </div>
+
+       
+    )
+}

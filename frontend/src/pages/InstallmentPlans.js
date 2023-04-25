@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom'
 import '../CSS/InstPlans.css'
+import Header from '../components/Header';
 
 //components
 
@@ -24,6 +25,8 @@ const InstallmentPlans = () => {
     },[])
 
     return (
+        <>
+    <Header/>
         <div className="instalmentPlans">
 
             <div className="darkBlueTopicBox">
@@ -42,7 +45,7 @@ const InstallmentPlans = () => {
             </div>
             
         </div>
-        
+        </>
     )
 }
 
