@@ -26,7 +26,7 @@ const MyInstallments = () => {
 
     return (
         <div className="allInstallments">
-            <h2>All Installments </h2>
+            <h2>My Installments </h2>
             {<div className="instalments">
                 <table border='1' >
                     <tr> 
@@ -49,30 +49,32 @@ const MyInstallments = () => {
 
 //table row
 const InstallmentTableRow = ({ installment }) => {
+
+    const [gems, setGems] = useState([]);
+
+    useEffect(() => {
+        const fetchGems = async () => {
+          try {
+            const response = await fetch('/api/gems&jewelleries/gems');
+            const json = await response.json();
+            setGems(json);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        fetchGems();
+    }, []);
+
     return(
         <tr>
+            <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
             <td> {installment.gemID} </td>
             <td> {installment.monthlyPayment} </td>
             <td> {installment.createdAt} </td>
-            
-            <td> <button> Details </button></td>
         </tr>
     )
 }
 
-// const findName = async({id}) => {
-//     useEffect(() => {
-//         const fetchInstallments = async () => {
-//             const response = await fetch(`/api/gems&jewelleries/gems/${id}`)
-//             const json = await response.json()
 
-//             if(response.ok){
-//                 setGem(json)
-//             }
-//         }
-
-//         fetchInstallments()
-//     },[])
-// }
 
 export default MyInstallments

@@ -14,6 +14,7 @@ import UserProfileUpdate from './pages/UserProfileUpdate';
 import AdminUsers from './pages/AdminUsers';
 import AdminHome from './pages/AdminHome';
 import ResetPassword from './pages/ChangePassword'
+import AllUsers from './pages/AllUsers';
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -82,6 +83,7 @@ function App() {
             <Route path="/profile/:id" element={<UserProfile />} />
             <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
             <Route path="/profile/resetPassword/:id" element={<ResetPassword />} />
+            <Route path="/AllUsers" element={ < AllUsers />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
