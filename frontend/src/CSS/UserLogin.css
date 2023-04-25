@@ -1,0 +1,103 @@
+.title-box-login {
+  background-color: #144272;
+  margin: 20px 300px;
+  padding: 40px 0;
+  border-radius: 20px;
+}
+
+.title-login {
+  color: white;
+  font-family: Bebas Neue;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.light-blue-bg-login {
+  background-color: #cadefc;
+  margin: 20px 300px;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+form {
+  width: 100%;
+}
+
+.top-drop-down {
+  text-align: justify;
+}
+
+#input {
+  height: 44px;
+  width: 100%;
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.label {
+  font-family: legendum;
+  color: #144272;
+  font-weight: bold;
+  text-align: center;
+}
+
+#input:hover,
+#input:focus,
+#input-group:hover #input {
+  outline: none;
+  border-color: #144272;
+}
+
+#input-group:hover .label,
+#input:focus {
+  color: #144272;
+}
+
+.login-btn {
+  background-color: #144272;
+  border: 2px solid #144272;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.login-btn:hover {
+  background-color: white;
+  color: #144272;
+  border: 2px solid #144272;
+  transition: 0.5s;
+}
+
+.cancel-btn {
+  background-color: #0b62a8;
+  border: 2px solid #0b62a8;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.cancel-btn:hover {
+  background-color: white;
+  border: 2px solid #0b62a8;
+  color: #0b62a8;
+  transition: 0.5s;
+}
+
+.register-link {
+  color: #144272;
+  font-family: legendum;
+}

@@ -1,0 +1,21 @@
+.topic {
+  margin: 20px;
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+  font-family: legendum;
+}
+
+.bg-card {
+  background-color: #cadefc;
+  padding: 20px;
+  margin: 20px 200px;
+  border-radius: 10px;
+  text-align: left;
+  padding-left: 20px;
+  font-family: legendum;
+}
+
+form {
+  width: 100%;
+}
