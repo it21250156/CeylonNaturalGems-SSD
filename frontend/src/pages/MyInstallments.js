@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 import '../CSS/BodyTemp.css'
 import Header from '../components/Header';
 
+import format from 'date-fns/format'
+
 //components
 
 const MyInstallments = () => {
@@ -36,7 +38,6 @@ const MyInstallments = () => {
                         <th>Gem</th>
                         <th>Monthly Payment</th>
                         <th>Payment Date</th>
-                        <th></th>
                     </tr>
                 
                     {Installments && Installments.map((installment) => (
@@ -72,9 +73,8 @@ const InstallmentTableRow = ({ installment }) => {
     return(
         <tr>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
-            <td> {installment.gemID} </td>
             <td> {installment.monthlyPayment} </td>
-            <td> {installment.createdAt} </td>
+            <td>  {format(new Date(installment.createdAt), 'MM/dd/yyyy')} </td>
         </tr>
     )
 }

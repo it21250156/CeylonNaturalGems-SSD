@@ -125,7 +125,6 @@ const InstallmentTableRow = ({ installment }) => {
             <td> {users.find((user) => user._id === installment.user)?.firstName} {} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
             <td> {installment.monthlyPayment} </td>
-            <td> {installment.createdAt} </td>
             <td>  {format(new Date(installment.createdAt), 'MM/dd/yyyy')} </td>
             
             
