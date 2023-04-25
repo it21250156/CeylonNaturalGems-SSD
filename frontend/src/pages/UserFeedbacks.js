@@ -37,9 +37,16 @@ const UserFeedbacks = () => {
         <div className="light-blue-bg">
           <div className="top-btn">
             {/* <FeedbackForm/> */}
-            <Link to={'/FeedbackForm/644673394e7e2b940937df7b'}>
-              <button className="add-feedback-btn"> Add a new Feedback</button>
-            </Link>
+
+            <button
+              className="add-feedback-btn"
+              onClick={() => {
+                window.location.href = './FeedbackForm';
+              }}
+            >
+              {' '}
+              Add a new Feedback
+            </button>
           </div>
 
           <div classname="feedbacks">

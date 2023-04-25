@@ -59,7 +59,7 @@ const GemDetails = ({ gem }) => {
         </p>
 
         <p>
-          <strong>Price: Rs.</strong>
+          <strong>Price: $</strong>
           {gem.price}/=
         </p>
 

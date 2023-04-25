@@ -130,7 +130,7 @@ const GemAddForm = () => {
             className={emptyFields.includes('quantity') ? 'error' : ''}
           />
 
-          <label>Gem Price: (in Rs)</label>
+          <label>Gem Price: (in $)</label>
           <input
             type="number"
             onChange={(e) => setPrice(e.target.value)}

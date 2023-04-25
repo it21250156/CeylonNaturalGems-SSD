@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 import Header from './components/Header';
 
-
 // pages & components
 import Home from './pages/Home';
 
@@ -13,7 +12,7 @@ import UserProfile from './pages/UserProfile';
 import UserProfileUpdate from './pages/UserProfileUpdate';
 import AdminUsers from './pages/AdminUsers';
 import AdminHome from './pages/AdminHome';
-import ResetPassword from './pages/ChangePassword'
+import ResetPassword from './pages/ChangePassword';
 import AllUsers from './pages/AllUsers';
 
 //janith
@@ -45,27 +44,25 @@ import CartPage from './pages/CartPage';
 import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
 import AddJewelleryes from './pages/AddJewelleryes';
 import JewelleryDetails from './components/JewelleryDetails';
-import UpdateJewellery from './pages/UpdateJewellery'
+import UpdateJewellery from './pages/UpdateJewellery';
 
 //Daham
 import JewelhomeMen from './pages/JewelhomeMen';
 import JewelScreen from './pages/JewelScreen';
 import JewelhomeWomen from './pages/JewelhomeWomen';
 
-
 //vihangi
-import InstallmentPlans from './pages/InstallmentPlans'
-import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan'
-import AllInstallments from './pages/AllInstallments'
-import AdminInstallmentPlans from './pages/AdminInstallmentPlans'
+import InstallmentPlans from './pages/InstallmentPlans';
+import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan';
+import AllInstallments from './pages/AllInstallments';
+import AdminInstallmentPlans from './pages/AdminInstallmentPlans';
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
 import MyInstallments from './pages/MyInstallments';
 
 //ammaar
-import GemAdminHome from './pages/GemAdminHome'
+import GemAdminHome from './pages/GemAdminHome';
 import AddGem from './pages/AddGem';
 import UpdateGems from './pages/UpdateGems';
-
 
 function App() {
   const { user } = useAuthContext();
@@ -78,12 +75,24 @@ function App() {
             {/* kalinga */}
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
-            <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
-            <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
+            <Route
+              path="/login"
+              element={!user ? <UserLogin /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/Register"
+              element={!user ? <UserRegistration /> : <Navigate to="/" />}
+            />
             <Route path="/profile/:id" element={<UserProfile />} />
-            <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
-            <Route path="/profile/resetPassword/:id" element={<ResetPassword />} />
-            <Route path="/AllUsers" element={ < AllUsers />} />
+            <Route
+              path="/profile/editProfile/:id"
+              element={<UserProfileUpdate />}
+            />
+            <Route
+              path="/profile/resetPassword/:id"
+              element={<ResetPassword />}
+            />
+            <Route path="/AllUsers" element={<AllUsers />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
@@ -94,54 +103,72 @@ function App() {
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
             <Route path="/reqReply" element={<ReplyRequest />}></Route>
-            <Route path="/Myrep" element={<Myreply />}></Route> 
-            
+            <Route path="/Myrep" element={<Myreply />}></Route>
 
-           
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
 
             {/* Malika */}
-            <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
-            <Route path ="/Userfeedbacks" element={<UserFeedbacks/>}/> 
-            <Route path ="/AdminFeedbacks" element={<AdminFeedbacks/>}/> 
-            <Route path ='/FeedbackForm/:_id' element ={<FeedbackForm/>}/> 
-            <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
-            
+            <Route path="/feedbacks" element={<AllFeedbacks />} />
+            <Route path="/Userfeedbacks" element={<UserFeedbacks />} />
+            <Route path="/AdminFeedbacks" element={<AdminFeedbacks />} />
+            <Route path="/FeedbackForm" element={<FeedbackForm />} />
+            <Route path="/UpdateFeedback/:_id" element={<UpdateFeedback />} />
 
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
             <Route path="/MyPayments" element={<MyPayments />} />
-            <Route path="/MyPayments/PaymentUpdate/:id" element={<PaymentUpdate/>}/>
+            <Route
+              path="/MyPayments/PaymentUpdate/:id"
+              element={<PaymentUpdate />}
+            />
 
             {/* ruchira */}
-            <Route path='/JewelleryAdminDashboard' element={<JewelleryAdminDashboard/>}/>
+            <Route
+              path="/JewelleryAdminDashboard"
+              element={<JewelleryAdminDashboard />}
+            />
 
-            <Route path='/AddJewelleryes' element={<AddJewelleryes/>}/>
+            <Route path="/AddJewelleryes" element={<AddJewelleryes />} />
 
-            <Route path='/UpdateJewelleryes/:_id' element={<UpdateJewellery/>}/>            
-
-
+            <Route
+              path="/UpdateJewelleryes/:_id"
+              element={<UpdateJewellery />}
+            />
 
             {/* daham */}
-            <Route path="/jwellhomeM" element={<JewelhomeMen/>}/>
-            <Route path="/jwellhomeWm" element={<JewelhomeWomen/>}/>
-            <Route path="/jwellscreen/:id" element={<JewelScreen/>}/>
+            <Route path="/jwellhomeM" element={<JewelhomeMen />} />
+            <Route path="/jwellhomeWm" element={<JewelhomeWomen />} />
+            <Route path="/jwellscreen/:id" element={<JewelScreen />} />
 
             {/* ammaar */}
-            <Route path='/GemAdminHome' element={<GemAdminHome/>}/>
-            <Route path='/AddGem' element={<AddGem/>}/>
-            <Route path='/UpdateGems/:_id' element={<UpdateGems/>}/>
+            <Route path="/GemAdminHome" element={<GemAdminHome />} />
+            <Route path="/AddGem" element={<AddGem />} />
+            <Route path="/UpdateGems/:_id" element={<UpdateGems />} />
 
             {/* Vihangi  */}
-            <Route path = "/InstallmentPlans" element={ <InstallmentPlans />} />
-            <Route path = "/InstallmentPlans/selectedInstallmentPlan/:id" element={ <SelectedInstallmentPlan />} /> 
+            <Route path="/InstallmentPlans" element={<InstallmentPlans />} />
+            <Route
+              path="/InstallmentPlans/selectedInstallmentPlan/:id"
+              element={<SelectedInstallmentPlan />}
+            />
 
             {/* admin */}
-            <Route path = "/AdminInstallmentPlans/AllInstallments" element={ <AllInstallments />} />
-            <Route path = "/AdminInstallmentPlans" element={ <AdminInstallmentPlans />} />  
-            <Route path= "/AdminInstallmentPlans/adminUpdatePlan/:id" element={ <AdminUpdatePlan /> } />
-            <Route path= "/profile/MyPayments/MyInstallments/:id" element={ <MyInstallments /> } />
-
+            <Route
+              path="/AdminInstallmentPlans/AllInstallments"
+              element={<AllInstallments />}
+            />
+            <Route
+              path="/AdminInstallmentPlans"
+              element={<AdminInstallmentPlans />}
+            />
+            <Route
+              path="/AdminInstallmentPlans/adminUpdatePlan/:id"
+              element={<AdminUpdatePlan />}
+            />
+            <Route
+              path="/profile/MyPayments/MyInstallments/:id"
+              element={<MyInstallments />}
+            />
           </Routes>
         </div>
       </BrowserRouter>

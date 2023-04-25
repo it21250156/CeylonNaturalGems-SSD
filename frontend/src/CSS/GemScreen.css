@@ -120,6 +120,10 @@ td {
   font-weight: bold;
 }
 
+table {
+  width: auto;
+}
+
 /* req compartment */
 
 .req-box {
