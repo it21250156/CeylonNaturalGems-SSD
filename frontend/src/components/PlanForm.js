@@ -85,7 +85,7 @@ const PlanForm = () => {
             />
 
 
-            <button className="btn">Add Installment Plan </button>
+            <button className="confirm-btn" >Add Installment Plan </button>
 
             {error && <div className = "error">{error}</div>}
 

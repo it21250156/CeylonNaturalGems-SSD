@@ -32,11 +32,7 @@ const GemDetails = ({ gem }) => {
   return (
     <div className="gem-details">
       <div className="gem-card">
-<<<<<<< Updated upstream
-        <h4>{gem.name}</h4>
-=======
         <h4 className="card-title">{gem.name}</h4>
->>>>>>> Stashed changes
         <p>
           <strong>Type: </strong>
           {gem.type}
