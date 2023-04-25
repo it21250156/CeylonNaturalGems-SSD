@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
 import format from 'date-fns/format'
+import '../CSS/table.css';
 
 const AllInstallments = () => {
 
@@ -63,24 +64,32 @@ const AllInstallments = () => {
         </nav>
       </div>
     </header>
-        <div className="allInstallments">
-            <h2>All Installments </h2>
-            {<div className="instalments">
-                <table border='1' >
+
+    <div className="lightBlueBodyBG">
+        <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">All Installments</h3>
+            </div>
+
+
+                <table >
+                  <thead>
                     <tr> 
                         <th>User</th>
                         <th>Gem</th>
+                        <th>Installment ID</th>
                         <th>Monthly Payment</th>
                         <th>Payment Date</th>
                         
                     </tr>
-                
+                  </thead>
+                  <tbody>
                     {Installments && Installments.map((installment) => (
                         <InstallmentTableRow key={installment._id} installment={installment} />
                     ))}
-                
+                  </tbody>
                 </table>
-            </div> }
+            </div> 
         </div>
         </>
     )
@@ -124,6 +133,7 @@ const InstallmentTableRow = ({ installment }) => {
         <tr>
             <td> {users.find((user) => user._id === installment.user)?.firstName} {} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
+            <td> {installment._id} </td>
             <td> {installment.monthlyPayment} </td>
             <td>  {format(new Date(installment.createdAt), 'MM/dd/yyyy')} </td>
             

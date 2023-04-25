@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
+import '../CSS/table.css';
+
 
 const AllUsers = () => {
 
@@ -62,25 +64,31 @@ const AllUsers = () => {
         </nav>
       </div>
     </header>
-        <div className="allUsers">
-            <h2>All Users </h2>
-            {<div className="instalments">
-                <table border='1' >
-                    <tr> 
+    <div className="lightBlueBodyBG">
+        <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">All Installments</h3>
+            </div>
+
+                <table >
+                  <thead>
+                      <tr> 
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone number</th>
 
                         
-                    </tr>
-                
-                    {Users && Users.map((user) => (
-                        <UsersTableRow key={user._id} user={user} />
-                    ))}
-                
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {Users && Users.map((user) => (
+                          <UsersTableRow key={user._id} user={user} />
+                      ))}
+                  </tbody>
                 </table>
-            </div> }
+            </div> 
         </div>
         </>
     )

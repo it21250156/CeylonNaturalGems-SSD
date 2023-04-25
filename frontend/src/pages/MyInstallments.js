@@ -4,6 +4,7 @@ import '../CSS/BodyTemp.css'
 import Header from '../components/Header';
 
 import format from 'date-fns/format'
+import '../CSS/table.css';
 
 //components
 
@@ -30,22 +31,28 @@ const MyInstallments = () => {
     return (
         <>
         <Header/>
-        <div className="allInstallments">
-            <h2>My Installments </h2>
-            {<div className="instalments">
-                <table border='1' >
-                    <tr> 
-                        <th>Gem</th>
-                        <th>Monthly Payment</th>
-                        <th>Payment Date</th>
-                    </tr>
-                
-                    {Installments && Installments.map((installment) => (
-                        <InstallmentTableRow key={installment._id} installment={installment} />
-                    ))}
-                
+        <div className="lightBlueBodyBG">
+        <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">My Installments</h3>
+            </div>
+
+                <table >
+                    <thead> 
+                        <tr> 
+                            <th>Installment ID</th>
+                            <th>Gem</th>
+                            <th>Monthly Payment</th>
+                            <th>Payment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Installments && Installments.map((installment) => (
+                            <InstallmentTableRow key={installment._id} installment={installment} />
+                        ))}
+                    </tbody>
                 </table>
-            </div> }
+            </div> 
         </div>
         </>
     )
@@ -72,6 +79,7 @@ const InstallmentTableRow = ({ installment }) => {
 
     return(
         <tr>
+            <td> {installment._id} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
             <td> {installment.monthlyPayment} </td>
             <td>  {format(new Date(installment.createdAt), 'MM/dd/yyyy')} </td>
