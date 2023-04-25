@@ -8,6 +8,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import axios from 'axios';
+import '../CSS/planForm.css'
 
 //components
 import PlanForm from "../components/PlanForm"
@@ -65,19 +66,24 @@ const AdminInstallmentPlans = () => {
         </nav>
       </div>
     </header>
+
+
         <div className="instalmentPlans">
-            <center> 
-            <button onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button>
-            <div className="plans">
-                <h3>Installment Plans </h3>
-                <hr></hr>
+            <br></br>
+            <button className="confirm-btn" onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button>
+            <div className="lightBlueBodyBG">
+            <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">Installment Plans</h3>
+            </div>
+            <div className="lightBlueBodyBG">
                 <PlanForm />
-                
+             </div>   
                 {plans && plans.map((plan) => (
                     <PlanDetailBox key={plan._id} plan={plan} />
                 ))}
             </div>
-            </center>
+            </div>
 
             
         </div>
@@ -104,12 +110,12 @@ const PlanDetailBox = ({ plan }) => {
     const navigate = useNavigate()
 
     return(
-        <div className="plan-detail-box-admin">
+        <div className="lightBlueBodyBG">
             <h4> {plan.name} </h4>
             <p><strong>Months : </strong> {plan.months} </p>
             <p><strong>Initial Payment : </strong> {plan.initialPayment} %</p>
-            <span className="btn" onClick = {handleDelete} >  Delete</span>
-            <span className="btn" onClick={() => {navigate(`/AdminInstallmentPlans/AdminUpdatePlan/${plan._id}`)}} >Update</span>
+            <span className="confirm-btn" onClick = {handleDelete} >  Delete</span> 
+            <span className="confirm-btn" onClick={() => {navigate(`/AdminInstallmentPlans/AdminUpdatePlan/${plan._id}`)}} >Update</span>
         </div>
     )
 
