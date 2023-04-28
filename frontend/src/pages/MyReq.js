@@ -13,15 +13,20 @@ const schema = yup.object().shape({
   newGemShape: yup.string(),
   newGemColour: yup.string(),
   newGemDescription: yup.string(),
-  newGemWeight: yup.number().positive(),
+  // newGemWeight: yup.number().positive(),
+  newGemQuantity: yup.number().positive(),
 });
+
 
 function MyReq() {
   const [listOfRequests, setListOfRequests] = useState([]);
   const [newGemShape, setNewGemShape] = useState('');
   const [newGemColour, setNewGemColour] = useState('');
   const [newGemDescription, setNewnewGemDescription] = useState('');
-  const [newGemWeight, setNewnewGemWeight] = useState('');
+  // const [newGemWeight, setNewnewGemWeight] = useState('');
+  const [newGemQuantity, setNewnewGemQuantity] = useState('');
+
+  
   const gemShapes = [
     'round',
     'oval',
@@ -35,7 +40,7 @@ function MyReq() {
 
   const deletereq = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
-      alert('Deleted Successuflly! Please refresh the page');
+      window.location.reload();
     });
   };
 
@@ -51,7 +56,8 @@ function MyReq() {
         id: id,
         newGemShape: newGemShape,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert('Updated Successfully!');
       });
     }
   };
@@ -62,7 +68,8 @@ function MyReq() {
         id: id,
         newGemColour: newGemColour,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert('Updated Successfully!');
       });
     }
   };
@@ -73,21 +80,40 @@ function MyReq() {
         id: id,
         newGemDescription: newGemDescription,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert('Updated Successfully!');
       });
     }
   };
 
-  const updateGemWeight = (id) => {
-    if (newGemWeight) {
-      Axios.put('/updateWt', {
+  // const updateGemWeight = (id) => {
+  //   if (newGemWeight) {
+  //     Axios.put('/updateWt', {
+  //       id: id,
+  //       newGemWeight: newGemWeight,
+  //     }).then((response) => {
+  //       alert('Updated Successfully! Please refresh the page');
+  //     });
+  //   }
+  // };
+
+  const updateGemQuantity = (id) => {
+    if (newGemQuantity) {
+      Axios.put('/updateQt', {
         id: id,
-        newGemWeight: newGemWeight,
+        newGemQuantity: newGemQuantity,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert('Updated Successfully!');
       });
     }
   };
+
+  const confirmDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this request?")) {
+      deletereq(id);
+    }
+  }
 
   const {
     register,
@@ -198,12 +224,21 @@ function MyReq() {
                           }}
                         />
 
-                        <input
+                        {/* <input
                           type="number"
                           placeholder="Edit weight...."
                           className="input"
                           onChange={(event) => {
                             setNewnewGemWeight(event.target.value);
+                          }}
+                        /> */}
+
+                        <input
+                          type="number"
+                          placeholder="Edit quantity...."
+                          className="input"
+                          onChange={(event) => {
+                            setNewnewGemQuantity(event.target.value);
                           }}
                         />
 
@@ -213,7 +248,8 @@ function MyReq() {
                             updateGemColour(user._id);
                             updateGemShape(user._id);
                             updateGemDescription(user._id);
-                            updateGemWeight(user._id);
+                            // updateGemWeight(user._id);
+                            updateGemQuantity(user._id);
                           }}
                         >
                           Update
@@ -222,7 +258,7 @@ function MyReq() {
                     </div>
                   </div>
 
-                  <button class="btn" onClick={() => deletereq(user._id)}>
+                  <button class="btn" onClick={() => confirmDelete(user._id)}>
                     <p class="paragraph"> delete </p>
                     <span class="icon-wrapper">
                       <svg

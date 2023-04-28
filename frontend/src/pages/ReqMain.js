@@ -13,13 +13,13 @@ const validationSchema = yup.object().shape({
   FirstName: yup.string().required('First Name is required'),
   LastName: yup.string().required('Last Name is required'),
   Email: yup.string().email('Invalid email').required('Email is required'),
-  PhoneNo: yup.number().required('Phone No is required'),
+  PhoneNo: yup.string().required('Phone No is required'),
   GemType: yup.string().required('Gem Type is required'),
   GemColor: yup.string().required('Gem Color is required'),
   GemShape: yup.string().required('Gem Shape is required'),
   Description: yup.string().required('Description is required'),
-  Weight: yup.number().required('Weight is required'),
-  Quantity: yup.number().required('Quantity is required'),
+  Weight: yup.string().required('Weight is required'),
+  Quantity: yup.string().required('Quantity is required'),
 });
 
 function ReqMain() {

@@ -28,7 +28,8 @@ const UserFeedbacks = () => {
 
   return (
     <>
-      <Header />
+      
+      {/* <Header/> */}
       <div className="Userfeedbacks">
         <div className="title-box-feedback">
           <h1 className="title-feedback">My Feedbacks</h1>

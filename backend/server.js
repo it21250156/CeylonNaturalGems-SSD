@@ -136,14 +136,29 @@ app.put('/updateDes', async (req, res) => {
   }
 });
 
-app.put('/updateWt', async (req, res) => {
-  const newGemWeight = req.body.newGemWeight;
+// app.put('/updateWt', async (req, res) => {
+//   const newGemWeight = req.body.newGemWeight;
+//   const id = req.body.id;
+
+//   try {
+//     await UserModel.findById(id, (err, updatedWeight) => {
+//       updatedWeight.Weight = newGemWeight;
+//       updatedWeight.save();
+//       res.send('update');
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
+app.put('/updateQt', async (req, res) => {
+  const newGemQuantity = req.body.newGemQuantity;
   const id = req.body.id;
 
   try {
-    await UserModel.findById(id, (err, updatedWeight) => {
-      updatedWeight.Weight = newGemWeight;
-      updatedWeight.save();
+    await UserModel.findById(id, (err, updatedQuantity) => {
+      updatedQuantity.Quantity = newGemQuantity;
+      updatedQuantity.save();
       res.send('update');
     });
   } catch (err) {
