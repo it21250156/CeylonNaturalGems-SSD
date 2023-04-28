@@ -1,0 +1,114 @@
+.gem-card {
+  background-color: #cadefc;
+  margin: 10px 30px;
+  padding: 20px;
+  border-radius: 20px;
+  font-family: legendum;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 25px;
+  color: black;
+  font-weight: bold;
+}
+
+.deleteButton {
+  border: 2px solid #144272;
+  background-color: white;
+  color: #144272;
+  padding: 10px 40px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.deleteButton:hover {
+  border: 2px solid #144272;
+  background-color: #144272;
+  transition: 0.5s;
+  color: white;
+}
+
+.updateButton {
+  border: 2px solid #2c74b3;
+  background-color: white;
+  padding: 10px 40px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.updateButton:hover {
+  border: 2px solid #2c74b3;
+  background-color: #2c74b3;
+  transition: 0.5s;
+  color: white;
+}
+
+.popup-message {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2c74b3;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 9999;
+  display: none;
+}
+
+.popup-message.show {
+  display: block;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+  background-color: #d9534f;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #a94442;
+}
+
+.modal-buttons button:last-child {
+  background-color: #428bca;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #1c537a;
+}

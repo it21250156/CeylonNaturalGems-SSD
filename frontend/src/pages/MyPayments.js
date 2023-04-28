@@ -1,6 +1,7 @@
 import React, { useEffect, useState  } from "react"
 //import { BodyTemp } from "../components/BodyTemp"
 import { usePaymentContext } from "../hooks/usePaymentsContext"
+import '../CSS/table.css';
 
 import Header from '../components/Header';
 
@@ -39,9 +40,9 @@ const MyPayments = () => {
             </div>
             <div className="mypayments">
             <div className="paymentlist">
-
+                <center>
                 <div className="insBtn" onClick={() => {navigate(`/profile/MyPayments/MyInstallments/${id}`)}}> MY INSTALLMENTS </div>
-
+                </center>
       <table>
 
             <thead>
@@ -117,7 +118,7 @@ const PaymentRow = ({payment}) => {
         <td>{payment.dStatus}</td>
         <td>{payment.createdAt}</td>
         <td><button onClick={handleDelete} disabled={isDeleting}>
-        {isDeleting ? 'Deleting...' : 'Delete'}
+        {isDeleting ? 'Deleting...' : 'DELETE'}
       </button></td>
         <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
         <td><button> FEEDBACK </button></td>

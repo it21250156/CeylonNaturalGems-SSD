@@ -65,13 +65,27 @@ const PlanForm = () => {
             />
 
             <lable>Initial payment (as a percentage):</lable>
-            <input 
+            {/* <input 
                 type="number"
                 onChange={(e) => setInitialPayment(e.target.value)}
                 value = {initialPayment}
+            /> */}
+
+            <input
+                type="number"
+                onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    if (value < 100) {
+                        setInitialPayment(value);
+                    } else {
+                        setError("Initial payment must be less than 100");
+                    }
+                }}
+                value={initialPayment}
             />
 
-            <button className="btn">Add Installment Plan </button>
+
+            <button className="confirm-btn" >Add Installment Plan </button>
 
             {error && <div className = "error">{error}</div>}
 

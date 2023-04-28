@@ -125,7 +125,9 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="bottom-btns-3"></div>
-        <button className="my---btn">MY REQUESTS</button>
+        <button className="my---btn" onClick={() => {
+                navigate('/MyReq');
+              }}>MY REQUESTS</button>
         <Link to = {'/UserFeedbacks'}>
         <button className="my---btn">MY FEEDBACKS</button>
         </Link>

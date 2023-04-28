@@ -26,11 +26,11 @@ const getPayment = async(req , res) => {
 
 //create a new payment
 const createPayment = async (req , res) =>{
-    const { amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus, orderID, userID  } = req.body
+    const {user  ,orderID , amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus } = req.body
 
     //add doc to db
     try{
-      const payment = await Payment.create({amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus, orderID, userID})
+      const payment = await Payment.create({user  ,orderID ,amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus})
       res.status(200).json(payment)
     }catch(error){
       res.status(400).json({error: error.message})
@@ -73,10 +73,28 @@ const updatePayment = async (req , res) => {
 
 }
 
+// get payments for a specific user
+const getUserPayments = async (req, res) => {
+    const {user} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(user)) {
+        return res.status(404).json({error:'No such user'})
+    }
+
+    const payment = await Payment.find({user:user})
+
+    if (!payment) {
+        return res.status(404).json({error: 'No installments'})
+    }
+    
+    res.status(200).json(payment)
+}
+
 module.exports = {
     createPayment,
     getPayment,
     getPayments,
     deletePayment,
-    updatePayment
+    updatePayment,
+    getUserPayments
 }

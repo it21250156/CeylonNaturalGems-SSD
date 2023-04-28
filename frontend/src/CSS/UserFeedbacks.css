@@ -1,0 +1,91 @@
+.feedback-details-users {
+  background-color: white;
+  padding: 30px;
+  margin: 10px;
+  border-radius: 20px;
+  width: auto;
+}
+
+.cols {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.feedback-col-1 {
+  flex: 1;
+  background-color: bisque;
+}
+
+.img-section {
+  background-color: bisque;
+}
+
+.feedback-col-2 {
+  flex: 2;
+  padding: 0 10px;
+}
+
+.feedback-col-3 {
+  flex: 1;
+  align-content: center;
+}
+
+.feedback-name {
+  font-family: Bebas Neue;
+  text-align: left;
+  font-size: 25px;
+  padding: 0;
+  margin: 0 0 5px 0;
+  color: #144272;
+}
+
+.feedback-description {
+  margin: 0;
+  text-align: left;
+  font-family: bpreplay;
+  margin: 10px;
+  color: #144272;
+}
+
+.g-quantity-tag {
+  text-align: left;
+  font-family: bpreplay;
+  margin: 10px;
+  color: #144272;
+}
+
+.material-symbols-outlined {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #144272;
+  font-size: 30px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.time-stamp-feedback {
+  text-align: right;
+  font-family: bpreplay;
+  margin: 0 20px;
+  font-style: italic;
+}
+
+#delete {
+  color: red;
+}
+
+#delete:hover {
+  color: white;
+  background-color: red;
+  transition: 0.5s;
+}
+
+#edit {
+  color: #144272;
+}
+
+#edit:hover {
+  color: white;
+  background-color: #144272;
+  transition: 0.5s;
+}

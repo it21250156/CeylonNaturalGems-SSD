@@ -1,0 +1,14 @@
+.addGemButton {
+  margin: 20px;
+  padding: 20px 40px;
+  border-radius: 10px;
+  background-color: #144272;
+  color: white;
+  border: none;
+}
+
+.addGemButton:hover {
+  background-color: white;
+  color: #144272;
+  border: 2px solid #144272;
+}

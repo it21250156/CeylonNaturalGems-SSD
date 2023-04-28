@@ -1,0 +1,100 @@
+.title-box-payment {
+  background-color: #144272;
+  margin: 20px 300px;
+  padding: 40px 0;
+  border-radius: 20px;
+}
+
+.title-payment {
+  color: white;
+  font-family: Bebas Neue;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.light-blue-bg {
+  background-color: #cadefc;
+  margin: 20px 300px;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+form {
+  width: 100%;
+}
+
+.form-fields {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-1 {
+  flex: 1;
+}
+
+.col-2 {
+  flex: 1;
+  border-left: 2px solid white;
+  padding-left: 30px;
+}
+
+.column-title {
+  font-family: Bebas Neue;
+  font-size: 30px;
+  padding: 0;
+  margin: 0 0 20px 0;
+  color: white;
+  text-shadow: 2px 2px 5px #05060f;
+}
+
+#input {
+  width: 300px;
+  height: 44px;
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.label {
+  font-family: legendum;
+  color: #144272;
+  font-weight: bold;
+  text-align: left;
+}
+
+#input:hover,
+#input:focus,
+#input-group:hover #input {
+  outline: none;
+  border-color: #144272;
+}
+
+#input-group:hover .label,
+#input:focus {
+  color: #144272;
+}
+
+.confirm-btn {
+  background-color: #144272;
+  border: 2px solid #144272;
+  padding: 15px 40px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.confirm-btn:hover {
+  border: 2px solid #144272;
+  background-color: white;
+  color: #144272;
+  transition: 0.5s;
+}

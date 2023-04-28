@@ -1,62 +1,53 @@
-import { useFeedbacksContext } from "../hooks/useFeedbackContext"
-import { Link } from 'react-router-dom'
+import { useFeedbacksContext } from '../hooks/useFeedbackContext';
+import { Link } from 'react-router-dom';
 import StarRating from 'react-star-ratings';
 import axios from 'axios';
+import '../CSS/FeedbackDetails.css';
 
 //date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import { useEffect, useState } from "react";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { useEffect, useState } from 'react';
 
-const FeedbackDetails = ({feedback}) =>{
+const FeedbackDetails = ({ feedback }) => {
+  const [feedbackReply, setFeedbackReply] = useState('');
 
-  const[feedbackReply,setFeedbackReply] = useState('')
-  
-  useEffect (()=> {
-  
-    setFeedbackReply(feedback?.reply || '')
+  useEffect(() => {
+    setFeedbackReply(feedback?.reply || '');
+  }, []);
 
-  },[])
+  const { dispatch, feedbacks } = useFeedbacksContext();
 
-  const { dispatch,feedbacks } = useFeedbacksContext()
+  const handleFeedbackReply = async (e, fid) => {
+    e.preventDefault();
 
-  const handleFeedbackReply = async(e,fid) => {
-
-  e.preventDefault()
-
-    const response = await fetch('/api/feedbacks/' +feedback._id, {
+    const response = await fetch('/api/feedbacks/' + feedback._id, {
       method: 'PATCH',
       body: JSON.stringify({
+        reply: feedbackReply,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const json = await response.json();
+    console.log(json);
 
-       reply:feedbackReply
-
-    }),
-    headers: {
-        'Content-Type': 'application/json'
+    if (response.ok) {
+      dispatch({ type: 'UPDATE_FEEDBACK', payload: json });
     }
-       
-    },)
-    const json = await response.json()
-    console.log(json)
-
-    if(response.ok) {
-      
-      dispatch({type: 'UPDATE_FEEDBACK', payload: json})
-   
-    }
-
-  }
+  };
 
   const handleClick = async () => {
-    const response = await fetch('/api/feedbacks/' +feedback._id, {
-      method: 'DELETE'
-    })
-    const json = await response.json()
+    const response = await fetch('/api/feedbacks/' + feedback._id, {
+      method: 'DELETE',
+    });
+    const json = await response.json();
 
-    if(response.ok) {
-       dispatch({type: 'DELETE_FEEDBACK', payload: json})
+    if (response.ok) {
+      dispatch({ type: 'DELETE_FEEDBACK', payload: json });
     }
-  }
-//=========================================================
+  };
+  //=========================================================
   const user = JSON.parse(localStorage.getItem('userInfo'));
 
   /*******************************************************/
@@ -69,33 +60,47 @@ const FeedbackDetails = ({feedback}) =>{
       .then((res) => setUserData(res.data))
       .catch((err) => console.log(err));
   }, []);
-//=============================================
+  //=============================================
 
   return (
-    <div className="feedback-details">
-      <h4>{feedback.gemType}</h4>
+    <div className="feedback-card">
+      <p className="feedback-name">{feedback.gemType}</p>
+      <div className="cols">
+        <div className="feedback-col-1">
+          <div className="feedback-img"></div>
+        </div>
+
+        <div className="feedback-col-2">
+          <p className="feedback-description">{feedback.fbInfo}</p>
+          <StarRating
+            readOnly
+            id="rating"
+            name="rating"
+            rating={Number(feedback.rating)}
+            starRatedColor="#0a2647"
+            starHoverColor="orange"
+            starDimension="25px"
+            starSpacing="5px"
+          />
+          <p className="g-quantity-tag">Gem Quantity: {feedback.gemQty}</p>
+          <p className="time-stamp-feedback">
+            {formatDistanceToNow(new Date(feedback.createdAt), {
+              addSuffix: true,
+            })}
+          </p>
+        </div>
+      </div>
+
       {/* {JSON.stringify(feedbacks)} */}
       {/* <p><strong>User Name: </strong>{userData.firstName}</p> */}
-      <p><strong>Gem Quantity: </strong>{feedback.gemQty}</p>
-      <p><strong>Feedback: </strong>{feedback.fbInfo}</p>
+
       {/* <p><strong>Rating: </strong>{feedback.rating}</p> */}
-      <StarRating 
-                    readOnly
-                    id="rating"
-                    name="rating"
-                    rating = {Number(feedback.rating)}                    
-                    starRatedColor="#0a2647"
-                    starHoverColor="orange"
-                    starDimension="25px"
-                    starSpacing="5px"
-                    
-                />
-      <p>{formatDistanceToNow(new Date(feedback.createdAt), { addSuffix: true })}</p>
+
       {feedback.reply && (
-  <p>
-    <strong>Feedback Reply:</strong> {feedback.reply}
-  </p>
-)}
+        <p>
+          <strong>Feedback Reply:</strong> {feedback.reply}
+        </p>
+      )}
       {/* <span className="material-symbols-outlined" onClick = {handleClick}>delete</span>
       <span>Reply</span>
       <form onSubmit={(e)=> handleFeedbackReply(e, feedback._id)}>
@@ -109,12 +114,8 @@ const FeedbackDetails = ({feedback}) =>{
       {/* <Link to = {`/UpdateFeedback/${feedback._id}`}>
       <span >Update</span>
       </Link> */}
-
-
-      
     </div>
-  )
+  );
+};
 
-}
-
-export default FeedbackDetails
+export default FeedbackDetails;

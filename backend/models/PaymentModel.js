@@ -3,6 +3,18 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PaymentSchema = new Schema({
+
+  user:{
+    type: Schema.Types.ObjectId,
+    ref:'user',
+   required:true,
+  },
+
+  orderID:{
+    type:[String],
+    required: true,
+  },
+
       amount: {
         type: Number,
         required: true
@@ -35,18 +47,8 @@ const PaymentSchema = new Schema({
         type:String,
         default:"pending"
       },
-      orderID:{
-        type:[String],
-        required: true
-      },
-      // userID:{
-      //   type:String
-      // }
-      userID:{
-        type: Schema.Types.ObjectId,
-        ref:'user',
-       
-      },
+     
+      
       // gemID:{
       //   type: Schema.Types.ObjectId,
       //   ref:'gem',

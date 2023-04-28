@@ -3,6 +3,7 @@ import logger from 'use-reducer-logger';
 import CartCard from '../components/CartCard';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Header from '../components/Header';
+import '../CSS/CartPage.css';
 
 import CartTotal from './cartTotal';
 
@@ -93,17 +94,28 @@ const CartPage = () => {
       <Header />
 
       <div>
-        <h1>my cart</h1>
-        {gems?.length &&
-          cartData.map((item) => (
-            <CartCard
-              key={item._id}
-              cartid={item._id}
-              gem={gems.find((gem) => gem._id === item.cartitemid)}
-              // gemid={item.cartitemid}
-            ></CartCard>
-          ))}
-        <CartTotal gems={gems} cartData={cartData}></CartTotal>
+        <div className="darkBlueTopicBoxcart">
+          <h1 className="pageTopiccart">My Cart</h1>
+        </div>
+        <div className="lightBlueBodyBGcart">
+          <div className="cart-col-1">
+            {gems?.length &&
+              cartData &&
+              cartData.map((item) => (
+                <CartCard
+                  key={item._id}
+                  cartid={item._id}
+                  gem={gems.find((gem) => gem._id === item.cartitemid)}
+                  // gemid={item.cartitemid}
+                ></CartCard>
+              ))}
+          </div>
+          <div className="cart-col-2">
+            {/* {JSON.stringify(gems)}
+              {JSON.stringify(cartData)} */}
+            <CartTotal gems={gems} cartData={cartData}></CartTotal>
+          </div>
+        </div>
       </div>
     </>
   );

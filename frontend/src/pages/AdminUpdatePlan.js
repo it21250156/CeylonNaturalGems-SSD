@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { usePlansContext } from "../hooks/usePlanContext"
+import { useNavigate } from 'react-router-dom'
 
 
 const AdminUpdatePlan = () => {
     const { dispatch } = usePlansContext()
+    const navigate = useNavigate()
 
     const [name, setName] = useState('')
     const [months, setMonths] = useState('')
@@ -62,18 +64,20 @@ const AdminUpdatePlan = () => {
             // dispatch({type: 'UPDATE_PLANS' , payload: json})
 
             console.log('Plan Updated' , json ) 
+            navigate('/AdminInstallmentPlans')
         }
         
 
     }
 
     return (
-        <div className="selectedInstalmentPlan">
-            <center> 
-            <h2>Admin</h2>
-            <div className="plans">
+        <div className="lightBlueBodyBG">
+        <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">Update installment plan</h3>
+            </div>
                 <form className="create-plans" onSubmit={handleSubmit}>
-                <h3> Update installment plan </h3>
+                
 
                 <lable>Plan name:</lable>
                 <input 
@@ -94,20 +98,28 @@ const AdminUpdatePlan = () => {
                 <lable>Initial payment (as a percentage):</lable>
                 <input 
                     type="number"
-                    onChange={(e) => setInitialPayment(e.target.value)}
+                    onChange={(e) => {
+                        const value = parseInt(e.target.value);
+                        if (value < 100) {
+                            setInitialPayment(value);
+                        } else {
+                            setError("Initial payment must be less than 100");
+                        }
+                    }}
                     value = {initialPayment}
                     // placeholder={plans.initialPayment}
                 />
 
-                <button className="btn">Save changes</button>
+                <button className="confirm-btn">Save changes</button>
 
                 {error && <div className = "error">{error}</div>}
 
             </form>
                     
             </div>
-            </center>
+        
         </div>
+
     )
 }
 

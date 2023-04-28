@@ -1,42 +1,49 @@
-import {useEffect }from 'react'
-import { useFeedbacksContext }from '../hooks/useFeedbackContext'
+import { useEffect } from 'react';
+import { useFeedbacksContext } from '../hooks/useFeedbackContext';
+import '../CSS/feedback.css';
 
 //components
-import FeedbackDetails from '../components/FeedbackDetails'
-import FeedbackForm from '../components/FeedbackForm'
+import FeedbackDetails from '../components/FeedbackDetails';
+import FeedbackForm from '../components/FeedbackForm';
+import Header from '../components/Header';
 
-const AllFeedbacks = () =>{
-  const {feedbacks, dispatch} = useFeedbacksContext()
+const AllFeedbacks = () => {
+  const { feedbacks, dispatch } = useFeedbacksContext();
 
-  useEffect(() =>{
+  useEffect(() => {
     const fetchFeedbacks = async () => {
-      const response = await fetch('/api/feedbacks')
-      const json = await response.json()
+      const response = await fetch('/api/feedbacks');
+      const json = await response.json();
 
-      if(response.ok) {
-
-        dispatch({type: 'SET_FEEDBACKS', payload: json})
-        
+      if (response.ok) {
+        dispatch({ type: 'SET_FEEDBACKS', payload: json });
       }
-    }
+    };
 
-    fetchFeedbacks()
-  },[dispatch])
+    fetchFeedbacks();
+  }, [dispatch]);
 
-    return (
-
+  return (
+    <>
+      <Header />
+      <div>
         <div className="Allfeedbacks">
-          <div classname = "feedbacks">
-            {feedbacks && feedbacks.map((feedback) =>(
-              <FeedbackDetails key={feedback._id} feedback={feedback} />
-            ))}
-
+          <div className="title-box-feedback">
+            <p className="title-feedback">Customer Feedbacks</p>
+          </div>
+          <div className="light-blue-bg">
+            <div classname="feedback-card">
+              {feedbacks &&
+                feedbacks.map((feedback) => (
+                  <FeedbackDetails key={feedback._id} feedback={feedback} />
+                ))}
+            </div>
           </div>
           {/* <FeedbackForm/> */}
           {/* <button onClick= {() => {window.location.href = "./FeedbackForm"}}> Add Feedback</button> */}
         </div>
-
-        
-    )
-}
-export default  AllFeedbacks 
+      </div>
+    </>
+  );
+};
+export default AllFeedbacks;

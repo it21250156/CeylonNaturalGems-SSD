@@ -17,46 +17,69 @@ function CartCard({ cartid, gem }) {
   return (
     <div className="cartcard">
       <div className="cartcard-content">
-        <span className="cartimg-section"></span>
-        <p className="cartcard-name">{gem.name}</p>
-        <p className="cartcard-price">${gem.price}</p>
-      </div>
-      <div className="update-section">
-        <div className="decrease-btn">
-          {/* {cartData.find((item) => item._id === cartid)?.cartquantity > 1 && ( */}
-          <button
-            onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
-            disabled={
-              !(cartData.find((item) => item._id === cartid)?.cartquantity > 1)
-            }
-          >
-            -
+        <div className="cartimg-section"></div>
+        <div className="name-price">
+          <p className="cartcard-name">{gem?.name}</p>
+          <p className="cartcard-price">${gem?.price}</p>
+        </div>
+        <div className="update-section">
+          <div>
+            {/* {cartData.find((item) => item._id === cartid)?.cartquantity > 1 && ( */}
+            <button
+              className="decrease-btn"
+              onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
+              disabled={
+                !(
+                  cartData.find((item) => item._id === cartid)?.cartquantity > 1
+                )
+              }
+            >
+              -
+            </button>
+            {/* )} */}
+          </div>
+          <div className="quantity">
+            {cartData.find((item) => item._id === cartid)?.cartquantity}
+          </div>
+          <div>
+            <button
+              className="increase-btn"
+              onClick={() => handleChangeQuantityCart(cartid, 'INCREASE')}
+              disabled={
+                !(
+                  cartData.find((item) => item._id === cartid)?.cartquantity <
+                  gem?.quantity
+                )
+              }
+            >
+              +
+            </button>
+          </div>
+        </div>
+        <div className="btn-delete">
+          <button class="btn" onClick={() => handleCartRemove(cartid)}>
+            <p class="paragraph"> Remove </p>
+            <span class="icon-wrapper">
+              <svg
+                class="icon"
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </span>
           </button>
-          {/* )} */}
-        </div>
-        <div className="quantity">
-          {cartData.find((item) => item._id === cartid)?.cartquantity}
-        </div>
-        <div className="increase-btn">
-          <button
-            onClick={() => handleChangeQuantityCart(cartid, 'INCREASE')}
-            disabled={
-              !(
-                cartData.find((item) => item._id === cartid)?.cartquantity <
-                gem.quantity
-              )
-            }
-          >
-            +
-          </button>
         </div>
       </div>
-      <button
-        onClick={() => handleCartRemove(cartid)}
-        className="cartcard-button"
-      >
-        Remove
-      </button>
     </div>
   );
 }

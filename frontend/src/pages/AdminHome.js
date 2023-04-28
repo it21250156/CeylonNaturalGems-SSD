@@ -58,7 +58,7 @@ const AdminHome = () => {
         <button onClick={() => {navigate("/AdminInstallmentPlans")}}>Installments</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Payments</button>
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Deliveries</button>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Customer Details</button>
+        <button onClick={() => {navigate("/AllUsers")}}>Customer Details</button>
 
       </div>
     </body>

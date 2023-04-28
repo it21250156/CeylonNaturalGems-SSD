@@ -55,14 +55,6 @@
   font-style: normal;
 }
 
-.lightBlueBodyBGUserprofile {
-  background-color: #cadefc;
-  margin: 0 100px;
-  padding: 30px 0;
-  height: 100%;
-  border-radius: 20px;
-}
-
 .requestL {
   font-size: 15px;
   text-align: left;
@@ -286,6 +278,46 @@
 
 /* janith - css */
 
+.add-req-btn {
+  font-family: Bebas Neue;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2c74b3;
+  transition: all 1000ms;
+  font-size: 30px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
+}
+
+.add-req-btn:hover {
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px #268391;
+}
+
+.add-req-btn::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #144272;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.add-req-btn:hover::before {
+  width: 250%;
+}
+
 .input {
   width: 300px;
   height: 44px;
@@ -320,7 +352,7 @@
   color: #144272;
 }
 
-.lightBlueBodyBG {
+.lightBlueBodyBG-my-req {
   background-color: #cadefc;
   margin: 20px 100px;
   padding: 20px;
