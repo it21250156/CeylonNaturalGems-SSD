@@ -102,7 +102,7 @@ function App() {
             <Route path ="/feedbacks" element={<AllFeedbacks/>}/> 
             <Route path ="/Userfeedbacks" element={<UserFeedbacks/>}/> 
             <Route path ="/AdminFeedbacks" element={<AdminFeedbacks/>}/> 
-            <Route path ='/FeedbackForm/:_id' element ={<FeedbackForm/>}/> 
+            <Route path ='/FeedbackForm' element ={<FeedbackForm/>}/> 
             <Route path ='/UpdateFeedback/:_id' element ={<UpdateFeedback/>}/> 
             
 

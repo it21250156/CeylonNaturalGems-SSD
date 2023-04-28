@@ -3,7 +3,6 @@ import { useFeedbacksContext }from '../hooks/useFeedbackContext'
 
 //components
 import FeedbackDetailsUsers from '../components/FeedbackDetailsUsers'
-import { Link } from 'react-router-dom'
 
 const UserFeedbacks = () =>{
   const {feedbacks, dispatch} = useFeedbacksContext()
@@ -33,9 +32,7 @@ const UserFeedbacks = () =>{
 
           </div>
           {/* <FeedbackForm/> */}
-          <Link to = {'/FeedbackForm/644673394e7e2b940937df7b'}>
-          <button> Add Feedback</button>
-          </Link>
+          <button onClick= {() => {window.location.href = "./FeedbackForm"}}> Add Feedback</button>
         </div>
 
         
