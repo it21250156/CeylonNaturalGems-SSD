@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useFeedbacksContext } from '../hooks/useFeedbackContext';
 import '../CSS/feedback.css';
+import Header from '../components/Header'
 
 //components
 import FeedbackDetailsUsers from '../components/FeedbackDetailsUsers'
