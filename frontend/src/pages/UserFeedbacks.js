@@ -6,6 +6,7 @@ import Header from '../components/Header'
 //components
 import FeedbackDetailsUsers from '../components/FeedbackDetailsUsers'
 import { Link } from 'react-router-dom'
+import Header from '../components/Header';
 
 const UserFeedbacks = () => {
   const { feedbacks, dispatch } = useFeedbacksContext();
@@ -29,8 +30,7 @@ const UserFeedbacks = () => {
 
   return (
     <>
-      
-      {/* <Header/> */}
+      <Header>
       <div className="Userfeedbacks">
         <div className="title-box-feedback">
           <h1 className="title-feedback">My Feedbacks</h1>
@@ -62,6 +62,7 @@ const UserFeedbacks = () => {
           </Link>
         </div>
       </div>
+      </Header>
     </>
   );
 };

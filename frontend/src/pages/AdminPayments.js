@@ -10,29 +10,16 @@ import axios from 'axios';
 
 const { useState  } = require("react")
 
-const AdminDelivery = () =>{
+const AdminPayments = () => {
 
     const { logout } = useLogout();
-  const {user} = useAuthContext()
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    logout();
-    navigate('/');
-  }
-    //payment id
-    //date
-    //address
-    //district
-    //country
-    //delivery method 
-    //delivery status
-
-    // const [ address, setAddress] = useState('')
-    // const [ district, setDistrict] = useState('')
-    // const [ country, setCountry ] = useState('')
-    // const [ dmethod, setDmethod ] = useState('')
-  //  const [ dStatus, setDstatuss ] = useState('')
+    const {user} = useAuthContext()
+    const navigate = useNavigate()
+  
+    const handleClick = () => {
+      logout();
+      navigate('/');
+    }
 
     const [payments , setPayments] = useState(null)
 
@@ -49,10 +36,17 @@ const AdminDelivery = () =>{
         fetchPayments()
         }, [])
 
+        return(
 
-    return(
+            //payment ID
+            //date
+            //payment amount
+            //payment method
+            //order ID
+            //user ID
+
         <>
-    <header>
+             <header>
       <div>
         <div className="background">
           <div className="headerNameDiv">
@@ -78,10 +72,12 @@ const AdminDelivery = () =>{
         </nav>
       </div>
     </header>
-        <div className="lightBlueBodyBG">
+
+
+<div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
             <div className="darkBlueTopicBox">
-                <h3 className="pageTopic"> DELIVERY DETAILS </h3>
+                <h3 className="pageTopic"> PAYMENT DETAILS </h3>
             </div>
             
 <div className="adminDel">
@@ -89,18 +85,17 @@ const AdminDelivery = () =>{
     <thead>
         <tr>
             <th>Payment ID</th>
+            <th>Order ID </th>
+            <th>User ID </th>
             <th>Date</th>
-            <th>Address</th>
-            <th>District</th>
-            <th>Country</th>
-            <th>Delivery Method</th>
-            <th>Delivery Status</th>
+            <th>Payment Amount </th>
+            <th>Payment Method</th>
         </tr>
     </thead>
 
     <tbody>
     {payments && payments.map((payment) => (
-                 <PDeliveryRow key={payment._id} payment={payment}/>
+                 <PPaymentRow key={payment._id} payment={payment}/>
                ))}
     </tbody>
 </table>
@@ -110,18 +105,18 @@ const AdminDelivery = () =>{
     </div>
     </>
 
-    )
+        )
 }
 
-const PDeliveryRow = ({payment}) => {
+const PPaymentRow = ({payment}) => {
 
-    const [status, setStatus] = useState(payment.dStatus);
+  //  const [status, setStatus] = useState(payment.dStatus);
   const [error, setError] = useState(null)
 
     const handleStatusChange = async (e) => {
         e.preventDefault()
 
-        const payment = {status}
+      //  const payment = {status}
 
         const response = await fetch('/api/payments' , {
             method:'POST' ,
@@ -133,41 +128,27 @@ const PDeliveryRow = ({payment}) => {
 
         const json = await response.json()
 
-        if(!response.ok){
-          setError(json.error)
-        }
-        if(response.ok){
-            setStatus('')
-            setError(null)
-            console.log('delivery status updated!' , json)
-        }
+        // if(!response.ok){
+        //   setError(json.error)
+        // }
+        // if(response.ok){
+        //     setStatus('')
+        //     setError(null)
+        //     console.log('delivery status updated!' , json)
+        // }
     }
-
-//   const handleStatusChange = (e) => {
-//     const newStatus = e.target.value;
-//     setStatus(newStatus);
-//     updateStatus(newStatus); // Call your server-side function here to update the status
-  
 
     return(
         <tr key={payment._id}>
             <td>{payment._id}</td>
+            <td>{payment.orderID}</td>
+            <td>{payment.userID}</td>
             <td>{payment.createdAt}</td>
-            <td>{payment.address}</td>
-            <td>{payment.district}</td>
-            <td>{payment.country}</td>
-            <td>{payment.dmethod}</td>
-            <td><td>
-            <select name="status" value={status} onChange={handleStatusChange}>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-      </select>
-</td>
-</td>
+            <td>{payment.amount}</td>
+            <td>{payment.pmethod}</td>
 
         </tr>
     )
     }
 
-export default AdminDelivery
+    export default AdminPayments

@@ -63,6 +63,8 @@ import MyInstallments from './pages/MyInstallments';
 import GemAdminHome from './pages/GemAdminHome';
 import AddGem from './pages/AddGem';
 import UpdateGems from './pages/UpdateGems';
+import AdminPayments from './pages/AdminPayments';
+import AdminDelivery from './pages/AdminDelivery';
 
 function App() {
   const { user } = useAuthContext();
@@ -117,10 +119,9 @@ function App() {
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
             <Route path="/MyPayments" element={<MyPayments />} />
-            <Route
-              path="/MyPayments/PaymentUpdate/:id"
-              element={<PaymentUpdate />}
-            />
+            <Route path="/MyPayments/PaymentUpdate/:id" element={<PaymentUpdate />}/>
+            <Route path="/AdminPayments" element={<AdminPayments/>} /> 
+            <Route path="/AdminDelivery" element={<AdminDelivery/>}/>
 
             {/* ruchira */}
             <Route

@@ -56,8 +56,8 @@ const AdminHome = () => {
         <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Gem Requests</button>
         <button onClick={() => {navigate("/AdminFeedbacks")}}>Feedbacks</button>
         <button onClick={() => {navigate("/AdminInstallmentPlans")}}>Installments</button>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Payments</button>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Deliveries</button>
+        <button onClick={() => {navigate("/AdminPayments")}}>Payments</button>
+        <button onClick={() => {navigate("/AdminDelivery")}}>Deliveries</button>
         <button onClick={() => {navigate("/AllUsers")}}>Customer Details</button>
 
       </div>
