@@ -1,4 +1,5 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
+
 import { Link, useParams } from 'react-router-dom';
 import logger from 'use-reducer-logger';
 import '../CSS/GemScreen.css';
@@ -30,6 +31,8 @@ export const JwelReducer = (state, action) => {
 function JewelScreen() {
   const params = useParams();
   const { id } = params;
+  const [Gem, setGem] = useState('');
+
   const [{ loading, error, Jwl }, dispatch] = useReducer(logger(JwelReducer), {
     Jwl: [],
     loading: true,
@@ -91,6 +94,26 @@ function JewelScreen() {
                   Add to cart
                 </button>
               </div>
+
+              <label className="label">Gem Shape</label>
+                  <select
+                    className="input"
+                  
+                    onChange={(event) => {
+                      setGem(event.target.value);
+                    }}
+                  >
+                    <option value="">Select a shape</option>
+                    <option value="Round">Round</option>
+                    <option value="Oval">Oval</option>
+                    <option value="Pear">Pear</option>
+                    <option value="Marquise">Marquise</option>
+                    <option value="Emerald">Emerald</option>
+                    <option value="Heart">Heart</option>
+                    <option value="Trillion">Trillion</option>
+                    <option value="Princess">Princess</option>
+                  </select>
+                  
 
               <div className="gem-desc">
                 <p>{Jwl.description}</p>
