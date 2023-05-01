@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 //Kalinga
 const userRoutes = require('./routes/userRoutes.js');
-const adminRoutes = require('./routes/adminRoutes.js')
+const adminRoutes = require('./routes/adminRoutes.js');
 
 // malika
 const feedbackRoutes = require('./routes/feedbacks');
@@ -187,7 +187,7 @@ app.delete('/delete/:id', async (req, res) => {
 
 //Kalinga
 app.use('/api/users', userRoutes);
-app.use('/api/admin' , adminRoutes) ;
+app.use('/api/admin', adminRoutes);
 
 //janith
 app.use('/api/gems&jewelleries', gemRoutes);
@@ -205,7 +205,7 @@ app.use('/api/installments', installmentsRoutes);
 
 //daham
 
-app.use('/api/jewelleryes',jwellRoutes);
+app.use('/api/jewelleryes', jwellRoutes);
 
 //ammaar
 app.use('/api/gems', gemAdminRoutes);
