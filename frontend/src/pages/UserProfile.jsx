@@ -85,10 +85,10 @@ const UserProfile = () => {
           </div>
           <div className="user-details">
             <table>
-              <tr>
+              {/* <tr>
                 <td className="detail-label">User ID</td>
                 <td className="detail-prop">{userData._id}</td>
-              </tr>
+              </tr> */}
               <tr>
                 <td className="detail-label">Name</td>
                 <td className="detail-prop">

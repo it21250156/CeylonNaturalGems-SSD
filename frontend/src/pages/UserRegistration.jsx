@@ -51,18 +51,7 @@ function UserRegistration() {
                 )
               );
 
-              await signup(
-                title,
-                userType,
-                firstName,
-                lastName,
-                email,
-                phone,
-                password,
-                confirmPassword
-              );
-
-              // const newUser = {
+              // await signup(
               //   title,
               //   userType,
               //   firstName,
@@ -70,19 +59,30 @@ function UserRegistration() {
               //   email,
               //   phone,
               //   password,
-              //   confirmPassword,
+              //   confirmPassword
+              // );
 
-              // };
+              const newUser = {
+                title,
+                userType,
+                firstName,
+                lastName,
+                email,
+                phone,
+                password,
+                confirmPassword,
 
-              // await axios
-              //   .post('http://localhost:4000/users/Register', newUser)
-              //   .then((res) => {
-              //     document.location.href = '/login';
-              //   })
-              //   .catch((err) => {
-              //     console.log(err);
-              //     alert('User Registration Failed');
-              //   });
+              };
+
+              await axios
+                .post('/api/users/Register', newUser)
+                .then((res) => {
+                  document.location.href = '/login';
+                })
+                .catch((err) => {
+                  console.log(err);
+                  alert('User Registration Failed');
+                });
             }}
           >
             <div className="top-drop-down">
