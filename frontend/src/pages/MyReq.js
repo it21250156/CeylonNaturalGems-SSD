@@ -17,8 +17,6 @@ const schema = yup.object().shape({
   newGemQuantity: yup.number().positive(),
 });
 
-
-
 function MyReq() {
   const [listOfRequests, setListOfRequests] = useState([]);
   const [newGemShape, setNewGemShape] = useState('');
@@ -27,7 +25,6 @@ function MyReq() {
   // const [newGemWeight, setNewnewGemWeight] = useState('');
   const [newGemQuantity, setNewnewGemQuantity] = useState('');
 
-  
   const gemShapes = [
     'round',
     'oval',
@@ -111,10 +108,10 @@ function MyReq() {
   };
 
   const confirmDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this request?")) {
+    if (window.confirm('Are you sure you want to delete this request?')) {
       deletereq(id);
     }
-  }
+  };
 
   const {
     register,
@@ -123,7 +120,6 @@ function MyReq() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  
 
   return (
     <>
@@ -260,7 +256,10 @@ function MyReq() {
                     </div>
                   </div>
 
-                  <button class="btn" onClick={() => confirmDelete(user._id)}>
+                  <button
+                    class="btn-del"
+                    onClick={() => confirmDelete(user._id)}
+                  >
                     <p class="paragraph"> delete </p>
                     <span class="icon-wrapper">
                       <svg

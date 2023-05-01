@@ -1,0 +1,50 @@
+.footer-body {
+  height: 200px;
+  background-color: #0a2647;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.col-1 {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.map {
+  flex: 1;
+}
+
+.static-pages-1 {
+  flex: 1;
+  color: white;
+  font-family: legendum;
+  padding: 40px 40px 0 0;
+  text-align: right;
+}
+
+.col-2 {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.static-pages-2 {
+  flex: 1;
+  color: white;
+  font-family: legendum;
+  padding: 20px 0 0 10px;
+  text-align: left;
+}
+
+.icons {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.icn-space {
+  width: 50px;
+  height: 50px;
+}
