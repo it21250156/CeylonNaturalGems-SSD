@@ -65,6 +65,18 @@ app.get('/getUsers', (req, res) => {
   });
 });
 
+// app.get('/getUsers', (req, res) => {
+//   const loggedInUserId = req.user.id; // assuming you have implemented user authentication
+//   UserModel.findById(loggedInUserId, (err, result) => {
+//     if (err) {
+//       res.json(err);
+//     } else {
+//       res.json(result);
+//     }
+//   });
+// });
+
+
 app.post('/createUser', async (req, res) => {
   const user = req.body;
   const newUser = new UserModel(user);

@@ -21,7 +21,7 @@ import GemScreen from './pages/GemScreen';
 
 //bimsara
 import ReqMain from './pages/ReqMain';
-
+import Reply_userView from './pages/Reply_userView';
 import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
@@ -99,11 +99,13 @@ function App() {
             <Route path="/gems/:id" element={<GemScreen />}></Route>
             <Route path="/mycart" element={<CartPage />}></Route>
 
+            {/* bimsara */}
             <Route path="/reqM" element={<ReqMain />}></Route>
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
             <Route path="/reqReply" element={<ReplyRequest />}></Route>
             <Route path="/Myrep" element={<Myreply />}></Route>
+            <Route path="/reply_uv" element={<Reply_userView />}></Route>
 
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
 

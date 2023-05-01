@@ -255,6 +255,13 @@ function ReqMain() {
         >
           All Requests
         </button>
+        <button
+          onClick={() => {
+            window.location.href = './reply_uv';
+          }}
+        >
+          Replies
+        </button>
       </div>
     </>
   );
