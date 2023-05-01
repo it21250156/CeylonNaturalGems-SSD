@@ -37,27 +37,6 @@ const AdminHome = () => {
               </div>
             </div>
 
-<<<<<<< Updated upstream
-          <ul>
-            <li>
-              <Link to={'/adminHome'}>Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    <body>
-      <div className="home">
-        <h1>hi Admin</h1>
-        <button onClick={() => {navigate("/GemAdminHome")}}>Gem Stones</button>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Jewellery</button>
-        <button onClick={() => {navigate("/JewelleryAdminDashboard")}}>Gem Requests</button>
-        <button onClick={() => {navigate("/AdminFeedbacks")}}>Feedbacks</button>
-        <button onClick={() => {navigate("/AdminInstallmentPlans")}}>Installments</button>
-        <button onClick={() => {navigate("/AdminPayments")}}>Payments</button>
-        <button onClick={() => {navigate("/AdminDelivery")}}>Deliveries</button>
-        <button onClick={() => {navigate("/AllUsers")}}>Customer Details</button>
-=======
             <ul>
               <li>
                 <Link to={'/adminHome'}>Home</Link>
@@ -130,6 +109,5 @@ const AdminHome = () => {
     </>
   );
 };
->>>>>>> Stashed changes
 
 export default AdminHome;
