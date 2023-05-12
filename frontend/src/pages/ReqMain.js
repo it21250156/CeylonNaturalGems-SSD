@@ -42,8 +42,14 @@ function ReqMain() {
     });
   }, []);
 
+
+
   const createRequest = (data) => {
-    Axios.post('/createUser', data).then((response) => {
+    const udata={...data, user: JSON.parse(localStorage.getItem('userInfo'))?._id || null,}
+
+    console.log(udata)
+
+    Axios.post('/createUser', udata).then((response) => {
       alert('Request Added!');
     });
   };

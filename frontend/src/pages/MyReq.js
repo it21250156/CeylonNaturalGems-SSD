@@ -1,13 +1,14 @@
-import '../CSS/AppBW.css';
-import { useState, useEffect } from 'react';
-import React from 'react';
-import Axios from 'axios';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Link, useParams } from 'react-router-dom';
-import TextareaAutosize from 'react-textarea-autosize';
-import Header from '../components/Header';
+import "../CSS/AppBW.css";
+import { useState, useEffect } from "react";
+import React from "react";
+import Axios from "axios";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { Link, useParams } from "react-router-dom";
+import TextareaAutosize from "react-textarea-autosize";
+import Header from "../components/Header";
+import { getWeekYearWithOptions } from "date-fns/fp";
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
@@ -17,26 +18,25 @@ const schema = yup.object().shape({
   newGemQuantity: yup.number().positive(),
 });
 
-
-
 function MyReq() {
+  const uid = JSON.parse(localStorage.getItem("userInfo"))?._id || null;
   const [listOfRequests, setListOfRequests] = useState([]);
-  const [newGemShape, setNewGemShape] = useState('');
-  const [newGemColour, setNewGemColour] = useState('');
-  const [newGemDescription, setNewnewGemDescription] = useState('');
+  const [listOfReplyStatus, setListOfReplyStatus] = useState([]);
+  const [newGemShape, setNewGemShape] = useState("");
+  const [newGemColour, setNewGemColour] = useState("");
+  const [newGemDescription, setNewnewGemDescription] = useState("");
   // const [newGemWeight, setNewnewGemWeight] = useState('');
-  const [newGemQuantity, setNewnewGemQuantity] = useState('');
+  const [newGemQuantity, setNewnewGemQuantity] = useState("");
 
-  
   const gemShapes = [
-    'round',
-    'oval',
-    'pear',
-    'marquise',
-    'emerald',
-    'heart',
-    'princess',
-    'cushion',
+    "round",
+    "oval",
+    "pear",
+    "marquise",
+    "emerald",
+    "heart",
+    "princess",
+    "cushion",
   ];
 
   const deletereq = (id) => {
@@ -45,44 +45,57 @@ function MyReq() {
     });
   };
 
+  async function getReplyStatus() {
+    try {
+      const response = await Axios.get(`/getReplyByUser/${uid}`);
+      setListOfReplyStatus(response.data);
+      console.log("got " + response.data);
+    } catch (error) {
+      console.log(error);
+      setListOfReplyStatus([...listOfReplyStatus, { reqId: error.message }]);
+    }
+  }
+
   useEffect(() => {
-    Axios.get('/getUsers').then((response) => {
+    Axios.get(`/getUsersRequests/${uid}`).then((response) => {
       setListOfRequests(response.data);
+      getReplyStatus(response.data);
     });
+    getReplyStatus();
   }, []);
 
   const updateGemShape = (id) => {
     if (newGemShape) {
-      Axios.put('/updateGshape', {
+      Axios.put("/updateGshape", {
         id: id,
         newGemShape: newGemShape,
       }).then((response) => {
         window.location.reload();
-        alert('Updated Successfully!');
+        alert("Updated Successfully!");
       });
     }
   };
 
   const updateGemColour = (id) => {
     if (newGemColour) {
-      Axios.put('/updateGsCl', {
+      Axios.put("/updateGsCl", {
         id: id,
         newGemColour: newGemColour,
       }).then((response) => {
         window.location.reload();
-        alert('Updated Successfully!');
+        alert("Updated Successfully!");
       });
     }
   };
 
   const updateGemDescription = (id) => {
     if (newGemDescription) {
-      Axios.put('/updateDes', {
+      Axios.put("/updateDes", {
         id: id,
         newGemDescription: newGemDescription,
       }).then((response) => {
         window.location.reload();
-        alert('Updated Successfully!');
+        alert("Updated Successfully!");
       });
     }
   };
@@ -100,12 +113,12 @@ function MyReq() {
 
   const updateGemQuantity = (id) => {
     if (newGemQuantity) {
-      Axios.put('/updateQt', {
+      Axios.put("/updateQt", {
         id: id,
         newGemQuantity: newGemQuantity,
       }).then((response) => {
         window.location.reload();
-        alert('Updated Successfully!');
+        alert("Updated Successfully!");
       });
     }
   };
@@ -114,7 +127,7 @@ function MyReq() {
     if (window.confirm("Are you sure you want to delete this request?")) {
       deletereq(id);
     }
-  }
+  };
 
   const {
     register,
@@ -123,7 +136,6 @@ function MyReq() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  
 
   return (
     <>
@@ -132,12 +144,12 @@ function MyReq() {
         <div className="darkBlueTopicBoxReq">
           <h1 className="pageTopicReq">My Requests</h1>
         </div>
-
+        {/* {JSON.stringify(listOfReplyStatus)} */}
         <div className="lightBlueBodyBG-my-req">
           <button
             className="add-req-btn"
             onClick={() => {
-              window.location.href = './reqM';
+              window.location.href = "./reqM";
             }}
           >
             Create a new request
@@ -259,6 +271,20 @@ function MyReq() {
                       </form>
                     </div>
                   </div>
+                  {/* {listOfReplyStatus[user._id] || "jncos"} */}
+                  <button
+                    disabled={
+                      listOfReplyStatus[user._id] > 0 ||
+                      listOfReplyStatus[user._id] === null
+                        ? true
+                        : false
+                    }
+                    onClick={() => {
+                      window.location.href = `./reply_uv/${user._id}`;
+                    }}
+                  >
+                    Replies
+                  </button>
 
                   <button class="btn" onClick={() => confirmDelete(user._id)}>
                     <p class="paragraph"> delete </p>

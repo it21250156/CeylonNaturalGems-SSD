@@ -118,7 +118,7 @@ function MyReq(){
                   </div>
                     </div>
                     
-                    <button className='repbtn' onClick={() => {window.location.href = "./reqReply"}}>Reply</button>
+                    <button className='repbtn' onClick={() => {window.location.href = `./reqReply/${user._id}`}}>Reply</button>
                 
                 </div>
                 
