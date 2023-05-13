@@ -99,7 +99,7 @@ function UserRegistration() {
                 <option value="Rev.">Rev.</option>
               </select>
               {regiValidationError && (
-                <div className="error">{regiValidationError.title}</div>
+                <p className="error">{regiValidationError.title}</p>
               )}
 
               <label className="label">I Am:</label>
@@ -116,7 +116,7 @@ function UserRegistration() {
                 <option value="A Jeweller">A Jeweller</option>
               </select>
               {regiValidationError && (
-                <div className="error">{regiValidationError.userType}</div>
+                <p className="error">{regiValidationError.userType}</p>
               )}
             </div>
             <label className="label">First Name:</label>
@@ -130,7 +130,7 @@ function UserRegistration() {
               placeholder="Enter your first name hear..."
             />
             {regiValidationError && (
-              <div className="error">{regiValidationError.firstName}</div>
+              <p className="error">{regiValidationError.firstName}</p>
             )}
 
             <label className="label">Last Name:</label>
@@ -144,7 +144,7 @@ function UserRegistration() {
               placeholder="Enter your last name hear..."
             />
             {regiValidationError && (
-              <div className="error">{regiValidationError.lastName}</div>
+              <p className="error">{regiValidationError.lastName}</p>
             )}
 
             <label className="label">Email address:</label>
@@ -158,7 +158,7 @@ function UserRegistration() {
               placeholder="Enter your Email hear..."
             />
             {regiValidationError && (
-              <div className="error">{regiValidationError.email}</div>
+              <p className="error">{regiValidationError.email}</p>
             )}
 
             <label className="label">Phone Number:</label>
@@ -172,7 +172,7 @@ function UserRegistration() {
               placeholder="0761760579 or +94761760579"
             />
             {regiValidationError && (
-              <div className="error">{regiValidationError.phone}</div>
+              <p className="error">{regiValidationError.phone}</p>
             )}
 
             <label className="label">Password:</label>
@@ -185,7 +185,7 @@ function UserRegistration() {
               placeholder="Password..."
             />
             {regiValidationError && (
-              <div className="error">{regiValidationError.password}</div>
+              <p className="error">{regiValidationError.password}</p>
             )}
 
             <label className="label">Confirm Password:</label>
@@ -198,7 +198,7 @@ function UserRegistration() {
               placeholder="Confirm Password..."
             />
             {regiValidationError && (
-              <div className="error">{regiValidationError.confirmPassword}</div>
+              <p className="error">{regiValidationError.confirmPassword}</p>
             )}
 
             {error && <div className="error">{error}</div>}
