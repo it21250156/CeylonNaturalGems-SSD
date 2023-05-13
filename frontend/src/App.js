@@ -65,6 +65,7 @@ import AddGem from './pages/AddGem';
 import UpdateGems from './pages/UpdateGems';
 import AdminPayments from './pages/AdminPayments';
 import AdminDelivery from './pages/AdminDelivery';
+import GemAdminReports from './pages/GemAdminReports';
 
 function App() {
   const { user } = useAuthContext();
@@ -147,6 +148,7 @@ function App() {
             <Route path="/GemAdminHome" element={<GemAdminHome />} />
             <Route path="/AddGem" element={<AddGem />} />
             <Route path="/UpdateGems/:_id" element={<UpdateGems />} />
+            <Route path='/GemAdminReports' element={<GemAdminReports/>}/>
 
             {/* Vihangi  */}
             <Route path="/InstallmentPlans" element={<InstallmentPlans />} />

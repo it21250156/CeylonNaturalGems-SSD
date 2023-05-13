@@ -124,7 +124,7 @@ function MyReq() {
   };
 
   const confirmDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this request?")) {
+    if (window.confirm('Are you sure you want to delete this request?')) {
       deletereq(id);
     }
   };
@@ -286,7 +286,10 @@ function MyReq() {
                     Replies
                   </button>
 
-                  <button class="btn" onClick={() => confirmDelete(user._id)}>
+                  <button
+                    class="btn-del"
+                    onClick={() => confirmDelete(user._id)}
+                  >
                     <p class="paragraph"> delete </p>
                     <span class="icon-wrapper">
                       <svg

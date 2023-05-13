@@ -1,3 +1,7 @@
+:root {
+  --error: #e7195a;
+}
+
 .addGemButton {
   margin: 20px;
   padding: 20px 40px;
@@ -11,4 +15,38 @@
   background-color: white;
   color: #144272;
   border: 2px solid #144272;
+}
+
+textarea.error {
+  border: 1px solid var(--error);
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+form button {
+  background: #2c74b3;
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+}
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
 }

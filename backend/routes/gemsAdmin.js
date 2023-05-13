@@ -1,27 +1,27 @@
-const express = require('express')
+const express = require('express');
 const {
-  getGems, 
-  getGem, 
-  createGem, 
-  deleteGem, 
+  getGems,
+  getGem,
+  createGem,
+  deleteGem,
   updateGem
-} = require('../controllers/gemController')
+} = require('../controllers/gemController');
 
-const router = express.Router()
+const router = express.Router();
 
 // GET all gems
-router.get('/', getGems)
+router.get('/', getGems);
 
 // GET a single gem
-router.get('/:id', getGem)
+router.get('/:id', getGem);
 
 // POST a new gem
-router.post('/', createGem)
+router.post('/', createGem);
 
 // DELETE a gem
-router.delete('/:id', deleteGem)
+router.delete('/:id', deleteGem);
 
 // UPDATE a gem
-router.patch('/:id', updateGem)
+router.patch('/:id', updateGem);
 
-module.exports = router
+module.exports = router;
