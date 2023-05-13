@@ -101,3 +101,7 @@ form {
   color: #144272;
   font-family: legendum;
 }
+
+.error{
+  border: none;
+}

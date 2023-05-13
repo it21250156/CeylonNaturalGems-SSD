@@ -13,7 +13,7 @@ import '../CSS/table.css';
 const AllUsers = () => {
 
     const { logout } = useLogout();
-    const {user} = useAuthContext()
+    //const {user} = useAuthContext()
     const navigate = useNavigate()
 
     const handleClick = () => {
@@ -22,6 +22,7 @@ const AllUsers = () => {
     };
 
     const [Users, setUsers] = useState([]);
+    const [deletedUsers, setDeletedUsers] = useState([]);
 
     useEffect(() => {
       const fetchUsers = async () => {
@@ -34,6 +35,19 @@ const AllUsers = () => {
         }
       };
       fetchUsers();
+    }, []);
+
+    useEffect(() => {
+      const fetchDeletedUsers = async () => {
+        try {
+          const response1 = await fetch('/api/deletedusers');
+          const json = await response1.json();
+          setDeletedUsers(json);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchDeletedUsers();
     }, []);
 
     return (
@@ -77,14 +91,34 @@ const AllUsers = () => {
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone number</th>
-
-                        
                       </tr>
                     </thead>
 
                     <tbody>
                       {Users && Users.map((user) => (
                           <UsersTableRow key={user._id} user={user} />
+                      ))}
+                  </tbody>
+                </table>
+            </div> 
+            <div className="whiteBodyBG">
+            <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">Deleted Users</h3>
+            </div>
+
+                <table >
+                  <thead>
+                      <tr> 
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone number</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {deletedUsers && deletedUsers.map((deletedUser) => (
+                          <deletedUsersTableRow key={deletedUser._id} deletedUser={deletedUser} />
                       ))}
                   </tbody>
                 </table>
@@ -109,6 +143,21 @@ const UsersTableRow = ({ user }) => {
             
         </tr>
     )
+}
+
+const deletedUsersTableRow = ({ deletedUser }) => {
+
+  return(
+    
+      <tr>
+          <td> {deletedUser.firstName} </td>
+          <td> {deletedUser.lastName} </td>
+          <td> {deletedUser.email} </td>
+          <td> {deletedUser.phone} </td>
+          
+          
+      </tr>
+  )
 }
 
 export default AllUsers
