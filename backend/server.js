@@ -157,7 +157,6 @@ app.put("/updateGshape", async (req, res) => {
       updatedShape.GemShape = newGemShape;
       updatedShape.save();
       res.send("update");
-      res.send("update");
     });
   } catch (err) {
     console.log(err);
@@ -173,7 +172,6 @@ app.put("/updateGsCl", async (req, res) => {
       updatedColor.GemColor = newGemColour;
       updatedColor.save();
       res.send("update");
-      res.send("update");
     });
   } catch (err) {
     console.log(err);
@@ -188,7 +186,6 @@ app.put("/updateDes", async (req, res) => {
     await RequestModel.findById(id, (err, updatedDescrition) => {
       updatedDescrition.Description = newGemDescription;
       updatedDescrition.save();
-      res.send("update");
       res.send("update");
     });
   } catch (err) {
@@ -220,7 +217,6 @@ app.put("/updateQt", async (req, res) => {
       updatedQuantity.Quantity = newGemQuantity;
       updatedQuantity.save();
       res.send("update");
-      res.send("update");
     });
   } catch (err) {
     console.log(err);
@@ -249,29 +245,24 @@ app.use("/api/deletedusers", deletedUserRoutes);
 //janith
 app.use("/api/gems&jewelleries", gemRoutes);
 app.use("/api/cart", cartRoutes);
-app.use("/api/gems&jewelleries", gemRoutes);
-app.use("/api/cart", cartRoutes);
+
 
 //Vidxni
 app.use("/api/payments", paymentRoutes);
-app.use("/api/payments", paymentRoutes);
 
 // Ruchira
-app.use("/api/jewelleryes", jewelleryRoutes);
 app.use("/api/jewelleryes", jewelleryRoutes);
 
 // vihangi
 app.use("/api/plans", planRoutes);
 app.use("/api/installments", installmentsRoutes);
-app.use("/api/plans", planRoutes);
-app.use("/api/installments", installmentsRoutes);
+
 
 //daham
 
 app.use("/api/jewelleryes", jwellRoutes);
 
 //ammaar
-app.use("/api/gems", gemAdminRoutes);
 app.use("/api/gems", gemAdminRoutes);
 
 //routes
@@ -282,7 +273,6 @@ mongoose
   .then(() => {
     // listen for requests
     app.listen(process.env.PORT, () => {
-      console.log("connected to db & listening on port", process.env.PORT);
       console.log("connected to db & listening on port", process.env.PORT);
     });
   })
