@@ -11,6 +11,13 @@ const getjwll = async(req,res) => {
 }
 
 
+// get all jewellery
+const getJewelleryByGender = async (req, res) => {
+    const {gender} = req.params
+    const jewelleryes = await Jewellery.find({gender: gender}).sort({createdAt: -1})
+  
+    res.status(200).json(jewelleryes)
+  }
 
 //get a single gem
 const getjewell = async (req,res) => {
@@ -31,5 +38,6 @@ const getjewell = async (req,res) => {
 
 module.exports = {
     getjwll,
-    getjewell
+    getjewell,
+    getJewelleryByGender 
 }

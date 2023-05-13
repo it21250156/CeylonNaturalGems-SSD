@@ -143,7 +143,7 @@ function App() {
 
             {/* daham */}
             <Route path="/jwellhomeM" element={<JewelhomeMen />} />
-            <Route path="/jwellhomeWm" element={<JewelhomeWomen />} />
+            <Route path="/jwellhomeW" element={<JewelhomeWomen />} />
             <Route path="/jwellscreen/:id" element={<JewelScreen />} />
 
             {/* ammaar */}

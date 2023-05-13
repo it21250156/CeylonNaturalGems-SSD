@@ -230,6 +230,20 @@ app.delete("/deleteReply/:id", async (req, res) => {
   res.json({ message: "Reply deleted successfully" });
 });
 
+app.put("/updateReply", async (req, res) => {
+  const {_id, reply } = req.body;
+
+  try {
+    await ReplyModel.findById(_id, (err, upd) => {
+      upd.reply = reply;
+      upd.save();
+      res.send("updated");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 //Kalinga
 app.use('/api/users', userRoutes);
@@ -251,7 +265,7 @@ app.use("/api/installments", installmentsRoutes);
 
 //daham
 
-app.use('/api/jewelleryes', jwellRoutes);
+app.use('/api/jewells', jwellRoutes);
 
 //ammaar
 app.use("/api/gems", gemAdminRoutes);
