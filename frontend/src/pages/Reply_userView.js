@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import React from 'react';
 import Axios from "axios";
 import { useParams } from "react-router-dom";
+import Header from "../components/Header";
 
 function Reply_userView(){
     const {reqId} = useParams()
@@ -14,17 +15,23 @@ function Reply_userView(){
       }, [])
 
     return(
-        <div>
-            <div className='lightBlueBodyBG'>
-                    {replies && 
-                    replies?.map( reply => 
-                        <div className="whiteBodyBG">
-                        <h1>Reply: {reply.reply}</h1>
-                        
-                        </div>
-                    )}
-            </div>
+        <>
+        <Header />
+        <div className="darkBlueTopicBoxReq">
+          <h1 className="pageTopicReq">Replies from admin</h1>
         </div>
+            <div>
+                <div className='lightBlueBodyBG'>
+                        {replies && 
+                        replies?.map( reply => 
+                            <div className="whiteBodyBG">
+                            <h1> {reply.reply}</h1>
+                            
+                            </div>
+                        )}
+                </div>
+            </div>
+        </>
     )
 }
 

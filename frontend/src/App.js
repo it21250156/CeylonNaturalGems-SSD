@@ -26,6 +26,7 @@ import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
 import Myreply from './pages/Myreply';
+import Reply_adminView from './pages/Reply_adminCheck';
 
 //malika
 import FeedbackForm from './pages/FeedbackPage';
@@ -109,6 +110,7 @@ function App() {
             <Route path="/reqReply/:reqId" element={<ReplyRequest />}></Route>
             <Route path="/Myrep" element={<Myreply />}></Route>
             <Route path="/reply_uv/:reqId" element={<Reply_userView />}></Route>
+            <Route path="/reply_av/:reqId" element={<Reply_adminView />}></Route>
 
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
 

@@ -224,6 +224,13 @@ app.delete("/delete/:id", async (req, res) => {
   res.send("deleted");
 });
 
+app.delete("/deleteReply/:id", async (req, res) => {
+  const { id } = req.params;
+  await ReplyModel.findByIdAndDelete(id);
+  res.json({ message: "Reply deleted successfully" });
+});
+
+
 //Kalinga
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
