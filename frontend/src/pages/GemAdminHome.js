@@ -82,7 +82,6 @@ const GemAdminHome = () => {
     }
   };
 
-  // Render the search results here using the sorted array
 
   return (
     <><header>
@@ -108,23 +107,25 @@ const GemAdminHome = () => {
           </ul>
         </nav>
       </div>
-    </header><div className="home">
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Search by gem name"
-            value={searchTerm}
-            onChange={handleSearchChange} />
-        </div>
+    </header><div className="gem-admin-home">
+        <div class="gem-admin-search-wrapper">
+          <div class="gem-admin-search">
+            <input
+              type="text"
+              placeholder="Search by gem name"
+              value={searchTerm}
+              onChange={handleSearchChange} />
+          </div>
 
-        <div className="sort">
-          <label htmlFor="sort-select">Sort by: </label>
-          <select id="sort-select" value={sortBy} onChange={handleSortChange}>
-            <option value="">--Select--</option>
-            <option value="date">Added Date</option>
-            <option value="quantity">Quantity</option>
-            <option value="price">Price</option>
-          </select>
+          <div class="gem-admin-sort">
+            <label htmlFor="sort-select">Sort by: </label>
+            <select id="sort-select" value={sortBy} onChange={handleSortChange}>
+              <option value="">--Select--</option>
+              <option value="date">Added Date</option>
+              <option value="quantity">Quantity</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
         </div>
 
         <button
@@ -138,7 +139,7 @@ const GemAdminHome = () => {
         </button>
 
         <Link to={`/GemAdminReports`}>
-          <button className="reportsButton">Reports</button>
+          <button className="GemReportsButton">Reports</button>
         </Link>
 
         <div className="gems">
