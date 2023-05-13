@@ -1,13 +1,12 @@
 require("dotenv").config();
-require("dotenv").config();
+
 
 const cors = require("cors");
-const cors = require("cors");
+
 
 const express = require("express");
 const mongoose = require("mongoose");
-const express = require("express");
-const mongoose = require("mongoose");
+
 
 //Kalinga
 const userRoutes = require("./routes/userRoutes.js");
@@ -16,13 +15,11 @@ const deletedUserRoutes = require("./routes/deletedUserRoutes.js");
 
 // malika
 const feedbackRoutes = require("./routes/feedbacks");
-const feedbackRoutes = require("./routes/feedbacks");
 
 //janith
 const gemRoutes = require("./routes/gems");
 const cartRoutes = require("./routes/cartRoutes.js");
-const gemRoutes = require("./routes/gems");
-const cartRoutes = require("./routes/cartRoutes.js");
+
 //Daham
 
 //bimsara
@@ -31,24 +28,19 @@ const ReplyModel = require("./models/Replies");
 
 //Vidxni
 const paymentRoutes = require("./routes/payments");
-const paymentRoutes = require("./routes/payments");
 
 // Ruchira
-const jewelleryRoutes = require("./routes/jewelleryes");
 const jewelleryRoutes = require("./routes/jewelleryes");
 
 // vihangi
 const planRoutes = require("./routes/plans");
 const installmentsRoutes = require("./routes/installments");
-const planRoutes = require("./routes/plans");
-const installmentsRoutes = require("./routes/installments");
+
 
 //daham
 const jwellRoutes = require("./routes/jewellers");
-const jwellRoutes = require("./routes/jewellers");
 
 //ammaar
-const gemAdminRoutes = require("./routes/gemsAdmin");
 const gemAdminRoutes = require("./routes/gemsAdmin");
 
 // express app
@@ -66,7 +58,6 @@ app.use((req, res, next) => {
 // routes
 
 //malika
-app.use("/api/feedbacks", feedbackRoutes);
 app.use("/api/feedbacks", feedbackRoutes);
 
 //bimsara
@@ -103,14 +94,12 @@ app.get("/getUsersRequests/:_id", (req, res) => {
 // });
 
 app.post("/createUser", async (req, res) => {
-app.post("/createUser", async (req, res) => {
   const user = req.body;
   const newUser = new RequestModel(user);
   await newUser.save();
   res.json(user);
 });
 
-app.get("/getReply", (req, res) => {
 app.get("/getReply", (req, res) => {
   ReplyModel.find({}, (err, result) => {
     if (err) {
@@ -160,7 +149,6 @@ app.post("/createReply", async (req, res) => {
 });
 
 app.put("/updateGshape", async (req, res) => {
-app.put("/updateGshape", async (req, res) => {
   const newGemShape = req.body.newGemShape;
   const id = req.body.id;
 
@@ -177,7 +165,6 @@ app.put("/updateGshape", async (req, res) => {
 });
 
 app.put("/updateGsCl", async (req, res) => {
-app.put("/updateGsCl", async (req, res) => {
   const newGemColour = req.body.newGemColour;
   const id = req.body.id;
 
@@ -193,7 +180,6 @@ app.put("/updateGsCl", async (req, res) => {
   }
 });
 
-app.put("/updateDes", async (req, res) => {
 app.put("/updateDes", async (req, res) => {
   const newGemDescription = req.body.newGemDescription;
   const id = req.body.id;
@@ -226,7 +212,6 @@ app.put("/updateDes", async (req, res) => {
 // });
 
 app.put("/updateQt", async (req, res) => {
-app.put("/updateQt", async (req, res) => {
   const newGemQuantity = req.body.newGemQuantity;
   const id = req.body.id;
 
@@ -242,7 +227,6 @@ app.put("/updateQt", async (req, res) => {
   }
 });
 
-app.delete("/delete/:id", async (req, res) => {
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
