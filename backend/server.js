@@ -1,13 +1,17 @@
 require("dotenv").config();
 
+
 const cors = require("cors");
+
 
 const express = require("express");
 const mongoose = require("mongoose");
 
+
 //Kalinga
-const userRoutes = require('./routes/userRoutes.js');
-const adminRoutes = require('./routes/adminRoutes.js');
+const userRoutes = require("./routes/userRoutes.js");
+const adminRoutes = require("./routes/adminRoutes.js");
+const deletedUserRoutes = require("./routes/deletedUserRoutes.js");
 
 // malika
 const feedbackRoutes = require("./routes/feedbacks");
@@ -15,6 +19,7 @@ const feedbackRoutes = require("./routes/feedbacks");
 //janith
 const gemRoutes = require("./routes/gems");
 const cartRoutes = require("./routes/cartRoutes.js");
+
 //Daham
 
 //bimsara
@@ -30,6 +35,7 @@ const jewelleryRoutes = require("./routes/jewelleryes");
 // vihangi
 const planRoutes = require("./routes/plans");
 const installmentsRoutes = require("./routes/installments");
+
 
 //daham
 const jwellRoutes = require("./routes/jewellers");
@@ -224,13 +230,36 @@ app.delete("/delete/:id", async (req, res) => {
   res.send("deleted");
 });
 
+app.delete("/deleteReply/:id", async (req, res) => {
+  const { id } = req.params;
+  await ReplyModel.findByIdAndDelete(id);
+  res.json({ message: "Reply deleted successfully" });
+});
+
+app.put("/updateReply", async (req, res) => {
+  const {_id, reply } = req.body;
+
+  try {
+    await ReplyModel.findById(_id, (err, upd) => {
+      upd.reply = reply;
+      upd.save();
+      res.send("updated");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
 //Kalinga
-app.use('/api/users', userRoutes);
-app.use('/api/admin', adminRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/deletedusers", deletedUserRoutes);
 
 //janith
 app.use("/api/gems&jewelleries", gemRoutes);
 app.use("/api/cart", cartRoutes);
+
 
 //Vidxni
 app.use("/api/payments", paymentRoutes);
@@ -242,9 +271,14 @@ app.use("/api/jewelleryes", jewelleryRoutes);
 app.use("/api/plans", planRoutes);
 app.use("/api/installments", installmentsRoutes);
 
+
 //daham
 
-app.use('/api/jewelleryes', jwellRoutes);
+<<<<<<< HEAD
+app.use('/api/jewells', jwellRoutes);
+=======
+app.use("/api/jewelleryes", jwellRoutes);
+>>>>>>> e0eda39161236286e35a2d1fa54a6b4f3f1bb5a9
 
 //ammaar
 app.use("/api/gems", gemAdminRoutes);

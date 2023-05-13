@@ -156,7 +156,7 @@ function MyReq() {
           </button>
           {listOfRequests.map((user) => {
             return (
-              <div>
+              <div key={user._id}>
                 <div className="whiteBodyBG">
                   <div className="white-content">
                     <div className="myreq-column-1">
@@ -273,12 +273,14 @@ function MyReq() {
                   </div>
                   {/* {listOfReplyStatus[user._id] || "jncos"} */}
                   <button
+                    
                     disabled={
                       listOfReplyStatus[user._id] > 0 ||
                       listOfReplyStatus[user._id] === null
                         ? true
                         : false
                     }
+                    className="repliesbtn"
                     onClick={() => {
                       window.location.href = `./reply_uv/${user._id}`;
                     }}

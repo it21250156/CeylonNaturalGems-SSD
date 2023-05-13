@@ -54,7 +54,8 @@ const GemAdminHome = () => {
     if (sortBy === "addedDate") {
       results = results.sort(
         (a, b) =>
-          (sortOrder === "asc" ? 1 : -1) * (new Date(a.createdAt) - new Date(b.createdAt))
+          (sortOrder === "asc" ? 1 : -1) *
+          (new Date(a.createdAt) - new Date(b.createdAt))
       );
     } else if (sortBy === "quantity") {
       results = results.sort(
@@ -69,41 +70,19 @@ const GemAdminHome = () => {
     setSearchResults(results);
   }, [gems, searchTerm, sortBy, sortOrder]);
 
+
   const handleSortChange = (event) => {
     const selectedSortBy = event.target.value;
-    setSortBy(selectedSortBy);
 
-    switch (selectedSortBy) {
-      case "date":
-        setSearchResults((prevResults) =>
-          prevResults.sort((a, b) =>
-            sortOrder === "asc"
-              ? new Date(a.createdAt) - new Date(b.createdAt)
-              : new Date(b.createdAt) - new Date(a.createdAt)
-          )
-        );
-        setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-        break;
-      case "quantity":
-        setSearchResults((prevResults) =>
-          prevResults.sort((a, b) =>
-            sortOrder === "asc" ? a.quantity - b.quantity : b.quantity - a.quantity
-          )
-        );
-        setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-        break;
-      case "price":
-        setSearchResults((prevResults) =>
-          prevResults.sort((a, b) =>
-            sortOrder === "asc" ? a.price - b.price : b.price - a.price
-          )
-        );
-        setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-        break;
-      default:
-        break;
+    if (selectedSortBy === sortBy) {
+      setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    } else {
+      setSortBy(selectedSortBy);
+      setSortOrder("asc");
     }
   };
+
+  // Render the search results here using the sorted array
 
   return (
     <><header>

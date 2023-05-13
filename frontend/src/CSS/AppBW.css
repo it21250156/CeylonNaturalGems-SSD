@@ -495,3 +495,43 @@ table {
   -webkit-transition: 0.2s linear;
   transition: 0.2s linear;
 }
+
+.repliesbtn {
+  float: right;
+  background-color: #30a945;
+  border: 2px solid #2c74b3;
+  margin-top: 20px;
+  padding: 10px;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.repliesbtn:hover {
+  background-color: white;
+  border: 2px solid #2c74b3;
+  color: #2c74b3;
+  transition: 0.5s;
+}
+
+.repliesbtnAdmin {
+  
+  background-color: #30a945;
+  border: 2px solid #2c74b3;
+  margin-top: 20px;
+  padding: 10px;
+  color: white;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  border-radius: 10px;
+  width: 150px;
+}
+
+.repliesbtnAdmin:hover {
+  background-color: white;
+  border: 2px solid #2c74b3;
+  color: #2c74b3;
+  transition: 0.5s;
+}

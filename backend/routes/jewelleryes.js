@@ -4,13 +4,16 @@ const {
   getJewellery, 
   createJewellery, 
   deleteJewellery, 
-  updateJewellery
+  updateJewellery,
+ 
 } = require('../controllers/jewelleryController')
 
 const router = express.Router()
 
 // GET all jewellery
 router.get('/', getJewelleryes)
+
+
 
 // GET a single jewellery
 router.get('/:id', getJewellery)
