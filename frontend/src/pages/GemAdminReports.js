@@ -7,11 +7,26 @@ const GemAdminReports = () => {
 
     useEffect(() => {
         const calculateAverages = () => {
-            const prices = gems.map((gem) => gem.price);
-            const avgPrice = prices.reduce((acc, curr) => acc + curr, 0) / prices.length;
-            const minPrice = Math.min(...prices);
-            const maxPrice = Math.max(...prices);
-            setGemData([{ type: "All", avgPrice, minPrice, maxPrice }]);
+            let allGemsData = { type: "All", avgPrice: 0, minPrice: 0, maxPrice: 0 };
+
+            if (gems.length > 0) {
+                const prices = gems.map((gem) => gem.price);
+                const avgPrice = prices.reduce((acc, curr) => acc + curr, 0) / prices.length;
+                const minPrice = Math.min(...prices);
+                const maxPrice = Math.max(...prices);
+                allGemsData = { type: "All", avgPrice, minPrice, maxPrice };
+            }
+
+            const types = [...new Set(gems.map((gem) => gem.type))];
+            const data = types.map((type) => {
+                const typeGems = gems.filter((gem) => gem.type === type);
+                const prices = typeGems.map((gem) => gem.price);
+                const avgPrice = prices.reduce((acc, curr) => acc + curr, 0) / prices.length;
+                const minPrice = Math.min(...prices);
+                const maxPrice = Math.max(...prices);
+                return { type, avgPrice, minPrice, maxPrice };
+            });
+            setGemData([allGemsData, ...data]);
         };
 
         calculateAverages();
