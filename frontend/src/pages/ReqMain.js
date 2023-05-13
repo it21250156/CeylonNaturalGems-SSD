@@ -42,8 +42,14 @@ function ReqMain() {
     });
   }, []);
 
+
+
   const createRequest = (data) => {
-    Axios.post('/createUser', data).then((response) => {
+    const udata={...data, user: JSON.parse(localStorage.getItem('userInfo'))?._id || null,}
+
+    console.log(udata)
+
+    Axios.post('/createUser', udata).then((response) => {
       alert('Request Added!');
     });
   };
@@ -254,6 +260,13 @@ function ReqMain() {
           }}
         >
           All Requests
+        </button>
+        <button
+          onClick={() => {
+            window.location.href = './reply_uv';
+          }}
+        >
+          Replies
         </button>
       </div>
     </>

@@ -5,8 +5,14 @@ const ReplySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+     reqId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'requests',
+        required: true,
+    },
     
 });
+
 
 const ReplyModel = mongoose.model("replies", ReplySchema);
 module.exports = ReplyModel;

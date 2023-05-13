@@ -57,7 +57,7 @@ function CartCard({ cartid, gem }) {
           </div>
         </div>
         <div className="btn-delete">
-          <button class="btn" onClick={() => handleCartRemove(cartid)}>
+          <button class="btn1" onClick={() => handleCartRemove(cartid)}>
             <p class="paragraph"> Remove </p>
             <span class="icon-wrapper">
               <svg

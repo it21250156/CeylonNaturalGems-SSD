@@ -109,7 +109,12 @@ const Header = () => {
               <Link to="/feedbacks">Feedbacks</Link>
             </li>
             <li>
-              <Link to="/mycart">Cart {cartData?.length}</Link>
+              <Link to="/mycart">
+                Cart{'  '}{' '}
+                <span class="badge text-bg-light fw-light">
+                  {cartData?.length}
+                </span>
+              </Link>
             </li>
           </ul>
         </nav>

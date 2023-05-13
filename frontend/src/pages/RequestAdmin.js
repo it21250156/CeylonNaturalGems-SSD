@@ -16,6 +16,7 @@ function MyReq(){
   const { logout } = useLogout();
     const {user} = useAuthContext()
     const navigate = useNavigate()
+    const [listOfReplyStatus, setListOfReplyStatus] = useState([]);
 
     const handleClick = () => {
       logout();
@@ -118,7 +119,23 @@ function MyReq(){
                   </div>
                     </div>
                     
-                    <button className='repbtn' onClick={() => {window.location.href = "./reqReply"}}>Reply</button>
+                    <button className='repbtn' onClick={() => {window.location.href = `./reqReply/${user._id}`}}>Reply</button>
+
+                    <button
+                    
+                    disabled={
+                      listOfReplyStatus[user._id] > 0 ||
+                      listOfReplyStatus[user._id] === null
+                        ? true
+                        : false
+                    }
+                    className="repliesbtnAdmin"
+                    onClick={() => {
+                      window.location.href = `./reply_av/${user._id}`;
+                    }}
+                  >
+                    Your Replies
+                  </button>
                 
                 </div>
                 

@@ -21,11 +21,12 @@ import GemScreen from './pages/GemScreen';
 
 //bimsara
 import ReqMain from './pages/ReqMain';
-
+import Reply_userView from './pages/Reply_userView';
 import MyReq from './pages/MyReq';
 import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
 import Myreply from './pages/Myreply';
+import Reply_adminView from './pages/Reply_adminCheck';
 
 //malika
 import FeedbackForm from './pages/FeedbackPage';
@@ -65,6 +66,7 @@ import AddGem from './pages/AddGem';
 import UpdateGems from './pages/UpdateGems';
 import AdminPayments from './pages/AdminPayments';
 import AdminDelivery from './pages/AdminDelivery';
+import GemAdminReports from './pages/GemAdminReports';
 
 function App() {
   const { user } = useAuthContext();
@@ -101,11 +103,14 @@ function App() {
             <Route path="/gems/:id" element={<GemScreen />}></Route>
             <Route path="/mycart" element={<CartPage />}></Route>
 
+            {/* bimsara */}
             <Route path="/reqM" element={<ReqMain />}></Route>
             <Route path="/MyReq" element={<MyReq />}></Route>
             <Route path="/reqAd" element={<RequestAdmin />}></Route>
-            <Route path="/reqReply" element={<ReplyRequest />}></Route>
+            <Route path="/reqReply/:reqId" element={<ReplyRequest />}></Route>
             <Route path="/Myrep" element={<Myreply />}></Route>
+            <Route path="/reply_uv/:reqId" element={<Reply_userView />}></Route>
+            <Route path="/reply_av/:reqId" element={<Reply_adminView />}></Route>
 
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
 
@@ -145,6 +150,7 @@ function App() {
             <Route path="/GemAdminHome" element={<GemAdminHome />} />
             <Route path="/AddGem" element={<AddGem />} />
             <Route path="/UpdateGems/:_id" element={<UpdateGems />} />
+            <Route path='/GemAdminReports' element={<GemAdminReports/>}/>
 
             {/* Vihangi  */}
             <Route path="/InstallmentPlans" element={<InstallmentPlans />} />
