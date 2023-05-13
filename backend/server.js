@@ -1,18 +1,26 @@
 require("dotenv").config();
+require("dotenv").config();
 
+const cors = require("cors");
 const cors = require("cors");
 
 const express = require("express");
 const mongoose = require("mongoose");
+const express = require("express");
+const mongoose = require("mongoose");
 
 //Kalinga
-const userRoutes = require('./routes/userRoutes.js');
-const adminRoutes = require('./routes/adminRoutes.js');
+const userRoutes = require("./routes/userRoutes.js");
+const adminRoutes = require("./routes/adminRoutes.js");
+const deletedUserRoutes = require("./routes/deletedUserRoutes.js");
 
 // malika
 const feedbackRoutes = require("./routes/feedbacks");
+const feedbackRoutes = require("./routes/feedbacks");
 
 //janith
+const gemRoutes = require("./routes/gems");
+const cartRoutes = require("./routes/cartRoutes.js");
 const gemRoutes = require("./routes/gems");
 const cartRoutes = require("./routes/cartRoutes.js");
 //Daham
@@ -23,18 +31,24 @@ const ReplyModel = require("./models/Replies");
 
 //Vidxni
 const paymentRoutes = require("./routes/payments");
+const paymentRoutes = require("./routes/payments");
 
 // Ruchira
+const jewelleryRoutes = require("./routes/jewelleryes");
 const jewelleryRoutes = require("./routes/jewelleryes");
 
 // vihangi
 const planRoutes = require("./routes/plans");
 const installmentsRoutes = require("./routes/installments");
+const planRoutes = require("./routes/plans");
+const installmentsRoutes = require("./routes/installments");
 
 //daham
 const jwellRoutes = require("./routes/jewellers");
+const jwellRoutes = require("./routes/jewellers");
 
 //ammaar
+const gemAdminRoutes = require("./routes/gemsAdmin");
 const gemAdminRoutes = require("./routes/gemsAdmin");
 
 // express app
@@ -52,6 +66,7 @@ app.use((req, res, next) => {
 // routes
 
 //malika
+app.use("/api/feedbacks", feedbackRoutes);
 app.use("/api/feedbacks", feedbackRoutes);
 
 //bimsara
@@ -88,12 +103,14 @@ app.get("/getUsersRequests/:_id", (req, res) => {
 // });
 
 app.post("/createUser", async (req, res) => {
+app.post("/createUser", async (req, res) => {
   const user = req.body;
   const newUser = new RequestModel(user);
   await newUser.save();
   res.json(user);
 });
 
+app.get("/getReply", (req, res) => {
 app.get("/getReply", (req, res) => {
   ReplyModel.find({}, (err, result) => {
     if (err) {
@@ -143,6 +160,7 @@ app.post("/createReply", async (req, res) => {
 });
 
 app.put("/updateGshape", async (req, res) => {
+app.put("/updateGshape", async (req, res) => {
   const newGemShape = req.body.newGemShape;
   const id = req.body.id;
 
@@ -151,12 +169,14 @@ app.put("/updateGshape", async (req, res) => {
       updatedShape.GemShape = newGemShape;
       updatedShape.save();
       res.send("update");
+      res.send("update");
     });
   } catch (err) {
     console.log(err);
   }
 });
 
+app.put("/updateGsCl", async (req, res) => {
 app.put("/updateGsCl", async (req, res) => {
   const newGemColour = req.body.newGemColour;
   const id = req.body.id;
@@ -166,12 +186,14 @@ app.put("/updateGsCl", async (req, res) => {
       updatedColor.GemColor = newGemColour;
       updatedColor.save();
       res.send("update");
+      res.send("update");
     });
   } catch (err) {
     console.log(err);
   }
 });
 
+app.put("/updateDes", async (req, res) => {
 app.put("/updateDes", async (req, res) => {
   const newGemDescription = req.body.newGemDescription;
   const id = req.body.id;
@@ -180,6 +202,7 @@ app.put("/updateDes", async (req, res) => {
     await RequestModel.findById(id, (err, updatedDescrition) => {
       updatedDescrition.Description = newGemDescription;
       updatedDescrition.save();
+      res.send("update");
       res.send("update");
     });
   } catch (err) {
@@ -203,6 +226,7 @@ app.put("/updateDes", async (req, res) => {
 // });
 
 app.put("/updateQt", async (req, res) => {
+app.put("/updateQt", async (req, res) => {
   const newGemQuantity = req.body.newGemQuantity;
   const id = req.body.id;
 
@@ -211,12 +235,14 @@ app.put("/updateQt", async (req, res) => {
       updatedQuantity.Quantity = newGemQuantity;
       updatedQuantity.save();
       res.send("update");
+      res.send("update");
     });
   } catch (err) {
     console.log(err);
   }
 });
 
+app.delete("/delete/:id", async (req, res) => {
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -232,28 +258,36 @@ app.delete("/deleteReply/:id", async (req, res) => {
 
 
 //Kalinga
-app.use('/api/users', userRoutes);
-app.use('/api/admin', adminRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/deletedusers", deletedUserRoutes);
 
 //janith
+app.use("/api/gems&jewelleries", gemRoutes);
+app.use("/api/cart", cartRoutes);
 app.use("/api/gems&jewelleries", gemRoutes);
 app.use("/api/cart", cartRoutes);
 
 //Vidxni
 app.use("/api/payments", paymentRoutes);
+app.use("/api/payments", paymentRoutes);
 
 // Ruchira
+app.use("/api/jewelleryes", jewelleryRoutes);
 app.use("/api/jewelleryes", jewelleryRoutes);
 
 // vihangi
 app.use("/api/plans", planRoutes);
 app.use("/api/installments", installmentsRoutes);
+app.use("/api/plans", planRoutes);
+app.use("/api/installments", installmentsRoutes);
 
 //daham
 
-app.use('/api/jewelleryes', jwellRoutes);
+app.use("/api/jewelleryes", jwellRoutes);
 
 //ammaar
+app.use("/api/gems", gemAdminRoutes);
 app.use("/api/gems", gemAdminRoutes);
 
 //routes
@@ -264,6 +298,7 @@ mongoose
   .then(() => {
     // listen for requests
     app.listen(process.env.PORT, () => {
+      console.log("connected to db & listening on port", process.env.PORT);
       console.log("connected to db & listening on port", process.env.PORT);
     });
   })
