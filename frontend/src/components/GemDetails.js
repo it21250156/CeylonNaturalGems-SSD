@@ -31,65 +31,66 @@ const GemDetails = ({ gem }) => {
 
   return (
     <div className="gem-details">
-      <div className="gem-card">
-        <h4 className="card-title">{gem.name}</h4>
-        <p>
-          <strong>Type: </strong>
-          {gem.type}
-        </p>
+  <div className="gem-card">
+    <h4 className="gem-card__title">{gem.name}</h4>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Type: </strong>
+      <span className="gem-card__value">{gem.type}</span>
+    </p>
 
-        <p>
-          <strong>Shape: </strong>
-          {gem.shape}
-        </p>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Shape: </strong>
+      <span className="gem-card__value">{gem.shape}</span>
+    </p>
 
-        <p>
-          <strong>Size: </strong>
-          {gem.size}ct(s)
-        </p>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Size: </strong>
+      <span className="gem-card__value">{gem.size}ct(s)</span>
+    </p>
 
-        <p>
-          <strong>Color: </strong>
-          {gem.color}
-        </p>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Color: </strong>
+      <span className="gem-card__value">{gem.color}</span>
+    </p>
 
-        <p>
-          <strong>Quantity: </strong>
-          {gem.quantity}
-        </p>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Quantity: </strong>
+      <span className="gem-card__value">{gem.quantity}</span>
+    </p>
 
-        <p>
-          <strong>Price: $</strong>
-          {gem.price}/=
-        </p>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Price: $</strong>
+      <span className="gem-card__value">{gem.price}/=</span>
+    </p>
 
-        <p>
-          <strong>Description: </strong>
-          {gem.description}
-        </p>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Description: </strong>
+      <span className="gem-card__value">{gem.description}</span>
+    </p>
 
-        <p>
-          <strong>Added Date: </strong>
-          {new Date(gem.createdAt).toLocaleString()}
-        </p>
+    <p className="gem-card__info">
+      <strong className="gem-card__label">Added Date: </strong>
+      <span className="gem-card__value">{new Date(gem.createdAt).toLocaleString()}</span>
+    </p>
 
-        <button className="deleteButton" onClick={() => setShowModal(true)}>
-          delete
-        </button>
+    <button className="gem-card__deleteButton" onClick={() => setShowModal(true)}>
+      delete
+    </button>
 
-        <Link to={`/UpdateGems/${gem._id}`}>
-          <button className="updateButton">update</button>
-        </Link>
+    <Link to={`/UpdateGems/${gem._id}`}>
+      <button className="gem-card__updateButton">update</button>
+    </Link>
 
-        {showModal && (
-          <ConfirmationModal
-            message="Are you sure you want to delete this gem?"
-            onConfirm={handleConfirm}
-            onCancel={handleCancel}
-          />
-        )}
-      </div>
-    </div>
+    {showModal && (
+      <ConfirmationModal
+        message="Are you sure you want to delete this gem?"
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
+    )}
+  </div>
+</div>
+
   );
 };
 

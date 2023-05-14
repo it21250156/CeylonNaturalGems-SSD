@@ -3,10 +3,10 @@ import '../CSS/GemAdminHome.css';
 
 const ConfirmationModal = ({ message, onConfirm, onCancel }) => {
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="gem-admin-modal">
+      <div className="gem-admin-modal-content">
         <p>{message}</p>
-        <div className="modal-buttons">
+        <div className="gem-admin-modal-buttons">
           <button onClick={onConfirm}>Confirm</button>
           <button onClick={onCancel}>Cancel</button>
         </div>
