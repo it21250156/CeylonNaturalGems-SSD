@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useGemsContext } from '../hooks/useGemsContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useLogout } from '../hooks/useLogout';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { Link } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 import "../CSS/GemAdminHome.css";
 
@@ -27,7 +24,6 @@ function UpdateGems() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
 
     const response = await fetch(`/api/gems/${_id}`, {
       method: 'PATCH',
@@ -84,123 +80,88 @@ function UpdateGems() {
     fetchGems();
   }, []);
 
-  const { logout } = useLogout();
-  const { user } = useAuthContext();
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    logout();
-    navigate('/');
-  };
-
   return (
-    <><header>
-      <div>
-        <div className="background">
-          <div className="headerNameDiv">
-            <h1 className="headerName">Ceylon Natural Gems</h1>
-          </div>
-        </div>
+    <div className="UpdateGems">
+      <form className="create" onSubmit={handleSubmit}>
+        <h3>Update Selected Gem</h3>
 
-        <nav>
-          <div className="navprofileDiv">
-            <div className="navEmal">
-              <span>Hello Admin</span>
-              <button onClick={handleClick}>Log out</button>
-            </div>
-          </div>
+        <label>Gem Name: </label>
+        <input
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          className={emptyFields.includes('name') ? 'error' : ''}
+        />
 
-          <ul>
-            <li>
-              <Link to={'/adminHome'}>Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-      <div className="UpdateGems">
-        <form className="create" onSubmit={handleSubmit}>
-          <h3 className="update-gem-header">Update Selected Gem</h3>
+        <label>Gem Type: </label>
+        <input
+          type="text"
+          onChange={(e) => setType(e.target.value)}
+          value={type}
+          className={emptyFields.includes('type') ? 'error' : ''}
+        />
 
-          <label className="gem-label">Gem Name: </label>
-          <input
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            className={`gem-input ${emptyFields.includes('name') ? 'error' : ''}`}
-          />
+        <label>Gem Shape: </label>
+        <select
+          id="shapeDropdown"
+          value={selectedShape}
+          onChange={(e) => {
+            setSelectedShape(e.target.value);
+            setShape(e.target.value);
+          }}
+        >
+          <option value="">Select a shape</option>
+          <option value="Round">Round</option>
+          <option value="Oval">Oval</option>
+          <option value="Square">Square</option>
+        </select>
 
-          <label className="gem-label">Gem Type: </label>
-          <input
-            type="text"
-            onChange={(e) => setType(e.target.value)}
-            value={type}
-            className={`gem-input ${emptyFields.includes('type') ? 'error' : ''}`}
-          />
+        <label>Gem Size (in kt): </label>
+        <input
+          type="number"
+          onChange={(e) => setSize(e.target.value)}
+          value={size}
+          className={emptyFields.includes('size') ? 'error' : ''}
+        />
 
-          <label className="gem-label">Gem Shape: </label>
-          <select
-            id="shapeDropdown"
-            value={selectedShape}
-            onChange={(e) => {
-              setSelectedShape(e.target.value);
-              setShape(e.target.value);
-            }}
-            className="gem-select"
-          >
-            <option value="">Select a shape</option>
-            <option value="Round">Round</option>
-            <option value="Oval">Oval</option>
-            <option value="Square">Square</option>
-          </select>
+        <label>Gem Color: </label>
+        <input
+          type="text"
+          onChange={(e) => setColor(e.target.value)}
+          value={color}
+          className={emptyFields.includes('color') ? 'error' : ''}
+        />
 
-          <label className="gem-label">Gem Size (in kt): </label>
-          <input
-            type="number"
-            onChange={(e) => setSize(e.target.value)}
-            value={size}
-            className={`gem-input ${emptyFields.includes('size') ? 'error' : ''}`}
-          />
+        <label>Gem Quantity: </label>
+        <input
+          type="number"
+          onChange={(e) => setQuantity(e.target.value)}
+          value={quantity}
+          className={emptyFields.includes('quantity') ? 'error' : ''}
+        />
 
-          <label className="gem-label">Gem Color: </label>
-          <input
-            type="text"
-            onChange={(e) => setColor(e.target.value)}
-            value={color}
-            className={`gem-input ${emptyFields.includes('color') ? 'error' : ''}`}
-          />
+        <label>Gem Price: </label>
+        <input
+          type="number"
+          onChange={(e) => setPrice(e.target.value)}
+          value={price}
+          className={emptyFields.includes('price') ? 'error' : ''}
+        />
 
-          <label className="gem-label">Gem Quantity: </label>
-          <input
-            type="number"
-            onChange={(e) => setQuantity(e.target.value)}
-            value={quantity}
-            className={`gem-input ${emptyFields.includes('quantity') ? 'error' : ''}`}
-          />
-
-          <label className="gem-label">Gem Price: (in Rs)</label>
-          <input
-            type="number"
-            onChange={(e) => setPrice(e.target.value)}
-            value={price}
-            className={`gem-input ${emptyFields.includes('price') ? 'error' : ''}`}
-          />
-
-          <label className="gem-label">Gem Description: </label>
-          <TextareaAutosize
-            minRows={3}
-            maxRows={6}
-            id="gemDesc"
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            className={`gem-input ${emptyFields.includes('description') ? 'error' : ''}`}
-          />
-          <button className="gem-button">Update Gem</button>
-          {error && <div className="gem-error">{error}</div>}
-        </form>
-      </div>
-    </>
+        <label>Gem Description: </label>
+        <TextareaAutosize
+          minRows={3}
+          maxRows={6}
+          id="gemDesc"
+          type="text"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+          className={emptyFields.includes('description') ? 'error' : ''}
+        />
+        <button className='gem-button'>Update Gem</button>
+        {error && <div className="error">{error}</div>}
+      </form>
+    </div>
   );
 }
 

@@ -85,7 +85,7 @@ const GemAdminHome = () => {
 
   return (
     <><header>
-      <div>
+      <div >
         <div className="background">
           <div className="headerNameDiv">
             <h1 className="headerName">Ceylon Natural Gems</h1>
@@ -127,21 +127,21 @@ const GemAdminHome = () => {
             </select>
           </div>
         </div>
+        <div className="gem-buttons-container">
+          <button
+            className="gem-admin-buttons"
+            onClick={() => {
+              window.location.href = "./AddGem";
+            }}
+          >
+            {" "}
+            Add a New Gem{" "}
+          </button>
 
-        <button
-          className="addGemButton"
-          onClick={() => {
-            window.location.href = "./AddGem";
-          }}
-        >
-          {" "}
-          Add a New Gem{" "}
-        </button>
-
-        <Link to={`/GemAdminReports`}>
-          <button className="GemReportsButton">Reports</button>
-        </Link>
-
+          <Link to={`/GemAdminReports`}>
+            <button className="gem-admin-buttons">Reports</button>
+          </Link>
+        </div>
         <div className="gems">
           {searchResults.length > 0 ? (
             searchResults.map((gem) => <GemDetails gem={gem} key={gem._id} />)
