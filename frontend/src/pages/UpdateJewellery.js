@@ -129,9 +129,10 @@ function UpdateJewellery() {
             {/* {JSON.stringify(jewellery)} */}
 
         <form className="create" onSubmit={handleSubmit}>
-        <h3>Add a New Jewellery</h3>
-
-        <label>Jewellery Name: </label>
+        <h3>Update Jewellery</h3>
+      <div className="jewinputbox">
+        <label className="jewAddlabel">Jewellery Name: </label>
+        <div className='jewInput'>
         <input
             type="text"
             onChange={(e) => setName(e.target.value)}
@@ -139,7 +140,7 @@ function UpdateJewellery() {
             className={emptyFields.includes('name') ? 'error': ''}
         />
 
-        <label>Jewellery Type: </label>
+        <label className="jewAddlabel">Jewellery Type: </label>
         <input
             type="text"
             onChange={(e) => setType(e.target.value)}
@@ -147,27 +148,34 @@ function UpdateJewellery() {
             className={emptyFields.includes('type') ? 'error': ''}
         />
 
-        <label>Gender: </label>
-        <select  value={type} onChange={(e) => setGender(e.target.value)}>
-            <option value="">Select a type</option>
-            <option value="Male">Men</option>
-            <option value="Female">Women</option>
-            className={emptyFields.includes('gender') ? 'error': ''}
+        <label className="jewAddlabel">Gender: </label>
+        <select name="gender" onChange={e=>setGender(e.target.value)}>
+          <option value="">Select a gender</option>
+          <option value="Male">Men</option>
+          <option value="Female">Women</option>
         </select>
 
-        <label>Gemstone: </label>
-        <input type="radio" name="gemstone" value="Blue Sapphire" onChange={e=>setGemstone(e.target.value)}/>Blue Sapphire
-        <input type="radio" name="gemstone" value="Pink Sapphire" onChange={e=>setGemstone(e.target.value)}/>Pink Sapphire
-        <input type="radio" name="gemstone" value="Green Sapphire" onChange={e=>setGemstone(e.target.value)}/>Green Sapphire
-        <input type="radio" name="gemstone" value="Emarald" onChange={e=>setGemstone(e.target.value)}/>Emarald
-        <input type="radio" name="gemstone" value="Ruby" onChange={e=>setGemstone(e.target.value)}/>Ruby
-        <input type="radio" name="gemstone" value="Moonstone" onChange={e=>setGemstone(e.target.value)}/>Moonstone
 
-        <lable>Metal</lable>
-        <input type="radio" name="metal" value="GOLD" onChange={e=>setMetal(e.target.value)}/>GOLD
-        <input type="radio" name="metal" value="SILVER" onChange={e=>setMetal(e.target.value)}/>SILVER
+        <label className="jewAddlabel">Gemstone: </label>
+        <select name="gemstone" onChange={e=>setGemstone(e.target.value)}>
+          <option value="">Select a gemstone</option>
+          <option value="Blue Sapphire">Blue Sapphire</option>
+          <option value="Pink Sapphire">Pink Sapphire</option>
+          <option value="Green Sapphire">Green Sapphire</option>
+          <option value="Emarald">Emarald</option>
+          <option value="Ruby">Ruby</option>
+          <option value="Moonstone">Moonstone</option>
+        </select>
 
-        <label>Description: </label>
+        <label className="jewAddlabel">Metal: </label>
+        <select name="metal" onChange={e=>setMetal(e.target.value)}>
+          <option value="">Select a metal</option>
+          <option value="GOLD">GOLD</option>
+          <option value="SILVER">SILVER</option>
+        </select>
+
+
+        <label className="jewAddlabel">Description: </label>
         <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
@@ -175,19 +183,20 @@ function UpdateJewellery() {
             className={emptyFields.includes('description') ? 'error': ''}
         />
 
-        <label>Jewellery Price: </label>
+        <label className="jewAddlabel">Jewellery Price: </label>
         <input
             type="number"
             onChange={(e) => setPrice(e.target.value)}
             value={price}
             className={emptyFields.includes('price') ? 'error': ''}
         />
+        </div>
 
                 <br /><br />
 
-                <label>Upload Images:</label>
+                <label className="jewAddlabel">Upload Images:</label>
                 <input type="file" name="image" accept="image/jpg, image/jpeg, image/png"></input>
-
+      </div>
                 <br /><br />
                 <br /><br />
 
