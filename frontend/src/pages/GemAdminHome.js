@@ -82,11 +82,10 @@ const GemAdminHome = () => {
     }
   };
 
-  // Render the search results here using the sorted array
 
   return (
     <><header>
-      <div>
+      <div >
         <div className="background">
           <div className="headerNameDiv">
             <h1 className="headerName">Ceylon Natural Gems</h1>
@@ -108,39 +107,41 @@ const GemAdminHome = () => {
           </ul>
         </nav>
       </div>
-    </header><div className="home">
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Search by gem name"
-            value={searchTerm}
-            onChange={handleSearchChange} />
+    </header><div className="gem-admin-home">
+        <div class="gem-admin-search-wrapper">
+          <div class="gem-admin-search">
+            <input
+              type="text"
+              placeholder="Search by gem name"
+              value={searchTerm}
+              onChange={handleSearchChange} />
+          </div>
+
+          <div class="gem-admin-sort">
+            <label htmlFor="sort-select">Sort by: </label>
+            <select id="sort-select" value={sortBy} onChange={handleSortChange}>
+              <option value="">--Select--</option>
+              <option value="date">Added Date</option>
+              <option value="quantity">Quantity</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
         </div>
+        <div className="gem-buttons-container">
+          <button
+            className="gem-admin-buttons"
+            onClick={() => {
+              window.location.href = "./AddGem";
+            }}
+          >
+            {" "}
+            Add a New Gem{" "}
+          </button>
 
-        <div className="sort">
-          <label htmlFor="sort-select">Sort by: </label>
-          <select id="sort-select" value={sortBy} onChange={handleSortChange}>
-            <option value="">--Select--</option>
-            <option value="date">Added Date</option>
-            <option value="quantity">Quantity</option>
-            <option value="price">Price</option>
-          </select>
+          <Link to={`/GemAdminReports`}>
+            <button className="gem-admin-buttons">Reports</button>
+          </Link>
         </div>
-
-        <button
-          className="addGemButton"
-          onClick={() => {
-            window.location.href = "./AddGem";
-          }}
-        >
-          {" "}
-          Add a New Gem{" "}
-        </button>
-
-        <Link to={`/GemAdminReports`}>
-          <button className="reportsButton">Reports</button>
-        </Link>
-
         <div className="gems">
           {searchResults.length > 0 ? (
             searchResults.map((gem) => <GemDetails gem={gem} key={gem._id} />)
