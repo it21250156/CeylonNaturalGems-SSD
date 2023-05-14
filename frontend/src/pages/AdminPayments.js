@@ -113,6 +113,36 @@ const PPaymentRow = ({payment}) => {
   //  const [status, setStatus] = useState(payment.dStatus);
   const [error, setError] = useState(null)
 
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('/api/users');
+        const json = await response.json();
+        setUsers(json);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchUsers();
+}, []);
+
+  const [ Cart, setCart ] = useState([])
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const response = await fetch('/api/Carts');
+        const json = await response.json();
+        setCart(json);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchCart();
+}, []);
+
     const handleStatusChange = async (e) => {
         e.preventDefault()
 
@@ -141,8 +171,8 @@ const PPaymentRow = ({payment}) => {
     return(
         <tr key={payment._id}>
             <td>{payment._id}</td>
-            <td>{payment.orderID}</td>
-            <td>{payment.userID}</td>
+            <td>{users.find((Cart) => Cart._id === payment.orderID)?._id} {}</td>
+            <td>{users.find((user) => user._id === payment.user)?._id} {}</td>
             <td>{payment.createdAt}</td>
             <td>{payment.amount}</td>
             <td>{payment.pmethod}</td>

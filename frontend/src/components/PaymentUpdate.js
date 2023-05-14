@@ -6,7 +6,7 @@ const PaymentUpdate = () => {
 
 
     const [amount, setAmount] = useState('')
-    const [userID, setUserID] = useState('')
+ //   const [users, setUsers] = useState('')
     const [orderID, setOrderID] = useState('')
     const [address, setAddress] = useState('')
     const [district, setDistrict] = useState('')
@@ -15,6 +15,12 @@ const PaymentUpdate = () => {
     const [error, setError] = useState(null)
 
     const {id} = useParams()
+
+  //  const [payments , setPayments] = useState(null)
+
+  const [payment, setPayment] = useState({ user: { _id: '' } });
+  const [users, setUsers] = useState([]);
+
 
     useEffect(() => {
         const fetchPaymentsUpdate = async () => {
@@ -27,7 +33,7 @@ const PaymentUpdate = () => {
                 setCountry(json.country)
                 setPhoneNo(json.phoneNo)
                 setOrderID(json.orderID)
-                setUserID(json.userID)
+                setUsers(json.user)
 
                 setError(null)
             }
@@ -35,6 +41,20 @@ const PaymentUpdate = () => {
         fetchPaymentsUpdate()
     }, [])
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+          try {
+            const response = await fetch('/api/users');
+            const json = await response.json();
+            setUsers(json);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+        fetchUsers();
+    }, []);
+    
+    
     const handleUpdate = async (e) => {
         e.preventDefault()
 
@@ -87,9 +107,21 @@ const PaymentUpdate = () => {
                                 value={amount} />
 
                             <label> User ID : </label>
-                            <input type="number"
-                                onChange={(e) => setUserID(e.target.value)}
-                                value={userID} />
+                            {/* <input 
+                                onChange={(e) => setUsers(e.target.value)}
+                                value={users.find((user) => user._id === payment.user)?._id} /> */}
+
+<input 
+        onChange={(e) => {
+          const selectedUserId = e.target.value;
+          const selectedUser = users.find((user) => user.id === selectedUserId);
+          setPayment({
+            ...payment,
+            user: selectedUser || { id: '' },
+          });
+        }}
+        value={payment.user.id}
+      />
 
                             <label> Order ID : </label>
                             <input type="number"

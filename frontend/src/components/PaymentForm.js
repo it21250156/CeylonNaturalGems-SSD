@@ -102,14 +102,6 @@ const PaymentForm = () => {
     }
   };
 
-  // const handleSecCodeChange = (e) => {
-  //   const inputValue = e.target.value;
-  //   // Check if input value is a valid 4-digit number
-  //   if (/^\d{4}$/.test(inputValue)) {
-  //     setSecCode(inputValue);
-  //   }
-  // };
-
   const handleSecCodeChange = (event) => {
     const inputSecCode = event.target.value;
 
@@ -117,6 +109,9 @@ const PaymentForm = () => {
     const trimmedSecCode = numericSecCode.slice(0, 4);
     setSecCode(trimmedSecCode);
   };
+
+  const amountInfo = localStorage.getItem('TamountInfo');
+  const parsedAmountInfo = amountInfo ? JSON.parse(amountInfo) : null;
 
   return (
     <>
@@ -138,15 +133,9 @@ const PaymentForm = () => {
                     id="input"
                     type="text"
                     onChange={(e) => setAmount(e.target.value)}
-                    value={JSON.parse(localStorage.getItem('TamountInfo'))}
+                   // value={JSON.parse(localStorage.getItem('TamountInfo'))}
+                   value={parsedAmountInfo}
                   />
-
-                  {/* <label> Payment Method : </label>
-                <input
-                id='input' type="text"
-                onChange={(e) => setPmethod(e.target.value)}
-                value={pmethod}
-                /> */}
 
                   <div className="Pmeth">
                     <label className="label">Payment Method:</label>

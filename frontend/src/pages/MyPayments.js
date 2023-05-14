@@ -16,10 +16,11 @@ const MyPayments = () => {
 
     const [payments , setPayments] = useState(null)
 
+    const user = JSON.parse(localStorage.getItem('userInfo'));
 
     useEffect(() => {
     const fetchPayments = async() => {
-       const response = await fetch('/api/payments')
+       const response = await fetch(`/api/payments/userPayments/${user._id}`);
        const json = await response.json()
 
        if (response.ok){
@@ -59,6 +60,14 @@ const MyPayments = () => {
                {payments && payments.map((payment) => (
                  <PaymentRow key={payment._id} payment={payment}/>
                ))}
+
+{/* {payments && payments.map((payment) => {
+  if (payment.user === id) {
+    return <PaymentRow key={payment._id} payment={payment} />;
+  }
+  
+})} */}
+
                </tbody>
                </table>
             </div>

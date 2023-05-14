@@ -73,22 +73,45 @@ const updatePayment = async (req , res) => {
 
 }
 
-// get payments for a specific user
-const getUserPayments = async (req, res) => {
-    const {user} = req.params
+// // get payments for a specific user
+// const getUserPayments = async (req, res) => {
+//     const {user} = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(user)) {
-        return res.status(404).json({error:'No such user'})
-    }
+//     if(!mongoose.Types.ObjectId.isValid(user)) {
+//         return res.status(404).json({error:'No such user'})
+//     }
 
-    const payment = await Payment.find({user:user})
+//     const payment = await Payment.find({user:user})
 
-    if (!payment) {
-        return res.status(404).json({error: 'No installments'})
-    }
+//     if (!payment) {
+//         return res.status(404).json({error: 'No installments'})
+//     }
     
-    res.status(200).json(payment)
-}
+//     res.status(200).json(payment)
+// }
+
+
+const getUserPayments = async (req, res) => {
+    try {
+        const { user } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(user)) {
+            return res.status(404).json({ error: 'No such user' });
+        }
+
+        const payments = await Payment.find({ user });
+
+        if (payments.length === 0) {
+            return res.status(404).json({ error: 'No payments' });
+        }
+
+        res.status(200).json(payments);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
 
 module.exports = {
     createPayment,

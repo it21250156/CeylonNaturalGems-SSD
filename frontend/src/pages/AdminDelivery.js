@@ -20,19 +20,6 @@ const AdminDelivery = () =>{
     logout();
     navigate('/');
   }
-    //payment id
-    //date
-    //address
-    //district
-    //country
-    //delivery method 
-    //delivery status
-
-    // const [ address, setAddress] = useState('')
-    // const [ district, setDistrict] = useState('')
-    // const [ country, setCountry ] = useState('')
-    // const [ dmethod, setDmethod ] = useState('')
-  //  const [ dStatus, setDstatuss ] = useState('')
 
     const [payments , setPayments] = useState(null)
 
@@ -142,12 +129,6 @@ const PDeliveryRow = ({payment}) => {
             console.log('delivery status updated!' , json)
         }
     }
-
-//   const handleStatusChange = (e) => {
-//     const newStatus = e.target.value;
-//     setStatus(newStatus);
-//     updateStatus(newStatus); // Call your server-side function here to update the status
-  
 
     return(
         <tr key={payment._id}>
