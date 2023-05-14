@@ -4,7 +4,8 @@ const {
   getJewellery, 
   createJewellery, 
   deleteJewellery, 
-  updateJewellery
+  updateJewellery,
+ 
 } = require('../controllers/jewelleryController')
 const { default: JewelleryAdminReports } = require('../../frontend/src/pages/JewelleryAdminReport')
 
@@ -12,6 +13,8 @@ const router = express.Router()
 
 // GET all jewellery
 router.get('/', getJewelleryes)
+
+
 
 // GET a single jewellery
 router.get('/:id', getJewellery)

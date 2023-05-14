@@ -20,34 +20,23 @@ const AdminDelivery = () =>{
     logout();
     navigate('/');
   }
-    //payment id
-    //date
-    //address
-    //district
-    //country
-    //delivery method 
-    //delivery status
-
-    // const [ address, setAddress] = useState('')
-    // const [ district, setDistrict] = useState('')
-    // const [ country, setCountry ] = useState('')
-    // const [ dmethod, setDmethod ] = useState('')
-  //  const [ dStatus, setDstatuss ] = useState('')
 
     const [payments , setPayments] = useState(null)
+    const [reload , setReload] = useState(true)
 
     useEffect(() => {
         const fetchPayments = async() => {
            const response = await fetch('/api/payments')
-           const json = await response.json()
+           const json     = await response.json()
     
            if (response.ok){
-             setPayments(json) 
-           }
+             setPayments(json)
+            }
+            setReload(false)
         }
     
         fetchPayments()
-        }, [])
+        }, [reload])
 
 
     return(
@@ -100,7 +89,7 @@ const AdminDelivery = () =>{
 
     <tbody>
     {payments && payments.map((payment) => (
-                 <PDeliveryRow key={payment._id} payment={payment}/>
+                 <PDeliveryRow key={payment._id} payment={payment} reload={reload} setReload={setReload}/>
                ))}
     </tbody>
 </table>
@@ -113,41 +102,91 @@ const AdminDelivery = () =>{
     )
 }
 
-const PDeliveryRow = ({payment}) => {
+const PDeliveryRow = ({payment, setReload}) => {
 
-    const [status, setStatus] = useState(payment.dStatus);
+    const [status, setStatus] = useState("");
   const [error, setError] = useState(null)
 
     const handleStatusChange = async (e) => {
-        e.preventDefault()
+          // e.preventDefault()
+          setStatus(e.target.value);
 
-        const payment = {status}
+        // const payment = {status}
 
-        const response = await fetch('/api/payments' , {
-            method:'POST' ,
-            body: JSON.stringify(payment),
-            headers: {
-                'Content-Type' : 'application/json'
+        // const response = await fetch('/api/payments' , {
+        //     method:'POST' ,
+        //     body: JSON.stringify(payment),
+        //     headers: {
+        //         'Content-Type' : 'application/json'
+        //     }
+        // })
+
+        // const json = await response.json()
+
+            // if(!response.ok){
+            //   setError(json.error)
+            // }
+            // if(response.ok){
+            //     setStatus('')
+            //     setError(null)
+            //     console.log('delivery status updated!' , json)
+            // }
+          const updatedPayment = {
+            ...payment,
+            dStatus: e.target.value
+          };
+          console.log(updatedPayment)
+      
+          try {
+            const response = await fetch(`/api/payments/${payment._id}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedPayment)
+            });
+            console.log(response)
+            if (response.ok) {
+              setStatus('');
+              setError(null);
+              console.log('Delivery status updated!', response.data);
+              setReload(true)
+            } else {
+              setError('Error updating delivery status.');
             }
-        })
-
-        const json = await response.json()
-
-        if(!response.ok){
-          setError(json.error)
+          } catch (error) {
+            setError(error.message);
+          }
         }
-        if(response.ok){
-            setStatus('')
-            setError(null)
-            console.log('delivery status updated!' , json)
-        }
-    }
+      
 
-//   const handleStatusChange = (e) => {
-//     const newStatus = e.target.value;
-//     setStatus(newStatus);
-//     updateStatus(newStatus); // Call your server-side function here to update the status
-  
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    const handleDelete = async () => {
+
+      const confirmDelete = window.confirm("Are you sure you want to delete this item?");
+      if (confirmDelete) {
+        try {
+          setIsDeleting(true);
+          const response = await fetch(`api/payments/${payment._id}`, {
+            method: 'DELETE',
+          });
+          if (response.ok) {
+            window.location.reload();
+          } else {
+            const json = await response.json();
+            // Handle error response
+            console.error(json.error);
+          }
+        } catch (error) {
+          // Handle fetch error
+          console.error(error);
+        } finally {
+          setIsDeleting(false);
+        }
+
+      }
+      };
 
     return(
         <tr key={payment._id}>
@@ -157,14 +196,20 @@ const PDeliveryRow = ({payment}) => {
             <td>{payment.district}</td>
             <td>{payment.country}</td>
             <td>{payment.dmethod}</td>
-            <td><td>
-            <select name="status" value={status} onChange={handleStatusChange}>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-      </select>
+            <td>
+            <input type="radio" name={"status_"+payment._id} value="Pending" checked={payment.dStatus === "Pending"} onChange={(e) => handleStatusChange(e)} />
+<label for="pending">Pending</label>
+
+<input type = "radio" name = {"status_"+payment._id} value = "In Process" checked = {payment.dStatus === "In Process"} onChange={(e) => handleStatusChange(e)} />
+<label for="inprocess">In Process</label>
+
+<input type = "radio" name = {"status_"+payment._id} value = "Delivered" checked = {payment.dStatus === "Delivered"} onChange = {(e) => handleStatusChange(e)} />
+<label for  = "delivered">Delivered</label>
+
 </td>
-</td>
+<td><button onClick = {handleDelete} disabled = {isDeleting}>
+        {isDeleting ? 'Deleting...' : 'DELETE'}
+      </button></td>
 
         </tr>
     )

@@ -2,16 +2,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/cartTotal.css';
 
-const CartTotal = ({ gems, cartData, Jwl }) => {
+const CartTotal = ({ gems, cartData, jewelleries }) => {
   const navigate = useNavigate();
 
   const cal = () => {
     let sum = 0;
     cartData.map(
-      (cartIns) =>
-        (sum +=
+      (cartIns) => (
+      sum +=          
           cartIns.cartquantity *
-          (gems.find((gem) => gem._id === cartIns.cartitemid)?.price || 0))
+          (gems.find((gem) => gem._id === cartIns.cartitemid)?.price || jewelleries?.find(jwl => jwl._id === cartIns.cartitemid)?.price || 0))
     );
     // setTotal(sum);
   

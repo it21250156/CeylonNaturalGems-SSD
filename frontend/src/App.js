@@ -80,23 +80,11 @@ function App() {
             {/* kalinga */}
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
-            <Route
-              path="/login"
-              element={!user ? <UserLogin /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/Register"
-              element={!user ? <UserRegistration /> : <Navigate to="/" />}
-            />
+            <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
+            <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
             <Route path="/profile/:id" element={<UserProfile />} />
-            <Route
-              path="/profile/editProfile/:id"
-              element={<UserProfileUpdate />}
-            />
-            <Route
-              path="/profile/resetPassword/:id"
-              element={<ResetPassword />}
-            />
+            <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
+            <Route path="/profile/resetPassword/:id" element={<ResetPassword />} />
             <Route path="/AllUsers" element={<AllUsers />} />
 
             {/* janith */}
@@ -119,7 +107,7 @@ function App() {
             <Route path="/feedbacks" element={<AllFeedbacks />} />
             <Route path="/Userfeedbacks" element={<UserFeedbacks />} />
             <Route path="/AdminFeedbacks" element={<AdminFeedbacks />} />
-            <Route path="/FeedbackForm" element={<FeedbackForm />} />
+            <Route path="/FeedbackForm/:paymentid" element={<FeedbackForm />} />
             <Route path="/UpdateFeedback/:_id" element={<UpdateFeedback />} />
 
             {/* vidxni */}
@@ -130,11 +118,7 @@ function App() {
             <Route path="/AdminDelivery" element={<AdminDelivery/>}/>
 
             {/* ruchira */}
-            <Route
-              path="/JewelleryAdminDashboard"
-              element={<JewelleryAdminDashboard />}
-            />
-
+            <Route path="/JewelleryAdminDashboard" element={<JewelleryAdminDashboard />} />
             <Route path="/AddJewelleryes" element={<AddJewelleryes />} />
 
             <Route
@@ -145,10 +129,11 @@ function App() {
             path="/JewelleryAdminReport"
             element={<JewelleryAdminReport/>}
             />
+            <Route path="/UpdateJewelleryes/:_id" element={<UpdateJewellery />} />
 
             {/* daham */}
             <Route path="/jwellhomeM" element={<JewelhomeMen />} />
-            <Route path="/jwellhomeWm" element={<JewelhomeWomen />} />
+            <Route path="/jwellhomeW" element={<JewelhomeWomen />} />
             <Route path="/jwellscreen/:id" element={<JewelScreen />} />
 
             {/* ammaar */}
@@ -159,28 +144,14 @@ function App() {
 
             {/* Vihangi  */}
             <Route path="/InstallmentPlans" element={<InstallmentPlans />} />
-            <Route
-              path="/InstallmentPlans/selectedInstallmentPlan/:id"
-              element={<SelectedInstallmentPlan />}
-            />
+            <Route path="/InstallmentPlans/selectedInstallmentPlan/:id" element={<SelectedInstallmentPlan />} />
 
             {/* admin */}
-            <Route
-              path="/AdminInstallmentPlans/AllInstallments"
-              element={<AllInstallments />}
-            />
-            <Route
-              path="/AdminInstallmentPlans"
-              element={<AdminInstallmentPlans />}
-            />
-            <Route
-              path="/AdminInstallmentPlans/adminUpdatePlan/:id"
-              element={<AdminUpdatePlan />}
-            />
-            <Route
-              path="/profile/MyPayments/MyInstallments/:id"
-              element={<MyInstallments />}
-            />
+            <Route path="/AdminInstallmentPlans/AllInstallments" element={<AllInstallments />} />
+            <Route path="/AdminInstallmentPlans" element={<AdminInstallmentPlans />} />
+            <Route path="/AdminInstallmentPlans/adminUpdatePlan/:id" element={<AdminUpdatePlan />} />
+            <Route path="/profile/MyPayments/MyInstallments/:id" element={<MyInstallments />} />
+            
           </Routes>
         </div>
       </BrowserRouter>

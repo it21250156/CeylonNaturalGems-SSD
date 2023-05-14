@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import axios from 'axios';
+import '../CSS/Header.css';
 
 const Header = () => {
   const { logout } = useLogout();
@@ -51,17 +52,18 @@ const Header = () => {
           <div className="navprofileDiv">
             {user && (
               <div className="navEmal">
-                <span>
+                <span className="welcomeNote">
                   Hello {user.title} {user.firstName} {user.lastName}
                 </span>
-                <button onClick={handleClick}>Log out</button>
-                <button
+                <button className="headerLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
+                <span
+                  class="headerProfile"
                   onClick={() => {
                     navigate(`/profile/${user._id}`);
                   }}
-                >
-                  My Profile
-                </button>
+                ></span>
               </div>
             )}
             {!user && (

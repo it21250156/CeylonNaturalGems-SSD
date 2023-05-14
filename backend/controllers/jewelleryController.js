@@ -9,6 +9,7 @@ const getJewelleryes = async (req, res) => {
   res.status(200).json(jewelleryes)
 }
 
+
 // get a single jewellery
 const getJewellery = async (req, res) => {
   const { id } = req.params

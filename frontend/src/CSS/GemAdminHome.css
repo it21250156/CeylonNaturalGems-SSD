@@ -1,52 +1,138 @@
-:root {
-  --error: #e7195a;
-}
-
-.addGemButton {
-  margin: 20px;
-  padding: 20px 40px;
-  border-radius: 10px;
+.darkBlueTopicBoxGem {
   background-color: #144272;
+  margin: 20px 100px;
+  padding: 40px 0;
+  border-radius: 30px;
+}
+
+.pageTopicGems {
   color: white;
+  font-family: Bebas Neue;
+  font-weight: 100;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+}
+
+.gem-admin-buttons {
+  font-family: Bebas Neue;
+  padding: 15px 35px;
   border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2c74b3;
+  transition: all 1000ms;
+  font-size: 30px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
+  z-index: 1;
 }
 
-.addGemButton:hover {
-  background-color: white;
-  color: #144272;
-  border: 2px solid #144272;
+.gem-admin-buttons:hover {
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px #268391;
 }
 
-textarea.error {
-  border: 1px solid var(--error);
+.gem-admin-buttons::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #144272;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
 }
 
-div.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
-  border-radius: 4px;
-  margin: 20px 0;
+.gem-admin-buttons:hover::before {
+  width: 250%;
 }
 
-form button {
-  background: #2c74b3;
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
+.gem-admin-search-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
-div.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
-  border-radius: 4px;
-  margin: 20px 0;
+
+.gem-admin-search {
+  position: relative;
+  width: 100%;
+  max-width: 25rem;
 }
-input.error {
-  border: 1px solid var(--error);
+
+.gem-admin-search input[type="text"] {
+  width: 100%;
+  border: none;
+  border-radius: 9999px;
+  background-color: #f2f2f2;
+  padding: 0.75rem 2rem 0.75rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s ease-in-out;
 }
+
+.gem-admin-search input[type="text"]:focus {
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.2);
+}
+
+.gem-admin-search input[type="text"]::placeholder {
+  color: #666;
+  font-weight: 400;
+}
+
+.gem-admin-search input[type="text"] + svg {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #666;
+}
+
+.gem-admin-sort {
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+.gem-admin-sort label {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.gem-admin-sort select {
+  border: none;
+  border-radius: 9999px;
+  background-color: #f2f2f2;
+  padding: 0.75rem 2rem 0.75rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  transition: all 0.2s ease-in-out;
+}
+
+.gem-admin-sort select:focus {
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.2);
+}
+
+.gem-admin-sort option {
+  color: #333;
+  font-weight: 400;
+}
+

@@ -30,42 +30,6 @@ const getGem = async (req, res) => {
 const createGem = async (req, res) => {
   const {name, type, shape, size, price, color, quantity, description} = req.body
 
-  let emptyFields = []
-
-  if(!name){
-    emptyFields.push('name')
-  }
-
-  if(!type){
-    emptyFields.push('type')
-  }
-
-  if(!shape){
-    emptyFields.push('shape')
-  }
-
-  if(!size){
-    emptyFields.push('size')
-  }
-
-  if(!price){
-    emptyFields.push('price')
-  }
-
-  if(!color){
-    emptyFields.push('color')
-  }
-
-  if(!quantity){
-    emptyFields.push('quantity')
-  }
-  
-  if(!description){
-    emptyFields.push('desc')
-  }
-  if(emptyFields.length > 0){
-    return res.status(400).json({error: 'Please fill in all the required fields', emptyFields})
-  }
 
   // add to the database
   try {
