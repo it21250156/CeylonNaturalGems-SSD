@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import { useJewelleryesContext } from "../hooks/useJewelleryesContext";
+import ConfirmationModal from './ConfirmationModal';
 import { useState } from "react";
+
+import '../CSS/JewellAdmin.css';
 
 const JewelleryDetails = ({ jewellery }) => {
   const { dispatch } = useJewelleryesContext();
+  const [showModal, setShowModal] = useState(false);
   
   const handleDelete = async () => {
     const response = await fetch("/api/jewelleryes/" + jewellery._id, {
       method: "DELETE",
     });
+    
 
     const json = await response.json();
 
@@ -16,6 +21,15 @@ const JewelleryDetails = ({ jewellery }) => {
       dispatch({ type: "DELETE_JEWELLERY", payload: json });
       window.location.reload();
     }
+  };
+
+  const handleConfirm = () => {
+    setShowModal(false);
+    handleDelete();
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
   };
 
   const handleUpdate = async () => {
@@ -33,6 +47,7 @@ const JewelleryDetails = ({ jewellery }) => {
   return (
     <>
       <div className="jewellery-details">
+        <div className="jewBox">
         <h4>{jewellery.name}</h4>
         <p>
           <strong>Type: </strong>
@@ -52,18 +67,33 @@ const JewelleryDetails = ({ jewellery }) => {
           {jewellery.description}
         </p>
         <p>
-          <strong>Price: $.</strong>
+          <strong>Price: Rs.</strong>
           {jewellery.price}/=
         </p>
         <p>
           <strong>Added Date: </strong>
           {jewellery.createdAt}
         </p>
-        <button onClick={handleDelete}>delete</button>
+        <button className="JewdeleteButton" onClick={() => setShowModal(true)}>
+          delete
+        </button>
+        
 
-        <Link to={`/UpdateJewelleryes/${jewellery._id}`}>
-          <span>update</span>
-        </Link>
+        <button 
+          className="JewupdateButton"
+          onClick={() => window.location.href = `/UpdateJewelleryes/${jewellery._id}`}
+        >
+          Update
+        </button>
+
+        {showModal && (
+          <ConfirmationModal
+            message="Are you sure you want to delete this jewellery?"
+            onConfirm={handleConfirm}
+            onCancel={handleCancel}
+          />
+        )}
+        </div>
       </div>
     </>
   );

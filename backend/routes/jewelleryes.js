@@ -7,6 +7,7 @@ const {
   updateJewellery,
  
 } = require('../controllers/jewelleryController')
+const { default: JewelleryAdminReports } = require('../../frontend/src/pages/JewelleryAdminReport')
 
 const router = express.Router()
 
@@ -26,5 +27,7 @@ router.delete('/:id', deleteJewellery)
 
 // UPDATE a jewellery
 router.patch('/:id', updateJewellery)
+
+//router.param('/id' ,JewelleryAdminReport)
 
 module.exports = router

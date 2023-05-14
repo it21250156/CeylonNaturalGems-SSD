@@ -1,83 +1,162 @@
-.topic {
-  margin: 20px;
-  font-size: 25px;
-  color: black;
-  font-weight: bold;
-  font-family: legendum;
+
+.darkBlueTopicBoxGem {
+  background-color: #144272;
+  margin: 20px 100px;
+  padding: 40px 0;
+  border-radius: 30px;
 }
 
-.bg-card {
-  background-color: #cadefc;
-  padding: 20px;
-  margin: 20px 200px;
-  border-radius: 10px;
+.pageTopicGems {
+  color: white;
+  font-family: Bebas Neue;
+  font-weight: 100;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+}
+
+.column-1 {
+  flex: 1;
   text-align: left;
-  padding-left: 20px;
-  font-family: legendum;
+  padding-left: 40px;
 }
 
-form {
-  width: 100%;
-}
-
-textarea {
-  font-size: 15px;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-textarea.error {
-  border: 1px solid var(--error);
-}
-
-.gemDropdownContent {
-  display: none;
-  position: absolute;
-  background-color: black;
-  min-width: 200px;
+#gem-add-button.gem-add-buttons {
+  font-family: Bebas Neue;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2c74b3;
+  transition: all 1000ms;
+  font-size: 30px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
   z-index: 1;
-  color: black;
 }
 
-.gemDropdown:hover .gemDropdownContent {
+#gem-add-button.gem-add-buttons:hover {
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px #268391;
+}
+
+#gem-add-button.gem-add-buttons::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #144272;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+#gem-add-button.gem-add-buttons:hover::before {
+  width: 250%;
+}
+
+
+
+.gem-input {
+  width: 300px;
+  height: 44px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.gem-label {
   display: block;
-  background-color: #2c74b3;
-  border: 2px;
-  border-color: black;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #05060f99;
+  transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
 }
 
-#shapeDropdown {
-  appearance: none;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  color: #333;
-  font-size: 16px;
-  padding: 8px 12px;
-  width: 200px;
-}
-
-#shapeDropdown option {
-  background-color: white;
-  color: #333;
-}
-
-#shapeDropdown:focus {
+.gem-input:hover,
+.gem-input:focus,
+.gem-input-group:hover .gem-input {
   outline: none;
-  box-shadow: 0 0 0 2px #7dc5ee;
-  border-color: #7dc5ee;
+  border-color: #144272;
 }
 
-.error {
-  border-color: red;
+.gem-input-group:hover .gem-label,
+.gem-input:focus {
+  color: #144272;
 }
 
-.error {
-  color: red;
-  margin-top: 10px;
+.lightBlueBodyBG-my-req {
+  background-color: #cadefc;
+  margin: 20px 100px;
+  padding: 20px;
+  border-radius: 30px;
+}
+
+.pageTopicGem {
+  color: white;
+  font-family: Bebas Neue;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.whiteBodyBG {
+  background-color: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 40px;
+}
+
+.gem-input-container {
+  text-align: center;
+}
+
+.gem-select {
+  width: 300px;
+  height: 44px;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.146 9.854a.5.5 0 00.708 0L8 8.207l1.146 1.647a.5.5 0 00.708 0l.354-.354a.5.5 0 000-.708L8.354 7.5a.5.5 0 00-.708 0L6.146 9.146a.5.5 0 000 .708z' fill='%232c74b3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  color: #777;
+}
+
+.gem-select option {
+  color: #000;
+  background-color: #fff;
+}
+
+.gem-select:focus {
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(44, 116, 179, 0.5);
+}
+
+.gem-select:focus option:checked {
+  background-color: #cadefc;
+  color: #000;
 }

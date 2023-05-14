@@ -26,6 +26,6 @@ router.delete('/:id' , deletePayment)
 router.patch('/:id' , updatePayment)
  
 //GET payments for specific user
-router.get('/user/:user' , getUserPayments)
+router.get('/userPayments/:user' , getUserPayments)
 
 module.exports = router

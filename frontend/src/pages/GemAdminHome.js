@@ -12,6 +12,7 @@ import axios from 'axios';
 // components
 import GemDetails from '../components/GemDetails';
 import '../CSS/GemAdminHome.css';
+import Header from '../components/Header';
 
 const GemAdminHome = () => {
 
@@ -23,6 +24,7 @@ const GemAdminHome = () => {
     logout();
     navigate('/');
   };
+  
   const { gems, dispatch } = useGemsContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -82,42 +84,23 @@ const GemAdminHome = () => {
     }
   };
 
-  // Render the search results here using the sorted array
 
   return (
-    <><header>
-      <div>
-        <div className="background">
-          <div className="headerNameDiv">
-            <h1 className="headerName">Ceylon Natural Gems</h1>
+    <><Header />
+      <div className="gem-admin-home">
+        <div className="darkBlueTopicBoxGem">
+          <h3 className="pageTopicGems">Gem Admin</h3>
+        </div>
+        <div class="gem-admin-search-wrapper">
+          <div class="gem-admin-search">
+            <input
+              type="text"
+              placeholder="Search by gem name"
+              value={searchTerm}
+              onChange={handleSearchChange} />
           </div>
         </div>
-
-        <nav>
-          <div className="navprofileDiv">
-            <div className="navEmal">
-              <span>Hello Admin</span>
-              <button onClick={handleClick}>Log out</button>
-            </div>
-          </div>
-
-          <ul>
-            <li>
-              <Link to={'/adminHome'}>Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header><div className="home">
-        <div className="search">
-          <input
-            type="text"
-            placeholder="Search by gem name"
-            value={searchTerm}
-            onChange={handleSearchChange} />
-        </div>
-
-        <div className="sort">
+        <div class="gem-admin-sort">
           <label htmlFor="sort-select">Sort by: </label>
           <select id="sort-select" value={sortBy} onChange={handleSortChange}>
             <option value="">--Select--</option>
@@ -127,20 +110,21 @@ const GemAdminHome = () => {
           </select>
         </div>
 
-        <button
-          className="addGemButton"
-          onClick={() => {
-            window.location.href = "./AddGem";
-          }}
-        >
-          {" "}
-          Add a New Gem{" "}
-        </button>
+        <div className="gem-buttons-container">
+          <button
+            className="gem-admin-buttons"
+            onClick={() => {
+              window.location.href = "./AddGem";
+            }}
+          >
+            {" "}
+            Add a New Gem{" "}
+          </button>
 
-        <Link to={`/GemAdminReports`}>
-          <button className="reportsButton">Reports</button>
-        </Link>
-
+          <Link to={`/GemAdminReports`}>
+            <button className="gem-admin-buttons">Reports</button>
+          </Link>
+        </div>
         <div className="gems">
           {searchResults.length > 0 ? (
             searchResults.map((gem) => <GemDetails gem={gem} key={gem._id} />)

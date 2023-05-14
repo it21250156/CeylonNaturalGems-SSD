@@ -46,6 +46,7 @@ import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
 import AddJewelleryes from './pages/AddJewelleryes';
 import JewelleryDetails from './components/JewelleryDetails';
 import UpdateJewellery from './pages/UpdateJewellery';
+import JewelleryAdminReport from './pages/JewelleryAdminReport';
 
 //Daham
 import JewelhomeMen from './pages/JewelhomeMen';
@@ -106,7 +107,7 @@ function App() {
             <Route path="/feedbacks" element={<AllFeedbacks />} />
             <Route path="/Userfeedbacks" element={<UserFeedbacks />} />
             <Route path="/AdminFeedbacks" element={<AdminFeedbacks />} />
-            <Route path="/FeedbackForm" element={<FeedbackForm />} />
+            <Route path="/FeedbackForm/:paymentid" element={<FeedbackForm />} />
             <Route path="/UpdateFeedback/:_id" element={<UpdateFeedback />} />
 
             {/* vidxni */}
@@ -119,6 +120,15 @@ function App() {
             {/* ruchira */}
             <Route path="/JewelleryAdminDashboard" element={<JewelleryAdminDashboard />} />
             <Route path="/AddJewelleryes" element={<AddJewelleryes />} />
+
+            <Route
+              path="/UpdateJewelleryes/:_id"
+              element={<UpdateJewellery />}
+            />
+            <Route 
+            path="/JewelleryAdminReport"
+            element={<JewelleryAdminReport/>}
+            />
             <Route path="/UpdateJewelleryes/:_id" element={<UpdateJewellery />} />
 
             {/* daham */}

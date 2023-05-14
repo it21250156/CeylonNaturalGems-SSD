@@ -31,39 +31,39 @@ const getJewellery = async (req, res) => {
 const createJewellery = async (req, res) => {
   const {name, type, gender, gemstone, metal, description, price} = req.body
 
-  let emptyFields = []
+  // let emptyFields = []
 
-  if(!name){
-    emptyFields.push('name')
-  }
+  // if(!name){
+  //   emptyFields.push('name')
+  // }
 
-  if(!type){
-    emptyFields.push('type')
-  }
+  // if(!type){
+  //   emptyFields.push('type')
+  // }
 
-  if(!gender){
-    emptyFields.push('gender')
-  }
+  // if(!gender){
+  //   emptyFields.push('gender')
+  // }
 
-  if(!gemstone){
-    emptyFields.push('gemstone')
-  }
+  // if(!gemstone){
+  //   emptyFields.push('gemstone')
+  // }
 
-  if(!metal){
-    emptyFields.push('metal')
-  }
+  // if(!metal){
+  //   emptyFields.push('metal')
+  // }
 
-  if(!description){
-    emptyFields.push('description')
-  }
+  // if(!description){
+  //   emptyFields.push('description')
+  // }
 
-  if(!price){
-    emptyFields.push('price')
-  }
+  // if(!price){
+  //   emptyFields.push('price')
+  // }
   
-  if(emptyFields.length > 0){
-    return res.status(400).json({error: 'Please fill in all the required fields', emptyFields})
-  }
+  // if(emptyFields.length > 0){
+  //   return res.status(400).json({error: 'Please fill in all the required fields', emptyFields})
+  // }
 
   // add to the database
   try {

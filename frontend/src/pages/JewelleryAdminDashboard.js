@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
 
+
+
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import axios from "axios";
@@ -12,6 +14,7 @@ import axios from "axios";
 // components
 import JewelleryDetails from "../components/JewelleryDetails";
 import JewelleryAddForm from "../components/JewelleryAddForm";
+import '../CSS/JewellAdmin.css';
 
 const JewelleryAdminDashboard = () => {
   const navigate = useNavigate();
@@ -63,6 +66,7 @@ const JewelleryAdminDashboard = () => {
 
   }, [activeButton]);
 
+
   return (
     <>
       <header>
@@ -90,17 +94,19 @@ const JewelleryAdminDashboard = () => {
         </div>
       </header>
       <div className="home">
-        {/* <JewelleryAddForm/> */}
+        <div className="jewelleryes">
+          <div className="gender-switch">
+
         <button
+        className="add-jew-btn"
           onClick={() => {
             navigate("/AddJewelleryes");
           }}
         >
           Add a new jewellery
-        </button>
-        <div className="jewelleryes">
-          <div className="gender-switch">
+        </button> <p></p>
             <button
+              className="genderbtn"
               type="button"
               style={
                 activeButton === "Male"
@@ -109,9 +115,10 @@ const JewelleryAdminDashboard = () => {
               }
               onClick={() => handleButtonClick("Male")}
             >
-              Men
+              Men's Jewelleries
             </button>
             <button
+              className="genderbtn"
               type="button"
               style={
                 activeButton === "Female"
@@ -120,9 +127,12 @@ const JewelleryAdminDashboard = () => {
               }
               onClick={() => handleButtonClick("Female")}
             >
-              Women
+              Women's Jewelleries
             </button>
           </div>
+          <Link to={`/JewelleryAdminReport`}>
+          <button className="reportsButton">Reports</button>
+        </Link>
 
           {/* {jewellery &&
             jewellery.map((jewellery) => (
@@ -133,6 +143,8 @@ const JewelleryAdminDashboard = () => {
               <JewelleryDetails jewellery={jewellery} key={jewellery._id} />
             ))}
         </div>
+        {/* <JewelleryAddForm/> */}
+        
       </div>
       <style></style>
     </>
