@@ -2,66 +2,147 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
-}
-
-.gem-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem;
-  border-radius: 1rem;
-  background-color: #fff;
-  border: 1px solid #99c2ff; /* add this */
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease-in-out;
-  height: 100%;
-  width: 1000px;
-}
-
-.gem-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25); /* more pronounced shadow */
-  border-color: #0077b3; /* change border color on hover */
+  height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .card-title {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+}
+
+.gem-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
   text-align: center;
+  transition: box-shadow 0.3s ease-in-out;
+  margin-bottom: 20px;
 }
 
-.deleteButton {
-  margin-top: auto;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: #ff3f3f;
-  color: #fff;
+.gem-card:hover {
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-title {
+  font-size: 24px;
   font-weight: bold;
+  color: #333;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
 }
 
-.deleteButton:hover {
-  background-color: #ff6b6b;
+p {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #777;
 }
 
-.updateButton {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
+button {
   border: none;
-  border-radius: 0.5rem;
-  background-color: #008080;
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
+  outline: none;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 30px;
+  margin-top: 20px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.updateButton:hover {
-  background-color: #00bfbf;
+button.deleteButton {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+button.deleteButton:hover {
+  background-color: #c0392b;
+}
+
+button.updateButton {
+  background-color: #3498db;
+  color: #fff;
+  margin-left: 20px;
+}
+
+button.updateButton:hover {
+  background-color: #2980b9;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Modal */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px; /* adjust this value to your liking */
+}
+
+.modal-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 0 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-buttons button:hover {
+  background-color: #2c74b3;
+  color: #fff;
 }

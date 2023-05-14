@@ -12,6 +12,7 @@ import axios from 'axios';
 // components
 import GemDetails from '../components/GemDetails';
 import '../CSS/GemAdminHome.css';
+import Header from '../components/Header';
 
 const GemAdminHome = () => {
 
@@ -23,6 +24,7 @@ const GemAdminHome = () => {
     logout();
     navigate('/');
   };
+  
   const { gems, dispatch } = useGemsContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -84,30 +86,11 @@ const GemAdminHome = () => {
 
 
   return (
-    <><header>
-      <div >
-        <div className="background">
-          <div className="headerNameDiv">
-            <h1 className="headerName">Ceylon Natural Gems</h1>
-          </div>
+    <><Header />
+      <div className="gem-admin-home">
+        <div className="darkBlueTopicBoxGem">
+          <h3 className="pageTopicGems">Gem Admin</h3>
         </div>
-
-        <nav>
-          <div className="navprofileDiv">
-            <div className="navEmal">
-              <span>Hello Admin</span>
-              <button onClick={handleClick}>Log out</button>
-            </div>
-          </div>
-
-          <ul>
-            <li>
-              <Link to={'/adminHome'}>Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header><div className="gem-admin-home">
         <div class="gem-admin-search-wrapper">
           <div class="gem-admin-search">
             <input
@@ -116,17 +99,17 @@ const GemAdminHome = () => {
               value={searchTerm}
               onChange={handleSearchChange} />
           </div>
-
-          <div class="gem-admin-sort">
-            <label htmlFor="sort-select">Sort by: </label>
-            <select id="sort-select" value={sortBy} onChange={handleSortChange}>
-              <option value="">--Select--</option>
-              <option value="date">Added Date</option>
-              <option value="quantity">Quantity</option>
-              <option value="price">Price</option>
-            </select>
-          </div>
         </div>
+        <div class="gem-admin-sort">
+          <label htmlFor="sort-select">Sort by: </label>
+          <select id="sort-select" value={sortBy} onChange={handleSortChange}>
+            <option value="">--Select--</option>
+            <option value="date">Added Date</option>
+            <option value="quantity">Quantity</option>
+            <option value="price">Price</option>
+          </select>
+        </div>
+
         <div className="gem-buttons-container">
           <button
             className="gem-admin-buttons"
