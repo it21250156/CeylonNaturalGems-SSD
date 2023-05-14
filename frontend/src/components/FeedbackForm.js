@@ -67,11 +67,16 @@ const FeedbackForm = () => {
       cartData?.map(cartItem => {
         gems.find(gem => {
           if (gem._id === cartItem.cartitemid) {
-            str += cartItem.cartquantity + "x "+ gem.name + " " 
+            str += cartItem.cartquantity + "x "+ gem.name + ", " 
+          }
+        })
+        jewellery.find(gem => {
+          if (gem._id === cartItem.cartitemid) {
+            str += cartItem.cartquantity + "x "+ gem.name + ", " 
           }
         })
       })
-      return str
+      return str.substring(0,str.length-2)
     })
     setGemQty (() =>{
       let sum = 0
@@ -165,6 +170,7 @@ const FeedbackForm = () => {
           {/* {JSON.stringify(payment.data)} */}
           <label className="label"> Gem/Jewellery Name</label>
           <input
+            readOnly
             id="input"
             type="text"
             onChange={(e) => setGemType(e.target.value)}
@@ -183,6 +189,7 @@ const FeedbackForm = () => {
 
           <label className="label"> Gem Quantity</label>
           <input
+            readOnly
             id="input"
             type="number"
             onChange={(e) => setGemQty(e.target.value)}

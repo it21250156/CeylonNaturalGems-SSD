@@ -88,6 +88,7 @@ function UpdateFeedback() {
           >
             <label className="label">Gem/Jewellery Name:</label>
             <input
+              readOnly
               id="input"
               type="text"
               onChange={(e) => setGemType(e.target.value)}
@@ -97,6 +98,7 @@ function UpdateFeedback() {
 
             <label className="label">Gem Quantity:</label>
             <input
+              readOnly
               id="input"
               type="number"
               onChange={(e) => setGemQty(e.target.value)}
