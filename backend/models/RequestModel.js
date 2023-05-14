@@ -50,7 +50,7 @@ const RequestSchema = new Schema({
         ref: 'user',
         required: true,
     },
-});
+},{timestamps: true})
 
 // const ReplySchema = new mongoose.Schema({
 

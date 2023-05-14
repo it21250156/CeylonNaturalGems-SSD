@@ -27,6 +27,13 @@ function MyReq() {
   const [newGemDescription, setNewnewGemDescription] = useState("");
   // const [newGemWeight, setNewnewGemWeight] = useState('');
   const [newGemQuantity, setNewnewGemQuantity] = useState("");
+  const [sortBy, setSortBy] = useState("dateAcsending");
+
+  const handleSort = (e) => {
+    const { value } = e.target;
+    setSortBy(value);
+  };
+  
 
   const gemShapes = [
     "round",
@@ -154,6 +161,15 @@ function MyReq() {
           >
             Create a new request
           </button>
+          <br></br>
+          <label className="labelSort">Sort by</label>
+        <select
+          className="sortRequest"
+          onChange={handleSort}
+        >
+          <option value="dateAcsending">Date ascending </option>
+          <option value="dateDecending">Date descending</option>
+        </select>
           {listOfRequests.map((user) => {
             return (
               <div key={user._id}>
@@ -205,7 +221,7 @@ function MyReq() {
                     </div>
 
                     <div className="myreq-column-2">
-                      <form>
+                      <form className="updatebox">
                         <select
                           className="input"
                           onChange={(event) => {

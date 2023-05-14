@@ -274,11 +274,7 @@ app.use("/api/installments", installmentsRoutes);
 
 //daham
 
-<<<<<<< HEAD
-app.use('/api/jewells', jwellRoutes);
-=======
 app.use("/api/jewelleryes", jwellRoutes);
->>>>>>> e0eda39161236286e35a2d1fa54a6b4f3f1bb5a9
 
 //ammaar
 app.use("/api/gems", gemAdminRoutes);
