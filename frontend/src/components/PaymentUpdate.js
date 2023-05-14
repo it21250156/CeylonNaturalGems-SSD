@@ -6,8 +6,9 @@ const PaymentUpdate = () => {
 
 
     const [amount, setAmount] = useState('')
- //   const [users, setUsers] = useState('')
+   //   const [users, setUsers] = useState('')
     const [orderID, setOrderID] = useState('')
+    const [dmethod, setDmethod ] = useState('')
     const [address, setAddress] = useState('')
     const [district, setDistrict] = useState('')
     const [country, setCountry] = useState('')
@@ -27,6 +28,7 @@ const PaymentUpdate = () => {
             const response = await fetch(`/api/payments/${id}`)
             const json = await response.json()
             if (response.ok) {
+                setDmethod(json.dmethod)
                 setAddress(json.address)
                 setAmount(json.amount)
                 setDistrict(json.district)
@@ -54,17 +56,41 @@ const PaymentUpdate = () => {
         fetchUsers();
     }, []);
     
+    // const handleDeliveryMethodChange = (e) => {
+    //     setDmethod(e.target.value);
+    //   };
     
+
+    const handleDeliveryMethodChange = (e) => {
+        const selectedMethod = e.target.value;
+        if (selectedMethod === "Pickup") {
+          const confirmed = window.confirm(
+            "Are you sure you want to change the delivery method to Pickup? This will delete the delivery details."
+          );
+          if (confirmed) {
+            setDmethod(selectedMethod);
+            setAddress("");
+            setDistrict("");
+            setCountry("");
+            setPhoneNo("");
+          }
+        } else {
+          setDmethod(selectedMethod);
+        }
+      };
+      
+
     const handleUpdate = async (e) => {
         e.preventDefault()
 
         const response = await fetch(`/api/payments/${id}` ,{
             method: 'PATCH',
             body: JSON.stringify({
-                address: address,
+                dmethod : dmethod,
+                address : address,
                 district: district,
-                country: country,
-                phoneNo: phoneNo,
+                country : country,
+                phoneNo : phoneNo,
             }),
 
             headers: {
@@ -79,7 +105,7 @@ const PaymentUpdate = () => {
         }
 
         if (response.ok) {
-
+            setDmethod(json.dmethod)
             setAddress(json.address)
             setCountry(json.country)
             setDistrict(json.district)
@@ -87,14 +113,15 @@ const PaymentUpdate = () => {
             setError(null)
 
             console.log('Updated!', json)
+            window.location.reload();
         }
     }
 
     return (
-        <div className="lightBlueBodyBG">
-            <div className="whiteBodyBG">
-                <div className="darkBlueTopicBox">
-                    <h3 className="pageTopic">UPDATE PAYMENT</h3>
+        <div className = "lightBlueBodyBG">
+        <div className = "whiteBodyBG">
+        <div className = "darkBlueTopicBox">
+        <h3  className = "pageTopic">UPDATE PAYMENT</h3>
                 </div>
 
                 <form className="edit" onSubmit={handleUpdate}>
@@ -111,24 +138,53 @@ const PaymentUpdate = () => {
                                 onChange={(e) => setUsers(e.target.value)}
                                 value={users.find((user) => user._id === payment.user)?._id} /> */}
 
-<input 
-        onChange={(e) => {
-          const selectedUserId = e.target.value;
-          const selectedUser = users.find((user) => user.id === selectedUserId);
-          setPayment({
-            ...payment,
-            user: selectedUser || { id: '' },
-          });
-        }}
-        value={payment.user.id}
-      />
+                        <input
+                                onChange={(e) => {
+                                const selectedUserId = e.target.value;
+                                const selectedUser   = users.find((user) => user.id === selectedUserId);
+                                setPayment({
+                                    ...payment,
+                                    user: selectedUser || { id: '' },
+                                });
+                                }}
+                                value = {payment.user.id}
+                            />
 
-                            <label> Order ID : </label>
+                            {/* <label> Order ID : </label>
                             <input type="number"
                                 onChange={(e) => setOrderID(e.target.value)}
-                                value={orderID} />
+                                value={orderID} /> */}
+
 
                         </div>
+
+                        <div className="Dmeth">
+                    <label className="label">Delivery Method:</label>
+
+                    <label className="label" htmlFor="deliveryMethodDelivery">
+                      Delivery
+                    </label>
+                    <input
+                      type="radio"
+                      id="deliveryMethodDelivery"
+                      name="deliveryMethod"
+                      value="Delivery"
+                      checked={dmethod === 'Delivery'}
+                      onChange={handleDeliveryMethodChange}
+                    />
+
+                    <label className="label" htmlFor="deliveryMethodPickup">
+                      Pickup
+                    </label>
+                    <input
+                      type="radio"
+                      id="deliveryMethodPickup"
+                      name="deliveryMethod"
+                      value="Pickup"
+                      checked={dmethod === 'Pickup'}
+                      onChange={handleDeliveryMethodChange}
+                    />
+                  </div>
 
                         <div className="row">
                             <label> Address : </label>

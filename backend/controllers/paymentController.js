@@ -28,6 +28,28 @@ const getPayment = async(req , res) => {
 const createPayment = async (req , res) =>{
     const {user  ,orderID , amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus } = req.body
 
+    const errors = {};
+
+    if (!pmethod) {
+        errors.pmethod = 'Payment method is required';
+      }
+      if (!dmethod) {
+        errors.dmethod = 'Delivery method is required';
+      }
+      if (!address) {
+        errors.address = 'Address is required';
+      }
+      if (!district) {
+        errors.district = 'District is required';
+      }
+      if (!country) {
+        errors.country = 'Country is required';
+      }
+      if (!phoneNo) {
+        errors.phoneNo = 'Phone number is required';
+      }
+     
+
     //add doc to db
     try{
       const payment = await Payment.create({user  ,orderID ,amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus})
