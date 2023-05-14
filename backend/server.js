@@ -269,6 +269,7 @@ app.use('/api/installments', installmentsRoutes);
 
 app.use('/api/jewells', jwellRoutes);
 app.use('/api/jewelleryes', jwellRoutes);
+app.use('/api/jewelleryes', jwellRoutes);
 
 //ammaar
 app.use('/api/gems', gemAdminRoutes);

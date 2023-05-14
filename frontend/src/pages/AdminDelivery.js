@@ -20,19 +20,6 @@ const AdminDelivery = () =>{
     logout();
     navigate('/');
   }
-    //payment id
-    //date
-    //address
-    //district
-    //country
-    //delivery method 
-    //delivery status
-
-    // const [ address, setAddress] = useState('')
-    // const [ district, setDistrict] = useState('')
-    // const [ country, setCountry ] = useState('')
-    // const [ dmethod, setDmethod ] = useState('')
-  //  const [ dStatus, setDstatuss ] = useState('')
 
     const [payments , setPayments] = useState(null)
 
@@ -119,35 +106,83 @@ const PDeliveryRow = ({payment}) => {
   const [error, setError] = useState(null)
 
     const handleStatusChange = async (e) => {
-        e.preventDefault()
+          // e.preventDefault()
+          setStatus(e.target.value);
 
-        const payment = {status}
+        // const payment = {status}
 
-        const response = await fetch('/api/payments' , {
-            method:'POST' ,
-            body: JSON.stringify(payment),
-            headers: {
-                'Content-Type' : 'application/json'
+        // const response = await fetch('/api/payments' , {
+        //     method:'POST' ,
+        //     body: JSON.stringify(payment),
+        //     headers: {
+        //         'Content-Type' : 'application/json'
+        //     }
+        // })
+
+        // const json = await response.json()
+
+          // if(!response.ok){
+          //   setError(json.error)
+          // }
+          // if(response.ok){
+          //     setStatus('')
+          //     setError(null)
+          //     console.log('delivery status updated!' , json)
+          // }
+          const updatedPayment = {
+            ...payment,
+            dStatus: e.target.value
+          };
+      
+          try {
+            const response = await fetch(`/api/payments/${payment._id}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedPayment)
+            });
+      
+            if (response.ok) {
+              setStatus('');
+              setError(null);
+              console.log('Delivery status updated!', response.data);
+            } else {
+              setError('Error updating delivery status.');
             }
-        })
-
-        const json = await response.json()
-
-        if(!response.ok){
-          setError(json.error)
+          } catch (error) {
+            setError(error.message);
+          }
         }
-        if(response.ok){
-            setStatus('')
-            setError(null)
-            console.log('delivery status updated!' , json)
-        }
-    }
+      
 
-//   const handleStatusChange = (e) => {
-//     const newStatus = e.target.value;
-//     setStatus(newStatus);
-//     updateStatus(newStatus); // Call your server-side function here to update the status
-  
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    const handleDelete = async () => {
+
+      const confirmDelete = window.confirm("Are you sure you want to delete this item?");
+      if (confirmDelete) {
+        try {
+          setIsDeleting(true);
+          const response = await fetch(`api/payments/${payment._id}`, {
+            method: 'DELETE',
+          });
+          if (response.ok) {
+            window.location.reload();
+          } else {
+            const json = await response.json();
+            // Handle error response
+            console.error(json.error);
+          }
+        } catch (error) {
+          // Handle fetch error
+          console.error(error);
+        } finally {
+          setIsDeleting(false);
+        }
+
+      }
+      };
 
     return(
         <tr key={payment._id}>
@@ -157,14 +192,21 @@ const PDeliveryRow = ({payment}) => {
             <td>{payment.district}</td>
             <td>{payment.country}</td>
             <td>{payment.dmethod}</td>
-            <td><td>
-            <select name="status" value={status} onChange={handleStatusChange}>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-      </select>
+            <td>
+            <input type="radio" name="status" value="pending" checked={status === "pending"} onChange={handleStatusChange} />
+<label for="pending">Pending</label>
+
+<input type="radio" name="status" value="inprocess" checked={status === "inprocess"} onChange={handleStatusChange} />
+<label for="inprocess">In Process</label>
+
+<input type="radio" name="status" value="delivered" checked={status === "delivered"} onChange={handleStatusChange} />
+<label for="delivered">Delivered</label>
+
 </td>
-</td>
+
+<td><button onClick = {handleDelete} disabled = {isDeleting}>
+        {isDeleting ? 'Deleting...' : 'DELETE'}
+      </button></td>
 
         </tr>
     )

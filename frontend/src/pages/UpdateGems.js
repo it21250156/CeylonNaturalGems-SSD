@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useGemsContext } from '../hooks/useGemsContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
+import "../CSS/GemAdminHome.css";
 
 function UpdateGems() {
   const { _id } = useParams();
@@ -157,7 +158,7 @@ function UpdateGems() {
           value={description}
           className={emptyFields.includes('description') ? 'error' : ''}
         />
-        <button>Update Gem</button>
+        <button className='gem-button'>Update Gem</button>
         {error && <div className="error">{error}</div>}
       </form>
     </div>

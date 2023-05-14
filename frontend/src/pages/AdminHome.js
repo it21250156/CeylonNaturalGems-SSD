@@ -83,20 +83,23 @@ const AdminHome = () => {
           >
             Installments
           </button>
+
           <button
             onClick={() => {
-              navigate('/JewelleryAdminDashboard');
+              navigate('/AdminPayments');
             }}
           >
             Payments
           </button>
+
           <button
             onClick={() => {
-              navigate('/JewelleryAdminDashboard');
+              navigate('/AdminDelivery');
             }}
           >
             Deliveries
           </button>
+
           <button
             onClick={() => {
               navigate('/AllUsers');
