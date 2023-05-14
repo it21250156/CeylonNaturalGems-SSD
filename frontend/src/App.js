@@ -46,6 +46,7 @@ import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
 import AddJewelleryes from './pages/AddJewelleryes';
 import JewelleryDetails from './components/JewelleryDetails';
 import UpdateJewellery from './pages/UpdateJewellery';
+import JewelleryAdminReport from './pages/JewelleryAdminReport';
 
 //Daham
 import JewelhomeMen from './pages/JewelhomeMen';
@@ -139,6 +140,10 @@ function App() {
             <Route
               path="/UpdateJewelleryes/:_id"
               element={<UpdateJewellery />}
+            />
+            <Route 
+            path="/JewelleryAdminReport"
+            element={<JewelleryAdminReport/>}
             />
 
             {/* daham */}
