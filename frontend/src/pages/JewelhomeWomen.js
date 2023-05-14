@@ -31,7 +31,7 @@ const Jewelhome = () => {
     const fetchJewels = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const response = await fetch('/api/jewelleryes');
+        const response = await fetch('/api/jewells/gender/Female/');
         const json = await response.json();
         dispatch({ type: 'FETCH_SUCCESS', payload: json });
       } catch (err) {

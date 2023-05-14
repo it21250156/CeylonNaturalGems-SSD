@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import gemVid from '../video/vid.mp4';
+import { useNavigate, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../CSS/Home.css';
 import Header from '../components/Header';
+import HomeSlider from '../components/HomeSlider';
+import Footer from '../components/Footer';
 
 // components
 
@@ -30,6 +31,7 @@ const Home = () => {
       <Header />
       <div>
         <div className="slider-space">
+          <HomeSlider />
           {/* <video>
           <source src={gemVid} type="video/mp4"></source>
         </video> */}
@@ -39,10 +41,49 @@ const Home = () => {
           <p className="line-2">Ceylon Natural Gems</p>
         </div>
 
-        <div className="gem-nav-card">
-          <p className="Section Name"></p>
+        <hr className="hr-home"></hr>
+
+        <Link to="/gems" className="banner">
+          <div className="gem-nav-card">
+            <div className="gem-img-holder">
+              {/* <div className="dark-box"> */}
+              <p className="section-name">Gemstones</p>
+              {/* </div> */}
+            </div>
+          </div>
+        </Link>
+
+        <Link to="/jwellhomeW" className="banner">
+          <div className="womenj-nav-card">
+            <div className="womenj-img-holder">
+              {/* <div className="dark-box"> */}
+              <p className="section-name">Women's Jewellery</p>
+              {/* </div> */}
+            </div>
+          </div>
+        </Link>
+
+        <Link to="/jwellhomeM" className="banner">
+          <div className="menj-nav-card">
+            <div className="menj-img-holder">
+              {/* <div className="dark-box"> */}
+              <p className="section-name">Men's Jewellery</p>
+              {/* </div> */}
+            </div>
+          </div>
+        </Link>
+
+        <hr className="hr-home"></hr>
+
+        <div className="req-box">
+          <p className="req-txt-1">Can't find something you like?</p>
+          <p className="req-txt-2">Let us help you</p>
+          <Link to={'/reqM'}>
+            <button className="req-btn">Request Gems</button>
+          </Link>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

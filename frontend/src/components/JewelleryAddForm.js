@@ -8,7 +8,7 @@ const JewelleryAddForm = () => {
     const [name, setName] = useState('')
     const [type, setType] = useState('')
     const [gender, setGender] = useState('')
-    const [gemstone, setGemstone] = useState('')
+    // const [gemstone, setGemstone] = useState('')
     const [metal, setMetal] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
@@ -18,7 +18,7 @@ const JewelleryAddForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const jewellery = {name, type, gender, gemstone, metal, description, price}
+        const jewellery = {name, type, gender, metal, description, price}
 
         const response = await fetch('/api/jewelleryes', {
             method: 'POST',
@@ -39,7 +39,7 @@ const JewelleryAddForm = () => {
             setName('')
             setType('')
             setGender('')
-            setGemstone('')
+            // setGemstone('')
             setMetal('')
             setDescription('')
             setPrice('')
@@ -80,13 +80,13 @@ const JewelleryAddForm = () => {
                 className={emptyFields.includes('gender') ? 'error': ''}
             </select>
 
-            <label>Gemstone: </label>
+            {/* <label>Gemstone: </label>
             <input type="radio" name="gemstone" value="Blue Sapphire" onChange={e=>setGemstone(e.target.value)}/>Blue Sapphire
             <input type="radio" name="gemstone" value="Pink Sapphire" onChange={e=>setGemstone(e.target.value)}/>Pink Sapphire
             <input type="radio" name="gemstone" value="Green Sapphire" onChange={e=>setGemstone(e.target.value)}/>Green Sapphire
             <input type="radio" name="gemstone" value="Emarald" onChange={e=>setGemstone(e.target.value)}/>Emarald
             <input type="radio" name="gemstone" value="Ruby" onChange={e=>setGemstone(e.target.value)}/>Ruby
-            <input type="radio" name="gemstone" value="Moonstone" onChange={e=>setGemstone(e.target.value)}/>Moonstone
+            <input type="radio" name="gemstone" value="Moonstone" onChange={e=>setGemstone(e.target.value)}/>Moonstone */}
 
             <lable>Metal</lable>
             <input type="radio" name="metal" value="GOLD" onChange={e=>setMetal(e.target.value)}/>GOLD

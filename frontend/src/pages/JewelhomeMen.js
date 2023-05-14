@@ -33,7 +33,8 @@ const Jewelhome = () => {
     const fetchJewels = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const response = await fetch('/api/jewelleryes');
+        const response = await fetch('/api/jewells/gender/Male');
+       //const response = await fetch(`/api/jewells/bygender/Male`);
         const json = await response.json();
         dispatch({ type: 'FETCH_SUCCESS', payload: json });
       } catch (err) {
@@ -53,6 +54,7 @@ const Jewelhome = () => {
             <div className="darkBlueTopicBox">
               <h3 className="pageTopic">Men's Jewellery</h3>
             </div>
+            {/* {JSON.stringify(Jewel)} */}
             <div className="gem-cards">
               {Jewel &&
                 Jewel.map((Jwl) => <JewelCard key={Jwl._id} Jwl={Jwl}></JewelCard>)}

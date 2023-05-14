@@ -1,4 +1,7 @@
 /* slider */
+.slider-space {
+  padding: 30px 0;
+}
 
 /* welcome box */
 .welcome-box {
@@ -23,13 +26,96 @@
   font-weight: 300;
 }
 
-/* cards */
+.hr-home {
+  height: 3px;
+  border: none;
+  background-color: #144272;
+  opacity: 100%;
+}
 
+/* cards */
+/* gem */
 .gem-nav-card {
-  background: url('../images/sliderImg\(4\).jpg') no-repeat;
-  height: 700px;
+  height: 500px;
+  margin: 60px;
+  overflow: hidden;
+}
+
+.gem-img-holder {
+  height: 100%;
   width: 100%;
-  background-size: cover;
+  background: url('../images/homeGemImg.jpg');
+  background-repeat: no-repeat;
   background-position: center;
-  margin: 30px;
+  background-size: cover;
+}
+
+.section-name {
+  line-height: 500px;
+  color: white;
+  opacity: 100%;
+  font-family: Bebas Neue;
+  font-size: 80px;
+}
+
+.banner {
+  text-decoration: none;
+}
+
+.gem-img-holder:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
+  text-shadow: 2px 2px 2px black;
+}
+
+.dark-box:hover {
+  background-color: black;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+/* womens jewellery */
+
+.womenj-nav-card {
+  height: 500px;
+  margin: 60px;
+  overflow: hidden;
+}
+
+.womenj-img-holder {
+  height: 100%;
+  width: 100%;
+  background: url('../images/homeWomenJewelleryImg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.womenj-img-holder:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
+  text-shadow: 2px 2px 2px black;
+}
+
+/* mens jewellery */
+
+.menj-nav-card {
+  height: 500px;
+  margin: 60px;
+  overflow: hidden;
+}
+
+.menj-img-holder {
+  height: 100%;
+  width: 100%;
+  background: url('../images/homeMenJewelleryImg.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.menj-img-holder:hover {
+  transform: scale(1.5);
+  transition: 0.5s;
+  text-shadow: 2px 2px 2px black;
 }
