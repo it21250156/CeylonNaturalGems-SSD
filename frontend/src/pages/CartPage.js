@@ -25,6 +25,7 @@ import CartTotal from './cartTotal';
 const CartPage = () => {
   const { user, cartData, setCartData } = useAuthContext();
   const [gems, setGems] = useState([]);
+  const [jewelleries, setJewelleries] = useState([])
   //   const [{ loading, error, cartitems, gems }, dispatch] = useReducer(
   //     logger(reducer),
   //     {
@@ -48,6 +49,17 @@ const CartPage = () => {
       }
     };
     fetchGems();
+    
+    const fetchJewelleries = async () => {
+      try {
+        const response = await fetch(`/api/jewelleryes`);
+        const json = await response.json();
+        setJewelleries(json);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchJewelleries();
 
     // const userId = JSON.parse(localStorage.getItem('userInfo'))._id;
     // console.log(userId);
@@ -105,7 +117,8 @@ const CartPage = () => {
                 <CartCard
                   key={item._id}
                   cartid={item._id}
-                  gem={gems.find((gem) => gem._id === item.cartitemid)}
+                  gem={gems.find((gem) => gem._id === item.cartitemid) || null}
+                  jewellery={jewelleries.find(jwl => jwl._id === item.cartitemid) || null}
                   // gemid={item.cartitemid}
                 ></CartCard>
               ))}
@@ -113,7 +126,7 @@ const CartPage = () => {
           <div className="cart-col-2">
             {/* {JSON.stringify(gems)}
               {JSON.stringify(cartData)} */}
-            <CartTotal gems={gems} cartData={cartData}></CartTotal>
+            <CartTotal gems={gems} jewelleries={jewelleries} cartData={cartData}></CartTotal>
           </div>
         </div>
       </div>
