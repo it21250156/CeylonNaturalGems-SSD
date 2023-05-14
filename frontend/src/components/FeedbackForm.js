@@ -6,20 +6,79 @@ import axios from 'axios';
 import Header from './Header';
 
 import '../CSS/FeedbackForm.css';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const FeedbackForm = () => {
   const { _id } = useParams();
   const { dispatch } = useFeedbacksContext();
 
+  const { cartData } = useAuthContext();
+  const [gems, setGems] = useState([])
+  const [jewellery, setJewelleries] = useState([])
+
+  useEffect(() => {
+    const fetchGems = async () => {
+      try {
+        const response = await fetch('/api/gems&jewelleries/gems');
+        const json = await response.json();
+        setGems(json);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchGems();
+
+    const fetchJewelleries = async () => {
+      try {
+        const response = await fetch(`/api/jewelleryes`);
+        const json = await response.json();
+        setJewelleries(json);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchJewelleries();
+
+  }, [])
+
   const [payment, setPayment] = useState('');
   const [orders, setOrders] = useState('');
-  const [gemType, setGemType] = useState('');
-  const [gemQty, setGemQty] = useState('');
+  const [gemType, setGemType] = useState(() => {
+    let gemTypeString = ""
+    return cartData?.map(cartItem => {
+      gems.find(gem => gem._id == cartItem.cartitemid)
+
+    })
+    return gemTypeString
+  });
+
+  const [gemQty, setGemQty] = useState(() => {
+    
+  });
   const [fbInfo, setFbInfo] = useState('');
   const [rating, setRating] = useState(0);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const nav = useNavigate();
+
+  useEffect(() => {
+    setGemType(() => {
+      let str = ''
+      cartData?.map(cartItem => {
+        gems.find(gem => {
+          if (gem._id === cartItem.cartitemid) {
+            str += cartItem.cartquantity + "x "+ gem.name + " " 
+          }
+        })
+      })
+      return str
+    })
+    setGemQty (() =>{
+      let sum = 0
+    cartData.map(cartItem => sum += cartItem?.cartquantity || 0)
+    return sum
+    })
+  })
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
@@ -95,6 +154,9 @@ const FeedbackForm = () => {
         <p className="title-feedback">Add a new Feedback</p>
       </div>
       <div className="light-blue-bg">
+        {JSON.stringify(cartData[0])}
+        {JSON.stringify(gems[0])}
+        {JSON.stringify(jewellery[0])}
         <form
           className="create"
           onSubmit={handleSubmit}
@@ -106,7 +168,15 @@ const FeedbackForm = () => {
             id="input"
             type="text"
             onChange={(e) => setGemType(e.target.value)}
-            value={gemType}
+            value={gemType
+              // cartData?.map(cartItem => {
+              //   gems.find(gem => {
+              //     if (gem._id === cartItem.cartitemid) {
+              //       return gem?.name
+              //     }
+              //   })
+              // })
+            }
             className={emptyFields?.find((f) => f === 'gemType') ? 'error' : ''}
           />
           {/* {JSON.stringify(orders)} */}

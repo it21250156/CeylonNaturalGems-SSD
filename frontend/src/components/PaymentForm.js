@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Header from './Header';
 import '../CSS/PaymentForm.css';
@@ -27,6 +27,11 @@ const PaymentForm = () => {
 
   const [successMessage, setSuccessMessage] = useState(false); 
 
+  useEffect(()=> {
+
+    setOrderID(cartData?.map(cart => cart.cartitemid))
+  },[cartData])
+
   if (gotoPaymentlist) {
     return <Navigate to="/MyPayments" />;
   }
@@ -34,8 +39,8 @@ const PaymentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(cartData) {
-      setOrderID(cartData?.map(cart => cart.cartitemid))
+    if(!cartData) {
+      return
     }
 
     if (!cardNo || !cardName || !exMonth || !exYear || !secCode ) {
@@ -149,7 +154,7 @@ const PaymentForm = () => {
         <div className="whiteBodyBG">
           <div className="darkBlueTopicBox">
             <h3 className="pageTopic">PAYMENT FORM</h3>
-          </div>
+          </div> {JSON.stringify(orderID)}
           <div className="container">
             <form className="create" onSubmit={handleSubmit}>
               <div className="form-fields">
