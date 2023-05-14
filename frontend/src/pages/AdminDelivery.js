@@ -161,7 +161,7 @@ const PDeliveryRow = ({payment}) => {
     const handleDelete = async () => {
 
       const confirmDelete = window.confirm("Are you sure you want to delete this item?");
-  if (confirmDelete) {
+      if (confirmDelete) {
         try {
           setIsDeleting(true);
           const response = await fetch(`api/payments/${payment._id}`, {
@@ -196,11 +196,11 @@ const PDeliveryRow = ({payment}) => {
             <input type="radio" name="status" value="pending" checked={status === "pending"} onChange={handleStatusChange} />
 <label for="pending">Pending</label>
 
-<input type="radio" name="status" value="approved" checked={status === "approved"} onChange={handleStatusChange} />
-<label for="approved">Approved</label>
+<input type="radio" name="status" value="inprocess" checked={status === "inprocess"} onChange={handleStatusChange} />
+<label for="inprocess">In Process</label>
 
-<input type="radio" name="status" value="rejected" checked={status === "rejected"} onChange={handleStatusChange} />
-<label for="rejected">Rejected</label>
+<input type="radio" name="status" value="delivered" checked={status === "delivered"} onChange={handleStatusChange} />
+<label for="delivered">Delivered</label>
 
 </td>
 

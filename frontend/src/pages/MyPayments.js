@@ -117,7 +117,9 @@ const PaymentRow = ({payment}) => {
         {isDeleting ? 'Deleting...' : 'DELETE'}
       </button></td> */}
         <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
-        <td><button> FEEDBACK </button></td>
+        <td><button
+          disabled = {(payment?.orderID?.length > 0 && payment?.orderID[0].length > 0) ? false : true}
+        > FEEDBACK</button></td>
     </tr>
     )
 }

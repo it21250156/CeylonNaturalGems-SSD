@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Header from './Header';
 import '../CSS/PaymentForm.css';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const PaymentForm = () => {
+  const { cartData } = useAuthContext();
+
   const [user, setUser] = useState('');
   const [orderID, setOrderID] = useState('');
   const [amount, setAmount] = useState('');
@@ -18,7 +21,7 @@ const PaymentForm = () => {
   const [district, setDistrict] = useState('');
   const [country, setCountry] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
-  const [dStatus, setStatus] = useState('');
+  const [dStatus, setStatus] = useState('Pending');
   const [error, setError] = useState(null);
   const [gotoPaymentlist, setGotopaymentList] = useState(false);
 
@@ -30,6 +33,10 @@ const PaymentForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(cartData) {
+      setOrderID(cartData?.map(cart => cart.cartitemid))
+    }
 
     if (!cardNo || !cardName || !exMonth || !exYear || !secCode ) {
       setError('Please fill in all required fields');
@@ -143,7 +150,6 @@ const PaymentForm = () => {
           <div className="darkBlueTopicBox">
             <h3 className="pageTopic">PAYMENT FORM</h3>
           </div>
-
           <div className="container">
             <form className="create" onSubmit={handleSubmit}>
               <div className="form-fields">
