@@ -139,7 +139,7 @@ const PaymentForm = () => {
     } 
   };
 
-  const amountInfo = localStorage.getItem('TamountInfo');
+  const amountInfo       = localStorage.getItem('TamountInfo');
   const parsedAmountInfo = amountInfo ? JSON.parse(amountInfo) : '';
 
   return (
