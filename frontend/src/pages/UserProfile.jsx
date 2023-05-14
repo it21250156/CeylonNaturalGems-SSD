@@ -14,29 +14,74 @@ const UserProfile = () => {
   const location = useLocation();
   const { logout } = useLogout();
 
+  // const [title, setTitle] = useState('');
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [phone, setPhone] = useState('');
+  // const [error, setError] = useState(null)
+
+
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
+
   const { dispatch } = useAuthContext();
 
   const HandleDeleteAccount = async () => {
-    const response = await fetch(`/api/users/${user._id}`, {
-      method: 'DELETE',
-    });
 
-    const json = await response.json();
+    try{
 
-    if (response.ok) {
-      dispatch({ type: 'DELETE_USER', payload: json });
-      logout();
-      navigate('/');
-      window.location.reload();
+      const response = await fetch(`/api/users/${user._id}`, {
+        method: 'DELETE',
+      });
+  
+      const json = await response.json();
+  
+      if (response.ok) {
+
+        const newDeletedUser = {
+          duserID: user._id,
+          dtitle: user.title,
+          dfirstName: user.firstName,
+          dlastName: user.lastName,
+          demail: user.email,
+          dphone: user.phone,
+        };
+
+        await fetch('/api/deletedUser', {
+                  method: 'POST',
+                  body: JSON.stringify(newDeletedUser),
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+              })
+
+              dispatch({type: 'CREATE_DELETED_USER' , payload: json})
+
+              console.log('new deletedUser added' , json )
+
+
+
+
+        dispatch({ type: 'DELETE_USER', payload: json });
+        logout();
+        navigate('/');
+        window.location.reload();
+      }
+
+    }catch{
+
     }
+
+    
   };
 
   const user = JSON.parse(localStorage.getItem('userInfo'));
+
+ 
 
   /*******************************************************/
 
@@ -85,10 +130,10 @@ const UserProfile = () => {
           </div>
           <div className="user-details">
             <table>
-              <tr>
+              {/* <tr>
                 <td className="detail-label">User ID</td>
                 <td className="detail-prop">{userData._id}</td>
-              </tr>
+              </tr> */}
               <tr>
                 <td className="detail-label">Name</td>
                 <td className="detail-prop">

@@ -5,7 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import { useAuthContext } from "../hooks/useAuthContext"
 import React from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
@@ -13,6 +13,7 @@ import { useLogout } from '../hooks/useLogout';
 
 
 function ReplyRequest(){
+    const {reqId} = useParams()
     const { logout } = useLogout();
     const {user} = useAuthContext()
     const navigate = useNavigate()
@@ -33,8 +34,10 @@ function ReplyRequest(){
     //   }, [])
     
       const createReply = () => {
-        Axios.post("/createReply",{
+        
+        Axios.post(`/createReply/`,{
           reply,
+          reqId
         }).then((response) => {
           alert("wade goda bosa!");
         })

@@ -1,91 +1,131 @@
-import '../CSS/AppBW.css';
-import { useState, useEffect } from 'react';
-import React from 'react';
-import Axios from 'axios';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Link, useParams } from 'react-router-dom';
-import TextareaAutosize from 'react-textarea-autosize';
-import Header from '../components/Header';
+import "../CSS/AppBW.css";
+import { useState, useEffect } from "react";
+import React from "react";
+import Axios from "axios";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { Link, useParams } from "react-router-dom";
+import TextareaAutosize from "react-textarea-autosize";
+import Header from "../components/Header";
+import { getWeekYearWithOptions } from "date-fns/fp";
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
   newGemColour: yup.string(),
   newGemDescription: yup.string(),
-  newGemWeight: yup.number().positive(),
+  // newGemWeight: yup.number().positive(),
+  newGemQuantity: yup.number().positive(),
 });
 
 function MyReq() {
+  const uid = JSON.parse(localStorage.getItem("userInfo"))?._id || null;
   const [listOfRequests, setListOfRequests] = useState([]);
-  const [newGemShape, setNewGemShape] = useState('');
-  const [newGemColour, setNewGemColour] = useState('');
-  const [newGemDescription, setNewnewGemDescription] = useState('');
-  const [newGemWeight, setNewnewGemWeight] = useState('');
+  const [listOfReplyStatus, setListOfReplyStatus] = useState([]);
+  const [newGemShape, setNewGemShape] = useState("");
+  const [newGemColour, setNewGemColour] = useState("");
+  const [newGemDescription, setNewnewGemDescription] = useState("");
+  // const [newGemWeight, setNewnewGemWeight] = useState('');
+  const [newGemQuantity, setNewnewGemQuantity] = useState("");
+
   const gemShapes = [
-    'round',
-    'oval',
-    'pear',
-    'marquise',
-    'emerald',
-    'heart',
-    'princess',
-    'cushion',
+    "round",
+    "oval",
+    "pear",
+    "marquise",
+    "emerald",
+    "heart",
+    "princess",
+    "cushion",
   ];
 
   const deletereq = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
-      alert('Deleted Successuflly! Please refresh the page');
+      window.location.reload();
     });
   };
 
+  async function getReplyStatus() {
+    try {
+      const response = await Axios.get(`/getReplyByUser/${uid}`);
+      setListOfReplyStatus(response.data);
+      console.log("got " + response.data);
+    } catch (error) {
+      console.log(error);
+      setListOfReplyStatus([...listOfReplyStatus, { reqId: error.message }]);
+    }
+  }
+
   useEffect(() => {
-    Axios.get('/getUsers').then((response) => {
+    Axios.get(`/getUsersRequests/${uid}`).then((response) => {
       setListOfRequests(response.data);
+      getReplyStatus(response.data);
     });
+    getReplyStatus();
   }, []);
 
   const updateGemShape = (id) => {
     if (newGemShape) {
-      Axios.put('/updateGshape', {
+      Axios.put("/updateGshape", {
         id: id,
         newGemShape: newGemShape,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert("Updated Successfully!");
       });
     }
   };
 
   const updateGemColour = (id) => {
     if (newGemColour) {
-      Axios.put('/updateGsCl', {
+      Axios.put("/updateGsCl", {
         id: id,
         newGemColour: newGemColour,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert("Updated Successfully!");
       });
     }
   };
 
   const updateGemDescription = (id) => {
     if (newGemDescription) {
-      Axios.put('/updateDes', {
+      Axios.put("/updateDes", {
         id: id,
         newGemDescription: newGemDescription,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert("Updated Successfully!");
       });
     }
   };
 
-  const updateGemWeight = (id) => {
-    if (newGemWeight) {
-      Axios.put('/updateWt', {
+  // const updateGemWeight = (id) => {
+  //   if (newGemWeight) {
+  //     Axios.put('/updateWt', {
+  //       id: id,
+  //       newGemWeight: newGemWeight,
+  //     }).then((response) => {
+  //       alert('Updated Successfully! Please refresh the page');
+  //     });
+  //   }
+  // };
+
+  const updateGemQuantity = (id) => {
+    if (newGemQuantity) {
+      Axios.put("/updateQt", {
         id: id,
-        newGemWeight: newGemWeight,
+        newGemQuantity: newGemQuantity,
       }).then((response) => {
-        alert('Updated Successfully! Please refresh the page');
+        window.location.reload();
+        alert("Updated Successfully!");
       });
+    }
+  };
+
+  const confirmDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this request?')) {
+      deletereq(id);
     }
   };
 
@@ -104,19 +144,19 @@ function MyReq() {
         <div className="darkBlueTopicBoxReq">
           <h1 className="pageTopicReq">My Requests</h1>
         </div>
-
+        {/* {JSON.stringify(listOfReplyStatus)} */}
         <div className="lightBlueBodyBG-my-req">
           <button
             className="add-req-btn"
             onClick={() => {
-              window.location.href = './reqM';
+              window.location.href = "./reqM";
             }}
           >
             Create a new request
           </button>
           {listOfRequests.map((user) => {
             return (
-              <div>
+              <div key={user._id}>
                 <div className="whiteBodyBG">
                   <div className="white-content">
                     <div className="myreq-column-1">
@@ -198,12 +238,21 @@ function MyReq() {
                           }}
                         />
 
-                        <input
+                        {/* <input
                           type="number"
                           placeholder="Edit weight...."
                           className="input"
                           onChange={(event) => {
                             setNewnewGemWeight(event.target.value);
+                          }}
+                        /> */}
+
+                        <input
+                          type="number"
+                          placeholder="Edit quantity...."
+                          className="input"
+                          onChange={(event) => {
+                            setNewnewGemQuantity(event.target.value);
                           }}
                         />
 
@@ -213,7 +262,8 @@ function MyReq() {
                             updateGemColour(user._id);
                             updateGemShape(user._id);
                             updateGemDescription(user._id);
-                            updateGemWeight(user._id);
+                            // updateGemWeight(user._id);
+                            updateGemQuantity(user._id);
                           }}
                         >
                           Update
@@ -221,8 +271,27 @@ function MyReq() {
                       </form>
                     </div>
                   </div>
+                  {/* {listOfReplyStatus[user._id] || "jncos"} */}
+                  <button
+                    
+                    disabled={
+                      listOfReplyStatus[user._id] > 0 ||
+                      listOfReplyStatus[user._id] === null
+                        ? true
+                        : false
+                    }
+                    className="repliesbtn"
+                    onClick={() => {
+                      window.location.href = `./reply_uv/${user._id}`;
+                    }}
+                  >
+                    Replies
+                  </button>
 
-                  <button class="btn" onClick={() => deletereq(user._id)}>
+                  <button
+                    class="btn-del"
+                    onClick={() => confirmDelete(user._id)}
+                  >
                     <p class="paragraph"> delete </p>
                     <span class="icon-wrapper">
                       <svg

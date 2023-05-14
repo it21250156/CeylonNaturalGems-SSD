@@ -36,7 +36,7 @@ const UserFeedbacks = () => {
         </div>
         <div className="light-blue-bg">
           <div className="top-btn">
-            {/* <FeedbackForm/> */}
+           
 
             <button
               className="add-feedback-btn"

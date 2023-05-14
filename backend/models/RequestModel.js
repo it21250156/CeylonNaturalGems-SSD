@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const RequestSchema = new Schema({
     // requestID:{
     //     type: Number,
     //     required:false,
@@ -45,6 +45,11 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true,
+    },
 });
 
 // const ReplySchema = new mongoose.Schema({
@@ -56,6 +61,5 @@ const UserSchema = new mongoose.Schema({
 //     },
 
 // })
-
-const UserModel = mongoose.model("requests", UserSchema);
-module.exports = UserModel;
+const RequestModel = model("requests", RequestSchema);
+module.exports = RequestModel;
