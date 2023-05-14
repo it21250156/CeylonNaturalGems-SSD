@@ -45,7 +45,7 @@ const PaymentSchema = new Schema({
       },
       dStatus:{
         type:String,
-        default: "pending"
+        default: "Pending"
       },
      
       

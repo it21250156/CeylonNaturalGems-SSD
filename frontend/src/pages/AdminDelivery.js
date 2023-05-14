@@ -22,19 +22,21 @@ const AdminDelivery = () =>{
   }
 
     const [payments , setPayments] = useState(null)
+    const [reload , setReload] = useState(true)
 
     useEffect(() => {
         const fetchPayments = async() => {
            const response = await fetch('/api/payments')
-           const json = await response.json()
+           const json     = await response.json()
     
            if (response.ok){
-             setPayments(json) 
-           }
+             setPayments(json)
+            }
+            setReload(false)
         }
     
         fetchPayments()
-        }, [])
+        }, [reload])
 
 
     return(
@@ -87,7 +89,7 @@ const AdminDelivery = () =>{
 
     <tbody>
     {payments && payments.map((payment) => (
-                 <PDeliveryRow key={payment._id} payment={payment}/>
+                 <PDeliveryRow key={payment._id} payment={payment} reload={reload} setReload={setReload}/>
                ))}
     </tbody>
 </table>
@@ -100,9 +102,9 @@ const AdminDelivery = () =>{
     )
 }
 
-const PDeliveryRow = ({payment}) => {
+const PDeliveryRow = ({payment, setReload}) => {
 
-    const [status, setStatus] = useState(payment.dStatus);
+    const [status, setStatus] = useState("");
   const [error, setError] = useState(null)
 
     const handleStatusChange = async (e) => {
@@ -121,32 +123,34 @@ const PDeliveryRow = ({payment}) => {
 
         // const json = await response.json()
 
-          // if(!response.ok){
-          //   setError(json.error)
-          // }
-          // if(response.ok){
-          //     setStatus('')
-          //     setError(null)
-          //     console.log('delivery status updated!' , json)
-          // }
+            // if(!response.ok){
+            //   setError(json.error)
+            // }
+            // if(response.ok){
+            //     setStatus('')
+            //     setError(null)
+            //     console.log('delivery status updated!' , json)
+            // }
           const updatedPayment = {
             ...payment,
             dStatus: e.target.value
           };
+          console.log(updatedPayment)
       
           try {
             const response = await fetch(`/api/payments/${payment._id}`, {
-              method: 'POST',
+              method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify(updatedPayment)
             });
-      
+            console.log(response)
             if (response.ok) {
               setStatus('');
               setError(null);
               console.log('Delivery status updated!', response.data);
+              setReload(true)
             } else {
               setError('Error updating delivery status.');
             }
@@ -193,17 +197,16 @@ const PDeliveryRow = ({payment}) => {
             <td>{payment.country}</td>
             <td>{payment.dmethod}</td>
             <td>
-            <input type="radio" name="status" value="pending" checked={status === "pending"} onChange={handleStatusChange} />
+            <input type="radio" name={"status_"+payment._id} value="Pending" checked={payment.dStatus === "Pending"} onChange={(e) => handleStatusChange(e)} />
 <label for="pending">Pending</label>
 
-<input type="radio" name="status" value="inprocess" checked={status === "inprocess"} onChange={handleStatusChange} />
+<input type = "radio" name = {"status_"+payment._id} value = "In Process" checked = {payment.dStatus === "In Process"} onChange={(e) => handleStatusChange(e)} />
 <label for="inprocess">In Process</label>
 
-<input type="radio" name="status" value="delivered" checked={status === "delivered"} onChange={handleStatusChange} />
-<label for="delivered">Delivered</label>
+<input type = "radio" name = {"status_"+payment._id} value = "Delivered" checked = {payment.dStatus === "Delivered"} onChange = {(e) => handleStatusChange(e)} />
+<label for  = "delivered">Delivered</label>
 
 </td>
-
 <td><button onClick = {handleDelete} disabled = {isDeleting}>
         {isDeleting ? 'Deleting...' : 'DELETE'}
       </button></td>

@@ -86,11 +86,13 @@ const updatePayment = async (req , res) => {
 
     const payment = await Payment.findByIdAndUpdate({_id:id} , {
         ...req.body
-    })
+    },
+    { new: true })
     
     if(!payment){
         return res.status(404).json({error: 'No such Payment!'})
        }
+       console.log("payment", payment)
        res.status(200).json(payment) 
 
 }

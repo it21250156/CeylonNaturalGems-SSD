@@ -143,13 +143,13 @@ const PPaymentRow = ({payment}) => {
     fetchCart();
 }, []);
 
-    const handleStatusChange = async (e) => {
+    const handleStatusChange = async (payment_id, e) => {
         e.preventDefault()
 
       //  const payment = {status}
 
-        const response = await fetch('/api/payments' , {
-            method:'POST' ,
+        const response = await fetch('/api/payments', {
+            method:'PATCH' ,
             body: JSON.stringify(payment),
             headers: {
                 'Content-Type' : 'application/json'
