@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
-import axios from 'axios';
+
+import '../CSS/AdminHome.css';
 
 // components
 
@@ -32,8 +33,10 @@ const AdminHome = () => {
           <nav>
             <div className="navprofileDiv">
               <div className="navEmal">
-                <span>Hello Admin</span>
-                <button onClick={handleClick}>Log out</button>
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
               </div>
             </div>
 
@@ -47,66 +50,76 @@ const AdminHome = () => {
       </header>
       <body>
         <div className="home">
-          <h1>hi Admin</h1>
-          <button
-            onClick={() => {
-              navigate('/GemAdminHome');
-            }}
-          >
-            Gem Stones
-          </button>
-          <button
-            onClick={() => {
-              navigate('/JewelleryAdminDashboard');
-            }}
-          >
-            Jewellery
-          </button>
-          <button
-            onClick={() => {
-              navigate('/reqAd');
-            }}
-          >
-            Gem Requests
-          </button>
-          <button
-            onClick={() => {
-              navigate('/AdminFeedbacks');
-            }}
-          >
-            Feedbacks
-          </button>
-          <button
-            onClick={() => {
-              navigate('/AdminInstallmentPlans');
-            }}
-          >
-            Installments
-          </button>
+          <div className="admin-home-page-topic-box">
+            <h1 className="adminWelcome">Welcome Admin</h1>
+          </div>
 
-          <button
-            onClick={() => {
-              navigate('/AdminPayments');
-            }}
-          >
-            Payments
-          </button>
+          <div className="adminBtnsBody">
+            <div className="adminHome-col1">
+              <button
+                onClick={() => {
+                  navigate('/GemAdminHome');
+                }}
+              >
+                Gem Stones
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/JewelleryAdminDashboard');
+                }}
+              >
+                Jewellery
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/reqAd');
+                }}
+              >
+                Gem Requests
+              </button>
+              <button
+                onClick={() => {
+                  navigate('/AdminFeedbacks');
+                }}
+              >
+                Feedbacks
+              </button>
+            </div>
 
-          <button
-            onClick={() => {
-              navigate('/AdminDelivery');
-            }}
-          >
-            Deliveries
-          </button>
+            <div className="adminHome-col2">
+              <button
+                onClick={() => {
+                  navigate('/AdminInstallmentPlans');
+                }}
+              >
+                Installments
+              </button>
 
-          <button
-            onClick={() => {
-              navigate('/AllUsers');
-            }}
-          >
-            Customer Details
-          </button>
+              <button
+                onClick={() => {
+                  navigate('/AdminPayments');
+                }}
+              >
+                Payments
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate('/AdminDelivery');
+                }}
+              >
+                Deliveries
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate('/AllUsers');
+                }}
+              >
+                Customer Details
+              </button>
+            </div>
+          </div>
         </div>
       </body>
     </>

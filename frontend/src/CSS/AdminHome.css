@@ -1,0 +1,35 @@
+.adminLogoutBtn {
+  background-color: red;
+  color: white;
+  padding: 3px 20px;
+  margin: 0px 0px 5px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.adminLogoutBtn:hover {
+  background-color: white;
+  color: red;
+  transition: 0.5s;
+}
+
+.welcomeNoteAdmin {
+  font-family: legendum;
+  color: white;
+  font-style: italic;
+}
+
+.admin-home-page-topic-box {
+  background: url(../images/img3.jpg) no-repeat center;
+  margin: 20px 200px;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.adminWelcome {
+  font-family: Lobster;
+  font-size: 50px;
+  color: white;
+  text-shadow: 3px 3px 5px black;
+}
