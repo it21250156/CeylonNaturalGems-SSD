@@ -103,7 +103,7 @@ const AllUsers = () => {
             </div>
 
                 <table className="table table-striped table-hover">
-                  <thead>
+                  <thead style={{backgroundColor: "#144272"}}>
                       <tr> 
                         <th>Customer Name</th>
                         <th>Customer Type</th>
