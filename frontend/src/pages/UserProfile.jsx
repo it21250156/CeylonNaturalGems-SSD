@@ -14,14 +14,6 @@ const UserProfile = () => {
   const location = useLocation();
   const { logout } = useLogout();
 
-  // const [title, setTitle] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [phone, setPhone] = useState('');
-  // const [error, setError] = useState(null)
-
-
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -136,10 +128,6 @@ const UserProfile = () => {
           </div>
           <div className="user-details">
             <table>
-              {/* <tr>
-                <td className="detail-label">User ID</td>
-                <td className="detail-prop">{userData._id}</td>
-              </tr> */}
               <tr>
                 <td className="detail-label">Name</td>
                 <td className="detail-prop">
