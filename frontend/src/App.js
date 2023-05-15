@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 import Header from './components/Header';
+import React, {createContext, useState, useContext } from 'react';
+
 
 // pages & components
 import Home from './pages/Home';
@@ -14,6 +16,10 @@ import AdminUsers from './pages/AdminUsers';
 import AdminHome from './pages/AdminHome';
 import ResetPassword from './pages/ChangePassword';
 import AllUsers from './pages/AllUsers';
+
+import OTPInput from "./components/OTPInput";
+import Recovered from "./components/Recovered";
+import Reset from "./components/Reset";
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -69,10 +75,14 @@ import AdminPayments from './pages/AdminPayments';
 import AdminDelivery from './pages/AdminDelivery';
 import GemAdminReports from './pages/GemAdminReports';
 
+export const RecoveryContext = createContext();
+
 function App() {
   const { user } = useAuthContext();
 
   return (
+
+  
     <div className="App">
       <BrowserRouter>
         <div className="pages">
@@ -81,6 +91,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
             <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
+            <Route path="/otp" element={ <OTPInput /> } />
+            <Route path="/reset" element={ <Reset /> } />
             <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
             <Route path="/profile/:id" element={<UserProfile />} />
             <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />

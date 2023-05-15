@@ -43,21 +43,24 @@ const UserProfile = () => {
       if (response.ok) {
 
         const newDeletedUser = {
-          duserID: user._id,
-          dtitle: user.title,
-          dfirstName: user.firstName,
-          dlastName: user.lastName,
-          demail: user.email,
-          dphone: user.phone,
+         userID: userData._id,
+         userType : userData.userType,
+         title: userData.title,
+         firstName: userData.firstName,
+         lastName: userData.lastName,
+         email: userData.email,
+         phone: userData.phone,
         };
 
-        await fetch('/api/deletedUser', {
+        const response1 = await fetch('/api/deletedusers', {
                   method: 'POST',
                   body: JSON.stringify(newDeletedUser),
                   headers: {
                       'Content-Type': 'application/json'
                   }
               })
+
+              const json = await response1.json();
 
               dispatch({type: 'CREATE_DELETED_USER' , payload: json})
 
