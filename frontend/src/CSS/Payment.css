@@ -88,7 +88,7 @@ input.error {
 }
 
 table {
-  /* width: 1025px; */
+  width: 1025px;
   text-align: left;
   background: #cadefc;
   margin: 10px;
@@ -122,7 +122,7 @@ table tbody tr td button:disabled {
   cursor: default;
 }
 
-thead tr th {
+/* thead tr th {
   background: #144272;
   border: 0;
   width: 100%;
@@ -132,7 +132,7 @@ thead tr th {
   font-family: 'Poppins';
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 div.insBtn {
   background: #2c74b3;

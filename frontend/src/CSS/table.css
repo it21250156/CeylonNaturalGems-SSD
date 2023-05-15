@@ -97,7 +97,7 @@
     height: 50px;
     vertical-align: bottom;
   }
-  
+
   table tbody tr td button{
     background: #2c74b3;
     border: 0;
@@ -107,14 +107,13 @@
     font-family: "Poppins";
     border-radius: 4px;
     cursor: pointer;
-  }
+  } 
   
   thead tr th {
     background: #144272;
     border: 0;
-  
     height: 70%;
-    color: white;
+    color: black;
     padding: 10px;
     font-family: "Poppins";
     border-radius: 4px;

@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
-import '../CSS/table.css';
+//import '../CSS/table.css';
 
 
 const AllUsers = () => {
@@ -102,10 +102,11 @@ const AllUsers = () => {
                 <h3 className="pageTopic">All Users</h3>
             </div>
 
-                <table >
+                <table className="table table-striped table-hover">
                   <thead>
                       <tr> 
                         <th>Customer Name</th>
+                        <th>Customer Type</th>
                         <th>Email</th>
                         <th>Phone number</th>
                       </tr>
@@ -115,6 +116,7 @@ const AllUsers = () => {
                       {AllUserData.userData && AllUserData.userData.map((data , index) => (
                         <tr key={index}>
                         <td>{data.title} {data.firstName} {data.lastName}</td>
+                        <td> {data.userType} </td>
                         <td> {data.email} </td>
                         <td> {data.phone} </td>
                         </tr>
@@ -122,6 +124,7 @@ const AllUsers = () => {
                       {AllUserData.deletedUserData && AllUserData.deletedUserData.map((data , index) => (
                         <tr key={index}>
                         <td>{data.title} {data.firstName} {data.lastName}</td>
+                        <td> {data.userType} </td>
                         <td> {data.email} </td>
                         <td> {data.phone} </td>
                         </tr>
