@@ -17,10 +17,6 @@ import AdminHome from './pages/AdminHome';
 import ResetPassword from './pages/ChangePassword';
 import AllUsers from './pages/AllUsers';
 
-import OTPInput from "./components/OTPInput";
-import Recovered from "./components/Recovered";
-import Reset from "./components/Reset";
-
 //janith
 import Gemhome from './pages/Gemhome';
 import GemScreen from './pages/GemScreen';
@@ -91,8 +87,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
             <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
-            <Route path="/otp" element={ <OTPInput /> } />
-            <Route path="/reset" element={ <Reset /> } />
             <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
             <Route path="/profile/:id" element={<UserProfile />} />
             <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
