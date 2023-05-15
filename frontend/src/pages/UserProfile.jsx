@@ -33,7 +33,7 @@ const UserProfile = () => {
   const HandleDeleteAccount = async () => {
 
     try{
-
+      // send delete user request
       const response = await fetch(`/api/users/${user._id}`, {
         method: 'DELETE',
       });
@@ -42,6 +42,7 @@ const UserProfile = () => {
   
       if (response.ok) {
 
+        // get current user details when user trying to delete the account
         const newDeletedUser = {
          userID: userData._id,
          userType : userData.userType,
@@ -52,6 +53,7 @@ const UserProfile = () => {
          phone: userData.phone,
         };
 
+        // send user inmportant data to an another collection
         const response1 = await fetch('/api/deletedusers', {
                   method: 'POST',
                   body: JSON.stringify(newDeletedUser),
@@ -68,6 +70,7 @@ const UserProfile = () => {
 
 
 
+              // delete a user and set he/she can't login with these user login details again
 
         dispatch({ type: 'DELETE_USER', payload: json });
         logout();
