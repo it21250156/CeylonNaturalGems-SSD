@@ -20,23 +20,23 @@ const GemTypesReport = () => {
     const gemTypes = Object.keys(typesCount);
 
     return (
-        <div className="bar-chart-container">
-            <div className="chart">
+        <div className="admin-bar-chart-container">
+            <div className="admin-chart">
                 {gemTypes.map((type, index) => (
                     <div
-                        className="bar"
+                        className="admin-bar"
                         key={type}
                         style={{ height: `${(typesCount[type] / maxCount) * 100}%` }}
                     />
                 ))}
             </div>
-            <div className="axis-labels">
-                <div className="y-axis">
+            <div className="admin-axis-labels">
+                <div className="admin-y-axis">
 
                 </div>
-                <div className="x-axis">
+                <div className="admin-x-axis">
                     {gemTypes.map((type, index) => (
-                        <div className="x-axis-label" key={type}>
+                        <div className="admin-x-axis-label" key={type}>
                             {type}
                         </div>
                     ))}

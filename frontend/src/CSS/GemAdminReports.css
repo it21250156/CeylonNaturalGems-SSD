@@ -1,10 +1,10 @@
 /* GemAdminReports.css */
-.bar-chart-container {
+.admin-bar-chart-container {
   width: 80%;
   margin: 0 auto;
 }
 
-.chart {
+.admin-chart {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -14,66 +14,64 @@
   background-color: #f7f7f7;
 }
 
-.bar {
+.admin-bar {
   width: 100px;
   background-color: #4286f4;
   transition: height 0.3s ease;
 }
 
-.bar:hover {
+.admin-bar:hover {
   background-color: #3276d6;
 }
 
-.axis-labels {
+.admin-axis-labels {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
   font-family: Arial, sans-serif;
 }
 
-.y-axis {
+.admin-y-axis {
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
   margin-right: 8px;
 }
 
-.y-axis-label-container {
+.admin-y-axis-label-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.y-axis-label {
+.admin-y-axis-label {
   text-align: right;
   font-size: 12px;
   color: #333;
   margin-bottom: 10px;
 }
 
-.x-axis {
+.admin-x-axis {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.x-axis-label {
+.admin-x-axis-label {
   text-align: center;
   font-size: 12px;
   color: #333;
 }
 
-/* Optional: Add some spacing and styling for better readability */
-
-.bar-chart-container {
+.admin-bar-chart-container {
   margin-top: 20px;
 }
 
-.chart {
+.admin-chart {
   padding: 20px;
   background-color: #f7f7f7;
 }
 
-.axis-labels {
+.admin-axis-labels {
   margin-top: 20px; /* Add spacing between the chart and axis labels */
 }
