@@ -1,90 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import { useGemsContext } from '../hooks/useGemsContext';
-import { useNavigate, useParams } from 'react-router-dom';
-import TextareaAutosize from 'react-textarea-autosize';
-import "../CSS/GemAdminHome.css";
+import React, { useEffect, useState } from "react";
+import { useGemsContext } from "../hooks/useGemsContext";
+import { useNavigate, useParams } from "react-router-dom";
+import TextareaAutosize from "react-textarea-autosize";
+import "../CSS/GemAddForm.css";
 
 function UpdateGems() {
   const { _id } = useParams();
   const { gems, dispatch } = useGemsContext();
-  const [gem, setGem] = useState({});
-
-  const [name, setName] = useState('');
-  const [type, setType] = useState('');
-  const [shape, setShape] = useState('');
+  const [gem, setGem] = useState({ images: [] });
+  const [name, setName] = useState("");
+  const [type, setType] = useState("");
+  const [shape, setShape] = useState("");
   const [selectedShape, setSelectedShape] = useState(gem.shape);
-  const [size, setSize] = useState('');
-  const [color, setColor] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [error, setError] = useState('');
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
   const [emptyFields, setEmptyFields] = useState([]);
   const nav = useNavigate();
+  const [images, setImages] = useState([]);
+
+  const removeImage = () => {
+    setImages([]);
+  };
+
+  const handleFileChange = (e) => {
+    setImages(e.target.files);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const emptyFields = [];
-    if (name === '') {
-        emptyFields.push('name');
-    }
-    if (type === '') {
-        emptyFields.push('type');
-    }
-    if (shape === '') {
-        emptyFields.push('shape');
-    }
-    if (size === '') {
-        emptyFields.push('size');
-    }
-    if (color === '') {
-        emptyFields.push('color');
-    }
-    if (quantity === '') {
-        emptyFields.push('quantity');
-    }
-    if (price === '') {
-        emptyFields.push('price');
-    }
-    if (description === '') {
-        emptyFields.push('description');
-    }
 
-    if (emptyFields.length > 0) {
-        setEmptyFields(emptyFields);
-        setError('Please fill in all required fields.');
-        return;
+    if (images.length > 0) {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("type", type);
+      formData.append("shape", shape);
+      formData.append("size", size);
+      formData.append("color", color);
+      formData.append("quantity", quantity);
+      formData.append("price", price);
+      formData.append("description", description);
+
+      formData.append("image", images[0]);
+
+      const response = await fetch(`/api/gems/${_id}`, {
+        method: "PATCH",
+        body: formData,
+      });
+
+      const json = await response.json();
+
+      setGem(json); // Update gem state with the updated gem data
+
+      window.alert("Gem details were successfully updated!");
+
+      nav('/GemAdminHome');
+    } else {
+      alert("Please upload an image");
     }
-    
-
-    const response = await fetch(`/api/gems/${_id}`, {
-      method: 'PATCH',
-      body: JSON.stringify({
-        name: name,
-        type: type,
-        shape: shape,
-        size: size,
-        color: color,
-        quantity: quantity,
-        price: price,
-        description: description,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      setError(json.error);
-  }
-
-    window.alert('Gem details were successfully updated!');
-
-    nav('/GemAdminHome');
   };
+
+
 
   useEffect(() => {
     const fetchGems = async () => {
@@ -116,6 +95,7 @@ function UpdateGems() {
     };
     fetchGems();
   }, []);
+
 
   return (
     <div className='UpdateGems'>
@@ -212,6 +192,16 @@ function UpdateGems() {
                 />
               </div>
               {emptyFields.includes('description') && <div className="error">Please enter a description.</div>}
+
+              <label>Upload Image:</label>
+              <input type="file" accept="image/*" onChange={handleFileChange} />
+
+              {images.length > 0 && (
+                <div>
+                  <img src={URL.createObjectURL(images[0])} alt="Selected Image" />
+                  <button onClick={removeImage}>Remove Image</button>
+                </div>
+              )}
 
               <button className="gem-add-buttons" id='gem-add-button'>Add Gem</button>
               {error && <div className="error">{error}</div>}
