@@ -25,7 +25,7 @@ const JewelleryAdminDashboard = () => {
     setActiveButton(gender);
 
   };
-
+  
   const buttonStyle = {
     padding: "10px 20px",
     margin: "5px",
@@ -64,8 +64,7 @@ const JewelleryAdminDashboard = () => {
 
     fetchJewelleryes();
 
-  }, [activeButton]);
-
+  }, [activeButton],);
 
   return (
     <>
@@ -93,6 +92,8 @@ const JewelleryAdminDashboard = () => {
           </nav>
         </div>
       </header>
+
+
       <div className="home">
         <div className="jewelleryes">
           <div className="gender-switch">
@@ -130,9 +131,9 @@ const JewelleryAdminDashboard = () => {
               Women's Jewelleries
             </button>
           </div>
-          <Link to={`/JewelleryAdminReport`}>
+          {/* <Link to={`/JewelleryAdminReport`}>
           <button className="reportsButton">Reports</button>
-        </Link>
+        </Link> */}
 
           {/* {jewellery &&
             jewellery.map((jewellery) => (
@@ -144,7 +145,6 @@ const JewelleryAdminDashboard = () => {
             ))}
         </div>
         {/* <JewelleryAddForm/> */}
-        
       </div>
       <style></style>
     </>

@@ -63,11 +63,15 @@ const JewelleryDetails = ({ jewellery }) => {
           {jewellery.metal}
         </p>
         <p>
+          <strong>Gemstone: </strong>
+          {jewellery.gemstone}
+        </p>
+        <p>
           <strong>Description: </strong>
           {jewellery.description}
         </p>
         <p>
-          <strong>Price: Rs.</strong>
+          <strong>Price: $.</strong>
           {jewellery.price}/=
         </p>
         <p>
