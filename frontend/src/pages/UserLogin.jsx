@@ -10,29 +10,6 @@ function UserLogin() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const RecoveryContext = createContext();
-
-
-  // const { setOTP } = createContext();
-
-  function nagigateToOtp() {
-    if (email) {
-      const OTP = Math.floor(Math.random() * 9000 + 1000);
-      console.log(OTP);
-      //setOTP(OTP);
-
-      axios
-        .post("/send_recovery_email", {
-          OTP,
-          recipient_email: email,
-        })
-        navigate('/otp')
-        // .catch(console.log);
-      return;
-    }
-    return alert("Please enter your email");
-  }
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState('');
@@ -108,7 +85,7 @@ function UserLogin() {
             value={password}
             required="required"
           />
-          <a onClick={() => nagigateToOtp()} className="text-gray-800">
+          <a className="text-gray-800">
               Forgot password?
           </a>
             <br />
