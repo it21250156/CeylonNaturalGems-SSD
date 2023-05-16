@@ -15,6 +15,8 @@ import AdminUsers from './pages/AdminUsers';
 import AdminHome from './pages/AdminHome';
 import ResetPassword from './pages/ChangePassword';
 import AllUsers from './pages/AllUsers';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetForgotPassword from './pages/ResetForgotPassword';
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -102,6 +104,8 @@ function App() {
               element={<ResetPassword />}
             />
             <Route path="/AllUsers" element={<AllUsers />} />
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route path="/ResetForgotPassword/:token" element={<ResetForgotPassword />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
