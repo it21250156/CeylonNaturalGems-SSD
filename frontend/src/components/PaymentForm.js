@@ -96,9 +96,21 @@ const PaymentForm = () => {
     setPmethod(e.target.value);
   };
 
-  const handleDeliveryMethodChange = (e) => {
-    setDmethod(e.target.value);
-  };
+    const handleDeliveryMethodChange = (e) => {
+      setDmethod(e.target.value);
+    };
+    // const handleDeliveryMethodChange = (e) => {
+    //   const selectedDmethod = e.target.value;
+    
+    //   setDmethod(selectedDmethod);
+    
+    //   if (selectedDmethod === 'Pickup') {
+    //     setAddress("");
+    //     setDistrict("");
+    //     setCountry("");
+    //   }
+    // };
+    
 
   const handleCardNoChange = (e) => {
     const inputValue = e.target.value;
@@ -136,12 +148,13 @@ const PaymentForm = () => {
   };
 
   const handleConfirmPayment = () => {
-    if (dmethod === 'Delivery') {
+    if (dmethod === 'Deliver') {
       if (!address || !district || !country) {
         setError('Please fill in all required fields');
       }
     }
   };
+  
 
   const amountInfo = localStorage.getItem('TamountInfo');
   const parsedAmountInfo = amountInfo ? JSON.parse(amountInfo) : '';
@@ -286,11 +299,11 @@ const PaymentForm = () => {
 
                   <label className="label"> District : </label>
                   <input
-                    id="input"
-                    type="text"
-                    onChange={(e) => setDistrict(e.target.value)}
-                    value={district}
-                    disabled={dmethod === 'Pickup'}
+                    id       = "input"
+                    type     = "text"
+                    onChange = {(e) => setDistrict(e.target.value)}
+                    value    = {district}
+                    disabled = {dmethod === 'Pickup'}
                   />
 
                   <label className="label"> Country : </label>
