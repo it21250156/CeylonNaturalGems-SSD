@@ -57,6 +57,7 @@ const AdminHome = () => {
           <div className="adminBtnsBody">
             <div className="adminHome-col1">
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/GemAdminHome');
                 }}
@@ -64,6 +65,7 @@ const AdminHome = () => {
                 Gem Stones
               </button>
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/JewelleryAdminDashboard');
                 }}
@@ -71,6 +73,7 @@ const AdminHome = () => {
                 Jewellery
               </button>
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/reqAd');
                 }}
@@ -78,6 +81,7 @@ const AdminHome = () => {
                 Gem Requests
               </button>
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/AdminFeedbacks');
                 }}
@@ -88,6 +92,7 @@ const AdminHome = () => {
 
             <div className="adminHome-col2">
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/AdminInstallmentPlans');
                 }}
@@ -96,6 +101,7 @@ const AdminHome = () => {
               </button>
 
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/AdminPayments');
                 }}
@@ -104,6 +110,7 @@ const AdminHome = () => {
               </button>
 
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/AdminDelivery');
                 }}
@@ -112,6 +119,7 @@ const AdminHome = () => {
               </button>
 
               <button
+                className="adminHome-bigBtns"
                 onClick={() => {
                   navigate('/AllUsers');
                 }}

@@ -33,3 +33,61 @@
   color: white;
   text-shadow: 3px 3px 5px black;
 }
+
+.adminBtnsBody {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 200px;
+  padding: 40px;
+  border-radius: 20px;
+  background-color: #cadefc;
+}
+
+.adminHome-col1 {
+  flex: 1;
+}
+
+.adminHome-col2 {
+  flex: 1;
+}
+
+.adminHome-bigBtns {
+  min-width: 400px;
+  font-family: Bebas Neue;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2c74b3;
+  transition: all 1000ms;
+  font-size: 30px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
+}
+
+.adminHome-bigBtns:hover {
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px #268391;
+}
+
+.adminHome-bigBtns::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #144272;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.adminHome-bigBtns:hover::before {
+  width: 250%;
+}

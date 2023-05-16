@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
 import Header from './components/Header';
-import React, {createContext, useState, useContext } from 'react';
-
+import React, { createContext, useState, useContext } from 'react';
 
 // pages & components
 import Home from './pages/Home';
@@ -70,6 +69,7 @@ import UpdateGems from './pages/UpdateGems';
 import AdminPayments from './pages/AdminPayments';
 import AdminDelivery from './pages/AdminDelivery';
 import GemAdminReports from './pages/GemAdminReports';
+import Footer from './components/Footer';
 
 export const RecoveryContext = createContext();
 
@@ -77,8 +77,6 @@ function App() {
   const { user } = useAuthContext();
 
   return (
-
-  
     <div className="App">
       <BrowserRouter>
         <div className="pages">
@@ -86,11 +84,23 @@ function App() {
             {/* kalinga */}
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
-            <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
-            <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
+            <Route
+              path="/login"
+              element={!user ? <UserLogin /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/Register"
+              element={!user ? <UserRegistration /> : <Navigate to="/" />}
+            />
             <Route path="/profile/:id" element={<UserProfile />} />
-            <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
-            <Route path="/profile/resetPassword/:id" element={<ResetPassword />} />
+            <Route
+              path="/profile/editProfile/:id"
+              element={<UserProfileUpdate />}
+            />
+            <Route
+              path="/profile/resetPassword/:id"
+              element={<ResetPassword />}
+            />
             <Route path="/AllUsers" element={<AllUsers />} />
 
             {/* janith */}
@@ -105,7 +115,10 @@ function App() {
             <Route path="/reqReply/:reqId" element={<ReplyRequest />}></Route>
             <Route path="/Myrep" element={<Myreply />}></Route>
             <Route path="/reply_uv/:reqId" element={<Reply_userView />}></Route>
-            <Route path="/reply_av/:reqId" element={<Reply_adminView />}></Route>
+            <Route
+              path="/reply_av/:reqId"
+              element={<Reply_adminView />}
+            ></Route>
 
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
 
@@ -119,23 +132,32 @@ function App() {
             {/* vidxni */}
             <Route path="/payments" element={<PaymentForm />} />
             <Route path="/MyPayments" element={<MyPayments />} />
-            <Route path="/MyPayments/PaymentUpdate/:id" element={<PaymentUpdate />}/>
-            <Route path="/AdminPayments" element={<AdminPayments/>} /> 
-            <Route path="/AdminDelivery" element={<AdminDelivery/>}/>
+            <Route
+              path="/MyPayments/PaymentUpdate/:id"
+              element={<PaymentUpdate />}
+            />
+            <Route path="/AdminPayments" element={<AdminPayments />} />
+            <Route path="/AdminDelivery" element={<AdminDelivery />} />
 
             {/* ruchira */}
-            <Route path="/JewelleryAdminDashboard" element={<JewelleryAdminDashboard />} />
+            <Route
+              path="/JewelleryAdminDashboard"
+              element={<JewelleryAdminDashboard />}
+            />
             <Route path="/AddJewelleryes" element={<AddJewelleryes />} />
 
             <Route
               path="/UpdateJewelleryes/:_id"
               element={<UpdateJewellery />}
             />
-            <Route 
-            path="/JewelleryAdminReport"
-            element={<JewelleryAdminReport/>}
+            <Route
+              path="/JewelleryAdminReport"
+              element={<JewelleryAdminReport />}
             />
-            <Route path="/UpdateJewelleryes/:_id" element={<UpdateJewellery />} />
+            <Route
+              path="/UpdateJewelleryes/:_id"
+              element={<UpdateJewellery />}
+            />
 
             {/* daham */}
             <Route path="/jwellhomeM" element={<JewelhomeMen />} />
@@ -146,21 +168,36 @@ function App() {
             <Route path="/GemAdminHome" element={<GemAdminHome />} />
             <Route path="/AddGem" element={<AddGem />} />
             <Route path="/UpdateGems/:_id" element={<UpdateGems />} />
-            <Route path='/GemAdminReports' element={<GemAdminReports/>}/>
+            <Route path="/GemAdminReports" element={<GemAdminReports />} />
 
             {/* Vihangi  */}
             <Route path="/InstallmentPlans" element={<InstallmentPlans />} />
-            <Route path="/InstallmentPlans/selectedInstallmentPlan/:id" element={<SelectedInstallmentPlan />} />
+            <Route
+              path="/InstallmentPlans/selectedInstallmentPlan/:id"
+              element={<SelectedInstallmentPlan />}
+            />
 
             {/* admin */}
-            <Route path="/AdminInstallmentPlans/AllInstallments" element={<AllInstallments />} />
-            <Route path="/AdminInstallmentPlans" element={<AdminInstallmentPlans />} />
-            <Route path="/AdminInstallmentPlans/adminUpdatePlan/:id" element={<AdminUpdatePlan />} />
-            <Route path="/profile/MyPayments/MyInstallments/:id" element={<MyInstallments />} />
-            
+            <Route
+              path="/AdminInstallmentPlans/AllInstallments"
+              element={<AllInstallments />}
+            />
+            <Route
+              path="/AdminInstallmentPlans"
+              element={<AdminInstallmentPlans />}
+            />
+            <Route
+              path="/AdminInstallmentPlans/adminUpdatePlan/:id"
+              element={<AdminUpdatePlan />}
+            />
+            <Route
+              path="/profile/MyPayments/MyInstallments/:id"
+              element={<MyInstallments />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
+      <Footer />
     </div>
   );
 }
