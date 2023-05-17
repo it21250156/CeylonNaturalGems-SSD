@@ -119,7 +119,7 @@ const PaymentRow = ({payment}) => {
           disabled = {payment?.dStatus === "Delivered" || payment?.dStatus === "Picked Up"}
           onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
         <td><button
-          disabled = {payment?.orderID?.length < 1 || payment?.orderID[0].length < 1 || payment?.dStatus !== "Delivered"  }
+          disabled = {payment?.orderID?.length < 1 || payment?.orderID[0].length < 1 || payment?.dStatus !== "Delivered" && payment?.dStatus !=="Picked Up" }
           onClick={ () => {navigate ("/FeedbackForm/"+payment._id)}}
         > FEEDBACK</button></td>
     </tr>

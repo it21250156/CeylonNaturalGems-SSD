@@ -99,26 +99,16 @@ const PaymentForm = () => {
     const handleDeliveryMethodChange = (e) => {
       setDmethod(e.target.value);
     };
-    // const handleDeliveryMethodChange = (e) => {
-    //   const selectedDmethod = e.target.value;
-    
-    //   setDmethod(selectedDmethod);
-    
-    //   if (selectedDmethod === 'Pickup') {
-    //     setAddress("");
-    //     setDistrict("");
-    //     setCountry("");
-    //   }
-    // };
     
 
-  const handleCardNoChange = (e) => {
-    const inputValue = e.target.value;
-    // Remove all non-numeric characters from the input value
-    const sanitizedValue = inputValue.replace(/\D/g, '');
-    // Set the sanitized value to the state
-    setCardNO(sanitizedValue);
-  };
+    const handleCardNoChange = (e) => {
+      const inputValue = e.target.value;
+      // Remove all non-numeric characters from the input value
+      const sanitizedValue = inputValue.replace(/\D/g, '');
+      // Set the sanitized value to the state
+      setCardNO(sanitizedValue);
+    };
+
 
   const handleExMonthChange = (e) => {
     const inputValue = e.target.value;
