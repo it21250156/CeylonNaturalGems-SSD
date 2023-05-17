@@ -20,13 +20,13 @@
 }
 
 .gem-card:hover {
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 40px 80px rgba(0, 0, 0, 0.4); /* Increased shadow size */
 }
 
 .gem-card__title {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
-  color: #333;
+  color: #414040;
   text-transform: uppercase;
   margin-bottom: 10px;
   border-bottom: 2px solid #eee;
@@ -36,42 +36,94 @@
 .gem-card p {
   font-size: 18px;
   margin-bottom: 10px;
-  color: #777;
+  color: #414040;
 }
 
-.gem-card button {
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 10px 20px;
-  border-radius: 30px;
-  margin-top: 20px;
-  transition: background-color 0.2s ease-in-out;
-}
+/* delete button */
 
 .gem-card__deleteButton {
-  background-color: #e74c3c;
-  color: #fff;
+  font-family: "Bebas Neue", sans-serif;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #e53935; /* Change the color to white */
+  background-color: #ffffff; /* Set the background color to greyish */
+  transition: all 1000ms;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #e53935; /* Set the outline color to greyish */
+  margin: 20px;
+  z-index: 1;
 }
 
 .gem-card__deleteButton:hover {
-  background-color: #c0392b;
+  color: #ffffff; /* Change the color to white */
+  background-color: #e53935; /* Set the background color to red */
+  transform: scale(1.1);
+  outline: 2px solid #e53935; /* Set the outline color to red */
+  box-shadow: 4px 5px 17px -4px #801313; /* Adjust the box shadow color */
 }
 
+.gem-card__deleteButton::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #801313; /* Change the background color to a dark shade of red */
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.gem-card__deleteButton:hover::before {
+  width: 250%;
+}
+/* update button */
+
 .gem-card__updateButton {
-  background-color: #3498db;
-  color: #fff;
-  margin-left: 20px;
+  font-family: "Bebas Neue", sans-serif;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2c74b3;
+  transition: all 1000ms;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
+  z-index: 1;
 }
 
 .gem-card__updateButton:hover {
-  background-color: #2980b9;
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px #268391;
 }
 
-.gem-card button:hover {
-  transform: scale(1.05);
+.gem-card__updateButton::before {
+  content: "";
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #144272;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.gem-card__updateButton:hover::before {
+  width: 250%;
 }
 
 /* modal */
@@ -128,7 +180,6 @@
   color: #fff;
 }
 
-
 /* images */
 .gem-image-container {
   display: flex;
@@ -164,6 +215,6 @@
 }
 
 .gem-card__buttons button:hover {
-  background-color: #00c853;
+  filter: brightness(80%); /* Darkens the current color by 20% */
   color: #fff;
 }

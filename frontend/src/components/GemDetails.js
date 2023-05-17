@@ -83,13 +83,12 @@ const GemDetails = ({ gem }) => {
           )}
         </div>
 
-        <div className='gem-card__buttons'>
+        <div>
           <button className="gem-card__deleteButton" onClick={() => setShowModal(true)}>
-            delete
+            DELETE
           </button>
-
           <Link to={`/UpdateGems/${gem._id}`}>
-            <button className="gem-card__updateButton">update</button>
+            <button className="gem-card__updateButton">UPDATE</button>
           </Link>
         </div>
 
