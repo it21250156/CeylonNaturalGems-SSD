@@ -20,12 +20,12 @@ function Reply_userView() {
             <div className="darkBlueTopicBoxReq">
                 <h1 className="pageTopicReq">Replies from admin</h1>
             </div>
-            <div>
+            <div className="replybox">
                 <div className='lightBlueBodyBG'>
                     {replies.length > 0 ? (
                         replies.map(reply =>
                             <div className="whiteBodyBG">
-                                <h1>{reply.reply}</h1>
+                                <p className="replymsg">{reply.reply}</p>
                             </div>
                         )
                     ) : (
