@@ -31,7 +31,7 @@ const AllFeedbacks = () => {
           <div className="title-box-feedback">
             <p className="title-feedback">Customer Feedbacks</p>
           </div>
-          <div className="light-blue-bg">
+          <div className="all-fb-light-blue-bg">
             <div classname="feedback-card">
               {feedbacks &&
                 feedbacks.map((feedback) => (

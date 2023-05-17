@@ -1,7 +1,7 @@
 .title-box-feedback {
   background-color: #144272;
   margin: 20px 150px;
-  padding: 40px 0;
+  padding: 40px;
   border-radius: 20px;
 }
 
@@ -15,13 +15,11 @@
   font-weight: normal;
 }
 
-.light-blue-bg {
+.all-fb-light-blue-bg {
   background-color: #cadefc;
   margin: 20px 150px;
   padding: 40px;
   border-radius: 20px;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .add-feedback-btn {
