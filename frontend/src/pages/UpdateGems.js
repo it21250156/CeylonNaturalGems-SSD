@@ -4,6 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import TextareaAutosize from "react-textarea-autosize";
 import "../CSS/GemAddForm.css";
 import Header from "../components/Header";
+import { useAuthContext } from '../hooks/useAuthContext';
+
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
 
 function UpdateGems() {
   const { _id } = useParams();
@@ -113,9 +117,44 @@ function UpdateGems() {
     fetchGems();
   }, []);
 
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    logout();
+    navigate('/');
+  };
+
 
   return (
-    <><Header />
+    <>
+    <header>
+        <div>
+          <div className="background">
+            <div className="headerNameDiv">
+              <h1 className="headerName">Ceylon Natural Gems</h1>
+            </div>
+          </div>
+
+          <nav>
+            <div className="navprofileDiv">
+              <div className="navEmal">
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
+              </div>
+            </div>
+
+            <ul>
+              <li>
+                <Link to={'/adminHome'}>Home</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
       <div className='UpdateGems'>
         <div className='gemDisplay'>
           <div className="darkBlueTopicBoxGem">
