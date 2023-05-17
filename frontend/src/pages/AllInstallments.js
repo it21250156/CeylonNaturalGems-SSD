@@ -71,22 +71,25 @@ const AllInstallments = () => {
                 <h3 className="pageTopic">All Installments</h3>
             </div>
 
-
+            <div style = {{padding: '30px' } } >
                 <table className="table table-striped table-hover">
                   <thead>
                     <tr> 
+                        <th> # </th>
                         <th>User</th>
                         <th>Gem</th>
                         <th>Status</th>
+                        <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {Installments && Installments.map((installment) => (
-                        <InstallmentTableRow key={installment._id} installment={installment} />
+                    {Installments && Installments.map((installment , index ) => (
+                        <InstallmentTableRow key={installment._id} installment={installment} index={index}/>
                     ))}
 
                   </tbody>
                 </table>
+                </div>
             </div> 
         </div>
         </>
@@ -95,7 +98,8 @@ const AllInstallments = () => {
 
 
 //table row
-const InstallmentTableRow = ({ installment }) => {
+const InstallmentTableRow = ({ installment , index }) => {
+  const navigate = useNavigate()
   const [gems, setGems] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -129,9 +133,11 @@ const InstallmentTableRow = ({ installment }) => {
     return(
       
         <tr>
+            <td> {index + 1} </td>
             <td> {usersName?.firstName} {usersName?.lastName} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
             <td> {installment.status} </td>
+            <td> <button  onClick={() => {navigate(`/AdminInstallmentPlans/AllInstallments/AllInstallmentsDetailed/${installment._id}`)}}> details </button> </td>
         </tr>
     )
  };
