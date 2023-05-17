@@ -73,7 +73,7 @@ const RequestReport = () => {
             <th className='reqTh'>Gem Type</th>
             <th className='reqTh'>Gem Color</th>
             <th className='reqTh'>Gem Shape</th>
-            <th className='reqTh'>Description</th>
+            {/* <th className='reqTh'>Description</th> */}
             <th className='reqTh'>Weight</th>
             <th className='reqTh'>Quantity</th>
             <th className='reqTh'>User</th>
@@ -89,7 +89,7 @@ const RequestReport = () => {
               <td>{request.GemType}</td>
               <td>{request.GemColor}</td>
               <td>{request.GemShape}</td>
-              <td>{request.Description}</td>
+              {/* <td>{request.Description}</td> */}
               <td>{request.Weight}</td>
               <td>{request.Quantity}</td>
               <td>{request.user}</td>
