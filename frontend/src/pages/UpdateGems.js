@@ -123,7 +123,7 @@ function UpdateGems() {
           </div>
           <div className="lightBlueBodyBGUserprofile">
             <div className="gem-input-container">
-              <form className="create" onSubmit={handleSubmit}>
+              <form className="create" onSubmit={handleSubmit} encType="">
                 <div className='column-1'>
                   <label className="gem-label">Gem Name: </label>
                   <input
