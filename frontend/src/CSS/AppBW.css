@@ -428,11 +428,17 @@
   font-family: legendum;
   color: #144272;
   font-weight: bold;
+  padding-left: 5%;
+  width: 40%;
+  padding-top: 1%;
 }
 
 .req-value {
   font-family: legendum;
   color: #144272;
+  padding-left: 2%;
+  width: 500px;
+  
 }
 
 table {
@@ -584,3 +590,15 @@ table {
   border-radius: 10px;
   padding: 5px 5px 5px 5px;
 }
+
+.infobox{
+  width: 80%;
+}
+
+
+/* .reqData{
+  width: 90%;
+  margin-left: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+} */

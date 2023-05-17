@@ -12,11 +12,32 @@ import { useLogout } from '../hooks/useLogout';
   
 
 function MyReq(){
-
-  const { logout } = useLogout();
+    const uid = JSON.parse(localStorage.getItem("userInfo"))?._id || null;
+    const { logout } = useLogout();
     const {user} = useAuthContext()
     const navigate = useNavigate()
     const [listOfReplyStatus, setListOfReplyStatus] = useState([]);
+    const [sortBy, setSortBy] = useState("");
+
+    const handleSort = (e) => {
+      const { value } = e.target;
+      setSortBy(value);
+    };
+
+    useEffect(() => {
+      Axios.get(`/getUsersRequests/${uid}`).then((response) => {
+        // Sort the response data based on the createdAt property
+        const sortedRequests = response.data.sort((a, b) =>
+          sortBy === 'dateDescending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt)
+        );
+        // Reverse the sorted array for descending order
+        const sortedRequestsDescending = sortBy === 'dateDescending' ? sortedRequests.reverse() : sortedRequests;
+        // Reverse the sorted array again for ascending order
+        const sortedRequestsAscending = sortBy === 'dateAscending' ? sortedRequestsDescending.reverse() : sortedRequestsDescending;
+        setListOfRequests(sortedRequestsAscending);
+        // getReplyStatus(sortedRequestsAscending);
+      });
+    }, [sortBy]);
 
     const handleClick = () => {
       logout();
@@ -68,6 +89,13 @@ function MyReq(){
         </div>
 
             <div className="requestM">
+            <label className="labelSort">Sort by</label>
+            <select className="sortRequest" onChange={handleSort}>
+              <option value="">Select type</option>
+              <option value="dateAscending">Older requests first</option>
+              <option value="dateDescending">Latest requests First</option>
+            </select>
+
 
             {listOfRequests.map((user) => {
             return(
@@ -115,6 +143,10 @@ function MyReq(){
                         <td className="req-lable">Quantity</td>
                         <td className="req-value">{user.Quantity}</td>
                       </tr>
+                      <tr>
+                          <td className="req-lable">Date added</td>
+                          <td className="req-value">{user.createdAt}</td>
+                        </tr>
                     </table>
                   </div>
                     </div>

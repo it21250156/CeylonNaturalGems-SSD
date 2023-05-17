@@ -22,13 +22,17 @@ function Reply_userView() {
             </div>
             <div>
                 <div className='lightBlueBodyBG'>
-                    {replies &&
-                        replies?.map(reply =>
+                    {replies.length > 0 ? (
+                        replies.map(reply =>
                             <div className="whiteBodyBG">
-                                <h1> {reply.reply}</h1>
-                                
+                                <h1>{reply.reply}</h1>
                             </div>
-                        )}
+                        )
+                    ) : (
+                        <div className="whiteBodyBG">
+                            Sorry, you haven't got a reply from admin.
+                        </div>
+                    )}
                 </div>
             </div>
         </>

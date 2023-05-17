@@ -199,11 +199,12 @@ function MyReq() {
                 <div className="whiteBodyBG">
                   <div className="white-content">
                     <div className="myreq-column-1">
-                      <table>
-                      <tr key={user._id}>
-                        <td className="req-lable">First Name</td>
-                        <td className="req-value">{user.FirstName}</td>
-                      </tr>
+                      <table className="infobox">
+                        
+                        <tr key={user._id}>
+                          <td className="req-lable">First Name</td>
+                          <td className="req-value">{user.FirstName}</td>
+                        </tr>
 
                         <tr>
                           <td className="req-lable">Last Name</td>
@@ -245,6 +246,7 @@ function MyReq() {
                           <td className="req-lable">Date added</td>
                           <td className="req-value">{user.createdAt}</td>
                         </tr>
+                        
                       </table>
                     </div>
 
