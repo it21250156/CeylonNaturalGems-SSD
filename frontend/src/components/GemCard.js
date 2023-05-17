@@ -10,7 +10,7 @@ function GemCard(gems) {
         <span className="img-section">
           <div className="gem-image-container">
             {gem.gem_img && (
-              <img src={gem.gem_img} alt="Gem" className="gem-card__image" />
+              <img src={gem.gem_img} alt="Gem" className="gem-home-card-img" />
             )}
           </div>
         </span>
