@@ -16,9 +16,15 @@ function CartCard({ cartid, gem, jewellery }) {
   //   const { gem } = gem;
   return (
     <div className="cartcard">
-      {gem !== null &&
+      {gem !== null && (
         <div className="cartcard-content">
-          <div className="cartimg-section"></div>
+          <div className="cartimg-section">
+            <div className="gem-image-container">
+              {gem.gem_img && (
+                <img src={gem.gem_img} alt="Gem" className="gem-card__image" />
+              )}
+            </div>
+          </div>
           <div className="name-price">
             <p className="cartcard-name">{gem?.name}</p>
             <p className="cartcard-price">${gem?.price}</p>
@@ -31,7 +37,8 @@ function CartCard({ cartid, gem, jewellery }) {
                 onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
                 disabled={
                   !(
-                    cartData.find((item) => item._id === cartid)?.cartquantity > 1
+                    cartData.find((item) => item._id === cartid)?.cartquantity >
+                    1
                   )
                 }
               >
@@ -81,8 +88,8 @@ function CartCard({ cartid, gem, jewellery }) {
             </button>
           </div>
         </div>
-      }
-      {jewellery !== null && gem === null &&
+      )}
+      {jewellery !== null && gem === null && (
         <div className="cartcard-content">
           {/* {JSON.stringify(jewellery) || "none"} */}
           <div className="cartimg-section"></div>
@@ -91,9 +98,7 @@ function CartCard({ cartid, gem, jewellery }) {
             <p className="cartcard-price">${jewellery?.price}</p>
             <p className="cartcard-name">{jewellery?.gemstone}</p>
           </div>
-          <div className="update-section">
-
-          </div>
+          <div className="update-section"></div>
           <div className="btn-delete">
             <button class="btn1" onClick={() => handleCartRemove(cartid)}>
               <p class="paragraph"> Remove </p>
@@ -118,7 +123,7 @@ function CartCard({ cartid, gem, jewellery }) {
             </button>
           </div>
         </div>
-      }
+      )}
     </div>
   );
 }
