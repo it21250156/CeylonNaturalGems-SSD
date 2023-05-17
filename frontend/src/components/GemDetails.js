@@ -73,29 +73,43 @@ const GemDetails = ({ gem }) => {
           <span className="gem-card__value">{new Date(gem.createdAt).toLocaleString()}</span>
         </p>
 
-        <button className="gem-card__deleteButton" onClick={() => setShowModal(true)}>
-          delete
-        </button>
+        <div className="gem-image-container">
+          {gem.gem_img && (
+            <img
+              src={gem.gem_img}
+              alt="Gem"
+              className="gem-card__image"
+            />
+          )}
+        </div>
 
-        {gem.gem_img && (
-          <img
-            src={gem.gem_img}
-            alt="Gem"
-            style={{ width: "200px", height: "200px" }}
-          />
-        )}
+        <div className='gem-card__buttons'>
+          <button className="gem-card__deleteButton" onClick={() => setShowModal(true)}>
+            delete
+          </button>
 
-        <Link to={`/UpdateGems/${gem._id}`}>
-          <button className="gem-card__updateButton">update</button>
-        </Link>
+          <Link to={`/UpdateGems/${gem._id}`}>
+            <button className="gem-card__updateButton">update</button>
+          </Link>
+        </div>
 
         {showModal && (
-          <ConfirmationModal
-            message="Are you sure you want to delete this gem?"
-            onConfirm={handleConfirm}
-            onCancel={handleCancel}
-          />
+          <div className="modal-container">
+            <div className="modal-content">
+              <h2 className="modal-title">Confirm Deletion</h2>
+              <p className="modal-message">Are you sure you want to delete this gem?</p>
+              <div className="modal-actions">
+                <button className="modal-button confirm" onClick={handleConfirm}>
+                  Confirm
+                </button>
+                <button className="modal-button cancel" onClick={handleCancel}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
         )}
+
       </div>
     </div>
 

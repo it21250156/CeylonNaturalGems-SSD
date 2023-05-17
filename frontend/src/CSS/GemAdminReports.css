@@ -75,3 +75,92 @@
 .admin-axis-labels {
   margin-top: 20px; /* Add spacing between the chart and axis labels */
 }
+
+/* Reports */
+.reports-gem-admin {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.report-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gem-admin-report-header {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+}
+
+.gem-admin-report-cell {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.report-row:hover {
+  background-color: #f9f9f9;
+}
+
+.report-row:hover .gem-admin-report-cell {
+  color: #555;
+}
+
+.gem-admin-report-cell:first-child {
+  border-left: 1px solid #ccc;
+}
+
+.gem-admin-report-cell:last-child {
+  border-right: 1px solid #ccc;
+}
+
+.report-table th,
+.report-table td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.report-table th {
+  font-weight: bold;
+}
+
+.admin-bar-chart-container {
+  margin-bottom: 20px;
+}
+
+.report-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.admin-chart {
+  display: flex;
+}
+
+.admin-bar {
+  flex: 1;
+  background-color: #007bff;
+  margin-right: 5px;
+  transition: height 0.3s ease;
+}
+
+.admin-axis-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.admin-x-axis-label {
+  text-align: center;
+}

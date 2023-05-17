@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useGemsContext } from "../hooks/useGemsContext";
 
-import "../CSS/GemAdminHome.css"
+import "../CSS/GemAdminReports.css";
 
 const GemAdminReports = () => {
     const { gems } = useGemsContext();
@@ -35,8 +35,8 @@ const GemAdminReports = () => {
     }, [gems]);
 
     return (
-        <div className="reports gem-admin-reports">
-            <h2 className="report-title">Pricing Report</h2>
+        <div className="reports-gem-admin">
+
             <table className="report-table">
                 <thead>
                     <tr>
@@ -50,9 +50,9 @@ const GemAdminReports = () => {
                     {gemData.map((gem) => (
                         <tr key={gem.type} className="report-row">
                             <td className="gem-admin-report-cell">{gem.type}</td>
-                            <td className="gem-admin-report-cell">Rs. {gem.avgPrice.toFixed(2)}/=</td>
-                            <td className="gem-admin-report-cell">Rs. {gem.minPrice}/=</td>
-                            <td className="gem-admin-report-cell">Rs. {gem.maxPrice}/=</td>
+                            <td className="gem-admin-report-cell">{gem.avgPrice.toFixed(2)}/=</td>
+                            <td className="gem-admin-report-cell">{gem.minPrice}/=</td>
+                            <td className="gem-admin-report-cell">{gem.maxPrice}/=</td>
                         </tr>
                     ))}
                 </tbody>

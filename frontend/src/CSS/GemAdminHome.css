@@ -40,7 +40,7 @@
 }
 
 .gem-admin-buttons::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -50px;
   top: 0;

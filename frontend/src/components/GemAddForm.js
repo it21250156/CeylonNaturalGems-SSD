@@ -20,10 +20,31 @@ const GemAddForm = () => {
     const [description, setDescription] = useState('');
     const [error, setError] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
+    const [previewImage, setPreviewImage] = useState(null);
     const nav = useNavigate();
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setPreviewImage(null);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const file = e.target.image.files[0];
+        if (!file) {
+            setError('Please select an image.');
+            return;
+        }
 
         const formData = new FormData();
         formData.append("image", e.target.image.files[0]);
@@ -119,10 +140,13 @@ const GemAddForm = () => {
                                 />
                                 {emptyFields.includes('name') && <div className="error">Please enter a name.</div>}
 
-                                <label>Gem Image:</label>
-                                <input type="file" name="image" accept="image/*" />
+                                <label className="gem-label">Gem Image:</label>
+                                <input type="file" name="image" accept="image/*" onChange={handleImageChange} />
 
-                                <label className="gem-label">Gem Type: </label>
+                                {previewImage && <img src={previewImage} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }} className='gem-admin-add-image' />}
+
+
+                                <label className="gem-label">Gem Type:</label>
                                 <input
                                     type="text"
                                     onChange={(e) => setType(e.target.value)}
@@ -136,17 +160,19 @@ const GemAddForm = () => {
                                     setSelectedShape(e.target.value);
                                     setShape(e.target.value);
 
-                                }} className="gem-select">
+                                }} className="gem-select" style={{ marginBottom: '20px' }}>
                                     <option value="">Select a shape</option>
                                     <option value="Round">Round</option>
                                     <option value="Oval">Oval</option>
                                     <option value="Square">Square</option>
 
+
+
                                 </select>
 
                                 {emptyFields.includes('shape') && <div className="error">Please select a shape.</div>}
 
-                                <label className="gem-label">Gem Size (in kt): </label>
+                                <label className="gem-label">Gem Size (in ct): </label>
                                 <input
                                     type="number"
                                     onChange={(e) => setSize(e.target.value)}
@@ -176,7 +202,7 @@ const GemAddForm = () => {
 
                                 {emptyFields.includes('quantity') && <div className="error">Please enter a quantity.</div>}
 
-                                <label className="gem-label">Gem Price: (in Rs)</label>
+                                <label className="gem-label">Gem Price: (in $)</label>
                                 <input
                                     type="number"
                                     onChange={(e) => setPrice(e.target.value)}

@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import axios from 'axios';
+import Header from "../components/Header"
 
 const AddGem = () => {
   const { logout } = useLogout();
@@ -21,36 +22,11 @@ const AddGem = () => {
   };
 
   return (
-    <>
-      <header>
-        <div>
-          <div className="background">
-            <div className="headerNameDiv">
-              <h1 className="headerName">Ceylon Natural Gems</h1>
-            </div>
-          </div>
-
-          <nav>
-            <div className="navprofileDiv">
-              <div className="navEmal">
-                <span>Hello Admin</span>
-                <button onClick={handleClick}>Log out</button>
-              </div>
-            </div>
-
-            <ul>
-              <li>
-                <Link to={'/adminHome'}>Home</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-
+  <><Header/>
       <div className="addGem">
         <GemAddForm />
       </div>
-    </>
+      </>
   );
 };
 
