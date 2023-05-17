@@ -89,7 +89,17 @@ function GemScreen() {
         <div className="lightBlueBodyBG">
           <div className="whiteBodyBG">
             <div className="content-top-part">
-              <div className="img-section-large"></div>
+              <div className="img-section-large">
+                <div className="gem-image-container">
+                  {gem.gem_img && (
+                    <img
+                      src={gem.gem_img}
+                      alt="Gem"
+                      className="gem-card__image"
+                    />
+                  )}
+                </div>
+              </div>
               <div className="btns-description">
                 <p className="gem-name">{gem.name}</p>
                 <p className="gem-price">${gem.price}</p>
