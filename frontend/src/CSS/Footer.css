@@ -10,6 +10,7 @@
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  padding-bottom: 10px;
 }
 
 .map {
