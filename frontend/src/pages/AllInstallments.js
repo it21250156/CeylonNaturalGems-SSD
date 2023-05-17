@@ -15,13 +15,26 @@ const AllInstallments = () => {
     const { logout } = useLogout();
     const {user} = useAuthContext()
     const navigate = useNavigate()
-
+ 
     const handleClick = () => {
       logout();
       navigate('/');
     };
 
     const [Installments , setInstallments] = useState(null)
+
+    const [data, setData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearch = (event) => {
+      setSearchQuery(event.target.value);
+    };
+  
+    const filteredData = data.filter(
+      (item) =>
+        item.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.lastName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     useEffect(() => {
         const fetchInstallments = async () => {
@@ -67,6 +80,18 @@ const AllInstallments = () => {
 
     <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
+
+        <input
+          style={{width:"50%" , marginLeft:"5%"}}
+          className="opacity-75"
+            type="text"
+            value={searchQuery}
+            onChange={handleSearch}
+            placeholder="Search..."
+          />
+
+          
+
             <div className="darkBlueTopicBox">
                 <h3 className="pageTopic">All Installments</h3>
             </div>
