@@ -151,7 +151,7 @@ function ReqMain() {
                   )}
 
                   {/* weight */}
-                  <label className="label">Weight</label>
+                  <label className="label">Weight(Carat)</label>
                   <input
                     className="input"
                     autoComplete="on"

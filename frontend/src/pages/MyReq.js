@@ -235,7 +235,7 @@ function MyReq() {
                           <td className="req-value">{user.Description}</td>
                         </tr>
                         <tr>
-                          <td className="req-lable">Weight</td>
+                          <td className="req-lable">Weigh(Carat)</td>
                           <td className="req-value">{user.Weight}</td>
                         </tr>
                         <tr>
