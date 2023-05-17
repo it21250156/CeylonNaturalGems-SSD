@@ -20,12 +20,42 @@ const GemAddForm = () => {
     const [description, setDescription] = useState('');
     const [error, setError] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
+    const [previewImage, setPreviewImage] = useState(null);
     const nav = useNavigate();
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            setPreviewImage(null);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const gem = { name, type, shape, size, color, quantity, price, description };
+        const file = e.target.image.files[0];
+        if (!file) {
+            setError('Please select an image.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("image", e.target.image.files[0]);
+        formData.append("name", name);
+        formData.append("type", type);
+        formData.append("shape", shape);
+        formData.append("size", size);
+        formData.append("color", color);
+        formData.append("quantity", quantity);
+        formData.append("price", price);
+        formData.append("description", description);
 
         const emptyFields = [];
         if (name === '') {
@@ -50,7 +80,7 @@ const GemAddForm = () => {
             emptyFields.push('price');
         }
         if (description === '') {
-            emptyFields.push('description');
+            emptyFields.push('desc');
         }
 
         if (emptyFields.length > 0) {
@@ -59,12 +89,9 @@ const GemAddForm = () => {
             return;
         }
 
-        const response = await fetch('/api/gems', {
-            method: 'POST',
-            body: JSON.stringify(gem),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        const response = await fetch("/api/gems", {
+            method: "POST",
+            body: formData,
         });
 
         const json = await response.json();
@@ -102,97 +129,105 @@ const GemAddForm = () => {
                 </div>
                 <div className="lightBlueBodyBGUserprofile">
                     <div className="gem-input-container">
-                    <form className="create" onSubmit={handleSubmit}>
-                        <div className='column-1'>
-                            <label className="gem-label">Gem Name: </label>
-                            <input
-                                type="text"
-                                onChange={(e) => setName(e.target.value)}
-                                value={name}
-                                className={`gem-input ${emptyFields.includes('name') ? 'error' : ''}`}
-                            />
-                            {emptyFields.includes('name') && <div className="error">Please enter a name.</div>}
+                        <form className="create" onSubmit={handleSubmit}>
+                            <div className='column-1'>
+                                <label className="gem-label">Gem Name: </label>
+                                <input
+                                    type="text"
+                                    onChange={(e) => setName(e.target.value)}
+                                    value={name}
+                                    className={`gem-input ${emptyFields.includes('name') ? 'error' : ''}`}
+                                />
+                                {emptyFields.includes('name') && <div className="error">Please enter a name.</div>}
 
-                            <label className="gem-label">Gem Type: </label>
-                            <input
-                                type="text"
-                                onChange={(e) => setType(e.target.value)}
-                                value={type}
-                                className={`gem-input ${emptyFields.includes('type') ? 'error' : ''}`}
-                            />
-                            {emptyFields.includes('type') && <div className="error">Please enter a type.</div>}
+                                <label className="gem-label">Gem Image:</label>
+                                <input type="file" name="image" accept="image/*" onChange={handleImageChange} />
 
-                            <label className="gem-label">Gem Shape: </label>
-                            <select id="shapeDropdown" value={selectedShape} defaultValue="" onChange={(e) => {
-                                setSelectedShape(e.target.value);
-                                setShape(e.target.value);
+                                {previewImage && <img src={previewImage} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }} className='gem-admin-add-image' />}
 
-                            }} className="gem-select">
-                                <option value="">Select a shape</option>
-                                <option value="Round">Round</option>
-                                <option value="Oval">Oval</option>
-                                <option value="Square">Square</option>
 
-                            </select>
+                                <label className="gem-label">Gem Type:</label>
+                                <input
+                                    type="text"
+                                    onChange={(e) => setType(e.target.value)}
+                                    value={type}
+                                    className={`gem-input ${emptyFields.includes('type') ? 'error' : ''}`}
+                                />
+                                {emptyFields.includes('type') && <div className="error">Please enter a type.</div>}
 
-                            {emptyFields.includes('shape') && <div className="error">Please select a shape.</div>}
+                                <label className="gem-label">Gem Shape: </label>
+                                <select id="shapeDropdown" value={selectedShape} defaultValue="" onChange={(e) => {
+                                    setSelectedShape(e.target.value);
+                                    setShape(e.target.value);
 
-                            <label className="gem-label">Gem Size (in kt): </label>
-                            <input
-                                type="number"
-                                onChange={(e) => setSize(e.target.value)}
-                                value={size}
-                                className={`gem-input ${emptyFields.includes('size') ? 'error' : ''}`}
-                            />
+                                }} className="gem-select" style={{ marginBottom: '20px' }}>
+                                    <option value="">Select a shape</option>
+                                    <option value="Round">Round</option>
+                                    <option value="Oval">Oval</option>
+                                    <option value="Square">Square</option>
 
-                            {emptyFields.includes('size') && <div className="error">Please enter a size.</div>}
 
-                            <label className="gem-label">Gem Color: </label>
-                            <input
-                                type="text"
-                                onChange={(e) => setColor(e.target.value)}
-                                value={color}
-                                className={`gem-input ${emptyFields.includes('color') ? 'error' : ''}`}
-                            />
 
-                            {emptyFields.includes('color') && <div className="error">Please enter a color.</div>}
+                                </select>
 
-                            <label className="gem-label">Gem Quantity: </label>
-                            <input
-                                type="number"
-                                onChange={(e) => setQuantity(e.target.value)}
-                                value={quantity}
-                                className={`gem-input ${emptyFields.includes('quantity') ? 'error' : ''}`}
-                            />
+                                {emptyFields.includes('shape') && <div className="error">Please select a shape.</div>}
 
-                            {emptyFields.includes('quantity') && <div className="error">Please enter a quantity.</div>}
+                                <label className="gem-label">Gem Size (in ct): </label>
+                                <input
+                                    type="number"
+                                    onChange={(e) => setSize(e.target.value)}
+                                    value={size}
+                                    className={`gem-input ${emptyFields.includes('size') ? 'error' : ''}`}
+                                />
 
-                            <label className="gem-label">Gem Price: (in Rs)</label>
-                            <input
-                                type="number"
-                                onChange={(e) => setPrice(e.target.value)}
-                                value={price}
-                                className={`gem-input ${emptyFields.includes('price') ? 'error' : ''}`}
-                            />
+                                {emptyFields.includes('size') && <div className="error">Please enter a size.</div>}
 
-                            {emptyFields.includes('price') && <div className="error">Please enter a price.</div>}
+                                <label className="gem-label">Gem Color: </label>
+                                <input
+                                    type="text"
+                                    onChange={(e) => setColor(e.target.value)}
+                                    value={color}
+                                    className={`gem-input ${emptyFields.includes('color') ? 'error' : ''}`}
+                                />
 
-                            <label className="gem-label">Gem Description: </label>
-                            <TextareaAutosize
-                                minRows={3}
-                                maxRows={6}
-                                id="gemDesc"
-                                type="textarea"
-                                onChange={(e) => setDescription(e.target.value)}
-                                value={description}
-                                className={`gem-input ${emptyFields.includes('description') ? 'error' : ''}`}
-                            />
-                        </div>
-                        {emptyFields.includes('description') && <div className="error">Please enter a description.</div>}
+                                {emptyFields.includes('color') && <div className="error">Please enter a color.</div>}
 
-                        <button className="gem-add-buttons" >Add Gem</button>
-                        {error && <div className="error">{error}</div>}
-                    </form>
+                                <label className="gem-label">Gem Quantity: </label>
+                                <input
+                                    type="number"
+                                    onChange={(e) => setQuantity(e.target.value)}
+                                    value={quantity}
+                                    className={`gem-input ${emptyFields.includes('quantity') ? 'error' : ''}`}
+                                />
+
+                                {emptyFields.includes('quantity') && <div className="error">Please enter a quantity.</div>}
+
+                                <label className="gem-label">Gem Price: (in $)</label>
+                                <input
+                                    type="number"
+                                    onChange={(e) => setPrice(e.target.value)}
+                                    value={price}
+                                    className={`gem-input ${emptyFields.includes('price') ? 'error' : ''}`}
+                                />
+
+                                {emptyFields.includes('price') && <div className="error">Please enter a price.</div>}
+
+                                <label className="gem-label">Gem Description: </label>
+                                <TextareaAutosize
+                                    minRows={3}
+                                    maxRows={6}
+                                    id="gemDesc"
+                                    type="textarea"
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    value={description}
+                                    className={`gem-input ${emptyFields.includes('description') ? 'error' : ''}`}
+                                />
+                            </div>
+                            {emptyFields.includes('description') && <div className="error">Please enter a description.</div>}
+
+                            <button className="gem-add-buttons" >Add Gem</button>
+                            {error && <div className="error">{error}</div>}
+                        </form>
                     </div>
                 </div>
             </div>

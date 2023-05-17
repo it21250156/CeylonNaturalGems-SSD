@@ -3,6 +3,7 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import logger from 'use-reducer-logger';
 import '../CSS/GemScreen.css';
+import Header from '../components/Header';
 
 export const JwelReducer = (state, action) => {
   switch (action.type) {
@@ -77,94 +78,95 @@ function JewelScreen() {
   ) : error ? (
     { error }
   ) : (
-    <div>
-      <div className="lightBlueBodyBG">
-        <div className="whiteBodyBG">
-          <div className="content-top-part">
-            <div className="img-section-large"></div>
-            <div className="btns-description">
-              <p className="gem-name">{Jwl.name}</p>
-              <p className="gem-price">${Jwl.price}</p>
+    <>
+      <Header />
+      <div>
+        <div className="lightBlueBodyBG">
+          <div className="whiteBodyBG">
+            <div className="content-top-part">
+              <div className="img-section-large"></div>
+              <div className="btns-description">
+                <p className="gem-name">{Jwl.name}</p>
+                <p className="gem-price">${Jwl.price}</p>
 
-              <div className="btns">
-                <button
-                  onClick={() => handleAddToCart(Jwl._id)}
-                  className="btn-add-to-cart"
-                >
-                  Add to cart
-                </button>
-              </div>
-
-              <label className="label">Gem Shape</label>
-                  <select
-                    className="input"
-                  
-                    onChange={(event) => {
-                      setGem(event.target.value);
-                    }}
+                <div className="btns">
+                  <button
+                    onClick={() => handleAddToCart(Jwl._id)}
+                    className="btn-add-to-cart"
                   >
-                    <option value="">Select a shape</option>
-                    <option value="Round">Round</option>
-                    <option value="Oval">Oval</option>
-                    <option value="Pear">Pear</option>
-                    <option value="Marquise">Marquise</option>
-                    <option value="Emerald">Emerald</option>
-                    <option value="Heart">Heart</option>
-                    <option value="Trillion">Trillion</option>
-                    <option value="Princess">Princess</option>
-                  </select>
-                  
+                    Add to cart
+                  </button>
+                </div>
 
-              <div className="gem-desc">
-                <p>{Jwl.description}</p>
+                <label className="label">Gem Shape</label>
+                <select
+                  className="input"
+                  onChange={(event) => {
+                    setGem(event.target.value);
+                  }}
+                >
+                  <option value="">Select a shape</option>
+                  <option value="Round">Round</option>
+                  <option value="Oval">Oval</option>
+                  <option value="Pear">Pear</option>
+                  <option value="Marquise">Marquise</option>
+                  <option value="Emerald">Emerald</option>
+                  <option value="Heart">Heart</option>
+                  <option value="Trillion">Trillion</option>
+                  <option value="Princess">Princess</option>
+                </select>
+
+                <div className="gem-desc">
+                  <p>{Jwl.description}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="content-middle-part">
-            <center>
-              <p className="details-topic">Details</p>
-              <hr className="detail-hr"></hr>
-            </center>
-            <div className="details-part">
+            <div className="content-middle-part">
               <center>
-                {' '}
-                <table>
-                  <tr>
-                    <td className="cl1">Type</td>
-                    <td className="cl2">: {Jwl.type}</td>
-                  </tr>
-                  <tr>
-                    <td className="cl1">Gender</td>
-                    <td className="cl2">: {Jwl.gender}</td>
-                  </tr>
+                <p className="details-topic">Details</p>
+                <hr className="detail-hr"></hr>
+              </center>
+              <div className="details-part">
+                <center>
+                  {' '}
+                  <table className="detail-table">
+                    <tr>
+                      <td className="cl1">Type</td>
+                      <td className="cl2">: {Jwl.type}</td>
+                    </tr>
+                    <tr>
+                      <td className="cl1">Gender</td>
+                      <td className="cl2">: {Jwl.gender}</td>
+                    </tr>
 
-                  {/* <tr>
+                    {/* <tr>
                     <td className="cl1">Stone</td>
                     <td className="cl2">: {Jwl.gemstone}ct</td>
                   </tr> */}
-                  <tr>
-                    <td className="cl1">MetalType</td>
-                    <td className="cl2">: {Jwl.metal}ct</td>
-                  </tr>
-                </table>
-              </center>
+                    <tr>
+                      <td className="cl1">MetalType</td>
+                      <td className="cl2">: {Jwl.metal}ct</td>
+                    </tr>
+                  </table>
+                </center>
+              </div>
             </div>
-          </div>
-          <h1>New Arrivals</h1>
+            <h1>New Arrivals</h1>
 
-          <div className="card">
-            <div className="card-content">
-              <span className="img-section"></span>
-              <p className="card-name">{Jwl.name}</p>
-              <p className="card-price">${Jwl.price}</p>
+            <div className="card">
+              <div className="card-content">
+                <span className="img-section"></span>
+                <p className="card-name">{Jwl.name}</p>
+                <p className="card-price">${Jwl.price}</p>
+              </div>
+              <Link to={`/jewells/${Jwl._id}`}>
+                <button className="card-button">Read More...</button>
+              </Link>
             </div>
-            <Link to={`/jewells/${Jwl._id}`}>
-              <button className="card-button">Read More...</button>
-            </Link>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

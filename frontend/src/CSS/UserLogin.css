@@ -105,3 +105,7 @@ form {
 .error{
   border: none;
 }
+
+.text-gray-800{
+  cursor: pointer;
+}

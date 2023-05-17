@@ -50,14 +50,15 @@ const createPayment = async (req , res) =>{
       }
      
 
-    //add doc to db
-    try{
-      const payment = await Payment.create({user  ,orderID ,amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus})
-      res.status(200).json(payment)
-    }catch(error){
-      res.status(400).json({error: error.message})
-    }
-}
+      //add doc to db
+      try{
+        const payment = await Payment.create({user  ,orderID ,amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus})
+        res.status(200).json(payment)
+      }catch(error){
+        res.status(400).json({error: error.message})
+      }
+  }
+
 
 //delete a payment
 const deletePayment = async (req , res) => {

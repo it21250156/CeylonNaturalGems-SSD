@@ -24,7 +24,7 @@ const GemAdminHome = () => {
     logout();
     navigate('/');
   };
-  
+
   const { gems, dispatch } = useGemsContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -132,7 +132,8 @@ const GemAdminHome = () => {
             <p>No results found. Please check the gem name.</p>
           )}
         </div>
-      </div></>
+      </div>
+    </>
   );
 };
 

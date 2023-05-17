@@ -99,3 +99,35 @@ nav li a:hover {
   color: red;
   transition: 0.5s;
 }
+
+.header-btn-login {
+  background-color: #0a2647;
+  color: white;
+  padding: 3px 20px;
+  margin: 0px 0px 5px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.header-btn-login:hover {
+  background-color: white;
+  color: #0a2647;
+  transition: 0.5s;
+}
+
+.header-btn-register {
+  background-color: #144272;
+  color: white;
+  padding: 3px 20px;
+  margin: 0px 0px 5px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.header-btn-register:hover {
+  background-color: white;
+  color: #144272;
+  transition: 0.5s;
+}

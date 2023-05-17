@@ -160,3 +160,24 @@
   background-color: #cadefc;
   color: #000;
 }
+
+/* image */
+.gem-admin-add-image {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  padding: 10px; /* Add desired padding value */
+}
+
+
+.removeImage {
+  display: block;
+  font-size: 12px;
+  padding: 4px 8px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 3px;
+  margin-top: 5px;
+}

@@ -15,6 +15,13 @@
   font-weight: normal;
 }
 
+.light-blue-main-box {
+  background-color: #cadefc;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 10px;
+}
+
 .light-blue-bg {
   background-color: #cadefc;
   margin: 20px 300px;
@@ -31,11 +38,11 @@ form {
   flex-wrap: wrap;
 }
 
-.col-1 {
+.col-1-p-from {
   flex: 1;
 }
 
-.col-2 {
+.col-2-p-from {
   flex: 1;
   border-left: 2px solid white;
   padding-left: 30px;
