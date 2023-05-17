@@ -72,21 +72,19 @@ const AllInstallments = () => {
             </div>
 
 
-                <table >
+                <table className="table table-striped table-hover">
                   <thead>
                     <tr> 
                         <th>User</th>
                         <th>Gem</th>
-                        <th>Installment ID</th>
-                        <th>Monthly Payment</th>
-                        <th>Payment Date</th>
-                        
+                        <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     {Installments && Installments.map((installment) => (
                         <InstallmentTableRow key={installment._id} installment={installment} />
                     ))}
+
                   </tbody>
                 </table>
             </div> 
@@ -99,23 +97,19 @@ const AllInstallments = () => {
 //table row
 const InstallmentTableRow = ({ installment }) => {
   const [gems, setGems] = useState([]);
-
-  useEffect(() => {
-      const fetchGems = async () => {
-        try {
-          const response = await fetch('/api/gems&jewelleries/gems');
-          const json = await response.json();
-          setGems(json);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      fetchGems();
-  }, []);
-
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    const fetchGems = async () => {
+      try {
+        const response = await fetch('/api/gems&jewelleries/gems');
+        const json = await response.json();
+        setGems(json);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     const fetchUsers = async () => {
       try {
         const response = await fetch('/api/users');
@@ -125,21 +119,21 @@ const InstallmentTableRow = ({ installment }) => {
         console.log(err);
       }
     };
+
+    fetchGems();
     fetchUsers();
-}, []);
+  }, []);
+
+  const usersName = users.find((user) => user._id === installment.user);
 
     return(
       
         <tr>
-            <td> {users.find((user) => user._id === installment.user)?.firstName} {} </td>
+            <td> {usersName?.firstName} {usersName?.lastName} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
-            <td> {installment._id} </td>
-            <td> {installment.monthlyPayment} </td>
-            <td>  {format(new Date(installment.createdAt), 'MM/dd/yyyy')} </td>
-            
-            
+            <td> {installment.status} </td>
         </tr>
     )
-}
+ };
 
 export default AllInstallments
