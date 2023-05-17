@@ -97,20 +97,24 @@ const Gemhome = () => {
                 <h3 className="pageTopic">Gemstones</h3>
               </div>
 
-              <div class="gem-admin-search-wrapper">
-                <div class="gem-admin-search">
+              <div className="gem-search-wrapper">
+                <div className="gem-search">
                   <input
+                    className="gem-search-input"
                     type="text"
-                    placeholder="Search by gem name"
+                    placeholder="Search by Gem Name"
                     value={searchTerm}
                     onChange={handleSearchChange}
                   />
                 </div>
               </div>
 
-              <div class="gem-admin-sort">
-                <label htmlFor="sort-select">Sort by: </label>
+              <div className="gem-sort">
+                <label htmlFor="sort-select" className="gem-sort-lable">
+                  Sort by:{' '}
+                </label>
                 <select
+                  className="sort-select"
                   id="sort-select"
                   value={sortBy}
                   onChange={handleSortChange}
