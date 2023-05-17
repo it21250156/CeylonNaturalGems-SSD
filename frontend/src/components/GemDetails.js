@@ -108,7 +108,6 @@ const GemDetails = ({ gem }) => {
             </div>
           </div>
         )}
-
       </div>
     </div>
 
