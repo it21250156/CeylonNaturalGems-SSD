@@ -88,16 +88,24 @@ const AllUsers = () => {
       </header>
       <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
+
           <input
+            style={{width:"50%" , marginLeft:"5%"}}
+            className="opacity-75"
             type="text"
             value={searchQuery}
             onChange={handleSearch}
             placeholder="Search..."
           />
-          <div className="darkBlueTopicBox">
+          
+          {filteredData.length > 0 ? (
+            <>
+            <p style={{marginLeft : "80%" , marginTop : "-60px"}}>Number of results: {filteredData.length}</p> 
+
+            <br></br>
+            <div className="darkBlueTopicBox">
             <h3 className="pageTopic">All Users</h3>
           </div>
-
           <table className="table table-striped table-hover">
             <thead style={{ backgroundColor: "#144272" }}>
               <tr>
@@ -110,26 +118,24 @@ const AllUsers = () => {
                 <th>Phone number</th>
               </tr>
             </thead>
-
-            
-            {filteredData.length > 0 ? (
-              filteredData.map((item , index) => (
+              {filteredData.map((item , index) => (
                 <tbody>
                 <tr key={item.id}>
-                  <td>{index + 1}</td>
-                  <td>{item.title}</td>
-                  <td>{item.firstName}</td>
-                  <td>{item.lastName}</td>
+                  <td> {index + 1}</td>
+                  <td> {item.title}</td>
+                  <td> {item.firstName}</td>
+                  <td> {item.lastName}</td>
                   <td> {item.userType} </td>
                   <td> {item.email} </td>
                   <td> {item.phone} </td>
                 </tr>
                 </tbody>
-              )))  : (
-                <p style={{paddingLeft:"30%"}}>No results found. Please check again.</p>
-              ) }
+              )) }
             
-          </table>
+          </table> </>
+           ): (
+            <p style={{color:"red"}}>No results found. Please check again.</p>
+          ) } 
         </div>
       </div>
     </>
