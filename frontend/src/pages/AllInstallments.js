@@ -101,6 +101,7 @@ const AllInstallments = () => {
                   <thead>
                     <tr> 
                         <th> # </th>
+                        <th>ID</th>
                         <th>User</th>
                         <th>Gem</th>
                         <th>Status</th>
@@ -159,6 +160,7 @@ const InstallmentTableRow = ({ installment , index }) => {
       
         <tr>
             <td> {index + 1} </td>
+            <td> {installment._id} </td>
             <td> {usersName?.firstName} {usersName?.lastName} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
             <td> {installment.status} </td>

@@ -30,6 +30,7 @@ const AllInstallmentsDetailed = () => {
 
     const [gems, setGems] = useState([]);
     const [users, setUsers] = useState([]);
+    const [plans, setPlans] = useState([]);
 
 
     useEffect(() => {
@@ -67,6 +68,17 @@ const AllInstallmentsDetailed = () => {
       }
     };
 
+    const fetchPlans = async () => {
+        try {
+          const response = await fetch('/api/plans');
+          const json = await response.json();
+          setPlans(json);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+    fetchPlans();
     fetchGems();
     fetchUsers();
   }, []);
@@ -106,16 +118,26 @@ const AllInstallmentsDetailed = () => {
     <div className="lightBlueBodyBG">
         <div className="lightBlueBox">
             <h3>{gems.find((gem) => gem._id === installment.gemID)?.name} </h3>
-            <h3> Customer {usersName?.firstName} {usersName?.lastName} </h3>
+            <h3> Customer: {usersName?.firstName} {usersName?.lastName} </h3>
             <br></br>
             
-            <table>
-                <tr><td></td> <td></td></tr>
+            <table className="table table-striped table-hover">
+                <tr><td>Purchased Date</td> <td>{installment.installmentDates[0]}</td></tr>
+                <tr><td>Installement Plan</td> <td>{plans.find((plan) => plan._id === installment.planID)?.name}</td></tr>
+                <tr><td>Total Amount</td> <td></td></tr>
+                <tr><td>Initial Payment</td> <td>{installment.initialPayment}</td></tr>
+                <tr><td>Monthly Payment</td> <td>{installment.monthlyPayment}</td></tr>
+                <tr><td>Total Number of Months to Pay</td> <td>{installment.noOfMonths}</td></tr>
+                <tr><td>Order completion date</td> <td></td></tr>
+
+                <br></br>
+                <tr><td>Status</td> <td>{installment.status}</td></tr>
+
             </table>
 
             
         </div> 
-        <div className="whiteBodyBG">
+        <div className="whiteBox">
             
 
             

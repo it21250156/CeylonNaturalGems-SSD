@@ -41,7 +41,7 @@ const MyInstallments = () => {
                     <thead> 
                         <tr> 
                             <th> # </th>
-                            <th>Installment ID</th>
+                            <th>ID</th>
                             <th>Gem</th>
                             <th>Status</th>
                             <th></th>
