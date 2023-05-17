@@ -22,7 +22,33 @@ const AddGem = () => {
   };
 
   return (
-  <><Header/>
+  <>
+  <header>
+        <div>
+          <div className="background">
+            <div className="headerNameDiv">
+              <h1 className="headerName">Ceylon Natural Gems</h1>
+            </div>
+          </div>
+
+          <nav>
+            <div className="navprofileDiv">
+              <div className="navEmal">
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
+              </div>
+            </div>
+
+            <ul>
+              <li>
+                <Link to={'/adminHome'}>Home</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
       <div className="addGem">
         <GemAddForm />
       </div>
