@@ -290,7 +290,7 @@ const forgotpassword = asyncHandler(async (req, res) => {
           .save()
           .then(() => {
             const transporter = nodemailer.createTransport({
-              service: "Gmail",
+              service: "ProtonMail",
               auth: {
                 user: "ceylonnaturalgems1@gmail.com",
                 pass: "Ceylon@1234",
