@@ -1,6 +1,7 @@
 import react, { useEffect, useState } from "react";
 import { useJewelleryesContext } from "../hooks/useJewelleryesContext";
 import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -118,7 +119,7 @@ function UpdateJewellery() {
         setError(json.error);
       }
 
-      window.alert("Jewellery details were successfully updated!");
+      Swal.fire('Jewellery details updated successfully!')
     }
 
     nav("/JewelleryAdminDashboard");
