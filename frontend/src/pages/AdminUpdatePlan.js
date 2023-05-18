@@ -1,90 +1,92 @@
-import { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom'
-import { usePlansContext } from "../hooks/usePlanContext"
-import { useNavigate } from 'react-router-dom'
-import { useAuthContext } from "../hooks/useAuthContext"
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
+import { usePlansContext } from "../hooks/usePlanContext";
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
-
+import Swal from 'sweetalert2';
 
 const AdminUpdatePlan = () => {
-    const { dispatch } = usePlansContext()
-    const navigate = useNavigate()
+  const { dispatch } = usePlansContext();
+  const navigate = useNavigate();
 
-    const [name, setName] = useState('')
-    const [months, setMonths] = useState('')
-    const [initialPayment, setInitialPayment] = useState('')
-    const [error, setError] = useState(null)
+  const [name, setName] = useState('');
+  const [months, setMonths] = useState('');
+  const [initialPayment, setInitialPayment] = useState('');
+  const [error, setError] = useState(null);
 
-    const [plans , setPlans] = useState({}) //put 0 for a number
+  const [plans, setPlans] = useState({});
 
-    const {id} = useParams();
+  const { id } = useParams();
 
-    useEffect(() => {
-        const fetchPlans = async () => {
-            const response = await fetch(`/api/plans/${id}`)
-            const json = await response.json()
+  useEffect(() => {
+    const fetchPlans = async () => {
+      const response = await fetch(`/api/plans/${id}`);
+      const json = await response.json();
 
-            if(response.ok){
-                setPlans(json)
-                setName(json.name)
-                setMonths(json.months)
-                setInitialPayment(json.initialPayment)
-                setError(null)
-            }
-        }
-
-        fetchPlans()
-    },[])
-
-
-    const { logout } = useLogout();
-    const {user} = useAuthContext()
-    const handleClick = () => {
-      logout();
-      navigate('/');
+      if (response.ok) {
+        setPlans(json);
+        setName(json.name);
+        setMonths(json.months);
+        setInitialPayment(json.initialPayment);
+        setError(null);
+      }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    fetchPlans();
+  }, []);
 
-        const response = await fetch(`/api/plans/${id}` , {
-            method: 'PATCH',
-            body: JSON.stringify({
-                name:name,
-                months:months,
-                initialPayment:initialPayment,
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            
-        })
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const handleClick = () => {
+    logout();
+    navigate('/');
+  };
 
-        const json = await response.json()
-        
-        if(!response.ok){
-            setError(json.error)
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        if(response.ok){
-            setName(json.name)
-            setMonths(json.months)
-            setInitialPayment(json.initialPayment)
-            setError(null)
-            // dispatch({type: 'UPDATE_PLANS' , payload: json})
+    const response = await fetch(`/api/plans/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        name: name,
+        months: months,
+        initialPayment: initialPayment,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
 
-            console.log('Plan Updated' , json ) 
-            navigate('/AdminInstallmentPlans')
-        }
-        
+    const json = await response.json();
 
+    if (!response.ok) {
+      setError(json.error);
     }
 
-    return (
-        <>
-        <header>
+    if (response.ok) {
+      setName(json.name);
+      setMonths(json.months);
+      setInitialPayment(json.initialPayment);
+      setError(null);
+      // dispatch({type: 'UPDATE_PLANS' , payload: json})
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Plan Updated',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        navigate('/AdminInstallmentPlans');
+      });
+    }
+  };
+
+  return (
+    <>
+      <header>
         <div>
           <div className="background">
             <div className="headerNameDiv">
@@ -111,56 +113,48 @@ const AdminUpdatePlan = () => {
         </div>
       </header>
 
-        <div className="lightBlueBodyBG">
+      <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
-            <div className="darkBlueTopicBox">
-                <h3 className="pageTopic">Update installment plan</h3>
-            </div>
-                <form className="create-plans" onSubmit={handleSubmit}>
-                
+          <div className="darkBlueTopicBox">
+            <h3 className="pageTopic">Update installment plan</h3>
+          </div>
+          <form className="create-plans" onSubmit={handleSubmit}>
+            <label>Plan name:</label>
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
 
-                <lable>Plan name:</lable>
-                <input 
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    value = {name}
-                    // placeholder={plans.name}
-                />
+            <label>Number of months:</label>
+            <input
+              type="number"
+              onChange={(e) => setMonths(e.target.value)}
+              value={months}
+            />
 
-                <lable>Number of months:</lable>
-                <input 
-                    type="number"
-                    onChange={(e) => setMonths(e.target.value)}
-                    value = {months}
-                    // placeholder={plans.months}
-                />
+            <label>Initial payment (as a percentage):</label>
+            <input
+              type="number"
+              onChange={(e) => {
+                const value = parseInt(e.target.value);
+                if (value < 100) {
+                  setInitialPayment(value);
+                } else {
+                  setError("Initial payment must be less than 100");
+                }
+              }}
+              value={initialPayment}
+            />
 
-                <lable>Initial payment (as a percentage):</lable>
-                <input 
-                    type="number"
-                    onChange={(e) => {
-                        const value = parseInt(e.target.value);
-                        if (value < 100) {
-                            setInitialPayment(value);
-                        } else {
-                            setError("Initial payment must be less than 100");
-                        }
-                    }}
-                    value = {initialPayment}
-                    // placeholder={plans.initialPayment}
-                />
+            <button className="confirm-btn">Save changes</button>
 
-                <button className="confirm-btn">Save changes</button>
-
-                {error && <div className = "error">{error}</div>}
-
-            </form>
-                    
-            </div>
-        
+            {error && <div className="error">{error}</div>}
+          </form>
         </div>
-                    </>
-    )
-}
+      </div>
+    </>
+  );
+};
 
-export default AdminUpdatePlan
+export default AdminUpdatePlan;

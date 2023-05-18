@@ -137,6 +137,11 @@ const SelectedInstallmentPlan = () => {
                       </h4>
                     </div>
                     <div className="img-section-inst"></div>
+                    <img
+                      src={gem.gem_img}
+                      alt="Gem"
+                      className="gem-card__image"
+                    />
                   </div>
                 </div>
                 <div className="col-2-slected-plan-details">

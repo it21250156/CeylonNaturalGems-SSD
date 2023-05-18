@@ -12,7 +12,7 @@ const MonthlyPayment = ({ plans, gem }) => {
 
     fpay = (price * initial) / 100;
 
-    mpay = (price - fpay) / months - 1;
+    mpay = ((price - fpay) / months - 1).toFixed(2);
 
     return mpay;
   };
