@@ -186,3 +186,9 @@
   padding: 20px;
   border-radius: 20px;
 }
+
+/* error */
+.gem-admin-_error{
+    color: #e7195a;
+    margin: 20px 0;
+  }

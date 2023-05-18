@@ -209,7 +209,7 @@ function UpdateGems() {
                       }`}
                     />
                     {emptyFields.includes('name') && (
-                      <div className="error">Please enter a name.</div>
+                      <div className="gem-admin-_error">Please enter a name.</div>
                     )}
 
                     <label>Upload Image:</label>
@@ -244,7 +244,7 @@ function UpdateGems() {
                       }`}
                     />
                     {emptyFields.includes('type') && (
-                      <div className="error">Please enter a type.</div>
+                      <div className="gem-admin-_error">Please enter a type.</div>
                     )}
 
                     <label className="gem-label">Gem Shape: </label>
@@ -265,7 +265,7 @@ function UpdateGems() {
                     </select>
 
                     {emptyFields.includes('shape') && (
-                      <div className="error">Please select a shape.</div>
+                      <div className="gem-admin-_error">Please select a shape.</div>
                     )}
 
                     <label className="gem-label">Gem Size (in kt): </label>
@@ -279,7 +279,7 @@ function UpdateGems() {
                     />
 
                     {emptyFields.includes('size') && (
-                      <div className="error">Please enter a size.</div>
+                      <div className="gem-admin-_error">Please enter a size.</div>
                     )}
                   </div>
                   <div className="column-2-gem-form">
@@ -294,7 +294,7 @@ function UpdateGems() {
                     />
 
                     {emptyFields.includes('color') && (
-                      <div className="error">Please enter a color.</div>
+                      <div className="gem-admin-_error">Please enter a color.</div>
                     )}
 
                     <label className="gem-label">Gem Quantity: </label>
@@ -308,7 +308,7 @@ function UpdateGems() {
                     />
 
                     {emptyFields.includes('quantity') && (
-                      <div className="error">Please enter a quantity.</div>
+                      <div className="gem-admin-_error">Please enter a quantity.</div>
                     )}
 
                     <label className="gem-label">Gem Price: (in Rs)</label>
@@ -322,7 +322,7 @@ function UpdateGems() {
                     />
 
                     {emptyFields.includes('price') && (
-                      <div className="error">Please enter a price.</div>
+                      <div className="gem-admin-_error">Please enter a price.</div>
                     )}
 
                     <label className="gem-label">Gem Description: </label>
@@ -339,13 +339,13 @@ function UpdateGems() {
                     />
 
                     {emptyFields.includes('description') && (
-                      <div className="error">Please enter a description.</div>
+                      <div className="gem-admin-_error">Please enter a description.</div>
                     )}
 
                     <button className="gem-add-buttons" id="gem-add-button">
                       Update Gem
                     </button>
-                    {error && <div className="error">{error}</div>}
+                    {error && <div className="gem-admin-_error">{error}</div>}
                   </div>
                 </div>
               </form>
