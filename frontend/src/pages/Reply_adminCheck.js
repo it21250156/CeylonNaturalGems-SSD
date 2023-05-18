@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import Axios from "axios";
+import Swal from "sweetalert2";
 import "../CSS/AppBW.css";
 import Header from "../components/Header";
 import TextareaAutosize from 'react-textarea-autosize';
@@ -25,12 +26,26 @@ function Reply_adminView() {
   }, []);
 
   const handleDelete = (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this reply?');
-    if (confirmed) {
-      Axios.delete(`/deleteReply/${id}`).then(() => {
-        setReplies(replies.filter((reply) => reply._id !== id));
-      });
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        Axios.delete(`/deleteReply/${id}`).then(() => {
+          setReplies(replies.filter((reply) => reply._id !== id));
+        });
+      }
+    });
   };
 
   const handleUpdate = (repId) => {

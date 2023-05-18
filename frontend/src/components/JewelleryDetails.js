@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useJewelleryesContext } from "../hooks/useJewelleryesContext";
-import ConfirmationModal from "./ConfirmationModal";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 import "../CSS/JewellAdmin.css";
 
@@ -10,25 +10,37 @@ const JewelleryDetails = ({ jewellery }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = async () => {
-    const response = await fetch("/api/jewelleryes/" + jewellery._id, {
-      method: "DELETE",
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        const deleteJewellery = async () => {
+          const response = await fetch("/api/jewelleryes/" + jewellery._id, {
+            method: "DELETE",
+          });
+    
+          const json = await response.json();
+    
+          if (response.ok) {
+            dispatch({ type: "DELETE_JEWELLERY", payload: json });
+            window.location.reload();
+          }
+        };
+
+        deleteJewellery();
+      }
     });
-
-    const json = await response.json();
-
-    if (response.ok) {
-      dispatch({ type: "DELETE_JEWELLERY", payload: json });
-      window.location.reload();
-    }
-  };
-
-  const handleConfirm = () => {
-    setShowModal(false);
-    handleDelete();
-  };
-
-  const handleCancel = () => {
-    setShowModal(false);
   };
 
   const handleUpdate = async () => {
@@ -88,7 +100,7 @@ const JewelleryDetails = ({ jewellery }) => {
           </div>
           <button
             className="JewdeleteButton"
-            onClick={() => setShowModal(true)}
+            onClick={handleDelete}
           >
             delete
           </button>
@@ -101,14 +113,6 @@ const JewelleryDetails = ({ jewellery }) => {
           >
             Update
           </button>
-
-          {showModal && (
-            <ConfirmationModal
-              message="Are you sure you want to delete this jewellery?"
-              onConfirm={handleConfirm}
-              onCancel={handleCancel}
-            />
-          )}
         </div>
       </div>
     </>

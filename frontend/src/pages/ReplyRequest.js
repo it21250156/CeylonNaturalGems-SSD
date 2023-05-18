@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
+import Swal from "sweetalert2";
 
 
 
@@ -39,7 +40,7 @@ function ReplyRequest(){
           reply,
           reqId
         }).then((response) => {
-          alert("Reply added!");
+          Swal.fire('Reply added succsessfully!')
         })
       }
   
