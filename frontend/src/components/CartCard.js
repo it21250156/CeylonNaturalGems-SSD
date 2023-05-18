@@ -1,5 +1,4 @@
 import '../CSS/CartCard.css';
-import { useAuthContext } from '../hooks/useAuthContext';
 import { Link } from "react-router-dom";
 import "../CSS/CartCard.css";
 import { useAuthContext } from "../hooks/useAuthContext";
