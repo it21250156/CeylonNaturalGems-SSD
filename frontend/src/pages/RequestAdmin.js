@@ -14,10 +14,11 @@ function MyReq() {
   const { logout } = useLogout();
   const { user } = useAuthContext()
   const navigate = useNavigate();
-  const [listOfReplyStatus, setListOfReplyStatus] = useState([]);
+  const [listOfReplyStatus, setListOfReplyStatus] = useState({});
   const [sortBy, setSortBy] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [listOfRequests, setListOfRequests] = useState([]);
 
   const handleSort = (e) => {
     const { value } = e.target;
@@ -30,14 +31,11 @@ function MyReq() {
   };
 
   useEffect(() => {
-    Axios.get(`/getUsersRequests/${uid}`).then((response) => {
-      // Sort the response data based on the createdAt property
+    Axios.get(`/getUsers`).then((response) => {
       const sortedRequests = response.data.sort((a, b) =>
         sortBy === 'dateDescending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt)
       );
-      // Reverse the sorted array for descending order
       const sortedRequestsDescending = sortBy === 'dateDescending' ? sortedRequests.reverse() : sortedRequests;
-      // Reverse the sorted array again for ascending order
       const sortedRequestsAscending = sortBy === 'dateAscending' ? sortedRequestsDescending.reverse() : sortedRequestsDescending;
       setListOfRequests(sortedRequestsAscending);
       // getReplyStatus(sortedRequestsAscending);
@@ -48,8 +46,6 @@ function MyReq() {
     logout();
     navigate('/');
   };
-
-  const [listOfRequests, setListOfRequests] = useState([]);
 
   useEffect(() => {
     Axios.get("/getUsers").then((response) => {
@@ -84,8 +80,8 @@ function MyReq() {
             </div>
           </div>
 
-        <nav>
-          <div className="navprofileDiv">
+          <nav>
+            <div className="navprofileDiv">
               <div className="navEmal">
                 <span className="welcomeNoteAdmin">Hello Admin</span>
                 <button className="adminLogoutBtn" onClick={handleClick}>
@@ -94,16 +90,16 @@ function MyReq() {
               </div>
             </div>
 
-          <ul>
-            <li>
-              <Link to={'/adminHome'}>Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-        <div className="MyRequests">
+            <ul>
+              <li>
+                <Link to={'/adminHome'}>Home</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
+      <div className="MyRequests">
         <div className="darkBlueTopicBoxReq">
           <h1 className="pageTopicReq">All requests</h1>
         </div>
@@ -124,12 +120,13 @@ function MyReq() {
             <option value="dateDescending">Latest requests First</option>
           </select>
 
-          {searchResults.map((user) => {
-            return (
-              <div className='lightBlueBodyBG'>
-                <div className='whiteBodyBG'>
-                  <div className="myreq-column-1">
-                    <table>
+          {searchResults.map((user) => (
+            
+            <div key={user._id} className='lightBlueBodyBG'>
+              <div className='whiteBodyBG'>
+                <div className="myreq-column-1">
+                  <table>
+                    <tbody>
                       <tr>
                         <td className="req-lable">First Name</td>
                         <td className="req-value">{user.FirstName}</td>
@@ -174,31 +171,27 @@ function MyReq() {
                         <td className="req-lable">Date added</td>
                         <td className="req-value">{user.createdAt}</td>
                       </tr>
-                    </table>
-                  </div>
+                    </tbody>
+                  </table>
                 </div>
-
-                <button className='repbtn' onClick={() => { window.location.href = `./reqReply/${user._id}` }}>Reply</button>
-
-                <button
-                  disabled={
-                    listOfReplyStatus[user._id] > 0 ||
-                    listOfReplyStatus[user._id] === null
-                      ? true
-                      : false
-                  }
-                  className="repliesbtnAdmin"
-                  onClick={() => {
-                    window.location.href = `./reply_av/${user._id}`;
-                  }}
-                >
-                  Your Replies
-                </button>
-
               </div>
 
-            );
-          })}
+              <button className='repbtn' onClick={() => { window.location.href = `./reqReply/${user._id}` }}>Reply</button>
+
+              <button
+                disabled={listOfReplyStatus[user._id] > 0 || listOfReplyStatus[user._id] === null}
+                className="repliesbtnAdmin"
+                onClick={() => {
+                  window.location.href = `./reply_av/${user._id}`;
+                }}
+              >
+                Your Replies
+              </button>
+
+            </div>
+            
+          ))}
+
           <Link to={'/Myrep'}>
             <button className="req-btn">View My Replies</button>
           </Link>

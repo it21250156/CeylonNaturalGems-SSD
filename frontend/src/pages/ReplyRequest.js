@@ -39,7 +39,7 @@ function ReplyRequest(){
           reply,
           reqId
         }).then((response) => {
-          alert("wade goda bosa!");
+          alert("Reply added!");
         })
       }
   
