@@ -7,7 +7,14 @@ function JewelCard(Jewel) {
   return (
     <div className="card">
       <div className="card-content">
-        <span className="img-section"></span>
+        <div >
+            {Jwl.jewellery_img && (
+              <img
+                src={Jwl.jewellery_img}
+                style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }}
+              />
+            )}
+          </div>
         <p className="card-name">{Jwl.name}</p>
         <p className="card-price">${Jwl.price}</p>
       </div>

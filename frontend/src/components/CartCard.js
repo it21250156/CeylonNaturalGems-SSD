@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import '../CSS/CartCard.css';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+import "../CSS/CartCard.css";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useEffect, useState } from "react";
 
 function CartCard({ cartid, gem, jewellery }) {
   const { cartData, handleCartRemove, handleChangeQuantityCart } =
@@ -22,11 +22,11 @@ function CartCard({ cartid, gem, jewellery }) {
     );
   }, [cartData, gem, cartid]);
 
-  const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
+  const jewelWithGem = JSON.parse(localStorage.getItem("gemCartInfo"));
 
   const confirmCartRemove = (cartid) => {
     const confirmed = window.confirm(
-      'Are you sure you want to remove this item from the cart?'
+      "Are you sure you want to remove this item from the cart?"
     );
     if (confirmed) {
       // Call the remove item function
@@ -53,7 +53,7 @@ function CartCard({ cartid, gem, jewellery }) {
             <div>
               <button
                 className="decrease-btn"
-                onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
+                onClick={() => handleChangeQuantityCart(cartid, "DECREASE")}
                 disabled={isAtItemMin}
               >
                 -
@@ -65,7 +65,7 @@ function CartCard({ cartid, gem, jewellery }) {
             <div>
               <button
                 className="increase-btn"
-                onClick={() => handleChangeQuantityCart(cartid, 'INCREASE')}
+                onClick={() => handleChangeQuantityCart(cartid, "INCREASE")}
                 disabled={isAtItemMax}
               >
                 +
@@ -105,6 +105,18 @@ function CartCard({ cartid, gem, jewellery }) {
             <p className="cartcard-name">{jewellery?.name}</p>
             <p className="cartcard-price">${jewellery?.price}</p>
             <p className="cartcard-name">{jewelWithGem}</p>
+          </div>
+          <div>
+            {jewellery.jewellery_img && (
+              <img
+                src={jewellery.jewellery_img}
+                style={{
+                  maxWidth: "200px",
+                  maxHeight: "200px",
+                  marginBottom: "10px",
+                }}
+              />
+            )}
           </div>
           <div className="update-section"></div>
           <div className="btn-delete">
