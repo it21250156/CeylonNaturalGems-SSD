@@ -15,6 +15,8 @@ import AdminUsers from './pages/AdminUsers';
 import AdminHome from './pages/AdminHome';
 import ResetPassword from './pages/ChangePassword';
 import AllUsers from './pages/AllUsers';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetForgotPassword from './pages/ResetForgotPassword';
 
 //janith
 import Gemhome from './pages/Gemhome';
@@ -28,6 +30,7 @@ import RequestAdmin from './pages/RequestAdmin';
 import ReplyRequest from './pages/ReplyRequest';
 import Myreply from './pages/Myreply';
 import Reply_adminView from './pages/Reply_adminCheck';
+import RequestReport from './pages/RequesReport';
 
 //malika
 import FeedbackForm from './pages/FeedbackPage';
@@ -58,6 +61,7 @@ import JewelhomeWomen from './pages/JewelhomeWomen';
 import InstallmentPlans from './pages/InstallmentPlans';
 import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan';
 import AllInstallments from './pages/AllInstallments';
+import AllInstallmentsDetailed from './pages/AllInstallmentsDetailed';
 import AdminInstallmentPlans from './pages/AdminInstallmentPlans';
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
 import MyInstallments from './pages/MyInstallments';
@@ -102,6 +106,8 @@ function App() {
               element={<ResetPassword />}
             />
             <Route path="/AllUsers" element={<AllUsers />} />
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route path="/ResetForgotPassword/:token" element={<ResetForgotPassword />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
@@ -119,6 +125,7 @@ function App() {
               path="/reply_av/:reqId"
               element={<Reply_adminView />}
             ></Route>
+            <Route path="/reqReport" element={<RequestReport />}></Route>
 
             {/* <Route path='/' element={<AdminUsers/>}/> gugyugub*/}
 
@@ -176,11 +183,14 @@ function App() {
               path="/InstallmentPlans/selectedInstallmentPlan/:id"
               element={<SelectedInstallmentPlan />}
             />
-
-            {/* admin */}
+            {/* admin -Vihangi's */}
             <Route
               path="/AdminInstallmentPlans/AllInstallments"
               element={<AllInstallments />}
+            />
+            <Route
+              path="/AdminInstallmentPlans/AllInstallments/AllInstallmentsDetailed/:id"
+              element={<AllInstallmentsDetailed />}
             />
             <Route
               path="/AdminInstallmentPlans"

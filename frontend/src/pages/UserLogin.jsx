@@ -85,7 +85,9 @@ function UserLogin() {
             value={password}
             required="required"
           />
-          <a className="text-gray-800">
+          <a onClick={() => {
+              navigate('/ForgotPassword');
+            }} className="text-gray-800" style={{position : "absolute" , marginLeft : "-15%"}} >
               Forgot password?
           </a>
             <br />

@@ -1,4 +1,4 @@
-import { useEffect  } from "react"
+import { useEffect , useState } from "react"
 import { usePlansContext } from "../hooks/usePlanContext"
 import { useNavigate } from "react-router-dom"
 
@@ -41,31 +41,31 @@ const AdminInstallmentPlans = () => {
     return (
         <>
       <header>
-      <div>
-        <div className="background">
-          <div className="headerNameDiv">
-            <h1 className="headerName">Ceylon Natural Gems</h1>
+        <div>
+          <div className="background">
+            <div className="headerNameDiv">
+              <h1 className="headerName">Ceylon Natural Gems</h1>
+            </div>
           </div>
-        </div>
 
-        <nav>
-          <div className="navprofileDiv">
+          <nav>
+            <div className="navprofileDiv">
               <div className="navEmal">
-                <span>
-                  Hello Admin
-                </span>
-                <button onClick={handleClick}>Log out</button>
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
               </div>
-          </div>
+            </div>
 
-          <ul>
-            <li>
-              <Link to={'/adminHome'}>Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+            <ul>
+              <li>
+                <Link to={'/adminHome'}>Home</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
 
         <div className="instalmentPlans">
@@ -95,6 +95,16 @@ const AdminInstallmentPlans = () => {
 //Detail box 
 const PlanDetailBox = ({ plan }) => {
     const { dispatch } = usePlansContext()
+    const [showModal, setShowModal] = useState(false);
+
+    const handleConfirm = () => {
+      setShowModal(false);
+      handleDelete();
+    };
+  
+    const handleCancel = () => {
+      setShowModal(false);
+    };
 
     const handleDelete = async() => {
         const response = await fetch('api/plans/' + plan._id , {
@@ -114,8 +124,30 @@ const PlanDetailBox = ({ plan }) => {
             <h4> {plan.name} </h4>
             <p><strong>Months : </strong> {plan.months} </p>
             <p><strong>Initial Payment : </strong> {plan.initialPayment} %</p>
-            <span className="confirm-btn" onClick = {handleDelete} >  Delete</span> 
+            <span className="confirm-btn"
+             //onClick = {handleDelete} 
+             onClick={() => setShowModal(true)}
+             > 
+              Delete</span> 
             <span className="confirm-btn" onClick={() => {navigate(`/AdminInstallmentPlans/AdminUpdatePlan/${plan._id}`)}} >Update</span>
+        
+            {showModal && (
+          <div className="modal-container">
+            <div className="modal-content">
+              <h2 className="modal-title">Confirm Deletion</h2>
+              <p className="modal-message">Are you sure ? <br></br> you want to delete this Plan ?</p>
+              <div className="modal-actions">
+                <button className="modal-button confirm" onClick={handleConfirm}>
+                  Confirm
+                </button>
+                <button className="modal-button cancel" onClick={handleCancel}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         </div>
     )
 

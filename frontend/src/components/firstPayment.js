@@ -8,6 +8,8 @@ const FirstPayment = ({ plans , gem }) => {
         let initial = plans.initialPayment;
     
         fpay = (price * initial) / 100;
+
+        localStorage.setItem('TamountInfo', fpay);
     
         return fpay;
     };

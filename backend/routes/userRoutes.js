@@ -11,6 +11,9 @@ const {
   getUserById,
   updateUser,
   resetpassword,
+  forgotpassword,
+  forgotpasswordtoken
+
 } = require('../controllers/users.controller.js');
 const { protect } = require('../middleware/authMiddleware.js');
 
@@ -68,5 +71,10 @@ router
   .route('/profile/:id')
   // .delete(protect, deleteUser)
   // .put(protect, updateUser);
+
+
+//forgot password
+router.post('/forgotpassword', forgotpassword)
+router.post('/resetpassword/:token' , forgotpasswordtoken )
 
 module.exports =  router;

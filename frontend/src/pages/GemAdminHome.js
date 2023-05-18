@@ -24,7 +24,7 @@ const GemAdminHome = () => {
     logout();
     navigate('/');
   };
-  
+
   const { gems, dispatch } = useGemsContext();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -86,7 +86,33 @@ const GemAdminHome = () => {
 
 
   return (
-    <><Header />
+    <>
+    <header>
+        <div>
+          <div className="background">
+            <div className="headerNameDiv">
+              <h1 className="headerName">Ceylon Natural Gems</h1>
+            </div>
+          </div>
+
+          <nav>
+            <div className="navprofileDiv">
+              <div className="navEmal">
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
+              </div>
+            </div>
+
+            <ul>
+              <li>
+                <Link to={'/adminHome'}>Home</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
       <div className="gem-admin-home">
         <div className="darkBlueTopicBoxGem">
           <h3 className="pageTopicGems">Gem Admin</h3>
@@ -132,7 +158,8 @@ const GemAdminHome = () => {
             <p>No results found. Please check the gem name.</p>
           )}
         </div>
-      </div></>
+      </div>
+    </>
   );
 };
 

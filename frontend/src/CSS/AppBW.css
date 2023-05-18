@@ -199,8 +199,10 @@
 }
 
 .repbtn:hover {
-  background-color: blue;
-  color: wheat;
+  background-color: white;
+  border: 2px solid orange;
+  color: orange;
+  transition: 0.5s;
 }
 
 .Srepbtn {
@@ -428,11 +430,17 @@
   font-family: legendum;
   color: #144272;
   font-weight: bold;
+  padding-left: 5%;
+  width: 40%;
+  padding-top: 1%;
 }
 
 .req-value {
   font-family: legendum;
   color: #144272;
+  padding-left: 2%;
+  width: 500px;
+  
 }
 
 table {
@@ -583,4 +591,49 @@ table {
 .sortRequest{
   border-radius: 10px;
   padding: 5px 5px 5px 5px;
+}
+
+.infobox{
+  width: 80%;
+}
+
+
+/* .reqData{
+  width: 90%;
+  margin-left: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+} */
+
+
+
+.reqreportTB {
+  border-collapse: collapse;
+  width: 90%;
+  border-radius: 10px;
+  margin: 0 auto; 
+  text-align: center;
+}
+
+.reqTh {
+  background-color: #268391; 
+  color: #333333; 
+  border: 1px solid #dddddd; 
+  padding: 8px;
+  text-align: left;
+}
+
+.searchReq{
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.replybox{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.replymsg{
+  font-size: 25px;
 }

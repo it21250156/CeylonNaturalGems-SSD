@@ -15,7 +15,7 @@ const router = express.Router()
 router.get('/', getInstallments)
 
 //GET a single installment 
-//router.get('/:id', getInstallment)
+router.get('/:id', getInstallment)
 
 
 //POST a new installment

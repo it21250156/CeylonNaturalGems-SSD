@@ -22,19 +22,30 @@ const AdminPayments = () => {
     }
 
     const [payments , setPayments] = useState(null)
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
-        const fetchPayments = async() => {
-           const response = await fetch('/api/payments')
-           const json = await response.json()
-    
-           if (response.ok){
-             setPayments(json) 
-           }
+      const fetchPayments = async () => {
+        try {
+          const response = await fetch('/api/payments');
+          const json = await response.json();
+  
+          if (response.ok) {
+            const filteredPayments = json.filter(payment =>
+              payment._id &&
+              payment._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              payment.amount.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              payment.pmethod.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setPayments(filteredPayments);
+          }
+        } catch (error) {
+          console.log(error);
         }
-    
-        fetchPayments()
-        }, [])
+      };
+  
+      fetchPayments();
+    }, [searchQuery]);
 
         return(
 
@@ -46,32 +57,32 @@ const AdminPayments = () => {
             //user ID
 
         <>
-             <header>
-      <div>
-        <div className="background">
-          <div className="headerNameDiv">
-            <h1 className="headerName">Ceylon Natural Gems</h1>
+      <header>
+        <div>
+          <div className="background">
+            <div className="headerNameDiv">
+              <h1 className="headerName">Ceylon Natural Gems</h1>
+            </div>
           </div>
-        </div>
 
-        <nav>
-          <div className="navprofileDiv">
+          <nav>
+            <div className="navprofileDiv">
               <div className="navEmal">
-                <span>
-                  Hello Admin
-                </span>
-                <button onClick={handleClick}>Log out</button>
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
               </div>
-          </div>
+            </div>
 
-          <ul>
-            <li>
-              <Link to={'/adminHome'}>Home</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+            <ul>
+              <li>
+                <Link to={'/adminHome'}>Home</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
 
 <div className="lightBlueBodyBG">
@@ -80,12 +91,20 @@ const AdminPayments = () => {
                 <h3 className="pageTopic"> PAYMENT DETAILS </h3>
             </div>
             
-<div className="adminDel">
+<div className = "adminDel">
+  
+<input
+              type="text"
+              placeholder="Search Payment ID / Amount / Payment Method "
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+
 <table>
     <thead>
         <tr>
             <th>Payment ID</th>
-            <th>Order ID </th>
+            {/* <th>Order ID </th> */}
             <th>User ID </th>
             <th>Date</th>
             <th>Payment Amount </th>
@@ -112,8 +131,8 @@ const PPaymentRow = ({payment}) => {
 
   //  const [status, setStatus] = useState(payment.dStatus);
   const [error, setError] = useState(null)
-
   const [users, setUsers] = useState([]);
+  const [ carts, setCart ] = useState([])
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -128,20 +147,18 @@ const PPaymentRow = ({payment}) => {
     fetchUsers();
 }, []);
 
-  const [ Cart, setCart ] = useState([])
-
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const response = await fetch('/api/Carts');
-        const json = await response.json();
-        setCart(json);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchCart();
-}, []);
+//   useEffect(() => {
+//     const fetchCart = async () => {
+//       try {
+//         const response = await fetch('/api/carts');
+//         const json = await response.json();
+//         setCart(json);
+//       } catch (err) {
+        
+//       }
+//     };
+//     fetchCart();
+// }, []);
 
     const handleStatusChange = async (payment_id, e) => {
         e.preventDefault()
@@ -171,7 +188,7 @@ const PPaymentRow = ({payment}) => {
     return(
         <tr key={payment._id}>
             <td>{payment._id}</td>
-            <td>{users.find((Cart) => Cart._id === payment.orderID)?._id} {}</td>
+            {/* <td>{carts.find((cart) => cart._id === payment.cart)?._id} {}</td> */}
             <td>{users.find((user) => user._id === payment.user)?._id} {}</td>
             <td>{payment.createdAt}</td>
             <td>{payment.amount}</td>

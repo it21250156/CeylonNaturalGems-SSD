@@ -1,7 +1,10 @@
-const User = require('../models/users.model.js');
-const generateToken = require('../utils/generateToken.js');
+const User = require("../models/users.model.js");
+const generateToken = require("../utils/generateToken.js");
 // import jwt from 'jsonwebtoken'
-const asyncHandler = require('express-async-handler');
+const asyncHandler = require("express-async-handler");
+
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 // @desc    Auth user & get token
 // @route   POST /users/login
@@ -25,23 +28,31 @@ const authUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401).json({
-      error: 'Invalid email and password',
+      error: "Invalid email and password",
     });
   }
 });
-
 
 // @desc    Register a new user
 // @route   POST /users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { title , userType , firstName , lastName , email, phone , password , confirmPassword } = req.body;
+  const {
+    title,
+    userType,
+    firstName,
+    lastName,
+    email,
+    phone,
+    password,
+    confirmPassword,
+  } = req.body;
 
   const userExists = await User.findOne({ email });
 
   if (userExists) {
     res.status(400);
-    throw new Error('User already exists');
+    throw new Error("User already exists");
   }
 
   const user = await User.create({
@@ -57,22 +68,21 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (user) {
     res.status(201).json({
-        _id: user._id,
-        title: user.title,
-        userType: user.userType,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phone: user.phone,
-        confirmPassword: user.confirmPassword,
-        token: generateToken(user._id),
+      _id: user._id,
+      title: user.title,
+      userType: user.userType,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      confirmPassword: user.confirmPassword,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
-    throw new Error('Invalid user data');
+    throw new Error("Invalid user data");
   }
 });
-
 
 //*************************************************** */
 
@@ -106,19 +116,19 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
   if (user) {
     res.json({
-        _id: user._id,
-        title: user.title,
-        userType: user.userType,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        phone: user.phone,
-        confirmPassword: user.confirmPassword,
-        token: generateToken(user._id),
+      _id: user._id,
+      title: user.title,
+      userType: user.userType,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      confirmPassword: user.confirmPassword,
+      token: generateToken(user._id),
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
@@ -155,7 +165,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
@@ -175,10 +185,10 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   if (user) {
     await user.remove();
-    res.json({ message: 'User removed' });
+    res.json({ message: "User removed" });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
@@ -193,7 +203,7 @@ const getUserById = asyncHandler(async (req, res) => {
     res.json(user);
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
@@ -216,23 +226,22 @@ const updateUser = asyncHandler(async (req, res) => {
     const updatedUser = await user.save();
 
     res.json({
-        _id: updatedUser._id,
-        firstName: updatedUser.firstName,
-        lastName: updatedUser.lastName,
-        email: updatedUser.email,
-        phone: updatedUser.phone,
-        title: updatedUser.title,
-        userType: updatedUser.userType,
-        password:updateUser.password,
-        confirmPassword: updatedUser.confirmPassword,
-        token: generateToken(updatedUser._id),
+      _id: updatedUser._id,
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      title: updatedUser.title,
+      userType: updatedUser.userType,
+      password: updateUser.password,
+      confirmPassword: updatedUser.confirmPassword,
+      token: generateToken(updatedUser._id),
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
-
 
 // reset password
 
@@ -248,16 +257,130 @@ const resetpassword = asyncHandler(async (req, res) => {
     res.json({
       password: updatedUser.password,
       confirmPassword: updatedUser.confirmPassword,
-      
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
+//forgot password
 
-module.exports =  {
+const forgotpassword = asyncHandler(async (req, res) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ error: "An error occurred. Please try again later." });
+    }
+
+    const token = buffer.toString("hex");
+    User.findOne({ email: req.body.email })
+      .then((user) => {
+        if (!user) {
+          return res
+            .status(400)
+            .json({ error: "No account with that email address exists." });
+        }
+
+        user.resetToken = token;
+        user.resetTokenExpiration = Date.now() + 3600000; // Token expires in 1 hour
+        user
+          .save()
+          .then(() => {
+            const transporter = nodemailer.createTransport({
+              service: "Gmail",
+              auth: {
+                user: "ceylonnaturalgems1@gmail.com",
+                pass: "Ceylon@1234",
+              },
+            });
+
+            const mailOptions = {
+              from: "ceylonnaturalgems1@gmail.com",
+              // to: user.email,
+              to : "kalingajayathilaka@gmail.com",
+              subject: "Password Reset",
+              html: `
+                <p>You are receiving this email because you (or someone else) has requested the reset of the password for your account.</p>
+                <p>Click <a href="http://localhost:3000/resetpassword/${token}">here</a> to reset your password.</p>
+              `,
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                console.log(error);
+                return res
+                  .status(500)
+                  .json({
+                    error: "An error occurred. Please try again later. 111111",
+                  });
+              } else {
+                return res.json({
+                  message: "Email sent. Please check your inbox.",
+                });
+              }
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            return res
+              .status(500)
+              .json({ error: "An error occurred. Please try again later.222222" });
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        return res
+          .status(500)
+          .json({ error: "An error occurred. Please try again later." });
+      });
+  });
+});
+
+const forgotpasswordtoken = asyncHandler(async (req, res) => {
+  const token = req.params.token;
+  const newPassword = req.body.password;
+
+  User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
+    .then((user) => {
+      if (!user) {
+        return res
+          .status(400)
+          .json({
+            error:
+              "Invalid or expired token. Please request a new password reset.",
+          });
+      }
+
+      user.password = newPassword;
+      user.resetToken = undefined;
+      user.resetTokenExpiration = undefined;
+      user
+        .save()
+        .then(() => {
+          return res.json({
+            message:
+              "Password reset successful. You can now log in with your new password.",
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          return res
+            .status(500)
+            .json({ error: "An error occurred. Please try again later. kali" });
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      return res
+        .status(500)
+        .json({ error: "An error occurred. Please try again later. vihii" });
+    });
+});
+
+module.exports = {
   authUser,
   registerUser,
   getUserProfile,
@@ -266,5 +389,7 @@ module.exports =  {
   deleteUser,
   getUserById,
   updateUser,
-  resetpassword
+  resetpassword,
+  forgotpassword,
+  forgotpasswordtoken,
 };

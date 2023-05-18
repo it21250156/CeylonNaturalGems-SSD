@@ -25,94 +25,39 @@ const getPayment = async(req , res) => {
 }
 
 //create a new payment
-// const createPayment = async (req , res) =>{
-//     const {user  ,orderID , amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus } = req.body
+const createPayment = async (req , res) =>{
+    const {user  ,orderID , amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus } = req.body
 
-//     const errors = {};
+    const errors = {};
 
-//     if (!pmethod) {
-//         errors.pmethod = 'Payment method is required';
-//       }
-//       if (!dmethod) {
-//         errors.dmethod = 'Delivery method is required';
-//       }
-//       if (!address) {
-//         errors.address = 'Address is required';
-//       }
-//       if (!district) {
-//         errors.district = 'District is required';
-//       }
-//       if (!country) {
-//         errors.country = 'Country is required';
-//       }
-//       if (!phoneNo) {
-//         errors.phoneNo = 'Phone number is required';
-//       }
+    if (!pmethod) {
+        errors.pmethod = 'Payment method is required';
+      }
+      if (!dmethod) {
+        errors.dmethod = 'Delivery method is required';
+      }
+      if (!address) {
+        errors.address = 'Address is required';
+      }
+      if (!district) {
+        errors.district = 'District is required';
+      }
+      if (!country) {
+        errors.country = 'Country is required';
+      }
+      if (!phoneNo) {
+        errors.phoneNo = 'Phone number is required';
+      }
      
 
-  //     //add doc to db
-  //     try{
-  //       const payment = await Payment.create({user  ,orderID ,amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus})
-  //       res.status(200).json(payment)
-  //     }catch(error){
-  //       res.status(400).json({error: error.message})
-  //     }
-  // }
-
-
-
-  // create a new payment
-const createPayment = async (req, res) => {
-  const { user, orderID, amount, pmethod, dmethod, address, district, country, phoneNo, dStatus } = req.body;
-
-  const errors = {};
-
-  if (!pmethod) {
-    errors.pmethod = 'Payment method is required';
+      //add doc to db
+      try{
+        const payment = await Payment.create({user  ,orderID ,amount ,pmethod ,dmethod ,address ,district ,country ,phoneNo, dStatus})
+        res.status(200).json(payment)
+      }catch(error){
+        res.status(400).json({error: error.message})
+      }
   }
-  if (!dmethod) {
-    errors.dmethod = 'Delivery method is required';
-  }
-  // if (!address) {
-  //   errors.address = 'Address is required';
-  // }
-  // if (!district) {
-  //   errors.district = 'District is required';
-  // }
-  // if (!country) {
-  //   errors.country = 'Country is required';
-  // }
-  if (!phoneNo) {
-    errors.phoneNo = 'Phone number is required';
-  }
-
-  // Set delivery details based on the delivery method
-  let deliveryDetails = {};
-  if (dmethod === 'Pickup') {
-    deliveryDetails = {
-      address: null,
-      district: null,
-      country: null,
-    };
-  } else {
-    deliveryDetails = {
-      address,
-      district,
-      country,
-      phoneNo,
-    };
-  }
-
-  // add doc to db
-  try {
-    const payment = await Payment.create({ user, orderID, amount, pmethod, dmethod, deliveryDetails,phoneNo, dStatus });
-    res.status(200).json(payment);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-
 
 
 //delete a payment

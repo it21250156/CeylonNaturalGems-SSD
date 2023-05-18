@@ -3,3 +3,73 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.gem-search-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* .gem-search {
+  padding: 2px 0 0 0;
+  background-color: #7eb2ff;
+  border-radius: 50px;
+} */
+
+.gem-search-input {
+  background-color: #cadefc;
+  border-radius: 50px;
+  border: none;
+  width: 450px;
+  border: 2px solid #cadefc;
+  padding: 20px;
+}
+
+.gem-search-input::placeholder {
+  color: black;
+  font-size: 20px;
+}
+
+.gem-search-input:focus {
+  outline: none;
+  background-color: white;
+  border: none;
+  border: 2px solid #cadefc;
+  box-shadow: 0px 0px 0px 3px #9dc3f0;
+}
+
+.gem-sort {
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  background-color: #cadefc;
+  padding: 10px 20px;
+  margin-left: 30px;
+  width: 300px;
+  border-radius: 10px;
+}
+
+.gem-sort-lable {
+  font-size: 18px;
+  margin-right: 20px;
+  color: #0a2647;
+}
+
+.sort-select {
+  border: 2px solid #0a2647;
+  border-radius: 50px;
+  background-color: #fff;
+  padding: 5px 10px;
+  font-size: 1.1rem;
+  color: #0a2647;
+}
+
+.sort-select:focus {
+  background-color: #cadefc;
+  box-shadow: 0 0 0 3px white;
+  border: 2px solid #cadefc;
+}
+
+.gem-admin-sort option {
+  color: black;
+  font-weight: 400;
+}

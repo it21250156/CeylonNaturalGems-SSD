@@ -44,6 +44,14 @@ function GemScreen() {
     error: '',
   });
 
+  // const haddleNavigateToInstallment = () => {
+  //       if(!user){
+  //         navigate('#') ;
+  //       }else if(user){
+  //         navigate('/InstallmentPlans');
+  //       }
+  // }
+
   useEffect(() => {
     const fetchGems = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -89,7 +97,17 @@ function GemScreen() {
         <div className="lightBlueBodyBG">
           <div className="whiteBodyBG">
             <div className="content-top-part">
-              <div className="img-section-large"></div>
+              <div className="img-section-large">
+                <div className="gem-image-container">
+                  {gem.gem_img && (
+                    <img
+                      src={gem.gem_img}
+                      alt="Gem"
+                      className="gem-card__image"
+                    />
+                  )}
+                </div>
+              </div>
               <div className="btns-description">
                 <p className="gem-name">{gem.name}</p>
                 <p className="gem-price">${gem.price}</p>
@@ -102,6 +120,7 @@ function GemScreen() {
                     Add to cart
                   </button>
                   <button
+                    //onClick={() => haddleNavigateToInstallment}
                     onClick={() => navigate(`/InstallmentPlans`)}
                     className="btn-pay-in-installments"
                   >

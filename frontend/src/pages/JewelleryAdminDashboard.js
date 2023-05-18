@@ -79,14 +79,16 @@ const JewelleryAdminDashboard = () => {
           <nav>
             <div className="navprofileDiv">
               <div className="navEmal">
-                <span>Hello Admin</span>
-                <button onClick={handleClick}>Log out</button>
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
               </div>
             </div>
 
             <ul>
               <li>
-                <Link to={"/adminHome"}>Home</Link>
+                <Link to={'/adminHome'}>Home</Link>
               </li>
             </ul>
           </nav>

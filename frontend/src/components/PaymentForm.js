@@ -24,7 +24,7 @@ const PaymentForm = () => {
   const [dStatus, setStatus] = useState('Pending');
   const [error, setError] = useState(null);
   const [gotoPaymentlist, setGotopaymentList] = useState(false);
-
+  const [isChecked, setIsChecked] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
 
   useEffect(() => {
@@ -99,44 +99,29 @@ const PaymentForm = () => {
     const handleDeliveryMethodChange = (e) => {
       setDmethod(e.target.value);
     };
-    // const handleDeliveryMethodChange = (e) => {
-    //   const selectedDmethod = e.target.value;
-    
-    //   setDmethod(selectedDmethod);
-    
-    //   if (selectedDmethod === 'Pickup') {
-    //     setAddress("");
-    //     setDistrict("");
-    //     setCountry("");
-    //   }
-    // };
     
 
-  const handleCardNoChange = (e) => {
-    const inputValue = e.target.value;
-    // Remove all non-numeric characters from the input value
-    const sanitizedValue = inputValue.replace(/\D/g, '');
-    // Set the sanitized value to the state
-    setCardNO(sanitizedValue);
-  };
+    const handleCardNoChange = (e) => {
+      const inputValue = e.target.value;
+      // Remove all non-numeric characters from the input value
+      const sanitizedValue = inputValue.replace(/\D/g, '');
+      if (sanitizedValue.length <= 16) {
+        setCardNO(sanitizedValue);
+      }
+    };
+
 
   const handleExMonthChange = (e) => {
     const inputValue = e.target.value;
     // Check if input value is a valid month (1 to 12)
-    if (/^(0?[1-9]|1[0-2])$/.test(inputValue) && !exMonth) {
+    if (inputValue >= 1 && inputValue <= 12) {
       setExMonth(inputValue);
-    } else {
-      setError('Expiary month is required!');
     }
   };
 
   const handleExYearChange = (e) => {
     const inputValue = e.target.value;
-    // Check if input value is a valid year (current year or future years)
-    // const currentYear = new Date().getFullYear();
-    // if (/^20.{2}$/.test(inputValue) && parseInt(inputValue) >= currentYear) {
-    setExYear(inputValue);
-    // }
+    setExYear(inputValue)
   };
 
   const handleSecCodeChange = (event) => {
@@ -153,6 +138,19 @@ const PaymentForm = () => {
         setError('Please fill in all required fields');
       }
     }
+
+    if (isChecked) {
+      // Perform the payment processing logic here
+      console.log("Payment submitted!");
+    } else {
+      // Handle case when checkbox is not checked
+      alert("Please check the checkbox to confirm.");
+    }
+  };
+
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
   };
   
 
@@ -215,7 +213,7 @@ const PaymentForm = () => {
                   <input
                     id="input"
                     type="number" // Use text type to allow input of non-numeric characters
-                    pattern="[0-9]{13,19}" // Use a pattern attribute to specify the allowed input format
+                    pattern="[0-9]" // Use a pattern attribute to specify the allowed input format
                     title="Please enter a valid card number" // Display a tooltip with a custom error message
                     onChange={handleCardNoChange} // Call a custom handler to sanitize the input value
                     value={cardNo}
@@ -229,12 +227,12 @@ const PaymentForm = () => {
                     value={cardName}
                   />
 
-                  <label className="label">Expiry Month:</label>
+                  <label className = "label">Expiry Month:</label>
                   <input
-                    id="input"
-                    type="number"
-                    onChange={handleExMonthChange}
-                    value={exMonth}
+                    id       = "input"
+                    type     = "number"
+                    onChange = {handleExMonthChange}
+                    value    = {exMonth}
                   />
 
                   <label className="label">Expiry Year:</label>
@@ -323,9 +321,22 @@ const PaymentForm = () => {
                     value={phoneNo}
                   />
 
+<div>
+        <label>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            required
+          />
+          I have read and agreed to the terms and conditions of this website.
+        </label>
+      </div>
+
                   <button
-                    className="confirm-btn"
-                    onClick={handleConfirmPayment}
+                    className = "confirm-btn"
+                    onClick   = {handleConfirmPayment}
+                    disabled={!isChecked}
                   >
                     CONFIRM PAYMENT
                   </button>
@@ -341,19 +352,13 @@ const PaymentForm = () => {
                   )}
 
                   {successMessage && (
-                    <div className="success">Data entered successfully!</div>
+                    <div className="success">Payment done successfully!</div>
                   )}
                 </div>
               </div>
             </form>
 
-            {/* <button
-              onClick={() => {
-                setGotopaymentList(true);
-              }}
-            >
-              MY PAYMENTS
-            </button> */}
+
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 const express = require('express');
+const upload = require("../utils/multer");
 const {
   getGems,
   getGem,
@@ -16,12 +17,13 @@ router.get('/', getGems);
 router.get('/:id', getGem);
 
 // POST a new gem
-router.post('/', createGem);
+router.post('/', upload.single("image"), createGem);
 
 // DELETE a gem
 router.delete('/:id', deleteGem);
 
 // UPDATE a gem
-router.patch('/:id', updateGem);
+router.patch('/:id', upload.single("image"), updateGem);
 
-module.exports = router;
+module.exports = router
+
