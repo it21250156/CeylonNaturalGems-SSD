@@ -1,4 +1,5 @@
 const express = require('express')
+const upload = require("../utils/multer");
 const {
   getJewelleryes, 
   getJewellery, 
@@ -20,13 +21,13 @@ router.get('/', getJewelleryes)
 router.get('/:id', getJewellery)
 
 // POST a new jewellery
-router.post('/', createJewellery)
+router.post('/', upload.single("image"), createJewellery)
 
 // DELETE a jewellery
 router.delete('/:id', deleteJewellery)
 
 // UPDATE a jewellery
-router.patch('/:id', updateJewellery)
+router.patch('/:id', upload.single("image"), updateJewellery)
 
 //router.param('/id' ,JewelleryAdminReport)
 

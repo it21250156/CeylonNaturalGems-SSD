@@ -1,4 +1,5 @@
 const express = require('express')
+const upload = require("../utils/multer");
 const {
   createFeedback,
   getFeedback,
@@ -23,7 +24,7 @@ router.get('/:id', getFeedback)
 router.get('/user/:user', getUserFeedbacks)
 
 //POST a new feedback
-router.post('/', createFeedback)
+router.post('/',upload.single("image"), createFeedback)
 
 //DELETE a new feedback
 router.delete('/:id', deleteFeedback)

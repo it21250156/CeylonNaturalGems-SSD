@@ -132,20 +132,54 @@ const FeedbackForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const feedback = {
-      gemType,
-      gemQty,
-      fbInfo,
-      rating,
-      user: JSON.parse(localStorage.getItem('userInfo'))?._id || null,
-    };
+    const file = e.target.image.files[0];
+    const user = JSON.parse(localStorage.getItem('userInfo'))?._id || null;
 
-    const response = await fetch('/api/feedbacks', {
-      method: 'POST',
-      body: JSON.stringify(feedback),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const formData = new FormData();
+    if (file) {
+      formData.append("image", file);
+    }
+    formData.append("gemType", gemType);
+    formData.append("gemQty", gemQty);
+    formData.append("fbInfo", fbInfo);
+    formData.append("rating", rating);
+    formData.append("user", user);
+
+    const emptyFields = [];
+
+    if (fbInfo === '') {
+      emptyFields.push('fbInfo');
+    }
+
+    if (rating === 0) {
+      emptyFields.push('rating');
+    }
+
+    if (emptyFields.length > 0) {
+      setEmptyFields(emptyFields);
+      setError('Please fill in all required fields.');
+      return;
+    }
+
+    // const feedback = {
+    //   gemType,
+    //   gemQty,
+    //   fbInfo,
+    //   rating,
+    //   user: JSON.parse(localStorage.getItem('userInfo'))?._id || null,
+    // };
+
+    // const response = await fetch('/api/feedbacks', {
+    //   method: 'POST',
+    //   body: JSON.stringify(feedback),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
+
+    const response = await fetch("/api/feedbacks", {
+      method: "POST",
+      body: formData,
     });
     const json = await response.json();
 
@@ -175,15 +209,12 @@ const FeedbackForm = () => {
         <p className="title-feedback">Add a new Feedback</p>
       </div>
       <div className="light-blue-bg">
-        {JSON.stringify(cartData[0])}
-        {JSON.stringify(gems[0])}
-        {JSON.stringify(jewellery[0])}
         <form
           className="create"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >
-         
+
           <label className="label"> Gem/Jewellery Name(s)</label>
           <input
             readOnly
@@ -217,7 +248,9 @@ const FeedbackForm = () => {
             className={emptyFields?.find((f) => f === 'fbInfo') ? 'error' : ''}
           ></textarea>
 
-          <label className="label"> Add Star Rating</label>
+          {emptyFields.includes('fbInfo') && <div className="error">Please provide feedback.</div>}
+
+          <label className="label">Add Star Rating</label>
           <StarRating
             id="rating"
             name="rating"
@@ -227,14 +260,13 @@ const FeedbackForm = () => {
             starDimension="25px"
             starSpacing="5px"
             changeRating={handleRatingChange}
+            className={emptyFields?.find((f) => f === 'rating') ? 'error' : ''}
           />
 
+          {emptyFields.includes('rating') && <div className="error">Please add a rating.</div>}
+
           <label className="label"> Upload Image</label>
-          <input
-            type="file"
-            name="image"
-            accept="image/jpg, image/jpeg, image/png"
-          ></input>
+          <input type="file" name="image" accept="image/*" />
 
           <button type="submit" className="add-feedbackform-btn">
             Add Feedback

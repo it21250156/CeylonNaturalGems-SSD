@@ -264,5 +264,5 @@ const PDeliveryRow = ({ payment, setReload }) => {
     </tr>
   );
 };
-
+//you have reached the maximum quantity of gems available of this gem type in our store!
 export default AdminDelivery;

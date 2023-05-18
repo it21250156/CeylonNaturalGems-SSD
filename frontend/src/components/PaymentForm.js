@@ -396,7 +396,7 @@ const PaymentForm = () => {
                   </button>
 
                   {dmethod === 'Pickup' && (
-                    <div className="popup">
+                    <div className = "popup">
                       <p>Please come to our store to pick up your order.</p>
                     </div>
                   )}

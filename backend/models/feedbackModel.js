@@ -37,7 +37,15 @@ const feedbackSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user',
         required: true
-    }
+    },
+    feedback_img: {
+        type: String,
+        required: false
+      },
+      cloudinary_id: {
+        type: String,
+        required: false
+      }
 
 }, {timestamps: true})
 

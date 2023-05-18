@@ -42,7 +42,15 @@ const FeedbackDetailsUsers = ({ feedback }) => {
       <p className="feedback-name">{feedback.gemType}</p>
       <div className="cols">
         <div className="feedback-col-1">
-          <div className="img-section"></div>
+          <div className="img-section">
+          {feedback.feedback_img && (
+            <img
+              src={feedback.feedback_img}
+              alt="Feedback"
+              style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }}
+            />
+          )}
+          </div>
         </div>
         <div className="feedback-col-2">
           <p className="feedback-description">{feedback.fbInfo}</p>

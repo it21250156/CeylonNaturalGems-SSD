@@ -30,7 +30,13 @@ const jewellerySchema = new Schema({
     price: {
         type: Number,
         required: true
-    }
+    },
+    jewellery_img: {
+        type: String
+      },
+      cloudinary_id: {
+        type: String
+      }
 }, {timestamps: true})
 
 module.exports = mongoose.model('jewelleries', jewellerySchema);

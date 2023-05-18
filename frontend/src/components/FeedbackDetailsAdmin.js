@@ -75,6 +75,15 @@ import { useEffect, useState } from "react";
     <div className="feedback-details-Admin">
       <h4>{feedback.gemType}</h4>
       {/* {JSON.stringify(feedbacks)} */}
+      <div className="img-section">
+          {feedback.feedback_img && (
+            <img
+            style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }}
+              src={feedback.feedback_img}
+              alt="Feedback"
+            />
+          )}
+          </div>
       <p><strong>Item Quantity: </strong>{feedback.gemQty}</p>
       <p><strong>Feedback: </strong>{feedback.fbInfo}</p>
       {/* <p><strong>Rating: </strong>{feedback.rating}</p> */}

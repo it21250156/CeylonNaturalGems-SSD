@@ -32,7 +32,7 @@ const AllFeedbacks = () => {
       setSearchResults(filteredResults);
 
       if (filteredResults.length === 0) {
-        setErrorMessage('No feedbacks found with the specified gem type.');
+        setErrorMessage('No Feedbacks found with the specified Gem or Jewellery name.');
       } else {
         setErrorMessage('');
       }
