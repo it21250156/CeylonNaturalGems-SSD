@@ -148,7 +148,7 @@ const GemAdminHome = () => {
             <button className="gem-admin-buttons">Reports</button>
           </Link>
         </div>
-        <div className="gems">
+        <div className="card-container-ammaar">
           {searchResults.length > 0 ? (
             searchResults.map((gem) => <GemDetails gem={gem} key={gem._id} />)
           ) : (
