@@ -34,6 +34,9 @@ function JewelScreen() {
   const { id } = params;
   const [Gem, setGem] = useState('');
 
+  localStorage.setItem('gemCartInfo', JSON.stringify(Gem));
+
+
   const [{ loading, error, Jwl }, dispatch] = useReducer(logger(JwelReducer), {
     Jwl: [],
     loading: true,
@@ -94,10 +97,9 @@ function JewelScreen() {
                     onClick={() => handleAddToCart(Jwl._id)}
                     className="btn-add-to-cart"
                   >
-                    Add to cart
+                    Add to cart 
                   </button>
                 </div>
-
                 <label className="label">Gem Shape</label>
                 <select
                   className="input"

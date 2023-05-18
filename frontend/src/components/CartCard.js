@@ -6,6 +6,8 @@ function CartCard({ cartid, gem, jewellery }) {
   const { cartData, handleCartRemove, handleChangeQuantityCart } =
     useAuthContext();
 
+    const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
+
   // const handleCartRemove = async () => {
   //   const response = await fetch(`/api/cart/${cartid}`, {
   //     method: 'DELETE',
@@ -96,7 +98,7 @@ function CartCard({ cartid, gem, jewellery }) {
           <div className="name-price">
             <p className="cartcard-name">{jewellery?.name}</p>
             <p className="cartcard-price">${jewellery?.price}</p>
-            <p className="cartcard-name">{jewellery?.gemstone}</p>
+            <p className="cartcard-name">{jewelWithGem}</p>
           </div>
           <div className="update-section"></div>
           <div className="btn-delete">
