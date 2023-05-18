@@ -16,6 +16,7 @@ import { JewelleryesContextProvider} from './context/JewelleryContext'
 import { GemsContextProvider } from './context/GemContext';
 
 import { PlanContextProvider} from './context/PlansContext'
+import { InstallmentsContextProvider } from './context/InstallmentsContext';
 
 import {
   createBrowserRouter,
@@ -55,10 +56,11 @@ root.render(
     <JewelleryesContextProvider>
     <JewelContextProvider>
     <PlanContextProvider>
+    <InstallmentsContextProvider>
         
     {/* <RouterProvider router={router}/> */}
       <App />
-      
+    </InstallmentsContextProvider>
     </PlanContextProvider>
     </JewelContextProvider>
     </JewelleryesContextProvider>
