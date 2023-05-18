@@ -5,6 +5,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import "../CSS/GemAddForm.css";
 import Header from "../components/Header";
 import { useAuthContext } from '../hooks/useAuthContext';
+import Swal from 'sweetalert2';
 
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
@@ -71,13 +72,14 @@ function UpdateGems() {
 
       setGem(json); // Update gem state with the updated gem data
 
-      window.alert("Gem details were successfully updated!");
+      Swal.fire('Gem Updated', 'Gem details were successfully updated!', 'success'); // Show SweetAlert success alert
 
       nav('/GemAdminHome');
     } else {
       alert("Please upload an image");
     }
   };
+
 
 
 
@@ -126,7 +128,7 @@ function UpdateGems() {
 
   return (
     <>
-    <header>
+      <header>
         <div>
           <div className="background">
             <div className="headerNameDiv">

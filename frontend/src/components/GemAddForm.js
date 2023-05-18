@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 import '../CSS/GemAddForm.css';
 import Header from '../components/Header';
+import Swal from 'sweetalert2';
 
 const GemAddForm = () => {
 
@@ -116,10 +117,11 @@ const GemAddForm = () => {
             setDescription('');
             setError(null);
             setEmptyFields([]);
-            window.alert('Gem was successfully added to the database!');
+            Swal.fire('Gem Added', 'Gem was successfully added to the database!', 'success'); // Show SweetAlert success alert
             console.log('New Gem Added', json);
             dispatch({ type: 'CREATE_GEM', payload: json });
         }
+
 
         nav('/GemAdminHome');
     };
