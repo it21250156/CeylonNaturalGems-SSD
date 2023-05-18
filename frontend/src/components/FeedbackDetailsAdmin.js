@@ -67,48 +67,59 @@ const FeedbackDetailsAdmin = ({ feedback }) => {
   };
 
   return (
-    <div className="feedback-details-Admin">
-      <h4>{feedback.gemType}</h4>
-      {/* {JSON.stringify(feedbacks)} */}
-      <div className="img-section">
-        {feedback.feedback_img && (
-          <img
-            style={{
-              maxWidth: '200px',
-              maxHeight: '200px',
-              marginBottom: '10px',
-            }}
-            src={feedback.feedback_img}
-            alt="Feedback"
+    <div className="feedback-card">
+      <h4 className="feedback-name">{feedback.gemType}</h4>
+      <div className="cols">
+        <div className="all-feedback-col-1">
+          {feedback.feedback_img && (
+            <img
+              style={{
+                maxWidth: '200px',
+                maxHeight: '200px',
+                marginBottom: '10px',
+              }}
+              src={feedback.feedback_img}
+              alt="Feedback"
+            />
+          )}
+        </div>
+        <div className="all-feedback-col-2">
+          <p className="g-quantity-tag">
+            <strong>Item Quantity: </strong>
+            {feedback.gemQty}
+          </p>
+          <p className="feedback-description">
+            <strong>Feedback: </strong>
+            {feedback.fbInfo}
+          </p>
+          {/* <p><strong>Rating: </strong>{feedback.rating}</p> */}
+          <StarRating
+            readOnly
+            id="rating"
+            name="rating"
+            rating={Number(feedback.rating)}
+            starRatedColor="#0a2647"
+            starHoverColor="orange"
+            starDimension="25px"
+            starSpacing="5px"
           />
-        )}
+        </div>
+        <div>
+          <span
+            className="material-symbols-outlined"
+            id="delete"
+            onClick={handleConfirm}
+          >
+            delete
+          </span>
+        </div>
       </div>
-      <p>
-        <strong>Item Quantity: </strong>
-        {feedback.gemQty}
-      </p>
-      <p>
-        <strong>Feedback: </strong>
-        {feedback.fbInfo}
-      </p>
-      {/* <p><strong>Rating: </strong>{feedback.rating}</p> */}
-      <StarRating
-        readOnly
-        id="rating"
-        name="rating"
-        rating={Number(feedback.rating)}
-        starRatedColor="#0a2647"
-        starHoverColor="orange"
-        starDimension="25px"
-        starSpacing="5px"
-      />
-      <p>
+
+      <p className="time-stamp-feedback">
         {formatDistanceToNow(new Date(feedback.createdAt), { addSuffix: true })}
       </p>
-      <span className="material-symbols-outlined" onClick={handleConfirm}>
-        delete
-      </span>
-      <span>Reply</span>
+
+      <span className="reply-fb-">Type a Reply</span>
       <form onSubmit={(e) => handleFeedbackReply(e, feedback._id)}>
         <textarea
           value={feedbackReply}
@@ -116,8 +127,9 @@ const FeedbackDetailsAdmin = ({ feedback }) => {
         >
           {' '}
         </textarea>
-
-        <input type="submit" />
+        <center>
+          <input className="fbreply-submit" type="submit" />
+        </center>
       </form>
     </div>
   );

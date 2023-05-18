@@ -1,20 +1,20 @@
-import { useEffect } from 'react'
-import { useFeedbacksContext } from '../hooks/useFeedbackContext'
-import { useAuthContext } from "../hooks/useAuthContext"
-import React from "react";
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useFeedbacksContext } from '../hooks/useFeedbackContext';
+import { useAuthContext } from '../hooks/useAuthContext';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
 //components
-import FeedbackDetailsAdmin from '../components/FeedbackDetailsAdmin'
+import FeedbackDetailsAdmin from '../components/FeedbackDetailsAdmin';
 
-  const AdminFeedbacks = () => {
-  const { feedbacks, dispatch } = useFeedbacksContext()
+const AdminFeedbacks = () => {
+  const { feedbacks, dispatch } = useFeedbacksContext();
 
   const { logout } = useLogout();
-  const { user } = useAuthContext()
-  const navigate = useNavigate()
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     logout();
@@ -23,15 +23,15 @@ import FeedbackDetailsAdmin from '../components/FeedbackDetailsAdmin'
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
-      const response = await fetch('/api/feedbacks')
-      const json = await response.json()
+      const response = await fetch('/api/feedbacks');
+      const json = await response.json();
 
       if (response.ok) {
-        dispatch({ type: 'SET_FEEDBACKS', payload: json })
+        dispatch({ type: 'SET_FEEDBACKS', payload: json });
       }
-    }
-    fetchFeedbacks()
-  }, [dispatch])
+    };
+    fetchFeedbacks();
+  }, [dispatch]);
 
   return (
     <>
@@ -46,9 +46,7 @@ import FeedbackDetailsAdmin from '../components/FeedbackDetailsAdmin'
           <nav>
             <div className="navprofileDiv">
               <div className="navEmal">
-                <span>
-                  Hello Admin
-                </span>
+                <span>Hello Admin</span>
                 <button onClick={handleClick}>Log out</button>
               </div>
             </div>
@@ -62,17 +60,22 @@ import FeedbackDetailsAdmin from '../components/FeedbackDetailsAdmin'
         </div>
       </header>
       <div className="Adminfeedbacks">
-        <div classname="feedbacks">
-          {feedbacks && feedbacks.map((feedback) => (
-            <FeedbackDetailsAdmin key={feedback._id} feedback={feedback} />
-          ))}
-
+        <div className="title-box-feedback">
+          <p className="title-feedback">All Feedbacks</p>
         </div>
+        <div className="all-fb-light-blue-bg">
+          <div classname="feedbacks">
+            {feedbacks &&
+              feedbacks.map((feedback) => (
+                <FeedbackDetailsAdmin key={feedback._id} feedback={feedback} />
+              ))}
+          </div>
+        </div>
+
         {/* <FeedbackForm/> */}
         {/* <button onClick= {() => {window.location.href = "./FeedbackForm"}}> Add Feedback</button> */}
       </div>
     </>
-
-  )
-}
-export default AdminFeedbacks 
+  );
+};
+export default AdminFeedbacks;
