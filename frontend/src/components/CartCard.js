@@ -6,16 +6,18 @@ function CartCard({ cartid, gem, jewellery }) {
   const { cartData, handleCartRemove, handleChangeQuantityCart } =
     useAuthContext();
 
-    const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
+  const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
 
-  // const handleCartRemove = async () => {
-  //   const response = await fetch(`/api/cart/${cartid}`, {
-  //     method: 'DELETE',
-  //   });
+  const confirmCartRemove = (cartid) => {
+    const confirmed = window.confirm(
+      'Are you sure you want to remove this item from the cart?'
+    );
+    if (confirmed) {
+      // Call the remove item function
+      handleCartRemove(cartid);
+    }
+  };
 
-  //   const json = await response.json();
-  // }
-  //   const { gem } = gem;
   return (
     <div className="cartcard">
       {gem !== null && (
@@ -33,7 +35,6 @@ function CartCard({ cartid, gem, jewellery }) {
           </div>
           <div className="update-section">
             <div>
-              {/* {cartData.find((item) => item._id === cartid)?.cartquantity > 1 && ( */}
               <button
                 className="decrease-btn"
                 onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
@@ -46,7 +47,6 @@ function CartCard({ cartid, gem, jewellery }) {
               >
                 -
               </button>
-              {/* )} */}
             </div>
             <div className="quantity">
               {cartData.find((item) => item._id === cartid)?.cartquantity}
@@ -67,11 +67,11 @@ function CartCard({ cartid, gem, jewellery }) {
             </div>
           </div>
           <div className="btn-delete">
-            <button class="btn1" onClick={() => handleCartRemove(cartid)}>
-              <p class="paragraph"> Remove </p>
-              <span class="icon-wrapper">
+            <button className="btn1" onClick={() => confirmCartRemove(cartid)}>
+              <p className="paragraph"> Remove </p>
+              <span className="icon-wrapper">
                 <svg
-                  class="icon"
+                  className="icon"
                   width="30px"
                   height="30px"
                   viewBox="0 0 24 24"
@@ -81,9 +81,9 @@ function CartCard({ cartid, gem, jewellery }) {
                   <path
                     d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
                     stroke="#000000"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
               </span>
@@ -93,7 +93,6 @@ function CartCard({ cartid, gem, jewellery }) {
       )}
       {jewellery !== null && gem === null && (
         <div className="cartcard-content">
-          {/* {JSON.stringify(jewellery) || "none"} */}
           <div className="cartimg-section"></div>
           <div className="name-price">
             <p className="cartcard-name">{jewellery?.name}</p>
@@ -102,11 +101,11 @@ function CartCard({ cartid, gem, jewellery }) {
           </div>
           <div className="update-section"></div>
           <div className="btn-delete">
-            <button class="btn1" onClick={() => handleCartRemove(cartid)}>
-              <p class="paragraph"> Remove </p>
-              <span class="icon-wrapper">
+            <button className="btn1" onClick={() => confirmCartRemove(cartid)}>
+              <p className="paragraph"> Remove </p>
+              <span className="icon-wrapper">
                 <svg
-                  class="icon"
+                  className="icon"
                   width="30px"
                   height="30px"
                   viewBox="0 0 24 24"
@@ -116,9 +115,9 @@ function CartCard({ cartid, gem, jewellery }) {
                   <path
                     d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
                     stroke="#000000"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
               </span>

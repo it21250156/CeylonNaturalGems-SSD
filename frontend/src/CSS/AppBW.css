@@ -701,3 +701,14 @@ table {
   font-size: 25px;
 }
 
+.replydeletebtn{
+  background-color: rgb(255, 61, 61);
+  border-radius: 20px;
+  padding: 10px 10px 10px 10px;
+
+}
+.replydeletebtn:hover{
+  background-color: white;
+  color: #05060f;
+  border-color: red;
+}

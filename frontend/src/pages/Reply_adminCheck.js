@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Axios from "axios";
 import "../CSS/AppBW.css";
-
 import Header from "../components/Header";
 import TextareaAutosize from 'react-textarea-autosize';
-
-import { useAuthContext } from "../hooks/useAuthContext"
-import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { Link, useParams } from 'react-router-dom';
 
@@ -15,7 +13,7 @@ function Reply_adminView() {
   const { reqId } = useParams();
   const [replies, setReplies] = useState([]);
   const { logout } = useLogout();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getReplies = () => {
@@ -23,24 +21,29 @@ function Reply_adminView() {
         setReplies(response.data);
       });
     }
-    getReplies()
+    getReplies();
   }, []);
 
   const handleDelete = (id) => {
-    Axios.delete(`/deleteReply/${id}`).then(() => {
-      setReplies(replies.filter((reply) => reply._id !== id));
-    });
+    const confirmed = window.confirm('Are you sure you want to delete this reply?');
+    if (confirmed) {
+      Axios.delete(`/deleteReply/${id}`).then(() => {
+        setReplies(replies.filter((reply) => reply._id !== id));
+      });
+    }
   };
 
   const handleUpdate = (repId) => {
-    const data = replies.find(rep => rep._id === repId)
-    if (data)
+    const data = replies.find(rep => rep._id === repId);
+    if (data) {
       Axios
         .put(`/updateReply`, data)
         .then(() => {
-          window.location.reload()
+          window.location.reload();
         });
+    }
   }
+
   const handleClick = () => {
     logout();
     navigate('/');
@@ -55,17 +58,13 @@ function Reply_adminView() {
               <h1 className="headerName">Ceylon Natural Gems</h1>
             </div>
           </div>
-
           <nav>
             <div className="navprofileDiv">
               <div className="navEmal">
-                <span>
-                  Hello Admin
-                </span>
+                <span>Hello Admin</span>
                 <button onClick={handleClick}>Log out</button>
               </div>
             </div>
-
             <ul>
               <li>
                 <Link to={'/adminHome'}>Home</Link>
@@ -77,7 +76,6 @@ function Reply_adminView() {
       <div className="darkBlueTopicBoxReq">
         <h1 className="pageTopicReq">My Replies</h1>
       </div>
-
       <div>
         <div className="lightBlueBodyBG">
           {replies.length > 0 ? (
@@ -98,12 +96,12 @@ function Reply_adminView() {
                   />
                   <button className='Srepbtn' onClick={() => handleUpdate(reply._id)}>Update Reply</button>
                 </div>
-                <button onClick={() => handleDelete(reply._id)}>Delete</button>
+                <button className="replydeletebtn" onClick={() => handleDelete(reply._id)}>Delete</button>
               </div>
             ))
           ) : (
             <div className="whiteBodyBG">
-             You haven't replied to this request
+              You haven't replied to this request
             </div>
           )}
         </div>
