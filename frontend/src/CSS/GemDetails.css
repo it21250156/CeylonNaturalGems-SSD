@@ -1,5 +1,5 @@
 .gem-details {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -42,7 +42,7 @@
 /* delete button */
 
 .gem-card__deleteButton {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   padding: 10px 20px;
   border: 2px solid #e53935; /* Add a border to the button */
   border-radius: 5px;
@@ -68,7 +68,7 @@
 }
 
 .gem-card__deleteButton::before {
-  content: "";
+  content: '';
   position: absolute;
   left: -50px;
   top: 0;
@@ -87,7 +87,7 @@
 /* update button */
 
 .gem-card__updateButton {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -111,7 +111,7 @@
 }
 
 .gem-card__updateButton::before {
-  content: "";
+  content: '';
   position: absolute;
   left: -50px;
   top: 0;
