@@ -4,6 +4,8 @@ import icn1 from '../images/fb.png';
 import icn2 from '../images/ig.png';
 import icn3 from '../images/yt.png';
 
+
+
 const Footer = () => {
   useEffect(() => {
     // Load Google Maps API script
@@ -42,7 +44,7 @@ const Footer = () => {
             <div id="map" style={{ height: '100%', width: '100%' }} />
           </div>
           <div className="static-pages-1">
-            <p>About Us</p>
+            <a href='/AboutUs'>About Us</a>
             <p>Contact Us</p>
           </div>
         </div>
