@@ -7,18 +7,13 @@ import Axios from 'axios';
 import Header from '../components/Header';
 
 function Myreply() {
-  const { logout } = useLogout();
+  
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [listOfReplies, setListOfReplies] = useState([]);
   const { logout } = useLogout();
   
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    logout();
-    navigate('/');
-  };
+  
 
   const deletereq = (id) => {
     Axios.delete(`/deleteRep/${id}`).then((response) => {
