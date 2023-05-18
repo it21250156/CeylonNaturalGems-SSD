@@ -1,24 +1,21 @@
 import React from 'react';
+import '../CSS/InstPlans.css';
 
-const FirstPayment = ({ plans , gem }) => {
-    const cal = () => {
-        let fpay=0;
+const FirstPayment = ({ plans, gem }) => {
+  const cal = () => {
+    let fpay = 0;
 
-        let price = gem.price;
-        let initial = plans.initialPayment;
-    
-        fpay = (price * initial) / 100;
+    let price = gem.price;
+    let initial = plans.initialPayment;
 
-        localStorage.setItem('TamountInfo', fpay);
-    
-        return fpay;
-    };
+    fpay = (price * initial) / 100;
 
-    return(
-        <p> Payment : ${plans && gem && cal()} </p>
-    );
-    
+    localStorage.setItem('TamountInfo', fpay);
 
-}
+    return fpay;
+  };
 
-export default FirstPayment
+  return <p className="gem-detail-txt"> Payment : ${plans && gem && cal()} </p>;
+};
+
+export default FirstPayment;
