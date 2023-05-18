@@ -149,6 +149,7 @@ const AllUsers = () => {
                         color: "green"}}>
                   {filteredData.length}</h4>
                   </p> 
+                  
 
             <br></br>
             {/* <div className="darkBlueTopicBox">
@@ -186,6 +187,7 @@ const AllUsers = () => {
           ) } 
         </div>
       </div>
+      {/* <button onClick={navigate("/AllUsers/AdminUserReport")}>Report</button> */}
     </>
   );
 };
