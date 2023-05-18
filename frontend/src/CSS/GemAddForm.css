@@ -174,3 +174,15 @@
 .img-gem-form-input {
   width: 200px;
 }
+
+.report-title {
+  font-family: legendum;
+  font-weight: bold;
+}
+
+.white-box-for-tables {
+  background-color: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 20px;
+}

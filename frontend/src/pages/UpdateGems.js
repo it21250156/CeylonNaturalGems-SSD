@@ -214,6 +214,7 @@ function UpdateGems() {
 
                     <label>Upload Image:</label>
                     <input
+                      className="img-gem-form-input"
                       type="file"
                       accept="image/*"
                       onChange={handleFileChange}
