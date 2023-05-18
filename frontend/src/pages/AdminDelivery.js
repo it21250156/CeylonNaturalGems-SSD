@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/AdminDelivery.css';
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
-
+import * as Swal from 'sweetalert2'
 
 const { useState } = require('react');
 
@@ -176,31 +176,65 @@ const PDeliveryRow = ({ payment, setReload }) => {
 
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      'Are you sure you want to delete this Payment ?'
-    );
-    if (confirmDelete) {
-      try {
-        setIsDeleting(true);
-        const response = await fetch(`api/payments/${payment._id}`, {
-          method: 'DELETE',
-        });
-        if (response.ok) {
-          window.location.reload();
-        } else {
-          const json = await response.json();
-          // Handle error response
-          console.error(json.error);
+    // const handleDelete = async () => {
+    //   const confirmDelete = window.confirm(
+    //     'Are you sure you want to delete this Payment ?'
+    //   );
+    //   if (confirmDelete) {
+    //     try {
+    //       setIsDeleting(true);
+    //       const response = await fetch(`api/payments/${payment._id}`, {
+    //         method: 'DELETE',
+    //       });
+    //       if (response.ok) {
+    //         window.location.reload();
+    //       } else {
+    //         const json = await response.json();
+    //         // Handle error response
+    //         console.error(json.error);
+    //       }
+    //     } catch (error) {
+    //       // Handle fetch error
+    //       console.error(error);
+    //     } finally {
+    //       setIsDeleting(false);
+    //     }
+    //   }
+    // };
+    const handleDelete = async () => {
+      const confirmDelete = await Swal.fire({
+        title: 'Confirmation',
+        text: 'Are you sure you want to delete this Payment?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+      });
+    
+      if (confirmDelete.isConfirmed) {
+        try {
+          setIsDeleting(true);
+          const response = await fetch(`api/payments/${payment._id}`, {
+            method: 'DELETE',
+          });
+          if (response.ok) {
+            window.location.reload();
+          } else {
+            const json = await response.json();
+            // Handle error response
+            console.error(json.error);
+          }
+        } catch (error) {
+          // Handle fetch error
+          console.error(error);
+        } finally {
+          setIsDeleting(false);
         }
-      } catch (error) {
-        // Handle fetch error
-        console.error(error);
-      } finally {
-        setIsDeleting(false);
       }
-    }
-  };
+    };
+    
 
   return (
     <tr className="delTableDataRow" key={payment._id}>
