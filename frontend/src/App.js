@@ -150,10 +150,10 @@ function App() {
               path="/UpdateJewelleryes/:_id"
               element={<UpdateJewellery />}
             />
-            <Route
+            {/* <Route
               path="/JewelleryAdminReport"
               element={<JewelleryAdminReport />}
-            />
+            /> */}
             <Route
               path="/UpdateJewelleryes/:_id"
               element={<UpdateJewellery />}
