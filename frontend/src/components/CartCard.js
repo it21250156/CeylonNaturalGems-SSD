@@ -1,39 +1,20 @@
-import { Link } from 'react-router-dom';
 import '../CSS/CartCard.css';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useEffect, useState } from 'react';
 
 function CartCard({ cartid, gem, jewellery }) {
   const { cartData, handleCartRemove, handleChangeQuantityCart } =
     useAuthContext();
 
-  const [isAtItemMax, setIsAtItemMax] = useState(false);
-  const [isAtItemMin, setIsAtItemMin] = useState(false);
+    const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
 
-  useEffect(() => {
-    setIsAtItemMax(
-      !(
-        cartData.find((item) => item._id === cartid)?.cartquantity <
-        gem?.quantity
-      )
-    );
-    setIsAtItemMin(
-      !(cartData.find((item) => item._id === cartid)?.cartquantity > 1)
-    );
-  }, [cartData, gem, cartid]);
+  // const handleCartRemove = async () => {
+  //   const response = await fetch(`/api/cart/${cartid}`, {
+  //     method: 'DELETE',
+  //   });
 
-  const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
-
-  const confirmCartRemove = (cartid) => {
-    const confirmed = window.confirm(
-      'Are you sure you want to remove this item from the cart?'
-    );
-    if (confirmed) {
-      // Call the remove item function
-      handleCartRemove(cartid);
-    }
-  };
-
+  //   const json = await response.json();
+  // }
+  //   const { gem } = gem;
   return (
     <div className="cartcard">
       {gem !== null && (
@@ -51,13 +32,20 @@ function CartCard({ cartid, gem, jewellery }) {
           </div>
           <div className="update-section">
             <div>
+              {/* {cartData.find((item) => item._id === cartid)?.cartquantity > 1 && ( */}
               <button
                 className="decrease-btn"
                 onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
-                disabled={isAtItemMin}
+                disabled={
+                  !(
+                    cartData.find((item) => item._id === cartid)?.cartquantity >
+                    1
+                  )
+                }
               >
                 -
               </button>
+              {/* )} */}
             </div>
             <div className="quantity">
               {cartData.find((item) => item._id === cartid)?.cartquantity}
@@ -66,18 +54,23 @@ function CartCard({ cartid, gem, jewellery }) {
               <button
                 className="increase-btn"
                 onClick={() => handleChangeQuantityCart(cartid, 'INCREASE')}
-                disabled={isAtItemMax}
+                disabled={
+                  !(
+                    cartData.find((item) => item._id === cartid)?.cartquantity <
+                    gem?.quantity
+                  )
+                }
               >
                 +
               </button>
             </div>
           </div>
           <div className="btn-delete">
-            <button className="btn1" onClick={() => confirmCartRemove(cartid)}>
-              <p className="paragraph"> Remove </p>
-              <span className="icon-wrapper">
+            <button class="btn1" onClick={() => handleCartRemove(cartid)}>
+              <p class="paragraph"> Remove </p>
+              <span class="icon-wrapper">
                 <svg
-                  className="icon"
+                  class="icon"
                   width="30px"
                   height="30px"
                   viewBox="0 0 24 24"
@@ -87,19 +80,19 @@ function CartCard({ cartid, gem, jewellery }) {
                   <path
                     d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
                     stroke="#000000"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   ></path>
                 </svg>
               </span>
             </button>
-            {isAtItemMax && <p>Reached max limit</p>}
           </div>
         </div>
       )}
       {jewellery !== null && gem === null && (
         <div className="cartcard-content">
+          {/* {JSON.stringify(jewellery) || "none"} */}
           <div className="cartimg-section"></div>
           <div className="name-price">
             <p className="cartcard-name">{jewellery?.name}</p>
@@ -108,11 +101,11 @@ function CartCard({ cartid, gem, jewellery }) {
           </div>
           <div className="update-section"></div>
           <div className="btn-delete">
-            <button className="btn1" onClick={() => confirmCartRemove(cartid)}>
-              <p className="paragraph"> Remove </p>
-              <span className="icon-wrapper">
+            <button class="btn1" onClick={() => handleCartRemove(cartid)}>
+              <p class="paragraph"> Remove </p>
+              <span class="icon-wrapper">
                 <svg
-                  className="icon"
+                  class="icon"
                   width="30px"
                   height="30px"
                   viewBox="0 0 24 24"
@@ -122,9 +115,9 @@ function CartCard({ cartid, gem, jewellery }) {
                   <path
                     d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16"
                     stroke="#000000"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                   ></path>
                 </svg>
               </span>
