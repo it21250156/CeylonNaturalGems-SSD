@@ -7,8 +7,9 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Link } from "react-router-dom";
-import { useLogout } from "../hooks/useLogout";
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import Swal from "sweetalert2";
 
 function ReplyRequest() {
   const { reqId } = useParams();
@@ -38,9 +39,26 @@ function ReplyRequest() {
     });
   };
 
-  return (
-    <>
-      <header>
+    // useEffect(() => {
+    //     Axios.get("/getReply").then((response) => {
+    //       setListOfReplies(response.data);
+    //     })
+    //   }, [])
+    
+      const createReply = () => {
+        
+        Axios.post(`/createReply/`,{
+          reply,
+          reqId
+        }).then((response) => {
+          Swal.fire('Reply added succsessfully!')
+        })
+      }
+  
+
+    return(
+        <>
+        <header>
         <div>
           <div className="background">
             <div className="headerNameDiv">

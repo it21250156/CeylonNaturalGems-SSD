@@ -7,6 +7,7 @@ import * as yup from 'yup';
 import Header from '../components/Header';
 import { Link, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
+import Swal from 'sweetalert2';
 
 const validationSchema = yup.object().shape({
   // requestID: yup.number().required("Request ID is required"),
@@ -35,6 +36,7 @@ function ReqMain() {
   const [Description, setDescription] = useState('');
   const [Weight, setWeight] = useState(0);
   const [Quantity, setQuantity] = useState(0);
+  
 
   useEffect(() => {
     Axios.get('/getUsers').then((response) => {
@@ -50,7 +52,7 @@ function ReqMain() {
     console.log(udata)
 
     Axios.post('/createUser', udata).then((response) => {
-      alert('Request Added!');
+      Swal.fire('Request Added')
     });
   };
 

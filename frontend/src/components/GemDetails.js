@@ -3,30 +3,45 @@ import { useGemsContext } from '../hooks/useGemsContext';
 import { Link } from 'react-router-dom';
 import ConfirmationModal from './ConfirmationModal';
 import '../CSS/GemDetails.css';
+import Swal from 'sweetalert2';
+
 
 const GemDetails = ({ gem }) => {
   const { dispatch } = useGemsContext();
-  const [showModal, setShowModal] = useState(false);
 
   const handleDelete = async () => {
     const response = await fetch('/api/gems/' + gem._id, {
       method: 'DELETE',
     });
 
-    const json = await response.json();
-
     if (response.ok) {
-      dispatch({ type: 'DELETE_GEM', payload: json });
+      dispatch({ type: 'DELETE_GEM', payload: gem });
+      Swal.fire('Gem Deleted', '', 'success');
     }
   };
 
   const handleConfirm = () => {
-    setShowModal(false);
-    handleDelete();
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this gem?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDelete();
+      }
+    });
   };
 
   const handleCancel = () => {
-    setShowModal(false);
+    Swal.fire({
+      title: 'Deletion Cancelled',
+      text: 'Gem deletion has been cancelled',
+      icon: 'info',
+    });
   };
 
   return (
@@ -84,7 +99,7 @@ const GemDetails = ({ gem }) => {
         </div>
 
         <div>
-          <button className="gem-card__deleteButton" onClick={() => setShowModal(true)}>
+          <button className="gem-card__deleteButton" onClick={handleConfirm}>
             DELETE
           </button>
           <Link to={`/UpdateGems/${gem._id}`}>
@@ -92,22 +107,7 @@ const GemDetails = ({ gem }) => {
           </Link>
         </div>
 
-        {showModal && (
-          <div className="modal-container">
-            <div className="modal-content">
-              <h2 className="modal-title">Confirm Deletion</h2>
-              <p className="modal-message">Are you sure you want to delete this gem?</p>
-              <div className="modal-actions">
-                <button className="modal-button confirm" onClick={handleConfirm}>
-                  Confirm
-                </button>
-                <button className="modal-button cancel" onClick={handleCancel}>
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+
       </div>
     </div>
 

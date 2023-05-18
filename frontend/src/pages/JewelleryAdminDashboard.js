@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
 
-
-
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import axios from "axios";
@@ -19,13 +17,13 @@ import '../CSS/JewellAdmin.css';
 const JewelleryAdminDashboard = () => {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState("Male");
-  const [filteredJwl, setFilteredJwl] = useState([])
-  
+  const [filteredJwl, setFilteredJwl] = useState([]);
+  const [sortOption, setSortOption] = useState("");
+
   const handleButtonClick = (gender) => {
     setActiveButton(gender);
-
   };
-  
+
   const buttonStyle = {
     padding: "10px 20px",
     margin: "5px",
@@ -47,7 +45,6 @@ const JewelleryAdminDashboard = () => {
     navigate("/");
   };
 
-  //const {jewellery, dispatch} = useJewelleryesContext()
   const [jewellery, setjewellery] = useState(null);
 
   useEffect(() => {
@@ -56,15 +53,26 @@ const JewelleryAdminDashboard = () => {
       const json = await response.json();
 
       if (response.ok) {
-        //dispatch({type: 'SET_JEWELLERY', payload: json})
         setjewellery(json);
-        setFilteredJwl(json.filter(jwl  => jwl.gender == activeButton))
+        const filteredJewellery = json.filter((jwl) => jwl.gender === activeButton);
+        setFilteredJwl(filteredJewellery);
       }
     };
 
     fetchJewelleryes();
 
-  }, [activeButton],);
+  }, [activeButton]);
+
+  useEffect(() => {
+    const sortedJewellery = [...filteredJwl];
+    if (sortOption === "priceAscending") {
+      sortedJewellery.sort((a, b) => a.price - b.price);
+    } else if (sortOption === "priceDescending") {
+      sortedJewellery.sort((a, b) => b.price - a.price);
+    }
+
+    setFilteredJwl(sortedJewellery);
+  }, [sortOption]);
 
   return (
     <>
@@ -99,16 +107,16 @@ const JewelleryAdminDashboard = () => {
       <div className="home">
         <div className="jewelleryes">
           <div className="gender-switch">
+            <button
+              className="add-jew-btn"
+              onClick={() => {
+                navigate("/AddJewelleryes");
+              }}
+            >
+              Add a new jewellery
+            </button>
+            <p></p>
 
-        <button
-        className="add-jew-btn"
-          onClick={() => {
-            navigate("/AddJewelleryes");
-          }}
-        >
-          Add a new jewellery
-        </button> <p></p>
-        
             <button
               className="genderbtn"
               type="button"
@@ -132,11 +140,12 @@ const JewelleryAdminDashboard = () => {
               onClick={() => handleButtonClick("Female")}
             >
               Women's Jewelleries
-            </button><br></br>
-            <select className="sortRequest">
+            </button>
+            <br></br>
+            <select className="sortJwelleries" onChange={(e) => setSortOption(e.target.value)}>
               <option value="">Select type</option>
-              <option value="dateAscending">Price ascending</option>
-              <option value="dateDescending">Price descending</option>
+              <option value="priceAscending">Price ascending</option>
+              <option value="priceDescending">Price descending</option>
             </select>
           </div>
           {filteredJwl &&
@@ -144,11 +153,10 @@ const JewelleryAdminDashboard = () => {
               <JewelleryDetails jewellery={jewellery} key={jewellery._id} />
             ))}
         </div>
-        {/* <JewelleryAddForm/> */}
       </div>
       <style></style>
     </>
   );
 };
 
-export default JewelleryAdminDashboard;  
+export default JewelleryAdminDashboard;
