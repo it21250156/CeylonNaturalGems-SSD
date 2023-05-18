@@ -155,7 +155,7 @@ const AllUsers = () => {
             <h3 className="pageTopic">All Users</h3>
           </div> */}
           <table className="table table-striped table-hover">
-            <thead style={{ backgroundColor: "#144272" }}>
+            <thead>
               <tr>
               <th>#</th>
                 <th>Title</th>

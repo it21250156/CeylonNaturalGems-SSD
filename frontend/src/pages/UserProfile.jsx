@@ -12,10 +12,21 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout } = useLogout();
+  const [showModal, setShowModal] = useState(false);
+
 
   const handleLogout = () => {
     logout();
     navigate('/');
+  };
+
+  const handleConfirm = () => {
+    setShowModal(false);
+    HandleDeleteAccount();
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
   };
 
   const { dispatch } = useAuthContext();
@@ -97,7 +108,8 @@ const UserProfile = () => {
               <div>
                 <button
                   className="deleteAccountBtn"
-                  onClick={HandleDeleteAccount}
+                 // onClick={HandleDeleteAccount}
+                  onClick={() => setShowModal(true)}
                 >
                   DELETE MY PROFILE
                 </button>
@@ -175,6 +187,24 @@ const UserProfile = () => {
           >
             MY PAYMENTS
           </button>
+
+          {showModal && (
+          <div className="modal-container">
+            <div className="modal-content">
+              <h2 className="modal-title">Confirm Deletion</h2>
+              <p className="modal-message">Are you sure ! <br></br> you want to delete this Account ?</p>
+              <div className="modal-actions">
+                <button className="modal-button confirm" onClick={handleConfirm}>
+                  Confirm
+                </button>
+                <button className="modal-button cancel" onClick={handleCancel}>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         </div>
       </div>
     </>
