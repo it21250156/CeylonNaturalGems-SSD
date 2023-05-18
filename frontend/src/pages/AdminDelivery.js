@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../CSS/AdminDelivery.css';
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
-import axios from 'axios';
+
 
 const { useState } = require('react');
 
@@ -178,7 +178,7 @@ const PDeliveryRow = ({ payment, setReload }) => {
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
-      'Are you sure you want to delete this item?'
+      'Are you sure you want to delete this Payment ?'
     );
     if (confirmDelete) {
       try {
@@ -205,7 +205,12 @@ const PDeliveryRow = ({ payment, setReload }) => {
   return (
     <tr className="delTableDataRow" key={payment._id}>
       <td className="delTableDataCell">{payment._id}</td>
-      <td className="delTableDataCell">{payment.createdAt}</td>
+      <td className="delTableDataCell">{payment.createdAt && (
+    <>
+      <div>Date: {new Date(payment.createdAt).toLocaleDateString()}</div>
+      <div>Time: {new Date(payment.createdAt).toLocaleTimeString()}</div>
+    </>
+  )}</td>
       <td className="delTableDataCell">{payment.address}</td>
       <td className="delTableDataCell">{payment.district}</td>
       <td className="delTableDataCell">{payment.country}</td>

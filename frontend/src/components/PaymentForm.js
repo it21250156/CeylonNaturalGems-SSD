@@ -7,25 +7,26 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const PaymentForm = () => {
   const { cartData } = useAuthContext();
 
-  const [user, setUser] = useState('');
-  const [orderID, setOrderID] = useState('');
-  const [amount, setAmount] = useState('');
-  const [pmethod, setPmethod] = useState('');
-  const [cardNo, setCardNO] = useState('');
-  const [cardName, setCardName] = useState('');
-  const [exMonth, setExMonth] = useState('');
-  const [exYear, setExYear] = useState('');
-  const [secCode, setSecCode] = useState('');
-  const [dmethod, setDmethod] = useState('');
-  const [address, setAddress] = useState('');
-  const [district, setDistrict] = useState('');
-  const [country, setCountry] = useState('');
-  const [phoneNo, setPhoneNo] = useState('');
-  const [dStatus, setStatus] = useState('Pending');
-  const [error, setError] = useState(null);
+  const [user, setUser]                       = useState('');
+  const [orderID, setOrderID]                 = useState('');
+  const [amount, setAmount]                   = useState('');
+  const [pmethod, setPmethod]                 = useState('');
+  const [cardNo, setCardNO]                   = useState('');
+  const [cardName, setCardName]               = useState('');
+  const [exMonth, setExMonth]                 = useState('');
+  const [exYear, setExYear]                   = useState('');
+  const [secCode, setSecCode]                 = useState('');
+  const [dmethod, setDmethod]                 = useState('');
+  const [address, setAddress]                 = useState('');
+  const [district, setDistrict]               = useState('');
+  const [country, setCountry]                 = useState('');
+  const [phoneNo, setPhoneNo]                 = useState('');
+  const [dStatus, setStatus]                  = useState('Pending');
+  const [error, setError]                     = useState(null);
   const [gotoPaymentlist, setGotopaymentList] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(false);
+  const [isChecked, setIsChecked]             = useState(false);
+  const [successMessage, setSuccessMessage]   = useState(false);
+  const [phoneNoError, setPhoneNoError]       = useState('');
 
   useEffect(() => {
     setOrderID(cartData?.map((cart) => cart.cartitemid));
@@ -148,6 +149,24 @@ const PaymentForm = () => {
     }
   };
 
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberRegex = /^\d{10}$/; // Regular expression for a 10-digit phone number
+
+    if (!phoneNumberRegex.test(phoneNumber)) {
+      setPhoneNoError('Please enter a valid 10-digit phone number');
+    } else {
+      setPhoneNoError('');
+    }
+  };
+
+  const handlePhoneNoChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove all non-numeric characters from the input value
+    const sanitizedValue = inputValue.replace(/\D/g, '');
+    setPhoneNo(sanitizedValue);
+    validatePhoneNumber(sanitizedValue);
+  };
+
 
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
@@ -258,8 +277,7 @@ const PaymentForm = () => {
                   <div className="Dmeth">
                     <label className="label">Delivery Method:</label>
                     <span style={{ fontSize: 'small' }}>
-                      If you choose to pick up the order from our store no need
-                      to fill delivery details below!
+                      Fill the delivery details that will appear below if you need your order to be delivered!
                     </span>
                     <label className="label" htmlFor="deliveryMethodDelivery">
                       Delivery
@@ -286,7 +304,7 @@ const PaymentForm = () => {
                     />
                   </div>
 
-                  <label className="label"> Address : </label>
+                  {/* <label className="label"> Address : </label>
                   <input
                     id="input"
                     type="text"
@@ -311,15 +329,45 @@ const PaymentForm = () => {
                     onChange={(e) => setCountry(e.target.value)}
                     value={country}
                     disabled={dmethod === 'Pickup'}
-                  />
+                  /> */}
+
+
+{dmethod === 'Delivery' && (
+        <>
+          <label className="label"> Address : </label>
+          <input
+            id="input"
+            type="text"
+            onChange={(e) => setAddress(e.target.value)}
+            value={address}
+          />
+
+          <label className="label"> District : </label>
+          <input
+            id="input"
+            type="text"
+            onChange={(e) => setDistrict(e.target.value)}
+            value={district}
+          />
+
+          <label className="label"> Country : </label>
+          <input
+            id="input"
+            type="text"
+            onChange={(e) => setCountry(e.target.value)}
+            value={country}
+          />
+        </>
+      )}
 
                   <label className="label"> Phone Number : </label>
                   <input
                     id="input"
-                    type="text"
-                    onChange={(e) => setPhoneNo(e.target.value)}
+                    type="tel"
+                    onChange={handlePhoneNoChange}
                     value={phoneNo}
                   />
+                  {phoneNoError && <div className="error">{phoneNoError}</div>}
 
 <div>
         <label>

@@ -25,7 +25,7 @@ const AllInstallmentsDetailed = () => {
     };
 
     const [installment , setInstallment] = useState({
-        user:"" , gemID:"", planID:"", noOfMonths:"", initialPayment:"", monthlyPayment:"", installmentDates:"", status:""
+        user:"" , gemID:"", planID:"", noOfMonths:"", totalAmount:"", initialPayment:"", monthlyPayment:"", installmentDates:"", status:""
     })
 
     const [gems, setGems] = useState([]);
@@ -85,7 +85,6 @@ const AllInstallmentsDetailed = () => {
 
   const usersName = users.find((user) => user._id === installment.user);
 
-
     return (
         <>
       <header>
@@ -122,13 +121,14 @@ const AllInstallmentsDetailed = () => {
             <br></br>
             
             <table className="table table-striped table-hover">
-                <tr><td>Purchased Date</td> <td>{installment.installmentDates[0]}</td></tr>
+                <tr><td>Purchased Date</td>
+                <td>{new Date(installment.installmentDates[0]).toLocaleDateString()}</td>
+                </tr>
                 <tr><td>Installement Plan</td> <td>{plans.find((plan) => plan._id === installment.planID)?.name}</td></tr>
-                <tr><td>Total Amount</td> <td></td></tr>
+                <tr><td>Total Amount</td> <td>{installment.totalAmount}</td></tr>
                 <tr><td>Initial Payment</td> <td>{installment.initialPayment}</td></tr>
                 <tr><td>Monthly Payment</td> <td>{installment.monthlyPayment}</td></tr>
                 <tr><td>Total Number of Months to Pay</td> <td>{installment.noOfMonths}</td></tr>
-                <tr><td>Order completion date</td> <td></td></tr>
 
                 <br></br>
                 <tr><td>Status</td> <td>{installment.status}</td></tr>

@@ -21,7 +21,12 @@ const installmentSchema = new Schema({
         required: true,
     },
 
-    noOfMonths:{
+    noOfMonths: {
+      type: Number,
+      required: true
+    },
+
+    totalAmount: {
       type: Number,
       required: true
     },

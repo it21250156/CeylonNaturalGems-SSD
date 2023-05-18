@@ -70,18 +70,30 @@ const AdminInstallmentPlans = () => {
 
         <div className="instalmentPlans">
             <br></br>
-            <button className="confirm-btn" onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button>
+            {/* <button className="confirm-btn" onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button> */}
             <div className="lightBlueBodyBG">
+            <button className="adminHome-bigBtns" 
+            style={{marginLeft : "60%"}}
+            onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button>
             <div className="whiteBodyBG">
-            <div className="darkBlueTopicBox">
-                <h3 className="pageTopic">Installment Plans</h3>
-            </div>
-            <div className="lightBlueBodyBG">
-                <PlanForm />
-             </div>   
-                {plans && plans.map((plan) => (
-                    <PlanDetailBox key={plan._id} plan={plan} />
-                ))}
+              <div className="darkBlueTopicBox">
+                  <h3 className="pageTopic">Installment Plans</h3>
+              </div>
+              <br></br>
+              <div style={{height : "100%"}}>
+                <div className="lightBlueBodyBG" style={{width : "45%" , marginLeft: "50%" , height : "100%" , boxShadow : "10px 10px 20px rgba(0, 0, 0, 0.2)"}}>
+                    <div>
+                    <PlanForm />
+                    </div>
+                </div>   
+                <div className="shadow p-3 mb-5 bg-body-tertiary rounded" style={{ width : "40%" , marginLeft: "2%" , marginTop : "-500px"}}>
+                  {plans && plans.map((plan) => (
+                        <PlanDetailBox key={plan._id} plan={plan} />
+                    ))}
+                </div>
+              </div>
+              
+                
             </div>
             </div>
 
@@ -124,12 +136,15 @@ const PlanDetailBox = ({ plan }) => {
             <h4> {plan.name} </h4>
             <p><strong>Months : </strong> {plan.months} </p>
             <p><strong>Initial Payment : </strong> {plan.initialPayment} %</p>
-            <span className="confirm-btn"
+            <span className="btn btn-danger"
              //onClick = {handleDelete} 
+             style={{marginRight : "10px"}}
              onClick={() => setShowModal(true)}
              > 
               Delete</span> 
-            <span className="confirm-btn" onClick={() => {navigate(`/AdminInstallmentPlans/AdminUpdatePlan/${plan._id}`)}} >Update</span>
+            <span className="btn btn-warning" 
+             style={{backgroundColor : "#2c74b3" , border : "#2c74b3" , color : "white"}}
+            onClick={() => {navigate(`/AdminInstallmentPlans/AdminUpdatePlan/${plan._id}`)}} >Update</span>
         
             {showModal && (
           <div className="modal-container">

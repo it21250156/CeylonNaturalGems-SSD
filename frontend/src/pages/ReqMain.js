@@ -254,13 +254,13 @@ function ReqMain() {
             <button className="req-btn">View My Requests</button>
           </Link>
         </div>
-        <button
+        {/* <button
           onClick={() => {
             window.location.href = './reqAd';
           }}
         >
           All Requests
-        </button>
+        </button> */}
         {/* <button
           onClick={() => {
             window.location.href = './reply_uv';
