@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useLogout } from "../hooks/useLogout";
-import format from "date-fns/format";
-import "../CSS/table.css";
+import { useEffect, useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import format from 'date-fns/format';
+import '../CSS/table.css';
 
 const AllInstallments = () => {
   const { logout } = useLogout();
@@ -14,12 +14,12 @@ const AllInstallments = () => {
 
   const handleClick = () => {
     logout();
-    navigate("/");
+    navigate('/');
   };
 
   const [installments, setInstallments] = useState(null);
   const [data, setData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -33,7 +33,7 @@ const AllInstallments = () => {
 
   useEffect(() => {
     const fetchInstallments = async () => {
-      const response = await fetch("/api/installments");
+      const response = await fetch('/api/installments');
       const json = await response.json();
 
       if (response.ok) {
@@ -66,7 +66,7 @@ const AllInstallments = () => {
 
             <ul>
               <li>
-                <Link to={"/adminHome"}>Home</Link>
+                <Link to={'/adminHome'}>Home</Link>
               </li>
             </ul>
           </nav>
@@ -76,7 +76,7 @@ const AllInstallments = () => {
       <div className="lightBlueBodyBG">
         <div className="whiteBodyBG">
           <input
-            style={{ width: "50%", marginLeft: "5%" }}
+            style={{ width: '50%', marginLeft: '5%' }}
             className="opacity-75"
             type="text"
             value={searchQuery}
@@ -88,7 +88,7 @@ const AllInstallments = () => {
             <h3 className="pageTopic">All Installments</h3>
           </div>
 
-          <div style={{ padding: "30px" }}>
+          <div style={{ padding: '30px' }}>
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
@@ -133,7 +133,7 @@ const InstallmentTableRow = ({ installment, index }) => {
   useEffect(() => {
     const fetchGems = async () => {
       try {
-        const response = await fetch("/api/gems&jewelleries/gems");
+        const response = await fetch('/api/gems&jewelleries/gems');
         const json = await response.json();
         setGems(json);
       } catch (err) {
@@ -143,7 +143,7 @@ const InstallmentTableRow = ({ installment, index }) => {
 
     const fetchUsers = async () => {
       try {
-        const response = await fetch("/api/users");
+        const response = await fetch('/api/users');
         const json = await response.json();
         setUsers(json);
       } catch (err) {
@@ -167,7 +167,7 @@ const InstallmentTableRow = ({ installment, index }) => {
       <td>{gems.find((gem) => gem._id === installment.gemID)?.name}</td>
       <td>{installment.status}</td>
       <td>
-        {" "}
+        {' '}
         <button
           onClick={() => {
             navigate(
@@ -175,8 +175,8 @@ const InstallmentTableRow = ({ installment, index }) => {
             );
           }}
         >
-          details
-        </button>{" "}
+          Details
+        </button>{' '}
       </td>
     </tr>
   );

@@ -1,13 +1,57 @@
-.lightBlueBox{
-    background-color: #2c74b3;
-    margin: 20px 10%;
-    padding: 20px;
-    border-radius: 20px;
+.lightBlueBox {
+  background-color: white;
+  margin: 20px 10%;
+  padding: 20px;
+  border-radius: 20px;
 }
 
-.whiteBox{
-    background-color: white;
-    margin: 20px 10%;
-    padding: 20px;
-    border-radius: 20px;
+.top-box-inst {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.top-left-box {
+  flex: 1;
+  background-color: white;
+  margin: 10px 30px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px black;
+  text-align: start;
+}
+
+.top-right-box {
+  flex: 1;
+  background-color: white;
+  margin: 10px 30px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px black;
+  font-family: bpreplay;
+}
+
+.white-box-inst {
+  background-color: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.gem-name-inst {
+  margin: 20px;
+  color: #144272;
+  font-family: Bebas Neue;
+  font-size: 50px;
+}
+
+.cus-name-inst {
+  color: #144272;
+  margin-left: 20px;
+}
+
+.top-table-labels {
+  font-weight: bold;
+}
+
+.inst-table-1 {
+  text-align: start;
 }
