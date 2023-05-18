@@ -44,8 +44,8 @@ const Footer = () => {
             <div id="map" style={{ height: '100%', width: '100%' }} />
           </div>
           <div className="static-pages-1">
-            <a href='/AboutUs'>About Us</a>
-            <p>Contact Us</p>
+            <a href='/AboutUs'>About Us</a> <br></br>
+            <a href='/ContactUs'>Contact Us</a>
           </div>
         </div>
         <div className="col-2">

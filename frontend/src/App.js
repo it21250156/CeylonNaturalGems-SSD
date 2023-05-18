@@ -18,6 +18,7 @@ import AllUsers from "./pages/AllUsers";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetForgotPassword from "./pages/ResetForgotPassword";
 import AboutUsPage from "./pages/AboutUsPage";
+import ContactUsPage from "./pages/ContactUsPage";
 
 //janith
 import Gemhome from "./pages/Gemhome";
@@ -98,6 +99,7 @@ function App() {
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/ResetForgotPassword/:token" element={<ResetForgotPassword />} />
             <Route path="/AboutUs" element={<AboutUsPage />} />
+            <Route path="/ContactUs" element={<ContactUsPage />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
