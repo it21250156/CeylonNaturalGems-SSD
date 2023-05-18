@@ -32,6 +32,10 @@
   margin: 10px;
 }
 
+.jewel-card-img {
+  width: 150px;
+}
+
 .card-button {
   transform: translate(-50%, 125%);
   width: 60%;
