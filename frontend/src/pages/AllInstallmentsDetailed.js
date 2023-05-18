@@ -8,8 +8,6 @@ import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
-import format from 'date-fns/format'
-
 import "../CSS/Vih's.css"
 
 const AllInstallmentsDetailed = () => {
@@ -124,8 +122,7 @@ const AllInstallmentsDetailed = () => {
             
             <table className="table table-striped table-hover">
                 <tr><td>Purchased Date</td>
-                {/* <td>{installment.installmentDates[0]}</td>  */}
-                <td>{format(new Date(installment.installmentDates[0]), 'dd/MM/yyyy')}</td>
+                <td>{new Date(installment.installmentDates[0]).toLocaleDateString()}</td>
                 </tr>
                 <tr><td>Installement Plan</td> <td>{plans.find((plan) => plan._id === installment.planID)?.name}</td></tr>
                 <tr><td>Total Amount</td> <td>{installment.totalAmount}</td></tr>
