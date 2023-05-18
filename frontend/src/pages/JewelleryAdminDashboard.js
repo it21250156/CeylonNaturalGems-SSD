@@ -20,7 +20,7 @@ const JewelleryAdminDashboard = () => {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState("Male");
   const [filteredJwl, setFilteredJwl] = useState([])
-
+  
   const handleButtonClick = (gender) => {
     setActiveButton(gender);
 
@@ -139,14 +139,6 @@ const JewelleryAdminDashboard = () => {
               <option value="dateDescending">Price descending</option>
             </select>
           </div>
-          {/* <Link to={`/JewelleryAdminReport`}>
-          <button className="reportsButton">Reports</button>
-        </Link> */}
-
-          {/* {jewellery &&
-            jewellery.map((jewellery) => (
-              <JewelleryDetails jewellery={jewellery} key={jewellery._id} />
-            ))} */}
           {filteredJwl &&
             filteredJwl.map((jewellery) => (
               <JewelleryDetails jewellery={jewellery} key={jewellery._id} />
@@ -159,4 +151,4 @@ const JewelleryAdminDashboard = () => {
   );
 };
 
-export default JewelleryAdminDashboard;
+export default JewelleryAdminDashboard;  
