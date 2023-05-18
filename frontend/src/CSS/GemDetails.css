@@ -44,27 +44,27 @@
 .gem-card__deleteButton {
   font-family: "Bebas Neue", sans-serif;
   padding: 10px 20px;
-  border: none;
+  border: 2px solid #e53935; /* Add a border to the button */
   border-radius: 5px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #e53935; /* Change the color to white */
-  background-color: #ffffff; /* Set the background color to greyish */
+  color: #e53935;
+  background-color: #ffffff;
   transition: all 1000ms;
   font-size: 20px;
   position: relative;
   overflow: hidden;
-  outline: 2px solid #e53935; /* Set the outline color to greyish */
+  outline: none; /* Remove the outline */
   margin: 20px;
   z-index: 1;
 }
 
 .gem-card__deleteButton:hover {
-  color: #ffffff; /* Change the color to white */
-  background-color: #e53935; /* Set the background color to red */
+  color: #ffffff;
+  background-color: #e53935;
   transform: scale(1.1);
-  outline: 2px solid #e53935; /* Set the outline color to red */
-  box-shadow: 4px 5px 17px -4px #801313; /* Adjust the box shadow color */
+  outline: none; /* Remove the outline */
+  box-shadow: 4px 5px 17px -4px #801313;
 }
 
 .gem-card__deleteButton::before {
@@ -74,7 +74,7 @@
   top: 0;
   width: 0;
   height: 100%;
-  background-color: #801313; /* Change the background color to a dark shade of red */
+  background-color: #801313;
   transform: skewX(45deg);
   z-index: -1;
   transition: width 1000ms;
@@ -83,6 +83,7 @@
 .gem-card__deleteButton:hover::before {
   width: 250%;
 }
+
 /* update button */
 
 .gem-card__updateButton {
