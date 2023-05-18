@@ -73,7 +73,7 @@ const Home = () => {
 
       {showLoginPopup && (
         <div className="login-popup">
-          <p><strong>Please login first !</strong></p>
+          <p><strong>Please login first!</strong></p>
           <button className='logincheckbtn' onClick={() => setShowLoginPopup(false)}>Close</button>
         </div>
       )}
