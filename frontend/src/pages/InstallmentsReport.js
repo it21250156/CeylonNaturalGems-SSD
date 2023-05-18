@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom"
 import { useLogout } from '../hooks/useLogout';
 
+import "../CSS/Vih's.css"
+
 const InstallmentReport = () => {
 
   const { logout } = useLogout();
@@ -168,22 +170,53 @@ const InstallmentReport = () => {
               <div className="darkBlueTopicBox">
                   <h3 className="pageTopic">Installments Report</h3>
               </div>
-      
-      <h4>Number of Installments: {numberOfInstallments}</h4>
-      
-      <h4>Number of Plans: {numberOfPlans}</h4>
-      
-      <h4>Total Revenue: {totalRevenue}</h4>
-      
-      <h4>Average Initial Payment: {averageInitialPayment}</h4>
-      <h4>Average Monthly Payment: {averageMonthlyPayment}</h4>
-      <h4>Average Number of Months: {averageMonths}</h4>
-     
-      <h2>Initial Payment vs. Monthly Payment</h2>
-      <canvas id="barChart2" width="800" height="400"></canvas>
+      <div className="lightBlueBodyBG" >
+        <table  className="table table-striped inst-table-1">
+          <tr>
+            <td className="inst-report-text-row1">Number of Installments:</td>
+            <td className="inst-report-text-row1" >{numberOfInstallments}</td>
+          </tr>
 
-      <h2>Status Distribution</h2>
-      <canvas id="pieChart" width="800" height="400"></canvas>
+          <tr>
+            <td className="inst-report-text-row2">Number of Plans: </td>
+            <td className="inst-report-text-row2">{numberOfPlans}</td>
+          </tr>
+
+          <tr>
+            <td className="inst-report-text-row1">Total Revenue:</td>
+            <td className="inst-report-text-row1">{totalRevenue}</td>
+          </tr>
+
+          <tr>
+            <td className="inst-report-text-row2">Average Initial Payment:</td>
+            <td className="inst-report-text-row2">{averageInitialPayment}</td>
+          </tr>
+
+          <tr>
+            <td className="inst-report-text-row1">Average Monthly Payment:</td>
+            <td className="inst-report-text-row1">{averageMonthlyPayment}</td>
+          </tr>
+
+          <tr>
+            <td className="inst-report-text-row2">Average Number of Months:</td>
+            <td className="inst-report-text-row2">{averageMonths}</td>
+          </tr>
+          
+          </table>
+     
+     </div> 
+     <div className="top-box-inst">
+          <div className="col-md-6" > 
+            <h2 className="lightBlueBodyBG" >Initial Payment vs. Monthly Payment</h2>
+            <canvas id="barChart2" width="400" height="200"></canvas>
+        </div>
+
+        <div className="col-md-6">
+            <h2 className="lightBlueBodyBG">Status Distribution</h2>
+            <canvas id="pieChart" width="400" height="200"></canvas>
+        </div>
+
+      </div>
     </div>
     </div>
     </>
