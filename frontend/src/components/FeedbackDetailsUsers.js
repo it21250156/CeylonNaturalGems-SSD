@@ -2,17 +2,15 @@ import { useFeedbacksContext } from '../hooks/useFeedbackContext';
 import { Link } from 'react-router-dom';
 import StarRating from 'react-star-ratings';
 import '../CSS/UserFeedbacks.css';
+import Swal from 'sweetalert2';
 
 //DeleteCon
-import ConfirmationModal from './ConfirmationModal';
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { useEffect, useState } from 'react';
 
 const FeedbackDetailsUsers = ({ feedback }) => {
-  const [showModal, setShowModal] = useState(false);
-
   const { feedbacks, dispatch } = useFeedbacksContext();
 
   const handleClick = async () => {
@@ -23,16 +21,32 @@ const FeedbackDetailsUsers = ({ feedback }) => {
 
     if (response.ok) {
       dispatch({ type: 'DELETE_FEEDBACK', payload: json });
+      Swal.fire('Feedback Deleted', '', 'success');
     }
   };
 
   const handleConfirm = () => {
-    setShowModal(false);
-    handleClick();
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this Feedback?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleClick();
+      }
+    });
   };
 
   const handleCancel = () => {
-    setShowModal(false);
+    Swal.fire({
+      title: 'Deletion Cancelled',
+      text: 'Feedback deletion has been cancelled',
+      icon: 'info',
+    });
   };
 
   return (
@@ -76,7 +90,7 @@ const FeedbackDetailsUsers = ({ feedback }) => {
           <span
             className="material-symbols-outlined"
             id="delete"
-            onClick={() => setShowModal(true)}
+            onClick={handleConfirm}
           >
             delete
           </span>
