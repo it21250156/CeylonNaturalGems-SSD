@@ -164,9 +164,7 @@ const PaymentForm = () => {
         <div className="whiteBodyBG">
           <div className="darkBlueTopicBox">
             <h3 className="pageTopic">PAYMENT FORM</h3>
-          </div> {JSON.stringify(orderID)}
-          <div className="container">
-          </div>
+          </div> 
           <div className="light-blue-main-box">
             <form className="create" onSubmit={handleSubmit}>
               <div className="form-fields">
