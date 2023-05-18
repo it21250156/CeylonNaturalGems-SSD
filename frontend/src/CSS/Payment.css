@@ -20,6 +20,10 @@
   color: #555;
 }
 
+.adminDel {
+  padding: 20px;
+}
+
 .container {
   display: flex;
   justify-content: center;

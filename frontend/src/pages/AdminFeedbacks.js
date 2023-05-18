@@ -46,8 +46,10 @@ const AdminFeedbacks = () => {
           <nav>
             <div className="navprofileDiv">
               <div className="navEmal">
-                <span>Hello Admin</span>
-                <button onClick={handleClick}>Log out</button>
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
               </div>
             </div>
 
