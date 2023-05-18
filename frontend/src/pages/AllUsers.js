@@ -178,7 +178,7 @@ const AllUsers = () => {
           ) } 
         </div>
       </div>
-      {/* <button onClick={navigate("/AllUsers/AdminUserReport")}>Report</button> */}
+      <button onClick={() => {navigate("/AllUsers/AdminUserReport")}}>Report</button>
     </>
   );
 };
