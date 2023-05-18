@@ -86,7 +86,7 @@ function UpdateFeedback() {
             onSubmit={handleSubmit}
             enctype="multipart/form-data"
           >
-            <label className="label">Gem/Jewellery Name:</label>
+            <label className="label">Gem/Jewellery Name(s):</label>
             <input
               readOnly
               id="input"
@@ -96,7 +96,7 @@ function UpdateFeedback() {
               className={emptyFields.includes('gemType') ? 'error' : ''}
             />
 
-            <label className="label">Gem Quantity:</label>
+            <label className="label">Item Quantity:</label>
             <input
               readOnly
               id="input"
@@ -130,7 +130,7 @@ function UpdateFeedback() {
               changeRating={handleRatingChange}
             />
 
-            <label className="label">Upload Images:</label>
+            <label className="label">Upload Image:</label>
             <input
               type="file"
               name="image"

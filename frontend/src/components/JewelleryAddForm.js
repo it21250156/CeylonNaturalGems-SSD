@@ -38,10 +38,6 @@ const JewelleryAddForm = () => {
           emptyFields.push('gender')
         }
       
-        if(gemstone === ''){
-          emptyFields.push('gemstone')
-        }
-      
         if(metal === ''){
           emptyFields.push('metal')
         }
@@ -49,6 +45,10 @@ const JewelleryAddForm = () => {
         if(description === ''){
           emptyFields.push('description')
         }
+
+        if(gemstone === ''){
+            emptyFields.push('gemstone')
+          }
       
         if(price === ''){
           emptyFields.push('price')
@@ -78,8 +78,8 @@ const JewelleryAddForm = () => {
                 setName('')
                 setType('')
                 setGender('')
-                setGemstone('')
                 setMetal('')
+                setGemstone('')
                 setDescription('')
                 setPrice('')
                 setError(null)
@@ -130,8 +130,14 @@ const JewelleryAddForm = () => {
             </select>
             {emptyFields.includes('gender') && <div className="error">Please enter a gender.</div>}
              
-
-            
+            <label className="jewAddlabel">Metal</label>
+            <select className="jewdropdown" name="metal" onChange={e=>setMetal(e.target.value)}>
+            <option value="">Select a Metal</option>    
+            <option value="GOLD">GOLD</option>
+            <option value="SILVER">SILVER</option>
+            className={emptyFields.includes('metal') ? 'error': ''}
+            </select>
+            {emptyFields.includes('Metal') && <div className="error">Please selecta metal.</div>}
 
             <label className="jewAddlabel">Gemstone: </label>
             <select className="jewdropdown" name="gemstone" onChange={e=>setGemstone(e.target.value)}>
@@ -142,18 +148,14 @@ const JewelleryAddForm = () => {
             <option value="Emarald">Emarald</option>
             <option value="Ruby">Ruby</option>
             <option value="Moonstone">Moonstone</option>
+            <option value="Opal">Opal</option>
+            <option value="Tourmaline">Tourmaline</option>
+            <option value="Turquoies">Turquoies</option>
+            <option value="Cat's Eye">Cat's Eye</option>
             className={emptyFields.includes('gemstone') ? 'error': ''}
             </select>
             {emptyFields.includes('Gemstone') && <div className="error">Please select a gemstone.</div>}
 
-            <label className="jewAddlabel">Metal</label>
-            <select className="jewdropdown" name="metal" onChange={e=>setMetal(e.target.value)}>
-            <option value="">Select a Metal</option>    
-            <option value="GOLD">GOLD</option>
-            <option value="SILVER">SILVER</option>
-            className={emptyFields.includes('metal') ? 'error': ''}
-            </select>
-            {emptyFields.includes('Metal') && <div className="error">Please selecta metal.</div>}
 
 
             <label>Gem Description: </label>
@@ -169,7 +171,7 @@ const JewelleryAddForm = () => {
           
           {emptyFields.includes('description') && <div className="error">Please enter a description.</div>}
 
-            <label className="jewAddlabel">Jewellery Price: (in Rs)</label>
+            <label className="jewAddlabel">Jewellery Price: (in $)</label>
             <input
                 type="number"
                 onChange={(e) => setPrice(e.target.value)}

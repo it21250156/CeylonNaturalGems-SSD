@@ -82,7 +82,7 @@ const FeedbackDetails = ({ feedback }) => {
             starDimension="25px"
             starSpacing="5px"
           />
-          <p className="g-quantity-tag">Gem Quantity: {feedback.gemQty}</p>
+          <p className="g-quantity-tag">Item Quantity: {feedback.gemQty}</p>
           <p className="time-stamp-feedback">
             {formatDistanceToNow(new Date(feedback.createdAt), {
               addSuffix: true,

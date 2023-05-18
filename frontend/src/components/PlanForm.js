@@ -78,16 +78,17 @@ const PlanForm = () => {
                     if (value < 100) {
                         setInitialPayment(value);
                     } else {
-                        setError("Initial payment must be less than 100");
+                        setError("Initial payment must be a percentage value ( Less than 100 )");
                     }
                 }}
                 value={initialPayment}
             />
+            {error && <div className = "error">{error}</div>}
 
 
             <button className="confirm-btn" >Add Installment Plan </button>
 
-            {error && <div className = "error">{error}</div>}
+            {/* {error && <div className = "error">{error}</div>} */}
 
         </form>
     )

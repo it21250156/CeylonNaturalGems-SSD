@@ -50,7 +50,7 @@ import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
 import AddJewelleryes from './pages/AddJewelleryes';
 import JewelleryDetails from './components/JewelleryDetails';
 import UpdateJewellery from './pages/UpdateJewellery';
-import JewelleryAdminReport from './pages/JewelleryAdminReport';
+//import JewelleryAdminReport from './pages/JewelleryAdminReport';
 
 //Daham
 import JewelhomeMen from './pages/JewelhomeMen';
@@ -61,6 +61,7 @@ import JewelhomeWomen from './pages/JewelhomeWomen';
 import InstallmentPlans from './pages/InstallmentPlans';
 import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan';
 import AllInstallments from './pages/AllInstallments';
+import AllInstallmentsDetailed from './pages/AllInstallmentsDetailed';
 import AdminInstallmentPlans from './pages/AdminInstallmentPlans';
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
 import MyInstallments from './pages/MyInstallments';
@@ -156,10 +157,10 @@ function App() {
               path="/UpdateJewelleryes/:_id"
               element={<UpdateJewellery />}
             />
-            <Route
+            {/* <Route
               path="/JewelleryAdminReport"
               element={<JewelleryAdminReport />}
-            />
+            /> */}
             <Route
               path="/UpdateJewelleryes/:_id"
               element={<UpdateJewellery />}
@@ -182,11 +183,14 @@ function App() {
               path="/InstallmentPlans/selectedInstallmentPlan/:id"
               element={<SelectedInstallmentPlan />}
             />
-
-            {/* admin */}
+            {/* admin -Vihangi's */}
             <Route
               path="/AdminInstallmentPlans/AllInstallments"
               element={<AllInstallments />}
+            />
+            <Route
+              path="/AdminInstallmentPlans/AllInstallments/AllInstallmentsDetailed/:id"
+              element={<AllInstallmentsDetailed />}
             />
             <Route
               path="/AdminInstallmentPlans"

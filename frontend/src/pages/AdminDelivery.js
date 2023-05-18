@@ -20,7 +20,9 @@ const AdminDelivery = () => {
   };
 
   const [payments, setPayments] = useState(null);
-  const [reload, setReload] = useState(true);
+  const [reload, setReload]     = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+
 
   useEffect(() => {
     const fetchPayments = async () => {
@@ -28,13 +30,19 @@ const AdminDelivery = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setPayments(json);
+          // setPayments(json);
+          const filteredPayments = json.filter(payment =>
+            payment.country && payment.country.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            payment.district && payment.district.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            payment.dmethod && payment.dmethod.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          setPayments(filteredPayments);
       }
       setReload(false);
     };
 
     fetchPayments();
-  }, [reload]);
+  }, [reload , searchQuery]);
 
   return (
     <>
@@ -70,7 +78,14 @@ const AdminDelivery = () => {
             <h3 className="title-delivery"> DELIVERY DETAILS </h3>
           </div>
 
-          <div className="adminDel">
+          <div className = "adminDel">
+          <input
+              type="text"
+              placeholder="Search Country , District , Delivery Method "
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+
             <table className="delDetailsTable">
               <thead className="delTableHead">
                 <tr>

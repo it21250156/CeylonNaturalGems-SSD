@@ -7,7 +7,7 @@ const {
     getDeletedUsers,
     getDeletedUser
 } = require('../controllers/deletedUsersController');
-const router = require('./userRoutes');
+const router = express.Router();
 
 
 router.post('/' , addDeletedUser)

@@ -1,0 +1,13 @@
+.lightBlueBox{
+    background-color: #2c74b3;
+    margin: 20px 10%;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.whiteBox{
+    background-color: white;
+    margin: 20px 10%;
+    padding: 20px;
+    border-radius: 20px;
+}

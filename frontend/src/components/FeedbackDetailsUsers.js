@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 import StarRating from 'react-star-ratings';
 import '../CSS/UserFeedbacks.css';
 
+//DeleteCon
+import ConfirmationModal from './ConfirmationModal';
+
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { useEffect, useState } from 'react';
 
 const FeedbackDetailsUsers = ({ feedback }) => {
+
+  const [showModal, setShowModal] = useState(false);
+
   const { feedbacks, dispatch } = useFeedbacksContext();
 
   const handleClick = async () => {
@@ -20,6 +26,16 @@ const FeedbackDetailsUsers = ({ feedback }) => {
       dispatch({ type: 'DELETE_FEEDBACK', payload: json });
     }
   };
+
+  const handleConfirm = () => {
+    setShowModal(false);
+    handleClick();
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
+  };
+
 
   return (
     <div className="feedback-details-users">
@@ -41,7 +57,7 @@ const FeedbackDetailsUsers = ({ feedback }) => {
             starSpacing="5px"
           />
           <p className="g-quantity-tag">
-            Gem Quantity:
+            Item Quantity:
             {feedback.gemQty}
           </p>
         </div>
@@ -54,7 +70,8 @@ const FeedbackDetailsUsers = ({ feedback }) => {
           <span
             className="material-symbols-outlined"
             id="delete"
-            onClick={handleClick}
+            onClick={() => setShowModal(true)}
+
           >
             delete
           </span>
@@ -77,6 +94,13 @@ const FeedbackDetailsUsers = ({ feedback }) => {
           <strong>Feedback Reply:</strong> {feedback.reply}
         </p>
       )}
+      {showModal && (
+      <ConfirmationModal
+        message="Are you sure you want to delete this feedback?"
+        onConfirm={handleConfirm}
+        onCancel={handleCancel}
+      />
+    )}
     </div>
   );
 };

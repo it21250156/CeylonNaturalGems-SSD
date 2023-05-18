@@ -55,6 +55,14 @@ function GemScreen() {
     }
   };
 
+  // const haddleNavigateToInstallment = () => {
+  //       if(!user){
+  //         navigate('#') ;
+  //       }else if(user){
+  //         navigate('/InstallmentPlans');
+  //       }
+  // }
+
   useEffect(() => {
     const fetchGems = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -123,6 +131,7 @@ function GemScreen() {
                     Add to cart
                   </button>
                   <button
+                    //onClick={() => haddleNavigateToInstallment}
                     onClick={() => navigate(`/InstallmentPlans`)}
                     className="btn-pay-in-installments"
                   >
