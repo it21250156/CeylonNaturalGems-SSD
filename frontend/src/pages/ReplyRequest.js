@@ -1,15 +1,15 @@
-import "../CSS/AppBW.css";
-import { useState, useEffect } from "react";
-import Axios from "axios";
-import TextareaAutosize from "react-textarea-autosize";
+import '../CSS/AppBW.css';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
+import TextareaAutosize from 'react-textarea-autosize';
 
-import { useAuthContext } from "../hooks/useAuthContext";
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useAuthContext } from '../hooks/useAuthContext';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 function ReplyRequest() {
   const { reqId } = useParams();
@@ -19,15 +19,15 @@ function ReplyRequest() {
 
   const handleClick = () => {
     logout();
-    navigate("/");
+    navigate('/');
   };
 
-  const [reply, setReply] = useState("");
-  const [replyError, setReplyError] = useState("");
+  const [reply, setReply] = useState('');
+  const [replyError, setReplyError] = useState('');
 
   const createReply = () => {
-    if (reply.trim() === "") {
-      setReplyError("Please enter your reply.");
+    if (reply.trim() === '') {
+      setReplyError('Please enter your reply.');
       return;
     }
 
@@ -35,30 +35,19 @@ function ReplyRequest() {
       reply,
       reqId,
     }).then((response) => {
-      alert("Reply added!");
+      Swal.fire('Reply added succsessfully!');
     });
   };
 
-    // useEffect(() => {
-    //     Axios.get("/getReply").then((response) => {
-    //       setListOfReplies(response.data);
-    //     })
-    //   }, [])
-    
-      const createReply = () => {
-        
-        Axios.post(`/createReply/`,{
-          reply,
-          reqId
-        }).then((response) => {
-          Swal.fire('Reply added succsessfully!')
-        })
-      }
-  
+  // useEffect(() => {
+  //     Axios.get("/getReply").then((response) => {
+  //       setListOfReplies(response.data);
+  //     })
+  //   }, [])
 
-    return(
-        <>
-        <header>
+  return (
+    <>
+      <header>
         <div>
           <div className="background">
             <div className="headerNameDiv">
@@ -78,7 +67,7 @@ function ReplyRequest() {
 
             <ul>
               <li>
-                <Link to={"/adminHome"}>Home</Link>
+                <Link to={'/adminHome'}>Home</Link>
               </li>
             </ul>
           </nav>
@@ -97,7 +86,7 @@ function ReplyRequest() {
               minRows={3}
               maxRows={6}
               placeholder="Enter your reply here"
-              style={{ width: "90%" }}
+              style={{ width: '90%' }}
               onChange={(event) => {
                 setReply(event.target.value);
               }}

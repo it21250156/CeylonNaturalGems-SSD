@@ -99,13 +99,6 @@ const FeedbackDetailsUsers = ({ feedback }) => {
           <strong>Feedback Reply:</strong> {feedback.reply}
         </p>
       )}
-      {showModal && (
-        <ConfirmationModal
-          message="Are you sure you want to delete this feedback?"
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-        />
-      )}
     </div>
   );
 };
