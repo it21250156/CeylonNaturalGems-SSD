@@ -256,6 +256,7 @@ function MyReq() {
                         <hr></hr>
                         <select
                           className="inputupdate"
+                          value={user.GemShape}
                           onChange={(event) => {
                             setNewGemShape(event.target.value);
                           }}
