@@ -139,13 +139,13 @@ function JewelScreen() {
                       <td className="cl2">: {Jwl.gender}</td>
                     </tr>
 
-                    {/* <tr>
+                    <tr>
                     <td className="cl1">Stone</td>
-                    <td className="cl2">: {Jwl.gemstone}ct</td>
-                  </tr> */}
+                    <td className="cl2">: {Jwl.gemstone}</td>
+                  </tr>
                     <tr>
                       <td className="cl1">MetalType</td>
-                      <td className="cl2">: {Jwl.metal}ct</td>
+                      <td className="cl2">: {Jwl.metal}</td>
                     </tr>
                   </table>
                 </center>

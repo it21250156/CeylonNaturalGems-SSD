@@ -108,6 +108,7 @@ const JewelleryAdminDashboard = () => {
         >
           Add a new jewellery
         </button> <p></p>
+        
             <button
               className="genderbtn"
               type="button"
@@ -131,7 +132,12 @@ const JewelleryAdminDashboard = () => {
               onClick={() => handleButtonClick("Female")}
             >
               Women's Jewelleries
-            </button>
+            </button><br></br>
+            <select className="sortRequest">
+              <option value="">Select type</option>
+              <option value="dateAscending">Price ascending</option>
+              <option value="dateDescending">Price descending</option>
+            </select>
           </div>
           {/* <Link to={`/JewelleryAdminReport`}>
           <button className="reportsButton">Reports</button>
