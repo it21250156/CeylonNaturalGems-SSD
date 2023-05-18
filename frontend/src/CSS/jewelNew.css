@@ -1,0 +1,10 @@
+.select_sort_jewel {
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid #144272;
+  border-radius: 40px;
+}
+
+.select_sort_jewel::placeholder {
+  color: #144272;
+}

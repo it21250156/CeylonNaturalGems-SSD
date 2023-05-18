@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import { useJewelleryesContext } from "../hooks/useJewelleryesContext";
-import { useState } from "react";
-import Swal from "sweetalert2";
+import { Link } from 'react-router-dom';
+import { useJewelleryesContext } from '../hooks/useJewelleryesContext';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
 
-import "../CSS/JewellAdmin.css";
+import '../CSS/JewellAdmin.css';
 
 const JewelleryDetails = ({ jewellery }) => {
   const { dispatch } = useJewelleryesContext();
@@ -17,23 +17,19 @@ const JewelleryDetails = ({ jewellery }) => {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
         const deleteJewellery = async () => {
-          const response = await fetch("/api/jewelleryes/" + jewellery._id, {
-            method: "DELETE",
+          const response = await fetch('/api/jewelleryes/' + jewellery._id, {
+            method: 'DELETE',
           });
-    
+
           const json = await response.json();
-    
+
           if (response.ok) {
-            dispatch({ type: "DELETE_JEWELLERY", payload: json });
+            dispatch({ type: 'DELETE_JEWELLERY', payload: json });
             window.location.reload();
           }
         };
@@ -44,20 +40,20 @@ const JewelleryDetails = ({ jewellery }) => {
   };
 
   const handleUpdate = async () => {
-    const response = await fetch("/api/jewelleryes/" + jewellery._id, {
-      method: "PATCH",
+    const response = await fetch('/api/jewelleryes/' + jewellery._id, {
+      method: 'PATCH',
     });
 
     const json = await response.json();
 
     if (response.ok) {
-      dispatch({ type: "UPDATE_JEWELLERY", payload: json });
+      dispatch({ type: 'UPDATE_JEWELLERY', payload: json });
     }
   };
 
   return (
     <>
-      <div className="jewellery-details">
+      <div>
         <div className="jewBox">
           <h4>{jewellery.name}</h4>
           <p>
@@ -90,19 +86,20 @@ const JewelleryDetails = ({ jewellery }) => {
             {jewellery.createdAt}
           </p>
 
-          <div >
+          <div>
             {jewellery.jewellery_img && (
               <img
                 src={jewellery.jewellery_img}
-                style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }}
+                style={{
+                  maxWidth: '200px',
+                  maxHeight: '200px',
+                  marginBottom: '10px',
+                }}
               />
             )}
           </div>
-          <button
-            className="JewdeleteButton"
-            onClick={handleDelete}
-          >
-            delete
+          <button className="JewdeleteButton" onClick={handleDelete}>
+            Delete
           </button>
 
           <button
