@@ -76,20 +76,33 @@ const MyPayments = () => {
 
 const PaymentRow = ({payment}) => {
      const navigate = useNavigate()
+    
+      const getStatusColor = (status) => {
+        if (status === "Delivered" || status === "Picked Up") {
+          return "red";
+        }
+        return "inherit";
+      };
+  
 
     return (
-    <tr key={payment._id}>
+    <tr key={payment._id} >
         <td>{payment._id}</td>
         <td>{payment.amount}</td>
         <td>{payment.pmethod}</td>
         <td>{payment.dmethod}</td>
-        <td>{payment.dStatus}</td>
-        <td>{payment.createdAt}</td>
+        <td style={{ color: getStatusColor(payment.dStatus) }}>{payment.dStatus}</td>
+        <td> {payment.createdAt && (
+    <>
+      <div>Date: {new Date(payment.createdAt).toLocaleDateString()}</div>
+      <div>Time: {new Date(payment.createdAt).toLocaleTimeString()}</div>
+    </>
+  )}</td>
         
-        <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
+        {/* <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
         {/* <td><button onClick={handleDelete} disabled={isDeleting}>
         {isDeleting ? 'Deleting...' : 'DELETE'}
-      </button></td> */}
+      </button></td> */} 
         <td><button
           disabled = {payment?.dStatus === "Delivered" || payment?.dStatus === "Picked Up"}
           onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>

@@ -190,7 +190,12 @@ const PPaymentRow = ({payment}) => {
             <td>{payment._id}</td>
             {/* <td>{carts.find((cart) => cart._id === payment.cart)?._id} {}</td> */}
             <td>{users.find((user) => user._id === payment.user)?._id} {}</td>
-            <td>{payment.createdAt}</td>
+            <td>{payment.createdAt && (
+    <>
+      <div>Date: {new Date(payment.createdAt).toLocaleDateString()}</div>
+      <div>Time: {new Date(payment.createdAt).toLocaleTimeString()}</div>
+    </>
+  )}</td>
             <td>{payment.amount}</td>
             <td>{payment.pmethod}</td>
 
