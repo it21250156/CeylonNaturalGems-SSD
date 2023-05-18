@@ -106,7 +106,6 @@ const PaymentForm = () => {
     setPmethod(e.target.value);
   };
 
-<<<<<<< Updated upstream
   const handleDeliveryMethodChange = (e) => {
     setDmethod(e.target.value);
   };
@@ -119,20 +118,6 @@ const PaymentForm = () => {
       setCardNO(sanitizedValue);
     }
   };
-=======
-    const handleDeliveryMethodChange = (e) => {
-      setDmethod(e.target.value);
-    };
-    
-      const handleCardNoChange = (e) => {
-        const inputValue = e.target.value;
-        // Remove all non-numeric characters from the input value
-        const sanitizedValue = inputValue.replace(/\D/g, '');
-        if (sanitizedValue.length <= 16) {
-          setCardNO(sanitizedValue);
-        }
-      };
->>>>>>> Stashed changes
 
   const handleExMonthChange = (e) => {
     const inputValue = e.target.value;
@@ -411,7 +396,7 @@ const PaymentForm = () => {
                   </button>
 
                   {dmethod === 'Pickup' && (
-                    <div className="popup">
+                    <div className = "popup">
                       <p>Please come to our store to pick up your order.</p>
                     </div>
                   )}
