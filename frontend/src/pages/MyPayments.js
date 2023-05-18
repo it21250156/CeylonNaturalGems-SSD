@@ -51,7 +51,7 @@ const MyPayments = () => {
             <thead>
             <tr>
                 <th>Payment ID</th>
-                <th>Payment Amount(LKR)</th>
+                <th>Payment Amount($)</th>
                 <th>Payment Method</th>
                 <th>Delivery Method</th>
                 <th>Delivery Status</th>
