@@ -31,12 +31,19 @@ const AdminPayments = () => {
           const json = await response.json();
   
           if (response.ok) {
-            const filteredPayments = json.filter(payment =>
-              payment._id &&
-              payment._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              payment.amount.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              payment.pmethod.toLowerCase().includes(searchQuery.toLowerCase())
-            );
+            const filteredPayments = json.filter(payment =>{
+              const amount = payment.amount || "";
+              const pmethod = payment.pmethod || "";
+  
+              return (
+                payment._id &&
+                payment._id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                (typeof amount === "string" &&
+                  amount.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                (typeof pmethod === "string" &&
+                  pmethod.toLowerCase().includes(searchQuery.toLowerCase()))
+              );
+            });
             setPayments(filteredPayments);
           }
         } catch (error) {
@@ -46,6 +53,10 @@ const AdminPayments = () => {
   
       fetchPayments();
     }, [searchQuery]);
+
+    const handleSearch = (e) => {
+      setSearchQuery(e.target.value);
+    };
 
         return(
 
@@ -92,13 +103,15 @@ const AdminPayments = () => {
             </div>
             
 <div className = "adminDel">
-  
+{/*   
 <input
               type="text"
               placeholder="Search Payment ID / Amount / Payment Method "
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-            />
+            /> */}
+
+<input type="text" value={searchQuery} onChange={handleSearch} placeholder="Search Payments" />
 
 <table>
     <thead>
