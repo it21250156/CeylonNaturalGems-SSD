@@ -129,15 +129,16 @@ const PaymentUpdate = () => {
                     <div className="col">
                         <div className="row">
                             <label>Payment Amount: </label>
-                            <input type="number"
-                                onChange={(e) => setAmount(e.target.value)}
-                                value={amount} />
+                            <input type     = "number"
+                                   onChange = {(e) => setAmount(e.target.value)}
+                                   value    = {amount}
+                                   readOnly/>
 
-                            <label> User ID : </label>
+                            {/* <label> User ID : </label> */}
                             {/* <input 
                                 onChange={(e) => setUsers(e.target.value)}
                                 value={users.find((user) => user._id === payment.user)?._id} /> */}
-
+{/* 
                         <input
                                 onChange={(e) => {
                                 const selectedUserId = e.target.value;
@@ -148,7 +149,7 @@ const PaymentUpdate = () => {
                                 });
                                 }}
                                 value = {payment.user.id}
-                            />
+                            /> */}
 
                             {/* <label> Order ID : </label>
                             <input type="number"

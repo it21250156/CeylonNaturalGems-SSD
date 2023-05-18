@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Header from './Header';
 import '../CSS/PaymentForm.css';
@@ -25,7 +25,11 @@ const PaymentForm = () => {
   const [error, setError] = useState(null);
   const [gotoPaymentlist, setGotopaymentList] = useState(false);
 
-  const [successMessage, setSuccessMessage] = useState(false); 
+  const [successMessage, setSuccessMessage] = useState(false);
+
+  useEffect(() => {
+    setOrderID(cartData?.map((cart) => cart.cartitemid));
+  }, [cartData]);
 
   if (gotoPaymentlist) {
     return <Navigate to="/MyPayments" />;
@@ -34,15 +38,15 @@ const PaymentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(cartData) {
-      setOrderID(cartData?.map(cart => cart.cartitemid))
+    if (!cartData) {
+      return;
     }
 
-    if (!cardNo || !cardName || !exMonth || !exYear || !secCode ) {
+    if (!cardNo || !cardName || !exMonth || !exYear || !secCode) {
       setError('Please fill in all required fields');
       return; // Prevent form submission if any field is invalid
     }
-    
+
     const payment = {
       user: JSON.parse(localStorage.getItem('userInfo'))?._id || null,
       orderID,
@@ -81,20 +85,32 @@ const PaymentForm = () => {
       setError(null);
       console.log('new payment added', json);
 
-      setSuccessMessage(true);  // Set success message state variable to true
+      setSuccessMessage(true); // Set success message state variable to true
       setTimeout(() => {
         setSuccessMessage(false); // Hide success message after a certain duration
       }, 3000);
     }
-};
+  };
 
   const handlePaymentMethodChange = (e) => {
     setPmethod(e.target.value);
   };
 
-  const handleDeliveryMethodChange = (e) => {
-    setDmethod(e.target.value);
-  };
+    const handleDeliveryMethodChange = (e) => {
+      setDmethod(e.target.value);
+    };
+    // const handleDeliveryMethodChange = (e) => {
+    //   const selectedDmethod = e.target.value;
+    
+    //   setDmethod(selectedDmethod);
+    
+    //   if (selectedDmethod === 'Pickup') {
+    //     setAddress("");
+    //     setDistrict("");
+    //     setCountry("");
+    //   }
+    // };
+    
 
   const handleCardNoChange = (e) => {
     const inputValue = e.target.value;
@@ -109,8 +125,8 @@ const PaymentForm = () => {
     // Check if input value is a valid month (1 to 12)
     if (/^(0?[1-9]|1[0-2])$/.test(inputValue) && !exMonth) {
       setExMonth(inputValue);
-    }else{
-      setError("Expiary month is required!")
+    } else {
+      setError('Expiary month is required!');
     }
   };
 
@@ -119,7 +135,7 @@ const PaymentForm = () => {
     // Check if input value is a valid year (current year or future years)
     // const currentYear = new Date().getFullYear();
     // if (/^20.{2}$/.test(inputValue) && parseInt(inputValue) >= currentYear) {
-      setExYear(inputValue);
+    setExYear(inputValue);
     // }
   };
 
@@ -132,15 +148,16 @@ const PaymentForm = () => {
   };
 
   const handleConfirmPayment = () => {
-    if (dmethod === 'Delivery') {
+    if (dmethod === 'Deliver') {
       if (!address || !district || !country) {
         setError('Please fill in all required fields');
-      } 
-    } 
+      }
+    }
   };
+  
 
   const amountInfo = localStorage.getItem('TamountInfo');
-  const parsedAmountInfo = amountInfo ? JSON.parse(amountInfo) : null;
+  const parsedAmountInfo = amountInfo ? JSON.parse(amountInfo) : '';
 
   return (
     <>
@@ -150,19 +167,20 @@ const PaymentForm = () => {
           <div className="darkBlueTopicBox">
             <h3 className="pageTopic">PAYMENT FORM</h3>
           </div>
-          <div className="container">
+          <div className="light-blue-main-box">
             <form className="create" onSubmit={handleSubmit}>
               <div className="form-fields">
-                <div className="col-1">
+                <div className="col-1-p-from">
                   <p className="column-title">Payment Details</p>
+                  <br></br>
 
                   <label className="label"> Payment Amount : </label>
                   <input
                     id="input"
                     type="text"
                     onChange={(e) => setAmount(e.target.value)}
-                   // value={JSON.parse(localStorage.getItem('TamountInfo'))}
-                   value={parsedAmountInfo}
+                    // value={JSON.parse(localStorage.getItem('TamountInfo'))}
+                    value={parsedAmountInfo}
                   />
 
                   <div className="Pmeth">
@@ -236,95 +254,96 @@ const PaymentForm = () => {
                   />
                 </div>
 
+                <div className="col-2-p-from">
+                  <p className="column-title">Delivery Details</p>
 
-<div className = "col-2">
-<p   className = "column-title">Delivery Details</p>
+                  <div className="Dmeth">
+                    <label className="label">Delivery Method:</label>
+                    <span style={{ fontSize: 'small' }}>
+                      If you choose to pick up the order from our store no need
+                      to fill delivery details below!
+                    </span>
+                    <label className="label" htmlFor="deliveryMethodDelivery">
+                      Delivery
+                    </label>
+                    <input
+                      type="radio"
+                      id="deliveryMethodDelivery"
+                      name="deliveryMethod"
+                      value="Delivery"
+                      checked={dmethod === 'Delivery'}
+                      onChange={handleDeliveryMethodChange}
+                    />
 
-      <div className="Dmeth">
-        <label className="label">Delivery Method:</label>
-        <span style={{ fontSize: 'small' }}>
-  If you choose to pick up the order from our store no need to fill delivery details below!
-</span>
-        <label className="label" htmlFor="deliveryMethodDelivery">
-          Delivery
-        </label>
-        <input
-          type="radio"
-          id="deliveryMethodDelivery"
-          name="deliveryMethod"
-          value="Delivery"
-          checked={dmethod === 'Delivery'}
-          onChange={handleDeliveryMethodChange}
-        />
+                    <label className="label" htmlFor="deliveryMethodPickup">
+                      Pickup
+                    </label>
+                    <input
+                      type="radio"
+                      id="deliveryMethodPickup"
+                      name="deliveryMethod"
+                      value="Pickup"
+                      checked={dmethod === 'Pickup'}
+                      onChange={handleDeliveryMethodChange}
+                    />
+                  </div>
 
-        <label className="label" htmlFor="deliveryMethodPickup">
-          Pickup
-        </label>
-        <input
-          type="radio"
-          id="deliveryMethodPickup"
-          name="deliveryMethod"
-          value="Pickup"
-          checked={dmethod === 'Pickup'}
-          onChange={handleDeliveryMethodChange}
-        />
-      </div>
+                  <label className="label"> Address : </label>
+                  <input
+                    id="input"
+                    type="text"
+                    onChange={(e) => setAddress(e.target.value)}
+                    value={address}
+                    disabled={dmethod === 'Pickup'}
+                  />
 
-      <label className="label"> Address : </label>
-      <input
-        id="input"
-        type="text"
-        onChange={(e) => setAddress(e.target.value)}
-        value={address}
-        disabled={dmethod === 'Pickup'}
-      />
+                  <label className="label"> District : </label>
+                  <input
+                    id       = "input"
+                    type     = "text"
+                    onChange = {(e) => setDistrict(e.target.value)}
+                    value    = {district}
+                    disabled = {dmethod === 'Pickup'}
+                  />
 
-      <label className="label"> District : </label>
-      <input
-        id="input"
-        type="text"
-        onChange={(e) => setDistrict(e.target.value)}
-        value={district}
-        disabled={dmethod === 'Pickup'}
-      />
+                  <label className="label"> Country : </label>
+                  <input
+                    id="input"
+                    type="text"
+                    onChange={(e) => setCountry(e.target.value)}
+                    value={country}
+                    disabled={dmethod === 'Pickup'}
+                  />
 
-      <label className="label"> Country : </label>
-      <input
-        id="input"
-        type="text"
-        onChange={(e) => setCountry(e.target.value)}
-        value={country}
-        disabled={dmethod === 'Pickup'}
-      />
+                  <label className="label"> Phone Number : </label>
+                  <input
+                    id="input"
+                    type="text"
+                    onChange={(e) => setPhoneNo(e.target.value)}
+                    value={phoneNo}
+                  />
 
-      <label className="label"> Phone Number : </label>
-      <input
-        id="input"
-        type="text"
-        onChange={(e) => setPhoneNo(e.target.value)}
-        value={phoneNo}
-      />
+                  <button
+                    className="confirm-btn"
+                    onClick={handleConfirmPayment}
+                  >
+                    CONFIRM PAYMENT
+                  </button>
 
-      <button className="confirm-btn" onClick={handleConfirmPayment}>
-        CONFIRM PAYMENT
-      </button>
+                  {dmethod === 'Pickup' && (
+                    <div className="popup">
+                      <p>Please come to our store to pick up your order.</p>
+                    </div>
+                  )}
 
-      {dmethod === 'Pickup' && (
-        <div className="popup">
-          <p>Please come to our store to pick up your order.</p>
-        </div>
-      )}
+                  {dmethod === 'Delivery' && error && (
+                    <div className="error">{error}</div>
+                  )}
 
-      {dmethod === 'Delivery' && error && (
-        <div className="error">{error}</div>
-      )}
-
-{successMessage && (
-                  <div className="success">Data entered successfully!</div>
-                )}
-
-    </div>
-
+                  {successMessage && (
+                    <div className="success">Data entered successfully!</div>
+                  )}
+                </div>
               </div>
             </form>
 

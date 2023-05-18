@@ -1,15 +1,16 @@
-require('dotenv').config();
+require("dotenv").config();
+const nodemailer = require("nodemailer");
+const cors = require("cors");
+const express = require("express");
+const mongoose = require("mongoose");
 
-const cors = require('cors');
-
-const express = require('express');
-const mongoose = require('mongoose');
 
 //Kalinga
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const deletedUserRoutes = require('./routes/deletedUserRoutes.js');
-
+const userModel = require('./models/users.model.js');
+const deletedUserModel = require('./models/deletedUsersModel.js')
 // malika
 const feedbackRoutes = require('./routes/feedbacks');
 
@@ -250,6 +251,16 @@ app.put('/updateReply', async (req, res) => {
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/deletedusers', deletedUserRoutes);
+
+app.get('/api/allCurrentAndDeletedUsers' , async (req , res ) => {
+  try {
+    const userData = await userModel.find();
+    const deletedUserData = await deletedUserModel.find();
+    res.json({userData,deletedUserData});
+  } catch (error) {
+    res.status(500).json({error: 'An error occurred'});
+  }
+})
 
 //janith
 app.use('/api/gems&jewelleries', gemRoutes);

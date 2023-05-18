@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom"
 
 const MyPayments = () => {
 
-    // const {payments , dispatch} = usePaymentContext()
     const navigate = useNavigate()
     const {id} = useParams();
 
@@ -116,9 +115,11 @@ const PaymentRow = ({payment}) => {
         {/* <td><button onClick={handleDelete} disabled={isDeleting}>
         {isDeleting ? 'Deleting...' : 'DELETE'}
       </button></td> */}
-        <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
         <td><button
-          disabled = {(payment?.orderID?.length > 0 && payment?.orderID[0].length > 0) ? false : true}
+          disabled = {payment?.dStatus === "Delivered" || payment?.dStatus === "Picked Up"}
+          onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
+        <td><button
+          disabled = {payment?.orderID?.length < 1 || payment?.orderID[0].length < 1 || payment?.dStatus !== "Delivered"  }
           onClick={ () => {navigate ("/FeedbackForm/"+payment._id)}}
         > FEEDBACK</button></td>
     </tr>

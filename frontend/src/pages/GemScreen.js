@@ -33,7 +33,7 @@ export const gemsReducer = (state, action) => {
 };
 
 function GemScreen() {
-  const navigate= useNavigate();
+  const navigate = useNavigate();
 
   const { user, cartData, setCartData, handleAddToCart } = useAuthContext();
   const params = useParams();
@@ -84,74 +84,75 @@ function GemScreen() {
     { error }
   ) : (
     <>
-    <Header/>
-    <div>
-      <div className="lightBlueBodyBG">
-        <div className="whiteBodyBG">
-          <div className="content-top-part">
-            <div className="img-section-large"></div>
-            <div className="btns-description">
-              <p className="gem-name">{gem.name}</p>
-              <p className="gem-price">${gem.price}</p>
+      <Header />
+      <div>
+        <div className="lightBlueBodyBG">
+          <div className="whiteBodyBG">
+            <div className="content-top-part">
+              <div className="img-section-large"></div>
+              <div className="btns-description">
+                <p className="gem-name">{gem.name}</p>
+                <p className="gem-price">${gem.price}</p>
 
-              <div className="btns">
-                <button
-                  onClick={() => handleAddToCart(gem._id)}
-                  className="btn-add-to-cart"
-                >
-                  Add to cart
-                </button>
-                <button 
-                  onClick={() => navigate(`/InstallmentPlans`)}
-                  className="btn-pay-in-installments">
-                  Pay in Installments
-                </button>
-              </div>
+                <div className="btns">
+                  <button
+                    onClick={() => handleAddToCart(gem._id)}
+                    className="btn-add-to-cart"
+                  >
+                    Add to cart
+                  </button>
+                  <button
+                    onClick={() => navigate(`/InstallmentPlans`)}
+                    className="btn-pay-in-installments"
+                  >
+                    Pay in Installments
+                  </button>
+                </div>
 
-              <div className="gem-desc">
-                <p>{gem.description}</p>
+                <div className="gem-desc">
+                  <p>{gem.description}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="content-middle-part">
-            <center>
-              <p className="details-topic">Details</p>
-              <hr className="detail-hr"></hr>
-            </center>
-            <div className="details-part">
+            <div className="content-middle-part">
               <center>
-                {' '}
-                <table>
-                  <tr>
-                    <td className="cl1">Type</td>
-                    <td className="cl2">: {gem.type}</td>
-                  </tr>
-                  <tr>
-                    <td className="cl1">Colour</td>
-                    <td className="cl2">: {gem.color}</td>
-                  </tr>
-                  <tr>
-                    <td className="cl1">Shape</td>
-                    <td className="cl2">: {gem.shape}</td>
-                  </tr>
-                  <tr>
-                    <td className="cl1">Weight</td>
-                    <td className="cl2">: {gem.size}ct</td>
-                  </tr>
-                </table>
+                <p className="details-topic">Details</p>
+                <hr className="detail-hr"></hr>
               </center>
+              <div className="details-part">
+                <center>
+                  {' '}
+                  <table className="detail-table">
+                    <tr>
+                      <td className="cl1">Type</td>
+                      <td className="cl2">: {gem.type}</td>
+                    </tr>
+                    <tr>
+                      <td className="cl1">Colour</td>
+                      <td className="cl2">: {gem.color}</td>
+                    </tr>
+                    <tr>
+                      <td className="cl1">Shape</td>
+                      <td className="cl2">: {gem.shape}</td>
+                    </tr>
+                    <tr>
+                      <td className="cl1">Weight</td>
+                      <td className="cl2">: {gem.size}ct</td>
+                    </tr>
+                  </table>
+                </center>
+              </div>
             </div>
-          </div>
-          <div className="req-box">
-            <p className="req-txt-1">Can't find something you like?</p>
-            <p className="req-txt-2">Let us help you</p>
-            <Link to={'/reqM'}>
-              <button className="req-btn">Request Gems</button>
-            </Link>
+            <div className="req-box">
+              <p className="req-txt-1">Can't find something you like?</p>
+              <p className="req-txt-2">Let us help you</p>
+              <Link to={'/reqM'}>
+                <button className="req-btn">Request Gems</button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

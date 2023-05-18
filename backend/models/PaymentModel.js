@@ -29,15 +29,15 @@ const PaymentSchema = new Schema({
       },
       address: {
         type: String,
-       required: true
+      //  required: true
       },
       district: {
         type: String,
-       required: true
+      //  required: true
       },
       country: {
         type: String,
-       required: true
+      //  required: true
       },
       phoneNo: {
         type: Number,

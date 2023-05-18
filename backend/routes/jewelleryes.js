@@ -7,7 +7,7 @@ const {
   updateJewellery,
  
 } = require('../controllers/jewelleryController')
-const { default: JewelleryAdminReports } = require('../../frontend/src/pages/JewelleryAdminReport')
+// const { default: JewelleryAdminReports } = require('../../frontend/src/pages/JewelleryAdminReport')
 
 const router = express.Router()
 

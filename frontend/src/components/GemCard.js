@@ -12,7 +12,7 @@ function GemCard(gems) {
         <p className="card-price">${gem.price}</p>
       </div>
       <Link to={`/gems/${gem._id}`}>
-        <button className="card-button">Read More...</button>
+        <button className="card-button">Read More</button>
       </Link>
     </div>
   );

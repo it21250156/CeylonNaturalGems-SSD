@@ -206,6 +206,9 @@ const PDeliveryRow = ({payment, setReload}) => {
 <input type = "radio" name = {"status_"+payment._id} value = "Delivered" checked = {payment.dStatus === "Delivered"} onChange = {(e) => handleStatusChange(e)} />
 <label for  = "delivered">Delivered</label>
 
+<input type = "radio" name = {"status_"+payment._id} value = "Picked Up" checked = {payment.dStatus === "Picked Up"} onChange = {(e) => handleStatusChange(e)} />
+<label for  = "pickedUp">Picked Up</label>
+
 </td>
 <td><button onClick = {handleDelete} disabled = {isDeleting}>
         {isDeleting ? 'Deleting...' : 'DELETE'}

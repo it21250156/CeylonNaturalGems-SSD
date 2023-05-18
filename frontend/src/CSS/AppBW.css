@@ -319,17 +319,19 @@
 }
 
 .input {
-  width: 300px;
+  width: 80%;
   height: 44px;
   background-color: white;
   border-radius: 0.5rem;
   padding: 0 1rem;
-  border: 2px solid transparent;
+  border-color: #cadefc;
+  /* border: 2px solid transparent; */
   font-size: 1rem;
   transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
 }
+
 
 .label {
   display: block;
@@ -349,6 +351,33 @@
 
 .input-group:hover .label,
 .input:focus {
+  color: #144272;
+}
+
+
+.inputupdate {
+  width: 100%;
+  height: 44px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border-color: #cadefc;
+  /* border: 2px solid transparent; */
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.inputupdate:hover,
+.inputupdate:focus,
+.inputupdate-group:hover .input {
+  outline: none;
+  border-color: #144272;
+}
+
+.inputupdate-group:hover .label,
+.inputupdate:focus {
   color: #144272;
 }
 
@@ -376,10 +405,12 @@
   border-radius: 40px;
 }
 
+
 .white-content {
   display: flex;
   flex-wrap: wrap;
 }
+
 
 .myreq-column-1 {
   flex: 1;
@@ -534,4 +565,22 @@ table {
   border: 2px solid #2c74b3;
   color: #2c74b3;
   transition: 0.5s;
+}
+
+.updatebox:hover{
+  box-shadow: #30a945;
+}
+
+.updatelbl{
+  font-size: 30px;
+  color: #30a945;
+}
+
+.labelSort{
+  color: black;
+}
+
+.sortRequest{
+  border-radius: 10px;
+  padding: 5px 5px 5px 5px;
 }

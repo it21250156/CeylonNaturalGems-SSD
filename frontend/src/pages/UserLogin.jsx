@@ -1,9 +1,10 @@
 import '../CSS/UserLogin.css';
-import React, { useState, useContext } from 'react';
+import React, {createContext, useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 const jwt_decode = require('jwt-decode');
+
 
 function UserLogin() {
   const navigate = useNavigate();
@@ -84,11 +85,14 @@ function UserLogin() {
             value={password}
             required="required"
           />
-
+          <a className="text-gray-800">
+              Forgot password?
+          </a>
+            <br />
           {error && (
             <div className="error">Please check your email and password.</div>
           )}
-
+            <br />
           <button className="login-btn">Log in</button>
           <button
             className="cancel-btn"

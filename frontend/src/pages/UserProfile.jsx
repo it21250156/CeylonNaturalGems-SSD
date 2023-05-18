@@ -14,14 +14,6 @@ const UserProfile = () => {
   const location = useLocation();
   const { logout } = useLogout();
 
-  // const [title, setTitle] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [phone, setPhone] = useState('');
-  // const [error, setError] = useState(null)
-
-
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -33,7 +25,7 @@ const UserProfile = () => {
   const HandleDeleteAccount = async () => {
 
     try{
-
+      // send delete user request
       const response = await fetch(`/api/users/${user._id}`, {
         method: 'DELETE',
       });
@@ -42,16 +34,19 @@ const UserProfile = () => {
   
       if (response.ok) {
 
+        // get current user details when user trying to delete the account
         const newDeletedUser = {
-          duserID: user._id,
-          dtitle: user.title,
-          dfirstName: user.firstName,
-          dlastName: user.lastName,
-          demail: user.email,
-          dphone: user.phone,
+         userID: userData._id,
+         userType : userData.userType,
+         title: userData.title,
+         firstName: userData.firstName,
+         lastName: userData.lastName,
+         email: userData.email,
+         phone: userData.phone,
         };
 
-        await fetch('/api/deletedUser', {
+        // send user inmportant data to an another collection
+        const response1 = await fetch('/api/deletedusers', {
                   method: 'POST',
                   body: JSON.stringify(newDeletedUser),
                   headers: {
@@ -59,12 +54,15 @@ const UserProfile = () => {
                   }
               })
 
+              const json = await response1.json();
+
               dispatch({type: 'CREATE_DELETED_USER' , payload: json})
 
               console.log('new deletedUser added' , json )
 
 
 
+              // delete a user and set he/she can't login with these user login details again
 
         dispatch({ type: 'DELETE_USER', payload: json });
         logout();
@@ -130,10 +128,6 @@ const UserProfile = () => {
           </div>
           <div className="user-details">
             <table>
-              {/* <tr>
-                <td className="detail-label">User ID</td>
-                <td className="detail-prop">{userData._id}</td>
-              </tr> */}
               <tr>
                 <td className="detail-label">Name</td>
                 <td className="detail-prop">
