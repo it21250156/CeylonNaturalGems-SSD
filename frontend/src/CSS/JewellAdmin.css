@@ -472,14 +472,17 @@ nav li a:hover {
 }
 
 .jewinputbox {
-  margin-right: 5%;
-  margin-left: 5%;
-  background-color: #428bca83;
-  border-radius: 40px;
-  padding-top: 3%;
-  padding-bottom: 3%;
+  margin: 20px;
+  background-color: #cadefc;
+  border-radius: 20px;
+  padding: 20px 50px;
 }
 
 .jewAddlabel {
   font-size: 20px;
+}
+
+.jewel-img-input {
+  width: 300px;
+  margin: 10px 50px;
 }
