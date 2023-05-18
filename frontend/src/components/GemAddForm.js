@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useGemsContext } from '../hooks/useGemsContext';
 import { useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import Swal from 'sweetalert2';
 
 const GemAddForm = () => {
-
     const { dispatch } = useGemsContext();
 
     const [name, setName] = useState('');
@@ -22,6 +21,7 @@ const GemAddForm = () => {
     const [error, setError] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
     const [previewImage, setPreviewImage] = useState(null);
+    const [isImageValid, setImageValid] = useState(true); // New state variable for image validation
     const nav = useNavigate();
 
     const handleImageChange = (e) => {
@@ -33,31 +33,40 @@ const GemAddForm = () => {
                 setPreviewImage(reader.result);
             };
             reader.readAsDataURL(file);
+            setImageValid(true); // Set the image field as valid
         } else {
             setPreviewImage(null);
+            setImageValid(false); // Set the image field as invalid
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const emptyFields = [];
         const file = e.target.image.files[0];
         if (!file) {
             setError('Please select an image.');
+            setImageValid(false); // Set the image field as invalid
+            if (!file) {
+                emptyFields.push('image');
+            }
+        } else {
+            setError(''); // Clear the error message if an image is selected
+            setImageValid(true); // Set the image field as valid
         }
 
         const formData = new FormData();
-        formData.append("image", e.target.image.files[0]);
-        formData.append("name", name);
-        formData.append("type", type);
-        formData.append("shape", shape);
-        formData.append("size", size);
-        formData.append("color", color);
-        formData.append("quantity", quantity);
-        formData.append("price", price);
-        formData.append("description", description);
+        formData.append('image', e.target.image.files[0]);
+        formData.append('name', name);
+        formData.append('type', type);
+        formData.append('shape', shape);
+        formData.append('size', size);
+        formData.append('color', color);
+        formData.append('quantity', quantity);
+        formData.append('price', price);
+        formData.append('description', description);
 
-        const emptyFields = [];
+
         if (name === '') {
             emptyFields.push('name');
         }
@@ -83,20 +92,14 @@ const GemAddForm = () => {
             emptyFields.push('desc');
         }
 
-        if (!file) {
-            setError('Please select an image.');
-        }
-
         if (emptyFields.length > 0) {
             setEmptyFields(emptyFields);
             setError('Please fill in all required fields.');
             return;
         }
 
-
-
-        const response = await fetch("/api/gems", {
-            method: "POST",
+        const response = await fetch('/api/gems', {
+            method: 'POST',
             body: formData,
         });
 
@@ -122,22 +125,19 @@ const GemAddForm = () => {
             dispatch({ type: 'CREATE_GEM', payload: json });
         }
 
-
         nav('/GemAdminHome');
     };
 
-
     return (
-
-        <div className='AddGems'>
-            <div className='gemDisplay'>
+        <div className="AddGems">
+            <div className="gemDisplay">
                 <div className="darkBlueTopicBoxGem">
                     <h3 className="pageTopicGems">Add a new Gem</h3>
                 </div>
                 <div className="lightBlueBodyBGUserprofile">
                     <div className="gem-input-container">
-                        <form className="create" onSubmit={handleSubmit} encType='multipart/form-data'>
-                            <div className='column-1'>
+                        <form className="create" onSubmit={handleSubmit} encType="multipart/form-data">
+                            <div className="column-1">
                                 <label className="gem-label">Gem Name: </label>
                                 <input
                                     type="text"
@@ -148,10 +148,24 @@ const GemAddForm = () => {
                                 {emptyFields.includes('name') && <div className="error">Please enter a name.</div>}
 
                                 <label className="gem-label">Gem Image:</label>
-                                <input type="file" name="image" accept="image/*" onChange={handleImageChange} />
+                                <input
+                                    type="file"
+                                    name="image"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    className={!isImageValid ? 'error' : ''}
+                                />
 
-                                {previewImage && <img src={previewImage} alt="Preview" style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }} className='gem-admin-add-image' />}
+                                {!isImageValid && <div className="error">Please select an image.</div>}
 
+                                {previewImage && (
+                                    <img
+                                        src={previewImage}
+                                        alt="Preview"
+                                        style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }}
+                                        className="gem-admin-add-image"
+                                    />
+                                )}
 
                                 <label className="gem-label">Gem Type:</label>
                                 <input
@@ -163,18 +177,21 @@ const GemAddForm = () => {
                                 {emptyFields.includes('type') && <div className="error">Please enter a type.</div>}
 
                                 <label className="gem-label">Gem Shape: </label>
-                                <select id="shapeDropdown" value={selectedShape} defaultValue="" onChange={(e) => {
-                                    setSelectedShape(e.target.value);
-                                    setShape(e.target.value);
-
-                                }} className="gem-select" style={{ marginBottom: '20px' }}>
+                                <select
+                                    id="shapeDropdown"
+                                    value={selectedShape}
+                                    defaultValue=""
+                                    onChange={(e) => {
+                                        setSelectedShape(e.target.value);
+                                        setShape(e.target.value);
+                                    }}
+                                    className={`gem-select ${emptyFields.includes('shape') ? 'error' : ''}`}
+                                    style={{ marginBottom: '20px' }}
+                                >
                                     <option value="">Select a shape</option>
                                     <option value="Round">Round</option>
                                     <option value="Oval">Oval</option>
                                     <option value="Square">Square</option>
-
-
-
                                 </select>
 
                                 {emptyFields.includes('shape') && <div className="error">Please select a shape.</div>}
@@ -198,7 +215,8 @@ const GemAddForm = () => {
                                 />
 
                                 {emptyFields.includes('color') && <div className="error">Please enter a color.</div>}
-
+                            </div>
+                            <div className="column-2">
                                 <label className="gem-label">Gem Quantity: </label>
                                 <input
                                     type="number"
@@ -209,7 +227,7 @@ const GemAddForm = () => {
 
                                 {emptyFields.includes('quantity') && <div className="error">Please enter a quantity.</div>}
 
-                                <label className="gem-label">Gem Price: (in $)</label>
+                                <label className="gem-label">Gem Price (in $): </label>
                                 <input
                                     type="number"
                                     onChange={(e) => setPrice(e.target.value)}
@@ -221,25 +239,28 @@ const GemAddForm = () => {
 
                                 <label className="gem-label">Gem Description: </label>
                                 <TextareaAutosize
-                                    minRows={3}
-                                    maxRows={6}
-                                    id="gemDesc"
-                                    type="textarea"
+                                    minRows={4}
+                                    maxRows={8}
                                     onChange={(e) => setDescription(e.target.value)}
                                     value={description}
-                                    className={`gem-input ${emptyFields.includes('desc') ? 'error' : ''}`}
+                                    className={`gem-input textarea ${emptyFields.includes('desc') ? 'error' : ''}`}
                                 />
-                            </div>
-                            {emptyFields.includes('desc') && <div className="error">Please enter a description.</div>}
 
-                            <button className="gem-add-buttons" >Add Gem</button>
-                            {error && <div className="error">{error}</div>}
+                                {emptyFields.includes('desc') && <div className="error">Please enter a description.</div>}
+
+                                <div className="buttonContainer">
+                                    <button type="submit" className="gem-add-button">
+                                        Add Gem
+                                    </button>
+                                </div>
+
+                                {error && <div className="error">{error}</div>}
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
     );
 };
 
