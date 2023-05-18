@@ -1,0 +1,66 @@
+.adminLogoutBtn {
+  background-color: red;
+  color: white;
+  padding: 3px 20px;
+  margin: 0px 0px 5px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.adminLogoutBtn:hover {
+  background-color: white;
+  color: red;
+  transition: 0.5s;
+}
+
+.welcomeNoteAdmin {
+  font-family: legendum;
+  color: white;
+  font-style: italic;
+}
+
+.title-box-delivery {
+  background-color: #144272;
+  margin: 20px 100px;
+  padding: 40px 0;
+  border-radius: 20px;
+}
+
+.title-delivery {
+  color: white;
+  font-family: Bebas Neue;
+  margin: 0;
+  padding: 0;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.delDetailsTable {
+  margin: 20px 100px;
+  border: 2px;
+}
+
+.delTableHead {
+}
+
+.delTableHead-box {
+  background-color: #144272;
+  color: white;
+  padding: 10px 30px;
+  min-width: 100px;
+}
+
+.delTableDataRow {
+  border-top: 10px solid white;
+  background-color: #cadefc;
+}
+
+.delTableDataCell {
+  padding: 20px;
+  border-right: 2px solid white;
+}
+
+.delTableRadio {
+}

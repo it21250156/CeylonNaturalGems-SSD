@@ -199,8 +199,10 @@
 }
 
 .repbtn:hover {
-  background-color: blue;
-  color: wheat;
+  background-color: white;
+  border: 2px solid orange;
+  color: orange;
+  transition: 0.5s;
 }
 
 .Srepbtn {
@@ -319,17 +321,19 @@
 }
 
 .input {
-  width: 300px;
+  width: 80%;
   height: 44px;
   background-color: white;
   border-radius: 0.5rem;
   padding: 0 1rem;
-  border: 2px solid transparent;
+  border-color: #cadefc;
+  /* border: 2px solid transparent; */
   font-size: 1rem;
   transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
     background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
 }
+
 
 .label {
   display: block;
@@ -349,6 +353,33 @@
 
 .input-group:hover .label,
 .input:focus {
+  color: #144272;
+}
+
+
+.inputupdate {
+  width: 100%;
+  height: 44px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border-color: #cadefc;
+  /* border: 2px solid transparent; */
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.inputupdate:hover,
+.inputupdate:focus,
+.inputupdate-group:hover .input {
+  outline: none;
+  border-color: #144272;
+}
+
+.inputupdate-group:hover .label,
+.inputupdate:focus {
   color: #144272;
 }
 
@@ -399,11 +430,17 @@
   font-family: legendum;
   color: #144272;
   font-weight: bold;
+  padding-left: 5%;
+  width: 40%;
+  padding-top: 1%;
 }
 
 .req-value {
   font-family: legendum;
   color: #144272;
+  padding-left: 2%;
+  width: 500px;
+  
 }
 
 table {
@@ -540,4 +577,63 @@ table {
 
 .updatebox:hover{
   box-shadow: #30a945;
+}
+
+.updatelbl{
+  font-size: 30px;
+  color: #30a945;
+}
+
+.labelSort{
+  color: black;
+}
+
+.sortRequest{
+  border-radius: 10px;
+  padding: 5px 5px 5px 5px;
+}
+
+.infobox{
+  width: 80%;
+}
+
+
+/* .reqData{
+  width: 90%;
+  margin-left: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+} */
+
+
+
+.reqreportTB {
+  border-collapse: collapse;
+  width: 90%;
+  border-radius: 10px;
+  margin: 0 auto; 
+  text-align: center;
+}
+
+.reqTh {
+  background-color: #268391; 
+  color: #333333; 
+  border: 1px solid #dddddd; 
+  padding: 8px;
+  text-align: left;
+}
+
+.searchReq{
+  width: 50%;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.replybox{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.replymsg{
+  font-size: 25px;
 }

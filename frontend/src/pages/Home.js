@@ -83,7 +83,6 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

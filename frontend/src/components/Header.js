@@ -69,6 +69,7 @@ const Header = () => {
             {!user && (
               <div className="navUserControl">
                 <button
+                  className="header-btn-login"
                   onClick={() => {
                     navigate('/login');
                   }}
@@ -76,6 +77,7 @@ const Header = () => {
                   Login
                 </button>
                 <button
+                  className="header-btn-register"
                   onClick={() => {
                     navigate('/Register');
                   }}

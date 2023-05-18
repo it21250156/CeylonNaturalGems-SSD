@@ -27,12 +27,12 @@ const getInstallment = async (req, res) => {
 
 //create a new installment
 const createInstallment = async (req, res) => {
-    const{ user, gemID, monthlyPayment } = req.body
+    const{ user, gemID, planID, noOfMonths, initialPayment, monthlyPayment, installmentDates, status } = req.body
 
     //add doc to db
     try{
         // const user_id = req.user._id
-        const installment = await Installment.create({ user, gemID, monthlyPayment })
+        const installment = await Installment.create({ user, gemID, planID, noOfMonths, initialPayment, monthlyPayment, installmentDates, status })
         res.status(200).json(installment)
     } catch (error) {
         res.status(400).json({error: error.message})

@@ -36,23 +36,25 @@ const MyInstallments = () => {
             <div className="darkBlueTopicBox">
                 <h3 className="pageTopic">My Installments</h3>
             </div>
-
-                <table >
+            <div style = {{padding: '30px' } } >
+                <table className="table table-striped table-hover" >
                     <thead> 
                         <tr> 
-                            <th>Installment ID</th>
+                            <th> # </th>
+                            <th>ID</th>
                             <th>Gem</th>
-                            <th>Monthly Payment</th>
-                            <th>Payment Date</th>
+                            <th>Status</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {Installments && Installments.map((installment) => (
-                            <InstallmentTableRow key={installment._id} installment={installment} />
+                        {Installments && Installments.map((installment , index ) => (
+                            <InstallmentTableRow key={installment._id} installment={installment} index={index} />
                         ))}
                     </tbody>
                 </table>
-            </div> 
+            </div>
+        </div> 
         </div>
         </>
     )
@@ -60,7 +62,7 @@ const MyInstallments = () => {
 
 
 //table row
-const InstallmentTableRow = ({ installment }) => {
+const InstallmentTableRow = ({ installment , index }) => {
 
     const [gems, setGems] = useState([]);
 
@@ -79,10 +81,11 @@ const InstallmentTableRow = ({ installment }) => {
 
     return(
         <tr>
+            <td> {index + 1} </td>
             <td> {installment._id} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
-            <td> {installment.monthlyPayment} </td>
-            <td>  {format(new Date(installment.createdAt), 'MM/dd/yyyy')} </td>
+            <td> {installment.status} </td>
+            <td> <button > details </button> </td>
         </tr>
     )
 }

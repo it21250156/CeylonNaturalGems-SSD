@@ -25,21 +25,24 @@
 /* image section */
 
 .img-section {
-  background-color: #cadefc;
   width: 150px;
   height: 100px;
   justify-self: center;
   margin: 10px;
 }
 
-.img-section-installment{
+.gem-home-card-img {
+  width: 150px;
+}
+
+.img-section-installment {
   background-color: #7eb2ff;
   width: 150px;
   height: 150px;
-    margin: 10px;
+  margin: 10px;
 }
 
-.img-section-installment-vihii{
+.img-section-installment-vihii {
   border-radius: 20px;
   background: #7eb2ff;
   padding: 15px;
@@ -64,7 +67,7 @@
   font-family: bpreplay;
 }
 
-.card-button-vihii{
+.card-button-vihii {
   transform: translate(-50%, 125%);
   width: 200px;
   border-radius: 1rem;
@@ -91,7 +94,7 @@
   margin: 0;
 }
 
-.card-name-installment{
+.card-name-installment {
   color: #0b62a8;
   font-size: 2em;
   font-weight: 100;

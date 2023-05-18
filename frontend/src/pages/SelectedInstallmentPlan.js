@@ -79,18 +79,4 @@ const SelectedInstallmentPlan = () => {
     )
 }
 
-// const firstPayment = ({ plans , gem }) => {
-//     let fpay=0;
-
-//     let price = gem.price;
-//     let initial = plans.initialPayment;
-
-//     fpay = (price * initial) / 100;
-
-//     console.log(fpay)
-
-//     return fpay;
-
-// }
-
 export default SelectedInstallmentPlan

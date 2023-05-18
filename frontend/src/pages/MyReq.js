@@ -1,14 +1,13 @@
 import "../CSS/AppBW.css";
-import { useState, useEffect } from "react";
-import React from "react";
-import Axios from "axios";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Link, useParams } from "react-router-dom";
-import TextareaAutosize from "react-textarea-autosize";
-import Header from "../components/Header";
-import { getWeekYearWithOptions } from "date-fns/fp";
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import TextareaAutosize from 'react-textarea-autosize';
+import Header from '../components/Header';
+import Axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
 
 const schema = yup.object().shape({
   newGemShape: yup.string(),
@@ -27,12 +26,34 @@ function MyReq() {
   const [newGemDescription, setNewnewGemDescription] = useState("");
   // const [newGemWeight, setNewnewGemWeight] = useState('');
   const [newGemQuantity, setNewnewGemQuantity] = useState("");
-  const [sortBy, setSortBy] = useState("dateAcsending");
+  const [sortBy, setSortBy] = useState("");
+  
 
   const handleSort = (e) => {
     const { value } = e.target;
     setSortBy(value);
   };
+  
+
+
+  useEffect(() => {
+    Axios.get(`/getUsersRequests/${uid}`).then((response) => {
+      // Sort the response data based on the createdAt property
+      const sortedRequests = response.data.sort((a, b) =>
+        sortBy === 'dateDescending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt)
+      );
+      // Reverse the sorted array for descending order
+      const sortedRequestsDescending = sortBy === 'dateDescending' ? sortedRequests.reverse() : sortedRequests;
+      // Reverse the sorted array again for ascending order
+      const sortedRequestsAscending = sortBy === 'dateAscending' ? sortedRequestsDescending.reverse() : sortedRequestsDescending;
+      setListOfRequests(sortedRequestsAscending);
+      // getReplyStatus(sortedRequestsAscending);
+    });
+  }, [sortBy]);
+  
+  
+  
+  
   
 
   const gemShapes = [
@@ -48,27 +69,30 @@ function MyReq() {
 
   const deletereq = (id) => {
     Axios.delete(`/delete/${id}`).then((response) => {
-      window.location.reload();
+      setListOfRequests((prevRequests) =>
+        prevRequests.filter((request) => request._id !== id)
+);
+
     });
   };
 
-  async function getReplyStatus() {
-    try {
-      const response = await Axios.get(`/getReplyByUser/${uid}`);
-      setListOfReplyStatus(response.data);
-      console.log("got " + response.data);
-    } catch (error) {
-      console.log(error);
-      setListOfReplyStatus([...listOfReplyStatus, { reqId: error.message }]);
-    }
-  }
+  // async function getReplyStatus() {
+  //   try {
+  //     const response = await Axios.get(`/getReplyByUser/${uid}`);
+  //     setListOfReplyStatus(response.data);
+  //     console.log("got " + response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //     setListOfReplyStatus([...listOfReplyStatus, { reqId: error.message }]);
+  //   }
+  // }
 
   useEffect(() => {
     Axios.get(`/getUsersRequests/${uid}`).then((response) => {
       setListOfRequests(response.data);
-      getReplyStatus(response.data);
+      // getReplyStatus(response.data);
     });
-    getReplyStatus();
+    // getReplyStatus();
   }, []);
 
   const updateGemShape = (id) => {
@@ -77,7 +101,7 @@ function MyReq() {
         id: id,
         newGemShape: newGemShape,
       }).then((response) => {
-        window.location.reload();
+        
         alert("Updated Successfully!");
       });
     }
@@ -89,7 +113,7 @@ function MyReq() {
         id: id,
         newGemColour: newGemColour,
       }).then((response) => {
-        window.location.reload();
+        
         alert("Updated Successfully!");
       });
     }
@@ -101,7 +125,7 @@ function MyReq() {
         id: id,
         newGemDescription: newGemDescription,
       }).then((response) => {
-        window.location.reload();
+        
         alert("Updated Successfully!");
       });
     }
@@ -124,7 +148,7 @@ function MyReq() {
         id: id,
         newGemQuantity: newGemQuantity,
       }).then((response) => {
-        window.location.reload();
+        
         alert("Updated Successfully!");
       });
     }
@@ -163,24 +187,25 @@ function MyReq() {
           </button>
           <br></br>
           <label className="labelSort">Sort by</label>
-        <select
-          className="sortRequest"
-          onChange={handleSort}
-        >
-          <option value="dateAcsending">Date ascending </option>
-          <option value="dateDecending">Date descending</option>
-        </select>
+          <select className="sortRequest" onChange={handleSort}>
+            <option value="">Select type</option>
+            <option value="dateAscending">Older requests first</option>
+            <option value="dateDescending">Latest requests First</option>
+          </select>
+
           {listOfRequests.map((user) => {
             return (
               <div key={user._id}>
                 <div className="whiteBodyBG">
                   <div className="white-content">
                     <div className="myreq-column-1">
-                      <table>
-                        <tr>
+                      <table className="infobox">
+                        
+                        <tr key={user._id}>
                           <td className="req-lable">First Name</td>
                           <td className="req-value">{user.FirstName}</td>
                         </tr>
+
                         <tr>
                           <td className="req-lable">Last Name</td>
                           <td className="req-value">{user.LastName}</td>
@@ -210,20 +235,27 @@ function MyReq() {
                           <td className="req-value">{user.Description}</td>
                         </tr>
                         <tr>
-                          <td className="req-lable">Weight</td>
+                          <td className="req-lable">Weigh(Carat)</td>
                           <td className="req-value">{user.Weight}</td>
                         </tr>
                         <tr>
                           <td className="req-lable">Quantity</td>
                           <td className="req-value">{user.Quantity}</td>
                         </tr>
+                        <tr>
+                          <td className="req-lable">Date added</td>
+                          <td className="req-value">{user.createdAt}</td>
+                        </tr>
+                        
                       </table>
                     </div>
 
                     <div className="myreq-column-2">
                       <form className="updatebox">
+                        <label className="updatelbl"><strong>Update Request</strong> </label>
+                        <hr></hr>
                         <select
-                          className="input"
+                          className="inputupdate"
                           onChange={(event) => {
                             setNewGemShape(event.target.value);
                           }}
@@ -237,18 +269,22 @@ function MyReq() {
                         </select>
 
                         <input
+                          key="gemColour"
                           type="text"
                           placeholder="Edit gem colour...."
-                          className="input"
+                          className="inputupdate"
+                          
                           onChange={(event) => {
                             setNewGemColour(event.target.value);
                           }}
                         />
 
                         <input
+                          key="gemDescription"
                           type="text"
                           placeholder="Edit description...."
-                          className="input"
+                          className="inputupdate"
+                          
                           onChange={(event) => {
                             setNewnewGemDescription(event.target.value);
                           }}
@@ -264,9 +300,11 @@ function MyReq() {
                         /> */}
 
                         <input
+                          key="gemQty"
                           type="number"
                           placeholder="Edit quantity...."
-                          className="input"
+                          className="inputupdate"
+                          
                           onChange={(event) => {
                             setNewnewGemQuantity(event.target.value);
                           }}
@@ -305,9 +343,10 @@ function MyReq() {
                   </button>
 
                   <button
-                    class="btn-del"
+                    className="btn-del"
                     onClick={() => confirmDelete(user._id)}
                   >
+
                     <p class="paragraph"> delete </p>
                     <span class="icon-wrapper">
                       <svg

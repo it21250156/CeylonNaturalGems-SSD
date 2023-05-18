@@ -114,14 +114,16 @@
 td {
   width: 100px;
   text-align: left;
+  padding: 10px;
 }
 
 .cl1 {
   font-weight: bold;
 }
 
-table {
+.detail-table {
   width: auto;
+  padding: 20px;
 }
 
 /* req compartment */

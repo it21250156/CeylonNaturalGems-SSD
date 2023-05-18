@@ -151,7 +151,7 @@ function ReqMain() {
                   )}
 
                   {/* weight */}
-                  <label className="label">Weight</label>
+                  <label className="label">Weight(Carat)</label>
                   <input
                     className="input"
                     autoComplete="on"
@@ -261,13 +261,13 @@ function ReqMain() {
         >
           All Requests
         </button>
-        <button
+        {/* <button
           onClick={() => {
             window.location.href = './reply_uv';
           }}
         >
           Replies
-        </button>
+        </button> */}
       </div>
     </>
   );
