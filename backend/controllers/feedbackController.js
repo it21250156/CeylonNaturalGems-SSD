@@ -1,5 +1,7 @@
 const Feedback = require('../models/feedbackModel')
 const mongoose = require('mongoose')
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 
 //get all feedbacks
 const getFeedbacks = async (req, res) => {
@@ -29,64 +31,53 @@ const getFeedback = async (req, res) => {
 }
 
 //create a new feedback
-const createFeedback = async (req,res) => {
+const createFeedback = async (req, res) => {
+  try {
+    let feedbackData = {
+      gemType: req.body.gemType,
+      gemQty: req.body.gemQty,
+      fbInfo: req.body.fbInfo,
+      rating: req.body.rating,
+      user: req.body.user
+    };
 
-    const{gemType, gemQty, fbInfo, rating,user} = req.body
-
-    let emptyFields = []
-
-    if(!gemType) {
-      emptyFields.push('gemType')
-    }
-    if(!gemQty) {
-      emptyFields.push('gemQty')
-    }
-    if(!fbInfo) {
-      emptyFields.push('fbInfo')
-    }
-    if(!rating) {
-      emptyFields.push('rating')
-    }
-    
-    if(emptyFields.length > 0){
-      return res.status(400).json({error: 'Please fill in all the fields', emptyFields})
-
+    if (req.file) {
+      // Upload image to Cloudinary if it exists
+      const result = await cloudinary.uploader.upload(req.file.path);
+      feedbackData.feedback_img = result.secure_url;
+      feedbackData.cloudinary_id = result.public_id;
     }
 
-    //add doc to DB
-    try{
-      
-        const feedback = await Feedback.create({gemType, gemQty, fbInfo, rating, user})
-        res.status(200).json(feedback)
+    const feedback = await Feedback.create(feedbackData);
+    res.status(200).json(feedback);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
-    }catch(error){
-
-        res.status(400).json({error: error.message})
-    }
-
-}
 
 
 //delete a feedback
 const deleteFeedback = async (req, res) => {
-  const { id } = req.params
-
-  if(!mongoose.Types.ObjectId.isValid(id)){
-
-    return res.status(404).json({error: 'No such Feedback'})
-  }
-
-  const feedback = await Feedback.findOneAndDelete({_id: id})
-
-  if(!feedback) {
-    return res.status(400).json({error: 'No such feedback'})
-  }
-
-  res.status(200).json(feedback)
-
+  const { id } = req.params;
   
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+  return res.status(404).json({ error: 'No such Feedback' });
+  }
+  
+  const feedback = await Feedback.findOneAndDelete({ _id: id });
+  
+  if (!feedback) {
+  return res.status(400).json({ error: 'No such feedback' });
+  }
+  
+  if (feedback.cloudinary_id) {
+  await cloudinary.uploader.destroy(feedback.cloudinary_id);
+  }
+  
+  res.status(200).json(feedback);
+  };
 
-}
 
 //update a feedback
 const updateFeedback = async(req, res) => {

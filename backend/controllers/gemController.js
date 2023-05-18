@@ -84,6 +84,7 @@ const deleteGem = async (req, res) => {
   }
 };
 
+//Update Gems
 const updateGem = async (req, res) => {
   const { id } = req.params;
 

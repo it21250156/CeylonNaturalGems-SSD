@@ -26,6 +26,11 @@ function UpdateFeedback() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!fbInfo) {
+      setError(true);
+      return;
+    }
+
     const response = await fetch(`/api/feedbacks/${_id}`, {
       method: 'PATCH',
       body: JSON.stringify({
@@ -113,10 +118,14 @@ function UpdateFeedback() {
               name="feedbackContent"
               cols="100"
               rows="10"
-              onChange={(e) => setFbInfo(e.target.value)}
+              onChange={(e) => {
+                setFbInfo(e.target.value);
+                setError(false);
+              }}
               value={fbInfo}
-              className={emptyFields.includes('fbInfo') ? 'error' : ''}
+              className={emptyFields.includes('fbInfo') || !fbInfo ? 'error' : ''}
             ></textarea>
+            {!fbInfo && <div className="error">Please provide feedback.</div>}
 
             <label className="label">Add Star Rating:</label>
             <StarRating
@@ -130,17 +139,16 @@ function UpdateFeedback() {
               changeRating={handleRatingChange}
             />
 
-            <label className="label">Upload Image:</label>
+            {/* <label className="label">Upload Image:</label>
             <input
               type="file"
               name="image"
               accept="image/jpg, image/jpeg, image/png"
-            ></input>
-
+            ></input> */}
+            <br /><br />
             <button className="add-feedbackform-btn" type="submit">
               Update Feedback
             </button>
-            {error && <div className="error">{error}</div>}
           </form>
         </div>
       </div>
