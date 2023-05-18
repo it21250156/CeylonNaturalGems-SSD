@@ -1,32 +1,43 @@
-import '../CSS/AppBW.css';
-import {useState, useEffect} from "react";
+import "../CSS/AppBW.css";
+import { useState, useEffect } from "react";
 import Axios from "axios";
-import TextareaAutosize from 'react-textarea-autosize';
+import TextareaAutosize from "react-textarea-autosize";
 
-import { useAuthContext } from "../hooks/useAuthContext"
+import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import Swal from "sweetalert2";
 
+function ReplyRequest() {
+  const { reqId } = useParams();
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    logout();
+    navigate("/");
+  };
 
-function ReplyRequest(){
-    const {reqId} = useParams()
-    const { logout } = useLogout();
-    const {user} = useAuthContext()
-    const navigate = useNavigate()
+  const [reply, setReply] = useState("");
+  const [replyError, setReplyError] = useState("");
 
-    const handleClick = () => {
-      logout();
-      navigate('/');
-    };
-    
+  const createReply = () => {
+    if (reply.trim() === "") {
+      setReplyError("Please enter your reply.");
+      return;
+    }
 
-    // const [listOfReplies, setListOfReplies] = useState([]);
-    const [reply, setReply] = useState("");
+    Axios.post(`/createReply/`, {
+      reply,
+      reqId,
+    }).then((response) => {
+      alert("Reply added!");
+    });
+  };
 
     // useEffect(() => {
     //     Axios.get("/getReply").then((response) => {
@@ -67,58 +78,39 @@ function ReplyRequest(){
 
             <ul>
               <li>
-                <Link to={'/adminHome'}>Home</Link>
+                <Link to={"/adminHome"}>Home</Link>
               </li>
             </ul>
           </nav>
         </div>
       </header>
-        <div>
-            <div className="darkBlueTopicBoxReq">
-                <h1 className="pageTopicReq">Reply</h1>
-            </div>
-
-            {/* <div className='usersDisplay'>
-                    {listOfReplies.map((user) => {
-                    return(
-                        <div>
-                        <h1>Reply: {user.reply}</h1>
-                        
-                        </div>
-                    )
-                    })}
-            </div> */}
-
-            <div className="lightBlueBodyBG">
-                Wtite your reply:
-
-                
-
-                <div>
-                    <TextareaAutosize
-                        className="replytxt"
-                        minRows={3}
-                        maxRows={6}
-                        placeholder="Enter your reply here"
-                        style={{ width: "90%" }}
-                        onChange={(event) =>{
-                            setReply(event.target.value);
-                        }}
-                        />
-
-                    {/* <input type="text" placeholder="Name...." onChange={(event) => {
-                            setReply(event.target.value);
-                            }}></input> */}
-                    
-                </div>
-                
-                
-                <button className='Srepbtn' onClick={createReply}>Send Reply</button>
-                {/* {JSON.stringify(data)} */}
-            </div>
+      <div>
+        <div className="darkBlueTopicBoxReq">
+          <h1 className="pageTopicReq">Reply</h1>
         </div>
-        </>
-    )
+
+        <div className="lightBlueBodyBG">
+          Write your reply:
+          <div>
+            <TextareaAutosize
+              className="replytxt"
+              minRows={3}
+              maxRows={6}
+              placeholder="Enter your reply here"
+              style={{ width: "90%" }}
+              onChange={(event) => {
+                setReply(event.target.value);
+              }}
+            />
+            {replyError && <p className="error">{replyError}</p>}
+          </div>
+          <button className="Srepbtn" onClick={createReply}>
+            Send Reply
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default ReplyRequest;
