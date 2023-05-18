@@ -12,6 +12,25 @@
   width: 400px;
   height: 300px;
 } */
+.jewel-screen-dropdown {
+  display: flex;
+  margin: 10px 0;
+}
+
+.label-jewel-dropdown {
+  width: fit-content;
+  color: #144272;
+  font-weight: 600;
+  margin-right: 20px;
+}
+
+.input-jewel-dropdown {
+  width: 200px;
+  padding: 5px;
+  border-radius: 30px;
+  border: 3px solid #144272;
+  color: #144272;
+}
 
 .btns-description {
   margin: 0 20px;
@@ -73,7 +92,7 @@
 }
 
 .gem-desc {
-  width: 600px;
+  width: 850px;
   font-family: bpreplay;
   color: #144272;
   text-align: left;
@@ -110,14 +129,24 @@
   color: #144272;
 }
 
-td {
-  width: 100px;
+.cl2 {
+  width: auto;
   text-align: left;
   padding: 10px;
 }
 
 .cl1 {
   font-weight: bold;
+  width: auto;
+  text-align: left;
+  padding: 10px;
+}
+
+.new-arr-hr {
+  background-color: #144272;
+  height: 2px;
+  padding: 0;
+  margin: 10px 10px;
 }
 
 .detail-table {

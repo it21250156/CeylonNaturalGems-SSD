@@ -6,9 +6,11 @@
 
 .cartimg-section {
   flex: 1;
+}
+
+.cart-card-image {
   height: 100px;
   width: 150px;
-  background-color: brown;
 }
 
 .name-price {

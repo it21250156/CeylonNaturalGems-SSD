@@ -5,7 +5,6 @@ import logger from 'use-reducer-logger';
 import '../CSS/Gemhome.css';
 import Header from '../components/Header';
 
-
 //components
 import JewelCard from '../components/jwellCard';
 
@@ -37,13 +36,12 @@ const Jewelhome = () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
         const response = await fetch('/api/jewells/gender/Female');
-       //const response = await fetch(`/api/jewells/bygender/Male`);
+        //const response = await fetch(`/api/jewells/bygender/Male`);
         const json = await response.json();
         dispatch({ type: 'FETCH_SUCCESS', payload: json });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });
       }
-      
     };
     fetchJewels();
   }, []);
@@ -51,7 +49,6 @@ const Jewelhome = () => {
     setSearchTerm(event.target.value);
   };
 
-  
   useEffect(() => {
     let results = Jewel.filter((Jwl) =>
       Jwl.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -87,43 +84,42 @@ const Jewelhome = () => {
     // }
   };
 
-
   return (
     <>
-    <Header/>
-    <div className="gemhome">
-      <div className="gems">
-        <div className="lightBlueBodyBG">
-          <div className="whiteBodyBG">
-            <div className="darkBlueTopicBox">
-              <h3 className="pageTopic">Women's Jewellery</h3>
-            </div>
-            
-            <div className="gem-search-wrapper">
+      <Header />
+      <div className="gemhome">
+        <div className="gems">
+          <div className="lightBlueBodyBG">
+            <div className="whiteBodyBG">
+              <div className="darkBlueTopicBox">
+                <h3 className="pageTopic">Women's Jewellery</h3>
+              </div>
+
+              <div className="gem-search-wrapper">
                 <div className="gem-search">
                   <input
                     className="gem-search-input"
                     type="text"
-                    placeholder="Search by Jwellery Name"
+                    placeholder="Search by Jewellery Name"
                     value={searchTerm}
                     onChange={handleSearchChange}
                   />
                 </div>
-                </div>
-            {/* {JSON.stringify(Jewel)} */}
-            <div className="gem-cards">
-            {searchResults.length > 0 ? (
+              </div>
+              {/* {JSON.stringify(Jewel)} */}
+              <div className="gem-cards">
+                {searchResults.length > 0 ? (
                   searchResults.map((Jwl) => (
-                    <JewelCard key={Jwl._id} Jwl={Jwl}/>
+                    <JewelCard key={Jwl._id} Jwl={Jwl} />
                   ))
                 ) : (
                   <p>No results found. Please check the gem name.</p>
                 )}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
