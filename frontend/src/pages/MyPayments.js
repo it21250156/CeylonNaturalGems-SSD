@@ -18,6 +18,7 @@ const MyPayments = () => {
 
     const user = JSON.parse(localStorage.getItem('userInfo'));
 
+    
     useEffect(() => {
     const fetchPayments = async() => {
        const response = await fetch(`/api/payments/userPayments/${user._id}`);
@@ -30,6 +31,8 @@ const MyPayments = () => {
 
     fetchPayments()
     }, [])  
+
+    
 
     return (
       <>
@@ -61,12 +64,6 @@ const MyPayments = () => {
                  <PaymentRow key={payment._id} payment={payment}/>
                ))}
 
-{/* {payments && payments.map((payment) => {
-  if (payment.user === id) {
-    return <PaymentRow key={payment._id} payment={payment} />;
-  }
-  
-})} */}
 
                </tbody>
                </table>
@@ -81,30 +78,6 @@ const MyPayments = () => {
 const PaymentRow = ({payment}) => {
      const navigate = useNavigate()
 
-
-    // const [isDeleting, setIsDeleting] = useState(false);
-
-    // const handleDelete = async () => {
-    //     try {
-    //       setIsDeleting(true);
-    //       const response = await fetch(`api/payments/${payment._id}`, {
-    //         method: 'DELETE',
-    //       });
-    //       if (response.ok) {
-    //         window.location.reload();
-    //       } else {
-    //         const json = await response.json();
-    //         // Handle error response
-    //         console.error(json.error);
-    //       }
-    //     } catch (error) {
-    //       // Handle fetch error
-    //       console.error(error);
-    //     } finally {
-    //       setIsDeleting(false);
-    //     }
-    //   };
-
     return (
     <tr key={payment._id}>
         <td>{payment._id}</td>
@@ -113,15 +86,14 @@ const PaymentRow = ({payment}) => {
         <td>{payment.dmethod}</td>
         <td>{payment.dStatus}</td>
         <td>{payment.createdAt}</td>
-        {/* <td><button onClick={handleDelete} disabled={isDeleting}>
-        {isDeleting ? 'Deleting...' : 'DELETE'}
-      </button></td> */}
+        
         <td><button onClick={ () => {navigate ('/MyPayments/PaymentUpdate/' + payment._id)}}>UPDATE</button></td>
         <td><button
           disabled = {payment?.orderID?.length < 1 || payment?.orderID[0].length < 1 || payment?.dStatus !== "Delivered" }
           onClick={ () => {navigate ("/FeedbackForm/"+payment._id)}}
         > FEEDBACK</button></td>
     </tr>
+    
     )
 }
 

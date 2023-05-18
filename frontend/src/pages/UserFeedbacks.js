@@ -34,6 +34,7 @@ const UserFeedbacks = () => {
         <div className="title-box-feedback">
           <h1 className="title-feedback">My Feedbacks</h1>
         </div>
+
         <div className="light-blue-bg">
           <div className="top-btn">
            
@@ -41,7 +42,7 @@ const UserFeedbacks = () => {
             <button
               className="add-feedback-btn"
               onClick={() => {
-                window.location.href = './FeedbackForm';
+                window.location.href = './MyPayments';
               }}
             >
               {' '}

@@ -4,86 +4,126 @@ import StarRating from 'react-star-ratings';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
-
 import '../CSS/FeedbackForm.css';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { id } from 'date-fns/locale';
 
 const FeedbackForm = () => {
-  const { _id } = useParams();
+  const { paymentid } = useParams();
   const { dispatch } = useFeedbacksContext();
-
-  const { cartData } = useAuthContext();
+  const [payment, setPayment] = useState('');
+  const { user, cartData } = useAuthContext();
   const [gems, setGems] = useState([])
   const [jewellery, setJewelleries] = useState([])
-
-  useEffect(() => {
-    const fetchGems = async () => {
-      try {
-        const response = await fetch('/api/gems&jewelleries/gems');
-        const json = await response.json();
-        setGems(json);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchGems();
-
-    const fetchJewelleries = async () => {
-      try {
-        const response = await fetch(`/api/jewelleryes`);
-        const json = await response.json();
-        setJewelleries(json);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchJewelleries();
-
-  }, [])
-
-  const [payment, setPayment] = useState('');
-  const [orders, setOrders] = useState('');
-  const [gemType, setGemType] = useState(() => {
-    let gemTypeString = ""
-    return cartData?.map(cartItem => {
-      gems.find(gem => gem._id == cartItem.cartitemid)
-
-    })
-    return gemTypeString
-  });
-
-  const [gemQty, setGemQty] = useState(() => {
-    
-  });
   const [fbInfo, setFbInfo] = useState('');
   const [rating, setRating] = useState(0);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+
+
+  const [feedCart, setFeedCart] = useState('');
+  const [orders, setOrders] = useState('');
+
   const nav = useNavigate();
 
   useEffect(() => {
-    setGemType(() => {
-      let str = ''
-      cartData?.map(cartItem => {
-        gems.find(gem => {
-          if (gem._id === cartItem.cartitemid) {
-            str += cartItem.cartquantity + "x "+ gem.name + ", " 
-          }
+    console.log("check123")
+
+    const fetchPayment = async () => {
+
+      try {
+        console.log("check1")
+        const response = await fetch('/api/payments/' + paymentid);
+        const json = await response.json();
+        setPayment(json);
+
+        if (json?.orderID) {
+          console.log("got order ID", json?.orderID)
+          const itemList = json?.orderID
+
+          const gemPromises = itemList.map(item => {
+            console.log("gem check " + item);
+            return axios
+              .get('http://localhost:4000/api/gems&jewelleries/gems/' + item)
+              .then(resp => {
+                console.log("gem response " + item, " ", resp.status);
+                if (resp.status === 200) {
+                  console.log("got gem ", resp.data);
+                  return resp.data;
+                }
+              })
+              .catch(err => {
+                console.log(err);
+                return null; // Return null if there was an error fetching the gem
+              });
+          });
+
+
+
+          const jewelPromises = itemList.map(item => {
+            console.log("jewel check " + item);
+            return axios
+              .get(`http://localhost:4000/api/jewelleryes/` + item)
+              .then(res => {
+                if (res.status === 200) {
+                  console.log("got jewel ", res.data);
+                  return res.data;
+                }
+              })
+              .catch(err => {
+                console.log(err);
+                return null; // Return null if there was an error fetching the jewel
+              });
+          });
+
+
+
+          Promise.all([...gemPromises, ...jewelPromises])
+            .then(results => {
+              // Handle the fetched gems and jewels
+              const gems = results.filter(result => result !== null);
+              setGems(gems);
+              console.log(gems);
+              // Call setGems function or update the desired state/variable here
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchPayment()
+
+  }, [])
+
+  const [gemType, setGemType] = useState("Loading..");
+
+  const [gemQty, setGemQty] = useState("Loading..");
+
+
+  useEffect(() => {
+    if (gems) {
+      setGemType(() => {
+        let str = ''
+
+        gems.map(gem => {
+
+          str += gem.name + ", "
+
         })
-        jewellery.find(gem => {
-          if (gem._id === cartItem.cartitemid) {
-            str += cartItem.cartquantity + "x "+ gem.name + ", " 
-          }
-        })
+
+        return str.substring(0, str.length - 2)
       })
-      return str.substring(0,str.length-2)
-    })
-    setGemQty (() =>{
-      let sum = 0
-    cartData.map(cartItem => sum += cartItem?.cartquantity || 0)
-    return sum
-    })
-  })
+
+      setGemQty(() => {
+        return gems?.length
+
+      })
+    }
+  }, [gems])
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
@@ -127,30 +167,6 @@ const FeedbackForm = () => {
       nav('/Userfeedbacks');
     }
   };
-  useEffect(() => {
-    const getPayments = async () => {
-      try {
-        const paym = await axios.get(
-          `http://localhost:4000/api/payments/${_id}`
-        );
-        setPayment(paym);
-
-        const ord = await payment.data.orderId.map((order) => {
-          axios
-            .get(`http://localhost:4000/api/cart/${_id}`)
-
-            .then((result) => {
-              setOrders([...orders, result.data]);
-            });
-        });
-
-        setOrders(ord);
-      } catch (e) {
-        console.log('e', e);
-      }
-    };
-    getPayments();
-  }, []);
 
   return (
     <>
@@ -159,35 +175,24 @@ const FeedbackForm = () => {
         <p className="title-feedback">Add a new Feedback</p>
       </div>
       <div className="light-blue-bg">
-        {JSON.stringify(cartData[0])}
-        {JSON.stringify(gems[0])}
-        {JSON.stringify(jewellery[0])}
         <form
           className="create"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >
-          {/* {JSON.stringify(payment.data)} */}
-          <label className="label"> Gem/Jewellery Name</label>
+         
+          <label className="label"> Gem/Jewellery Name(s)</label>
           <input
             readOnly
             id="input"
             type="text"
             onChange={(e) => setGemType(e.target.value)}
             value={gemType
-              // cartData?.map(cartItem => {
-              //   gems.find(gem => {
-              //     if (gem._id === cartItem.cartitemid) {
-              //       return gem?.name
-              //     }
-              //   })
-              // })
             }
             className={emptyFields?.find((f) => f === 'gemType') ? 'error' : ''}
           />
-          {/* {JSON.stringify(orders)} */}
 
-          <label className="label"> Gem Quantity</label>
+          <label className="label"> Item Quantity</label>
           <input
             readOnly
             id="input"
@@ -221,7 +226,7 @@ const FeedbackForm = () => {
             changeRating={handleRatingChange}
           />
 
-          <label className="label"> Upload Images</label>
+          <label className="label"> Upload Image</label>
           <input
             type="file"
             name="image"
