@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useLogout } from '../hooks/useLogout';
+import { Link, useNavigate } from 'react-router-dom';
 import React from 'react';
-import Axios from "axios";
-import Header from "../components/Header";
+import Axios from 'axios';
+import Header from '../components/Header';
 
 function Myreply() {
-
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
   const [listOfReplies, setListOfReplies] = useState([]);
 
   const deletereq = (id) => {
@@ -20,24 +25,51 @@ function Myreply() {
   };
 
   useEffect(() => {
-    Axios.get("/getReply").then((response) => {
+    Axios.get('/getReply').then((response) => {
       setListOfReplies(response.data);
-    })
-  }, [])
+    });
+  }, []);
+
+  const handleClick = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <>
-      <Header />
+      <header>
+        <div>
+          <div className="background">
+            <div className="headerNameDiv">
+              <h1 className="headerName">Ceylon Natural Gems</h1>
+            </div>
+          </div>
+
+          <nav>
+            <div className="navprofileDiv">
+              <div className="navEmal">
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
+              </div>
+            </div>
+
+            <ul>
+              <li>
+                <Link to={'/adminHome'}>Home</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
       <div>
-        <div className='lightBlueBodyBG'>
+        <div className="lightBlueBodyBG">
           {listOfReplies.map((user) => {
             return (
               <div className="whiteBodyBG">
                 <h1>Reply: {user.reply}</h1>
-                <button
-                  class="btn-del"
-                  onClick={() => confirmDelete(user._id)}
-                >
+                <button class="btn-del" onClick={() => confirmDelete(user._id)}>
                   <p class="paragraph"> delete </p>
                   <span class="icon-wrapper">
                     <svg
@@ -58,14 +90,13 @@ function Myreply() {
                     </svg>
                   </span>
                 </button>
-
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default Myreply;
