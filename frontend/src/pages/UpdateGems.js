@@ -28,9 +28,6 @@ function UpdateGems() {
   const [images, setImages] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
 
-  const removeImage = () => {
-    setImages([]);
-  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -162,7 +159,7 @@ function UpdateGems() {
           </div>
           <div className="lightBlueBodyBGUserprofile">
             <div className="gem-input-container">
-              <form className="create" onSubmit={handleSubmit} encType="">
+              <form className="create" onSubmit={handleSubmit} encType='multipart/form-data'>
                 <div className='column-1'>
                   <label className="gem-label">Gem Name: </label>
                   <input

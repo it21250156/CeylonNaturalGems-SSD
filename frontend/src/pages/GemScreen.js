@@ -114,7 +114,7 @@ function GemScreen() {
                     <img
                       src={gem.gem_img}
                       alt="Gem"
-                      className="gem-card__image"
+                      className="gem-desc-image"
                     />
                   )}
                 </div>

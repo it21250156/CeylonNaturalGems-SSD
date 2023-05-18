@@ -1,10 +1,26 @@
 import { Link } from 'react-router-dom';
 import '../CSS/CartCard.css';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useEffect, useState } from 'react';
 
 function CartCard({ cartid, gem, jewellery }) {
   const { cartData, handleCartRemove, handleChangeQuantityCart } =
     useAuthContext();
+
+  const [isAtItemMax, setIsAtItemMax] = useState(false);
+  const [isAtItemMin, setIsAtItemMin] = useState(false);
+
+  useEffect(() => {
+    setIsAtItemMax(
+      !(
+        cartData.find((item) => item._id === cartid)?.cartquantity <
+        gem?.quantity
+      )
+    );
+    setIsAtItemMin(
+      !(cartData.find((item) => item._id === cartid)?.cartquantity > 1)
+    );
+  }, [cartData, gem, cartid]);
 
   const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
 
@@ -38,12 +54,7 @@ function CartCard({ cartid, gem, jewellery }) {
               <button
                 className="decrease-btn"
                 onClick={() => handleChangeQuantityCart(cartid, 'DECREASE')}
-                disabled={
-                  !(
-                    cartData.find((item) => item._id === cartid)?.cartquantity >
-                    1
-                  )
-                }
+                disabled={isAtItemMin}
               >
                 -
               </button>
@@ -55,12 +66,7 @@ function CartCard({ cartid, gem, jewellery }) {
               <button
                 className="increase-btn"
                 onClick={() => handleChangeQuantityCart(cartid, 'INCREASE')}
-                disabled={
-                  !(
-                    cartData.find((item) => item._id === cartid)?.cartquantity <
-                    gem?.quantity
-                  )
-                }
+                disabled={isAtItemMax}
               >
                 +
               </button>
@@ -88,6 +94,7 @@ function CartCard({ cartid, gem, jewellery }) {
                 </svg>
               </span>
             </button>
+            {isAtItemMax && <p>Reached max limit</p>}
           </div>
         </div>
       )}

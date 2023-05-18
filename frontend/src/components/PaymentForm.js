@@ -7,26 +7,26 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const PaymentForm = () => {
   const { cartData } = useAuthContext();
 
-  const [user, setUser]                       = useState('');
-  const [orderID, setOrderID]                 = useState('');
-  const [amount, setAmount]                   = useState('');
-  const [pmethod, setPmethod]                 = useState('');
-  const [cardNo, setCardNO]                   = useState('');
-  const [cardName, setCardName]               = useState('');
-  const [exMonth, setExMonth]                 = useState('');
-  const [exYear, setExYear]                   = useState('');
-  const [secCode, setSecCode]                 = useState('');
-  const [dmethod, setDmethod]                 = useState('');
-  const [address, setAddress]                 = useState('');
-  const [district, setDistrict]               = useState('');
-  const [country, setCountry]                 = useState('');
-  const [phoneNo, setPhoneNo]                 = useState('');
-  const [dStatus, setStatus]                  = useState('Pending');
-  const [error, setError]                     = useState(null);
+  const [user, setUser] = useState('');
+  const [orderID, setOrderID] = useState('');
+  const [amount, setAmount] = useState('');
+  const [pmethod, setPmethod] = useState('');
+  const [cardNo, setCardNO] = useState('');
+  const [cardName, setCardName] = useState('');
+  const [exMonth, setExMonth] = useState('');
+  const [exYear, setExYear] = useState('');
+  const [secCode, setSecCode] = useState('');
+  const [dmethod, setDmethod] = useState('');
+  const [address, setAddress] = useState('');
+  const [district, setDistrict] = useState('');
+  const [country, setCountry] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
+  const [dStatus, setStatus] = useState('Pending');
+  const [error, setError] = useState(null);
   const [gotoPaymentlist, setGotopaymentList] = useState(false);
-  const [isChecked, setIsChecked]             = useState(false);
-  const [successMessage, setSuccessMessage]   = useState(false);
-  const [phoneNoError, setPhoneNoError]       = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [phoneNoError, setPhoneNoError] = useState('');
 
   useEffect(() => {
     setOrderID(cartData?.map((cart) => cart.cartitemid));
@@ -86,6 +86,15 @@ const PaymentForm = () => {
       setError(null);
       console.log('new payment added', json);
 
+      try {
+        await fetch(`/api/cart/user/${payment.user}`, {
+          method: 'DELETE',
+        });
+        window.location.href = '/MyPayments';
+      } catch (error) {
+        console.log('error', error);
+      }
+
       setSuccessMessage(true); // Set success message state variable to true
       setTimeout(() => {
         setSuccessMessage(false); // Hide success message after a certain duration
@@ -97,20 +106,18 @@ const PaymentForm = () => {
     setPmethod(e.target.value);
   };
 
-    const handleDeliveryMethodChange = (e) => {
-      setDmethod(e.target.value);
-    };
-    
+  const handleDeliveryMethodChange = (e) => {
+    setDmethod(e.target.value);
+  };
 
-    const handleCardNoChange = (e) => {
-      const inputValue = e.target.value;
-      // Remove all non-numeric characters from the input value
-      const sanitizedValue = inputValue.replace(/\D/g, '');
-      if (sanitizedValue.length <= 16) {
-        setCardNO(sanitizedValue);
-      }
-    };
-
+  const handleCardNoChange = (e) => {
+    const inputValue = e.target.value;
+    // Remove all non-numeric characters from the input value
+    const sanitizedValue = inputValue.replace(/\D/g, '');
+    if (sanitizedValue.length <= 16) {
+      setCardNO(sanitizedValue);
+    }
+  };
 
   const handleExMonthChange = (e) => {
     const inputValue = e.target.value;
@@ -122,7 +129,7 @@ const PaymentForm = () => {
 
   const handleExYearChange = (e) => {
     const inputValue = e.target.value;
-    setExYear(inputValue)
+    setExYear(inputValue);
   };
 
   const handleSecCodeChange = (event) => {
@@ -142,10 +149,10 @@ const PaymentForm = () => {
 
     if (isChecked) {
       // Perform the payment processing logic here
-      console.log("Payment submitted!");
+      console.log('Payment submitted!');
     } else {
       // Handle case when checkbox is not checked
-      alert("Please check the checkbox to confirm.");
+      alert('Please check the checkbox to confirm.');
     }
   };
 
@@ -167,11 +174,9 @@ const PaymentForm = () => {
     validatePhoneNumber(sanitizedValue);
   };
 
-
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
   };
-  
 
   const amountInfo = localStorage.getItem('TamountInfo');
   const parsedAmountInfo = amountInfo ? JSON.parse(amountInfo) : '';
@@ -246,12 +251,12 @@ const PaymentForm = () => {
                     value={cardName}
                   />
 
-                  <label className = "label">Expiry Month:</label>
+                  <label className="label">Expiry Month:</label>
                   <input
-                    id       = "input"
-                    type     = "number"
-                    onChange = {handleExMonthChange}
-                    value    = {exMonth}
+                    id="input"
+                    type="number"
+                    onChange={handleExMonthChange}
+                    value={exMonth}
                   />
 
                   <label className="label">Expiry Year:</label>
@@ -277,7 +282,8 @@ const PaymentForm = () => {
                   <div className="Dmeth">
                     <label className="label">Delivery Method:</label>
                     <span style={{ fontSize: 'small' }}>
-                      Fill the delivery details that will appear below if you need your order to be delivered!
+                      Fill the delivery details that will appear below if you
+                      need your order to be delivered!
                     </span>
                     <label className="label" htmlFor="deliveryMethodDelivery">
                       Delivery
@@ -315,11 +321,11 @@ const PaymentForm = () => {
 
                   <label className="label"> District : </label>
                   <input
-                    id       = "input"
-                    type     = "text"
-                    onChange = {(e) => setDistrict(e.target.value)}
-                    value    = {district}
-                    disabled = {dmethod === 'Pickup'}
+                    id="input"
+                    type="text"
+                    onChange={(e) => setDistrict(e.target.value)}
+                    value={district}
+                    disabled={dmethod === 'Pickup'}
                   />
 
                   <label className="label"> Country : </label>
@@ -331,34 +337,33 @@ const PaymentForm = () => {
                     disabled={dmethod === 'Pickup'}
                   /> */}
 
+                  {dmethod === 'Delivery' && (
+                    <>
+                      <label className="label"> Address : </label>
+                      <input
+                        id="input"
+                        type="text"
+                        onChange={(e) => setAddress(e.target.value)}
+                        value={address}
+                      />
 
-{dmethod === 'Delivery' && (
-        <>
-          <label className="label"> Address : </label>
-          <input
-            id="input"
-            type="text"
-            onChange={(e) => setAddress(e.target.value)}
-            value={address}
-          />
+                      <label className="label"> District : </label>
+                      <input
+                        id="input"
+                        type="text"
+                        onChange={(e) => setDistrict(e.target.value)}
+                        value={district}
+                      />
 
-          <label className="label"> District : </label>
-          <input
-            id="input"
-            type="text"
-            onChange={(e) => setDistrict(e.target.value)}
-            value={district}
-          />
-
-          <label className="label"> Country : </label>
-          <input
-            id="input"
-            type="text"
-            onChange={(e) => setCountry(e.target.value)}
-            value={country}
-          />
-        </>
-      )}
+                      <label className="label"> Country : </label>
+                      <input
+                        id="input"
+                        type="text"
+                        onChange={(e) => setCountry(e.target.value)}
+                        value={country}
+                      />
+                    </>
+                  )}
 
                   <label className="label"> Phone Number : </label>
                   <input
@@ -369,21 +374,22 @@ const PaymentForm = () => {
                   />
                   {phoneNoError && <div className="error">{phoneNoError}</div>}
 
-<div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-            required
-          />
-          I have read and agreed to the terms and conditions of this website.
-        </label>
-      </div>
+                  <div>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                        required
+                      />
+                      I have read and agreed to the terms and conditions of this
+                      website.
+                    </label>
+                  </div>
 
                   <button
-                    className = "confirm-btn"
-                    onClick   = {handleConfirmPayment}
+                    className="confirm-btn"
+                    onClick={handleConfirmPayment}
                     disabled={!isChecked}
                   >
                     CONFIRM PAYMENT
@@ -405,8 +411,6 @@ const PaymentForm = () => {
                 </div>
               </div>
             </form>
-
-
           </div>
         </div>
       </div>
