@@ -15,36 +15,28 @@ const GemTypesReport = () => {
         return acc;
     }, {});
 
-    const maxCount = Math.max(...Object.values(typesCount));
-
     const gemTypes = Object.keys(typesCount);
 
     return (
-        <div className="admin-bar-chart-container">
-            <div className="admin-chart">
-                {gemTypes.map((type, index) => (
-                    <div
-                        className="admin-bar"
-                        key={type}
-                        style={{ height: `${(typesCount[type] / maxCount) * 100}%` }}
-                    />
-                ))}
-            </div>
-            <div className="admin-axis-labels">
-                <div className="admin-y-axis">
-
-                </div>
-                <div className="admin-x-axis">
+        <div className="admin-table-container">
+            <table className="admin-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {gemTypes.map((type, index) => (
-                        <div className="admin-x-axis-label" key={type}>
-                            {type}
-                        </div>
+                        <tr key={type}>
+                            <td>{type}</td>
+                            <td>{typesCount[type]}</td>
+                        </tr>
                     ))}
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div>
     );
-
 };
 
 export default GemTypesReport;

@@ -100,23 +100,35 @@ const updateGem = async (req, res) => {
       return res.status(404).json({ error: 'No such gem' });
     }
 
-    // Delete previous image from Cloudinary
-    await cloudinary.uploader.destroy(gem.cloudinary_id);
+    if (req.file && req.file.path) {
+      // Delete previous image from Cloudinary
+      await cloudinary.uploader.destroy(gem.cloudinary_id);
 
-    // Upload new image to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path);
+      // Upload new image to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
 
-    // Update gem data
-    gem.name = req.body.name || gem.name;
-    gem.type = req.body.type || gem.type;
-    gem.shape = req.body.shape || gem.shape;
-    gem.size = req.body.size || gem.size;
-    gem.price = req.body.price || gem.price;
-    gem.color = req.body.color || gem.color;
-    gem.quantity = req.body.quantity || gem.quantity;
-    gem.description = req.body.description || gem.description;
-    gem.gem_img = result.secure_url || gem.gem_img;
-    gem.cloudinary_id = result.public_id || gem.cloudinary_id;
+      // Update gem data with new values
+      gem.name = req.body.name || gem.name;
+      gem.type = req.body.type || gem.type;
+      gem.shape = req.body.shape || gem.shape;
+      gem.size = req.body.size || gem.size;
+      gem.price = req.body.price || gem.price;
+      gem.color = req.body.color || gem.color;
+      gem.quantity = req.body.quantity || gem.quantity;
+      gem.description = req.body.description || gem.description;
+      gem.gem_img = result.secure_url || gem.gem_img;
+      gem.cloudinary_id = result.public_id || gem.cloudinary_id;
+    } else {
+      // Update gem data without changing the image
+      gem.name = req.body.name || gem.name;
+      gem.type = req.body.type || gem.type;
+      gem.shape = req.body.shape || gem.shape;
+      gem.size = req.body.size || gem.size;
+      gem.price = req.body.price || gem.price;
+      gem.color = req.body.color || gem.color;
+      gem.quantity = req.body.quantity || gem.quantity;
+      gem.description = req.body.description || gem.description;
+    }
 
     // Save updated gem
     gem = await gem.save();
@@ -128,7 +140,6 @@ const updateGem = async (req, res) => {
   }
 };
 
-module.exports = updateGem;
 
 module.exports = {
   getGems,

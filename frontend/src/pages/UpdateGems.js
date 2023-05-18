@@ -63,6 +63,38 @@ function UpdateGems() {
 
       formData.append("image", images[0]);
 
+      const emptyFields = [];
+      if (name === '') {
+        emptyFields.push('name');
+      }
+      if (type === '') {
+        emptyFields.push('type');
+      }
+      if (shape === '') {
+        emptyFields.push('shape');
+      }
+      if (size === '') {
+        emptyFields.push('size');
+      }
+      if (color === '') {
+        emptyFields.push('color');
+      }
+      if (quantity === '') {
+        emptyFields.push('quantity');
+      }
+      if (price === '') {
+        emptyFields.push('price');
+      }
+      if (description === '') {
+        emptyFields.push('description');
+      }
+
+      if (emptyFields.length > 0) {
+        setEmptyFields(emptyFields);
+        setError('Please fill in all required fields.');
+        return;
+      }
+
       const response = await fetch(`/api/gems/${_id}`, {
         method: "PATCH",
         body: formData,
@@ -79,6 +111,7 @@ function UpdateGems() {
       alert("Please upload an image");
     }
   };
+
 
 
 
