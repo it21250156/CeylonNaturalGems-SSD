@@ -4,6 +4,7 @@ import FeedbackDetails from '../components/FeedbackDetails';
 import FeedbackForm from '../components/FeedbackForm';
 import Header from '../components/Header';
 import '../CSS/feedback.css';
+import '../CSS/FeedbackDetails.css';
 
 const AllFeedbacks = () => {
   const { feedbacks, dispatch } = useFeedbacksContext();
@@ -32,7 +33,9 @@ const AllFeedbacks = () => {
       setSearchResults(filteredResults);
 
       if (filteredResults.length === 0) {
-        setErrorMessage('No Feedbacks found with the specified Gem or Jewellery name.');
+        setErrorMessage(
+          'No Feedbacks found with the specified Gem or Jewellery name.'
+        );
       } else {
         setErrorMessage('');
       }
@@ -46,16 +49,17 @@ const AllFeedbacks = () => {
         <div className="title-box-feedback">
           <p className="title-feedback">Customer Feedbacks</p>
         </div>
-        <div className="light-blue-bg">
-          <div className="feedback-card">
-            <div className="search-bar">
-              <input
-                type="text"
-                placeholder="Search By Gem Or Jewellery Name"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
+        <div className="all-fb-light-blue-bg">
+          <div className="search-bar">
+            <input
+              className="feedback-search-input"
+              type="text"
+              placeholder="Search By Gem Or Jewellery Name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <div>
             {errorMessage ? (
               <p className="error">{errorMessage}</p>
             ) : (

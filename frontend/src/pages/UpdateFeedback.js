@@ -85,7 +85,7 @@ function UpdateFeedback() {
           <p className="title-feedback">Update Feedback</p>
         </div>
 
-        <div className="light-blue-bg">
+        <div className="all-fb-light-blue-bg">
           <form
             className="create"
             onSubmit={handleSubmit}
@@ -123,7 +123,9 @@ function UpdateFeedback() {
                 setError(false);
               }}
               value={fbInfo}
-              className={emptyFields.includes('fbInfo') || !fbInfo ? 'error' : ''}
+              className={
+                emptyFields.includes('fbInfo') || !fbInfo ? 'error' : ''
+              }
             ></textarea>
             {!fbInfo && <div className="error">Please provide feedback.</div>}
 
@@ -145,7 +147,8 @@ function UpdateFeedback() {
               name="image"
               accept="image/jpg, image/jpeg, image/png"
             ></input> */}
-            <br /><br />
+            <br />
+            <br />
             <button className="add-feedbackform-btn" type="submit">
               Update Feedback
             </button>
