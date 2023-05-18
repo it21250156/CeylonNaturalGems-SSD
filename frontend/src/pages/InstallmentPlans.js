@@ -36,7 +36,7 @@ const InstallmentPlans = () => {
             <div className="darkBlueTopicBox">
               <h3 className="pageTopic">Installment Plans</h3>
             </div>
-            <h3>Please select your desired installment plan </h3>
+            <h6>Please select your desired installment plan </h6>
                 <hr></hr>
             <div className="gem-cards">
             {plans && plans.map((plan) => (
