@@ -38,7 +38,7 @@ const AllUsers = () => {
 
         // Combine and store the data
         const combinedData = [...userData, ...deletedUserData];
-
+        setData(combinedData);
 
        if(filter === 'allusers'){
          setData(combinedData);
