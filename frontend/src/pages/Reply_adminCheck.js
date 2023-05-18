@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import React from "react";
-import Axios from "axios";
-import Swal from "sweetalert2";
-import "../CSS/AppBW.css";
-import Header from "../components/Header";
+import { useState, useEffect } from 'react';
+import React from 'react';
+import Axios from 'axios';
+import Swal from 'sweetalert2';
+import '../CSS/AppBW.css';
+import Header from '../components/Header';
 import TextareaAutosize from 'react-textarea-autosize';
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import { Link, useParams } from 'react-router-dom';
@@ -21,7 +21,7 @@ function Reply_adminView() {
       Axios.get(`/getReply/${reqId}`).then((response) => {
         setReplies(response.data);
       });
-    }
+    };
     getReplies();
   }, []);
 
@@ -33,14 +33,10 @@ function Reply_adminView() {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
         Axios.delete(`/deleteReply/${id}`).then(() => {
           setReplies(replies.filter((reply) => reply._id !== id));
         });
@@ -49,15 +45,13 @@ function Reply_adminView() {
   };
 
   const handleUpdate = (repId) => {
-    const data = replies.find(rep => rep._id === repId);
+    const data = replies.find((rep) => rep._id === repId);
     if (data) {
-      Axios
-        .put(`/updateReply`, data)
-        .then(() => {
-          window.location.reload();
-        });
+      Axios.put(`/updateReply`, data).then(() => {
+        window.location.reload();
+      });
     }
-  }
+  };
 
   const handleClick = () => {
     logout();
@@ -92,7 +86,7 @@ function Reply_adminView() {
         <h1 className="pageTopicReq">My Replies</h1>
       </div>
       <div>
-        <div className="lightBlueBodyBG">
+        <div className="lightBlueBoxReq">
           {replies.length > 0 ? (
             replies.map((reply) => (
               <div className="whiteBodyBG">
@@ -103,15 +97,31 @@ function Reply_adminView() {
                     minRows={3}
                     maxRows={6}
                     placeholder="Enter your reply here"
-                    style={{ width: "90%" }}
+                    style={{ width: '90%' }}
                     value={reply.reply}
-                    onChange={(event) => setReplies(
-                      replies.map(rep => rep._id === reply._id ? {...rep, reply: event.target.value} : rep )
-                    )}
+                    onChange={(event) =>
+                      setReplies(
+                        replies.map((rep) =>
+                          rep._id === reply._id
+                            ? { ...rep, reply: event.target.value }
+                            : rep
+                        )
+                      )
+                    }
                   />
-                  <button className='Srepbtn' onClick={() => handleUpdate(reply._id)}>Update Reply</button>
+                  <button
+                    className="Srepbtn"
+                    onClick={() => handleUpdate(reply._id)}
+                  >
+                    Update Reply
+                  </button>
                 </div>
-                <button className="replydeletebtn" onClick={() => handleDelete(reply._id)}>Delete</button>
+                <button
+                  className="replydeletebtn"
+                  onClick={() => handleDelete(reply._id)}
+                >
+                  Delete
+                </button>
               </div>
             ))
           ) : (
