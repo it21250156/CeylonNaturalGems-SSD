@@ -1,5 +1,5 @@
 .lightBlueBox {
-  background-color: white;
+  background-color: #cadefc;
   margin: 20px 10%;
   padding: 20px;
   border-radius: 20px;
@@ -54,4 +54,22 @@
 
 .inst-table-1 {
   text-align: start;
+}
+
+.nxt-payment-btn {
+  background-color: #144272;
+  border: 2px solid #144272;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  margin: 10px;
+  color: white;
+}
+
+.nxt-payment-btn:hover {
+  background-color: white;
+  color: #144272;
+  border: 2px solid #144272;
+  transition: 0.5s;
 }
