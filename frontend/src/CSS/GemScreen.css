@@ -3,16 +3,15 @@
   flex-wrap: wrap;
 }
 
-/* .gem-image {
-  width: 500px;
-  margin: 10px;
-} */
+.gem-desc-image {
+  width: 400px;
+}
 
-.img-section-large {
+/* .img-section-large {
   background-color: #cadefc;
   width: 400px;
   height: 300px;
-}
+} */
 
 .btns-description {
   margin: 0 20px;

@@ -8,13 +8,15 @@ const CartTotal = ({ gems, cartData, jewelleries }) => {
   const cal = () => {
     let sum = 0;
     cartData.map(
-      (cartIns) => (
-      sum +=          
+      (cartIns) =>
+        (sum +=
           cartIns.cartquantity *
-          (gems.find((gem) => gem._id === cartIns.cartitemid)?.price || jewelleries?.find(jwl => jwl._id === cartIns.cartitemid)?.price || 0))
+          (gems.find((gem) => gem._id === cartIns.cartitemid)?.price ||
+            jewelleries?.find((jwl) => jwl._id === cartIns.cartitemid)?.price ||
+            0))
     );
     // setTotal(sum);
-  
+
     localStorage.setItem('TamountInfo', sum);
 
     return sum;
@@ -31,6 +33,7 @@ const CartTotal = ({ gems, cartData, jewelleries }) => {
           onClick={() => {
             navigate('/payments');
           }}
+          disabled={!(cartData?.length > 0)}
         >
           PROCEED TO CHECKOUT
         </button>

@@ -95,10 +95,25 @@ const updateCartByID = asyncHandler(async (req, res) => {
   res.status(200).json(cart);
 });
 
+const deleteCartsByUser = async (req, res) => {
+  try {
+    const { user } = req.params;
+
+    // Delete documents matching the field value
+    const result = await Cart.deleteMany({ user: user });
+
+    console.log(`Deleted ${result.deletedCount} entries.`);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error('Error deleting entries:', error);
+  }
+};
+
 module.exports = {
   addToCart,
   getUserCart,
   deleteCartItem,
   getCartByID,
   updateCartByID,
+  deleteCartsByUser,
 };

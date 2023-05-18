@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createContext, useReducer, useEffect, useState } from 'react';
 import { json } from 'react-router-dom';
+import * as Swal from 'sweetalert2';
 
 export const AuthContext = createContext();
 
@@ -104,13 +105,33 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const handleCartRemove = async (cartid) => {
-    const response = await fetch(`/api/cart/${cartid}`, {
-      method: 'DELETE',
+    Swal.fire({
+      title: 'Are you sure you want to remove item from cart?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await fetch(`/api/cart/${cartid}`, {
+          method: 'DELETE',
+        });
+
+        const json = await response.json();
+        console.log(json);
+        setCartData(cartData.filter((item) => item._id !== json._id));
+      }
     });
 
-    const json = await response.json();
-    console.log(json);
-    setCartData(cartData.filter((item) => item._id !== json._id));
+    // const response = await fetch(`/api/cart/${cartid}`, {
+    //   method: 'DELETE',
+    // });
+
+    // const json = await response.json();
+    // console.log(json);
+    // setCartData(cartData.filter((item) => item._id !== json._id));
   };
 
   useEffect(() => {

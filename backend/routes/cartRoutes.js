@@ -5,6 +5,7 @@ const {
   deleteCartItem,
   getCartByID,
   updateCartByID,
+  deleteCartsByUser,
 } = require('../controllers/cartController');
 
 const router = express.Router();
@@ -21,7 +22,6 @@ router.post('/', addToCart);
 //GET user cart item
 router.get('/user/:_id', getUserCart);
 
-
 //GET  cart by id
 router.get('/:_id', getCartByID);
 
@@ -33,5 +33,8 @@ router.patch('/:_id', updateCartByID);
 
 //DELETE user cart item
 router.delete('/:id', deleteCartItem);
+
+//DELETE user cart item by user id
+router.delete('/user/:user', deleteCartsByUser);
 
 module.exports = router;
