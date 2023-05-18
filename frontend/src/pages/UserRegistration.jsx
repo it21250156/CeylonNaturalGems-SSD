@@ -51,17 +51,6 @@ function UserRegistration() {
                 )
               );
 
-              // await signup(
-              //   title,
-              //   userType,
-              //   firstName,
-              //   lastName,
-              //   email,
-              //   phone,
-              //   password,
-              //   confirmPassword
-              // );
-
               const newUser = {
                 title,
                 userType,

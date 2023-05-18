@@ -39,25 +39,6 @@ function UserLogin() {
       setError(true);
       console.log(errors);
     }
-    // try {
-    //   // Call login API
-    //   const res = await axios.post("/api/users/login", { email, password });
-
-    //   // Save token to local storage
-    //   localStorage.setItem("token", res.data.token);
-
-    //   // Decode token to get user ID and role
-    //   const { userId, role } = jwt_decode(res.data.token);
-
-    //   // Redirect based on user role
-    //   if (role === "admin") {
-    //     window.location.href = "/adminHome";
-    //   } else {
-    //     window.location.href = '/';
-    //   }
-    // } catch (err) {
-    //   console.error(err.message);
-    // }
   };
 
   return (

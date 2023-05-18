@@ -3,8 +3,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 
-
-
 function UserProfileUpdate() {
 
   const navigate = useNavigate()
@@ -104,8 +102,6 @@ function UserProfileUpdate() {
                    placeholder={userData.phone} 
                   />
 
-
-                  {/* {error && <div className="error">{error}</div>} */}
                   <button type="submit" >SAVE CHANGES</button>
                   <button onClick={() => {navigate(`/profile/${user._id}`)}}>CANCEL</button>
                   

@@ -35,41 +35,11 @@ export const AuthContextProvider = ({ children }) => {
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },
     });
-    // await fetch(`/api/cart/user/${data.cartuserid}`)
-    //   .this((res) => res.json())
-    //   .this((json) => setCartData(json));
-    // setCartData();
+
 
     const temp = await response.json();
     setCartData([...cartData, temp]);
   };
-
-  // const handleChangeQuantityCart = (cartid, mode) => {
-  //   axios.get(`http://localhost:4000/api/cart/${cartid}`).then(async (item) => {
-  //     const upditem = {
-  //       _id: item.data[0]._id,
-  //       cartquantity:
-  //         mode === 'INCREASE'
-  //           ? item.data[0].cartquantity + 1
-  //           : item.data[0].cartquantity - 1,
-  //     };
-  //     console.log(cartid);
-  //     console.log(item.data[0]);
-  //     console.log(upditem);
-
-  //     axios
-  //       .get(`/api/cart/${cartid}`, {
-  //         method: 'PATCH',
-  //         body: JSON.stringify(upditem),
-  //         headers: { 'Content-Type': 'application/json' },
-  //       })
-  //       .then((newcart) => {
-  //         const updcart = cartData.filter((item) => item._id !== cartid);
-  //         console.log(newcart.data[0]);
-  //         setCartData([...updcart, newcart.data[0]]);
-  //       });
-  //   });
-  // };
 
   const handleChangeQuantityCart = async (cartid, mode) => {
     const item = await axios.get(`http://localhost:4000/api/cart/${cartid}`);
@@ -125,13 +95,6 @@ export const AuthContextProvider = ({ children }) => {
       }
     });
 
-    // const response = await fetch(`/api/cart/${cartid}`, {
-    //   method: 'DELETE',
-    // });
-
-    // const json = await response.json();
-    // console.log(json);
-    // setCartData(cartData.filter((item) => item._id !== json._id));
   };
 
   useEffect(() => {
