@@ -185,24 +185,45 @@
 
 .repbtn {
   float: right;
-  width: 170px;
-  font-size: 30px;
-  margin-top: -14%;
-  padding-top: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  margin-right: 10%;
-  border-radius: 10px;
-  background-color: orange;
+  font-family: Bebas Neue;
+  padding: 15px 35px;
+  margin-top: -20%;
+  margin-right: 5%;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   color: white;
+  transition: all 1000ms;
+  font-size: 25px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid orange;
+  background-color: orange;
 }
 
 .repbtn:hover {
-  background-color: white;
-  border: 2px solid orange;
   color: orange;
-  transition: 0.5s;
+  transform: scale(1.1);
+  outline: 2px solid orange;
+  box-shadow: 4px 5px 17px -4px orange;
+}
+
+.repbtn::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: white;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.repbtn:hover::before {
+  width: 250%;
 }
 
 .Srepbtn {
@@ -408,6 +429,7 @@
 }
 
 
+
 .white-content {
   display: flex;
   flex-wrap: wrap;
@@ -555,7 +577,7 @@ table {
   transition: 0.5s;
 }
 
-.repliesbtnAdmin {
+/* .repliesbtnAdmin {
   
   background-color: #30a945;
   border: 2px solid #2c74b3;
@@ -573,6 +595,47 @@ table {
   border: 2px solid #2c74b3;
   color: #2c74b3;
   transition: 0.5s;
+} */
+
+
+.repliesbtnAdmin {
+  font-family: Bebas Neue;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: green;
+  transition: all 1000ms;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
+}
+
+.repliesbtnAdmin:hover {
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px green;
+}
+
+.repliesbtnAdmin::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: green;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.repliesbtnAdmin:hover::before {
+  width: 250%;
 }
 
 .updatebox:hover{
@@ -626,7 +689,7 @@ table {
 .searchReq{
   width: 50%;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .replybox{
@@ -637,3 +700,4 @@ table {
 .replymsg{
   font-size: 25px;
 }
+
