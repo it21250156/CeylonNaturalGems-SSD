@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useInstallmentsContext } from "../hooks/useInstallmentsContext";
 import Header from '../components/Header';
 import '../CSS/InstPlans.css';
 import '../CSS/GemCard.css';
@@ -10,7 +11,9 @@ import FirstPayment from '../components/firstPayment';
 import MonthlyPayment from '../components/monthlyPayment';
 
 const SelectedInstallmentPlan = () => {
-  const navigate = useNavigate();
+
+    const { dispatch } = useInstallmentsContext();
+    const navigate = useNavigate();
 
   const [plans, setPlans] = useState({
     name: '',
@@ -22,6 +25,19 @@ const SelectedInstallmentPlan = () => {
 
   const { id } = useParams();
 
+  const [user, setUser] = useState("");
+    const [gemID, setGemID] = useState("");
+    const [planID, setPlanID] = useState("");
+    const [noOfMonths, setNoOfMonths] = useState("");
+    const [totalAmount, setTotalAmount] = useState("");
+    const [initialPayment, setInitialPayment] = useState("");
+    const [monthlyPayment, setMonthlyPayment] = useState("");
+    const [installmentDates, setInstallmentDates] = useState([]);
+    const [status, setStatus] = useState("");
+    const [error, setError] = useState(null);
+  
+    const userData = JSON.parse(localStorage.getItem("userInfo"));
+
   useEffect(() => {
     const fetchPlans = async () => {
       const response = await fetch(`/api/plans/${id}`);
@@ -29,11 +45,72 @@ const SelectedInstallmentPlan = () => {
 
       if (response.ok) {
         setPlans(json);
+        setUser(userData._id);
+        setGemID(gem._id);
+        setPlanID(json._id);
+        setNoOfMonths(json.months);
+        setTotalAmount(gem.price);
+        setInitialPayment(200)
+        setMonthlyPayment(149)
       }
     };
 
     fetchPlans();
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const currentDate = new Date().toISOString().split("T")[0];
+    const updatedInstallmentDates = [...installmentDates, currentDate];
+    setStatus("Pending");
+  
+    const installment = {
+      user,
+      gemID,
+      planID,
+      noOfMonths,
+      totalAmount,
+      initialPayment,
+      monthlyPayment,
+      installmentDates: updatedInstallmentDates,
+      status: "Pending"
+    };
+  
+    const response = await fetch('/api/installments', {
+      method: "POST",
+      body: JSON.stringify(installment),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  
+    const json = await response.json();
+  
+    if (!response.ok) {
+      setError(json.error);
+      console.log(error);
+    }
+  
+    if (response.ok) {
+      setUser("");
+      setGemID("");
+      setPlanID("");
+      setNoOfMonths("");
+      setTotalAmount("");
+      setInitialPayment("");
+      setMonthlyPayment("");
+      setInstallmentDates([]);
+      setStatus("");
+  
+      setError(null);
+      dispatch({ type: "CREATE_INSTALLMENTS", payload: json });
+  
+      console.log("new Installment added", json);
+    }
+    
+    navigate("/payments");
+  };
 
   return (
     <>
@@ -87,9 +164,8 @@ const SelectedInstallmentPlan = () => {
               </div>
               <button
                 className="proceed-btn-inst"
-                onClick={() => {
-                  navigate(`/payments`);
-                }}
+                onClick={handleSubmit}
+                
               >
                 Proceed to Pay
               </button>
