@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 import '../CSS/BodyTemp.css'
 import Header from '../components/Header';
 
+import { useNavigate } from 'react-router-dom'
+
 import format from 'date-fns/format'
 import '../CSS/table.css';
 
@@ -65,6 +67,7 @@ const MyInstallments = () => {
 const InstallmentTableRow = ({ installment , index }) => {
 
     const [gems, setGems] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchGems = async () => {
@@ -85,7 +88,7 @@ const InstallmentTableRow = ({ installment , index }) => {
             <td> {installment._id} </td>
             <td> {gems.find((gem) => gem._id === installment.gemID)?.name} </td>
             <td> {installment.status} </td>
-            <td> <button > details </button> </td>
+            <td> <button onClick={() => {navigate(`/profile/MyPayments/MyInstallments/MyInstallmentsDetailed/${installment._id}`)}} > details </button> </td>
         </tr>
     )
 }

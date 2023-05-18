@@ -9,21 +9,14 @@ import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
 import "../CSS/Vih's.css"
+import Header from '../components/Header';
 
-const AllInstallmentsDetailed = () => {
+const MyInstallmentsDetailed = () => {
 
     const {id} = useParams();
-
-    const { logout } = useLogout();
     const {user} = useAuthContext()
     const navigate = useNavigate()
-
-
-    const handleClick = () => {
-      logout();
-      navigate('/');
-    };
-
+    
     const [installment , setInstallment] = useState({
         user:"" , gemID:"", planID:"", noOfMonths:"", totalAmount:"", initialPayment:"", monthlyPayment:"", installmentDates:[], status:""
     })
@@ -50,7 +43,7 @@ const AllInstallmentsDetailed = () => {
   useEffect(() => {
     const fetchGems = async () => {
       try {
-        const response = await fetch('/api/gems&jewelleries/gems');
+        const response = await fetch(`/api/gems&jewelleries/gems/${installment.gemID}`);
         const json = await response.json();
         setGems(json);
       } catch (err) {
@@ -87,41 +80,26 @@ const AllInstallmentsDetailed = () => {
 
     return (
         <>
-      <header>
-        <div>
-          <div className="background">
-            <div className="headerNameDiv">
-              <h1 className="headerName">Ceylon Natural Gems</h1>
-            </div>
-          </div>
-
-          <nav>
-            <div className="navprofileDiv">
-              <div className="navEmal">
-                <span className="welcomeNoteAdmin">Hello Admin</span>
-                <button className="adminLogoutBtn" onClick={handleClick}>
-                  Log out
-                </button>
-              </div>
-            </div>
-
-            <ul>
-              <li>
-                <Link to={'/adminHome'}>Home</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+        <Header/>
 
     <div className="lightBlueBodyBG">
-        <div className="lightBlueBox">
+        <div className="lightBlueBox" >
+            <div className="img-section-large">
+                <div className="gem-image-container">
+                    <img
+                      src={gems.find((gem) => gem._id === installment.gemID)?.gem_img}
+                      alt="Gem"
+                      className="gem-card__image"
+                    />
+                </div>
+              </div>
             <h3>{gems.find((gem) => gem._id === installment.gemID)?.name} </h3>
-            <h3> Customer: {usersName?.firstName} {usersName?.lastName} </h3>
+            <h3>{gems.find((gem) => gem._id === installment.gemID)?.color} </h3>
+        </div>
+        <div className="whiteBox">
             <br></br>
             
-            
-            <table className="table table-striped">
+            <table className="table table-striped table-hover">
                 <tr><td>Purchased Date</td>
                 <td>{new Date(installment.installmentDates[0]).toLocaleDateString()}</td>
                 </tr>
@@ -135,7 +113,7 @@ const AllInstallmentsDetailed = () => {
                 <tr><td>Status</td> <td>{installment.status}</td></tr>
 
             </table>
-            
+
             
         </div> 
         <div className="whiteBox">
@@ -146,7 +124,7 @@ const AllInstallmentsDetailed = () => {
           <table className="table table-striped table-hover" >
             <thead> 
               <tr>
-                <th>#</th>
+                <th>Month</th>
                 <th>Date of the Payemnt</th>
                 <th>Time of the Payemnt</th>
                 <th>Payment Status</th>
@@ -164,6 +142,15 @@ const AllInstallmentsDetailed = () => {
               ))}
             </tbody>
           </table>
+
+          <button 
+            onClick={() => {
+                navigate('/payments');
+                localStorage.setItem('TamountInfo', installment.monthlyPayment);
+                }} > 
+                
+                Do next payment 
+        </button>
             
         </div> 
     </div>
@@ -174,4 +161,4 @@ const AllInstallmentsDetailed = () => {
 
 
 
-export default AllInstallmentsDetailed
+export default MyInstallmentsDetailed

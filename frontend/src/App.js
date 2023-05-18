@@ -60,13 +60,15 @@ import JewelScreen from "./pages/JewelScreen";
 import JewelhomeWomen from "./pages/JewelhomeWomen";
 
 //vihangi
-import InstallmentPlans from "./pages/InstallmentPlans";
-import SelectedInstallmentPlan from "./pages/SelectedInstallmentPlan";
-import AllInstallments from "./pages/AllInstallments";
-import AllInstallmentsDetailed from "./pages/AllInstallmentsDetailed";
-import AdminInstallmentPlans from "./pages/AdminInstallmentPlans";
-import AdminUpdatePlan from "./pages/AdminUpdatePlan";
-import MyInstallments from "./pages/MyInstallments";
+import InstallmentPlans from './pages/InstallmentPlans';
+import SelectedInstallmentPlan from './pages/SelectedInstallmentPlan';
+import AllInstallments from './pages/AllInstallments';
+import AllInstallmentsDetailed from './pages/AllInstallmentsDetailed';
+import AdminInstallmentPlans from './pages/AdminInstallmentPlans';
+import AdminUpdatePlan from './pages/AdminUpdatePlan';
+import MyInstallments from './pages/MyInstallments';
+import MyInstallmentsDetailed from './pages/MyInstallmentsDetailed';
+import InstallmentReport from './pages/InstallmentsReport';
 
 //ammaar
 import GemAdminHome from "./pages/GemAdminHome";
@@ -180,6 +182,11 @@ function App() {
               path="/AdminInstallmentPlans/AllInstallments"
               element={<AllInstallments />}
             />
+
+          <Route
+              path="/AdminInstallmentPlans/InstallmentReport"
+              element={<InstallmentReport />}
+            />
             <Route
               path="/AdminInstallmentPlans/AllInstallments/AllInstallmentsDetailed/:id"
               element={<AllInstallmentsDetailed />}
@@ -195,6 +202,11 @@ function App() {
             <Route
               path="/profile/MyPayments/MyInstallments/:id"
               element={<MyInstallments />}
+            />
+
+            <Route
+              path="/profile/MyPayments/MyInstallments/MyInstallmentsDetailed/:id"
+              element={<MyInstallmentsDetailed />}
             />
           </Routes>
         </div>

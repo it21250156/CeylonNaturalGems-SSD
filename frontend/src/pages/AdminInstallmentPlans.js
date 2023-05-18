@@ -74,7 +74,13 @@ const AdminInstallmentPlans = () => {
             <div className="lightBlueBodyBG">
             <button className="adminHome-bigBtns" 
             style={{marginLeft : "60%"}}
+            onClick={() => {navigate('/AdminInstallmentPlans/InstallmentReport')}}> Reports </button>
+
+            <button className="adminHome-bigBtns" 
+            style={{marginLeft : "60%"}}
             onClick={() => {navigate('/AdminInstallmentPlans/AllInstallments')}}> See All User Installments</button>
+
+
             <div className="whiteBodyBG">
               <div className="darkBlueTopicBox">
                   <h3 className="pageTopic">Installment Plans</h3>
