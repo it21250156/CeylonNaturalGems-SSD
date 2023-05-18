@@ -87,37 +87,39 @@ const AdminDelivery = () => {
 
           <div className="adminDel">
             <input
+              className="gem-search-input"
               type="text"
               placeholder="Search Country , District , Delivery Method "
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+            <div className="del-table-cont">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Payment ID</th>
+                    <th>Date</th>
+                    <th>Address</th>
+                    <th>District</th>
+                    <th>Country</th>
+                    <th>Delivery Method</th>
+                    <th>Delivery Status</th>
+                  </tr>
+                </thead>
 
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Payment ID</th>
-                  <th>Date</th>
-                  <th>Address</th>
-                  <th>District</th>
-                  <th>Country</th>
-                  <th>Delivery Method</th>
-                  <th>Delivery Status</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {payments &&
-                  payments.map((payment) => (
-                    <PDeliveryRow
-                      key={payment._id}
-                      payment={payment}
-                      reload={reload}
-                      setReload={setReload}
-                    />
-                  ))}
-              </tbody>
-            </table>
+                <tbody>
+                  {payments &&
+                    payments.map((payment) => (
+                      <PDeliveryRow
+                        key={payment._id}
+                        payment={payment}
+                        reload={reload}
+                        setReload={setReload}
+                      />
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -266,8 +268,10 @@ const PDeliveryRow = ({ payment, setReload }) => {
           checked={payment.dStatus === 'Pending'}
           onChange={(e) => handleStatusChange(e)}
         />
-        <label for="pending">Pending</label>
-
+        <label for="pending" className="delTableLabel">
+          Pending
+        </label>
+        <br></br>
         <input
           className="delTableRadio"
           type="radio"
@@ -277,7 +281,7 @@ const PDeliveryRow = ({ payment, setReload }) => {
           onChange={(e) => handleStatusChange(e)}
         />
         <label for="inprocess">In Process</label>
-
+        <br></br>
         <input
           className="delTableRadio"
           type="radio"
@@ -287,7 +291,7 @@ const PDeliveryRow = ({ payment, setReload }) => {
           onChange={(e) => handleStatusChange(e)}
         />
         <label for="delivered">Delivered</label>
-
+        <br></br>
         <input
           className="delTableRadio"
           type="radio"
@@ -299,7 +303,11 @@ const PDeliveryRow = ({ payment, setReload }) => {
         <label for="pickedUp">Picked Up</label>
       </td>
       <td>
-        <button onClick={handleDelete} disabled={isDeleting}>
+        <button
+          className="delBtnDelete"
+          onClick={handleDelete}
+          disabled={isDeleting}
+        >
           {isDeleting ? 'Deleting...' : 'DELETE'}
         </button>
       </td>

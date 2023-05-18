@@ -24,6 +24,10 @@
   padding: 20px;
 }
 
+.del-table-cont {
+  padding: 10px;
+}
+
 .container {
   display: flex;
   justify-content: center;
