@@ -1,5 +1,8 @@
 import '../CSS/CartCard.css';
-import { useAuthContext } from '../hooks/useAuthContext';
+import { Link } from "react-router-dom";
+import "../CSS/CartCard.css";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useEffect, useState } from "react";
 
 function CartCard({ cartid, gem, jewellery }) {
   const { cartData, handleCartRemove, handleChangeQuantityCart } =
@@ -98,6 +101,18 @@ function CartCard({ cartid, gem, jewellery }) {
             <p className="cartcard-name">{jewellery?.name}</p>
             <p className="cartcard-price">${jewellery?.price}</p>
             <p className="cartcard-name">{jewelWithGem}</p>
+          </div>
+          <div>
+            {jewellery.jewellery_img && (
+              <img
+                src={jewellery.jewellery_img}
+                style={{
+                  maxWidth: "200px",
+                  maxHeight: "200px",
+                  marginBottom: "10px",
+                }}
+              />
+            )}
           </div>
           <div className="update-section"></div>
           <div className="btn-delete">

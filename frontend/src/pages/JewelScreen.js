@@ -1,24 +1,24 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from "react";
 
-import { Link, useParams } from 'react-router-dom';
-import logger from 'use-reducer-logger';
-import '../CSS/GemScreen.css';
-import Header from '../components/Header';
+import { Link, useParams } from "react-router-dom";
+import logger from "use-reducer-logger";
+import "../CSS/GemScreen.css";
+import Header from "../components/Header";
 
 export const JwelReducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_REQUEST':
+    case "FETCH_REQUEST":
       return {
         ...state,
         loading: true,
       };
-    case 'FETCH_SUCCESS':
+    case "FETCH_SUCCESS":
       return {
         ...state,
         Jwl: action.payload,
         loading: false,
       };
-    case 'FETCH_FAIL':
+    case "FETCH_FAIL":
       return {
         ...state,
         loading: false,
@@ -32,26 +32,25 @@ export const JwelReducer = (state, action) => {
 function JewelScreen() {
   const params = useParams();
   const { id } = params;
-  const [Gem, setGem] = useState('');
+  const [Gem, setGem] = useState("");
 
-  localStorage.setItem('gemCartInfo', JSON.stringify(Gem));
-
+  localStorage.setItem("gemCartInfo", JSON.stringify(Gem));
 
   const [{ loading, error, Jwl }, dispatch] = useReducer(logger(JwelReducer), {
     Jwl: [],
     loading: true,
-    error: '',
+    error: "",
   });
 
   useEffect(() => {
     const fetchJewels = async () => {
-      dispatch({ type: 'FETCH_REQUEST' });
+      dispatch({ type: "FETCH_REQUEST" });
       try {
         const response = await fetch(`/api/jewelleryes/${id}`);
         const json = await response.json();
-        dispatch({ type: 'FETCH_SUCCESS', payload: json });
+        dispatch({ type: "FETCH_SUCCESS", payload: json });
       } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
     };
     fetchJewels();
@@ -60,12 +59,12 @@ function JewelScreen() {
     const data = {
       cartitemid: itemid,
       cartquantity: 1,
-      cartuserid: JSON.parse(localStorage.getItem('userInfo'))._id,
+      cartuserid: JSON.parse(localStorage.getItem("userInfo"))._id,
     };
     const response = await fetch(`/api/cart/`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
     // await fetch(`/api/cart/user/${data.cartuserid}`)
     //   .this((res) => res.json())
@@ -92,12 +91,25 @@ function JewelScreen() {
                 <p className="gem-name">{Jwl.name}</p>
                 <p className="gem-price">${Jwl.price}</p>
 
+                <div>
+                  {Jwl.jewellery_img && (
+                    <img
+                      src={Jwl.jewellery_img}
+                      style={{
+                        maxWidth: "200px",
+                        maxHeight: "200px",
+                        marginBottom: "10px",
+                      }}
+                    />
+                  )}
+                </div>
+
                 <div className="btns">
                   <button
                     onClick={() => handleAddToCart(Jwl._id)}
                     className="btn-add-to-cart"
                   >
-                    Add to cart 
+                    Add to cart
                   </button>
                 </div>
                 <label className="label">Gem Shape</label>
@@ -130,7 +142,7 @@ function JewelScreen() {
               </center>
               <div className="details-part">
                 <center>
-                  {' '}
+                  {" "}
                   <table className="detail-table">
                     <tr>
                       <td className="cl1">Type</td>
@@ -142,9 +154,9 @@ function JewelScreen() {
                     </tr>
 
                     <tr>
-                    <td className="cl1">Stone</td>
-                    <td className="cl2">: {Jwl.gemstone}</td>
-                  </tr>
+                      <td className="cl1">Stone</td>
+                      <td className="cl2">: {Jwl.gemstone}</td>
+                    </tr>
                     <tr>
                       <td className="cl1">MetalType</td>
                       <td className="cl2">: {Jwl.metal}</td>
