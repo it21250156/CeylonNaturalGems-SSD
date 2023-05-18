@@ -175,6 +175,9 @@ const FeedbackForm = () => {
         <p className="title-feedback">Add a new Feedback</p>
       </div>
       <div className="light-blue-bg">
+        {JSON.stringify(cartData[0])}
+        {JSON.stringify(gems[0])}
+        {JSON.stringify(jewellery[0])}
         <form
           className="create"
           onSubmit={handleSubmit}
