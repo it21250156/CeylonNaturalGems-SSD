@@ -35,7 +35,7 @@ function ReplyRequest() {
       reply,
       reqId,
     }).then((response) => {
-      alert("Reply added!");
+      Swal.fire('Reply added succsessfully!')
     });
   };
 
@@ -45,15 +45,6 @@ function ReplyRequest() {
     //     })
     //   }, [])
     
-      const createReply = () => {
-        
-        Axios.post(`/createReply/`,{
-          reply,
-          reqId
-        }).then((response) => {
-          Swal.fire('Reply added succsessfully!')
-        })
-      }
   
 
     return(
