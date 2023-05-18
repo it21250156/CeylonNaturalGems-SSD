@@ -43,7 +43,6 @@ const GemAddForm = () => {
         const file = e.target.image.files[0];
         if (!file) {
             setError('Please select an image.');
-            return;
         }
 
         const formData = new FormData();
@@ -83,11 +82,17 @@ const GemAddForm = () => {
             emptyFields.push('desc');
         }
 
+        if (!file) {
+            setError('Please select an image.');
+        }
+
         if (emptyFields.length > 0) {
             setEmptyFields(emptyFields);
             setError('Please fill in all required fields.');
             return;
         }
+
+
 
         const response = await fetch("/api/gems", {
             method: "POST",
@@ -129,7 +134,7 @@ const GemAddForm = () => {
                 </div>
                 <div className="lightBlueBodyBGUserprofile">
                     <div className="gem-input-container">
-                        <form className="create" onSubmit={handleSubmit}>
+                        <form className="create" onSubmit={handleSubmit} encType='multipart/form-data'>
                             <div className='column-1'>
                                 <label className="gem-label">Gem Name: </label>
                                 <input
@@ -220,10 +225,10 @@ const GemAddForm = () => {
                                     type="textarea"
                                     onChange={(e) => setDescription(e.target.value)}
                                     value={description}
-                                    className={`gem-input ${emptyFields.includes('description') ? 'error' : ''}`}
+                                    className={`gem-input ${emptyFields.includes('desc') ? 'error' : ''}`}
                                 />
                             </div>
-                            {emptyFields.includes('description') && <div className="error">Please enter a description.</div>}
+                            {emptyFields.includes('desc') && <div className="error">Please enter a description.</div>}
 
                             <button className="gem-add-buttons" >Add Gem</button>
                             {error && <div className="error">{error}</div>}
