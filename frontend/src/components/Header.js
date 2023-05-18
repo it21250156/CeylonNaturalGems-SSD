@@ -6,6 +6,7 @@ import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import axios from 'axios';
 import '../CSS/Header.css';
+import logo from '../images/Artboard 1.png';
 
 const Header = () => {
   const { logout } = useLogout();
@@ -43,9 +44,11 @@ const Header = () => {
     <header>
       <div>
         <div className="background">
+          <div className="logo"></div>
           <div className="headerNameDiv">
-            <h1 className="headerName">Ceylon Natural Gems</h1>
+            <img src={logo} alt="logo" className="logo-img" />
           </div>
+          <div className="empty-col"></div>
         </div>
 
         <nav>
@@ -106,9 +109,7 @@ const Header = () => {
                 </li>
               </ul>
             </li>
-            <li>
-              <a href="#">Blog</a>
-            </li>
+
             <li>
               <Link to="/feedbacks">Feedbacks</Link>
             </li>

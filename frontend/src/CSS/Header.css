@@ -7,6 +7,20 @@ body {
   height: 200px;
   background-color: #0a2647;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.logo {
+  flex: 1;
+}
+
+.logo-img {
+  width: 500px;
+}
+
+.empty-col {
+  flex: 1;
 }
 
 .headerName {
@@ -17,6 +31,7 @@ body {
 }
 
 .headerNameDiv {
+  flex: 1;
   height: 200px;
   width: 100%;
   padding: 50px 0px 50px 0px;
