@@ -73,3 +73,16 @@
   border: 2px solid #144272;
   transition: 0.5s;
 }
+/* report */
+
+.inst-report-text-row1{
+  color: #144272;; 
+  font-size: 25px;
+  padding: 5px;
+}
+
+.inst-report-text-row2{
+  color: #061e36;; 
+  font-size: 25px;
+  padding: 5px;
+}
