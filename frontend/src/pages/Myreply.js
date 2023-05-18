@@ -2,10 +2,23 @@ import { useState, useEffect } from "react";
 import React from 'react';
 import Axios from "axios";
 import Header from "../components/Header";
+import { Link, useParams } from 'react-router-dom';
+
+import { useAuthContext } from "../hooks/useAuthContext"
+import { useNavigate } from 'react-router-dom'
+import { useLogout } from '../hooks/useLogout';
 
 function Myreply() {
 
   const [listOfReplies, setListOfReplies] = useState([]);
+  const { logout } = useLogout();
+  
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    logout();
+    navigate('/');
+  };
 
   const deletereq = (id) => {
     Axios.delete(`/deleteRep/${id}`).then((response) => {
@@ -27,7 +40,32 @@ function Myreply() {
 
   return (
     <>
-      <Header />
+      <header>
+        <div>
+          <div className="background">
+            <div className="headerNameDiv">
+              <h1 className="headerName">Ceylon Natural Gems</h1>
+            </div>
+          </div>
+
+        <nav>
+          <div className="navprofileDiv">
+              <div className="navEmal">
+                <span className="welcomeNoteAdmin">Hello Admin</span>
+                <button className="adminLogoutBtn" onClick={handleClick}>
+                  Log out
+                </button>
+              </div>
+            </div>
+
+          <ul>
+            <li>
+              <Link to={'/adminHome'}>Home</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
       <div>
         <div className='lightBlueBodyBG'>
           {listOfReplies.map((user) => {

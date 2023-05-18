@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import logger from 'use-reducer-logger';
 import '../CSS/GemScreen.css';
@@ -43,6 +43,17 @@ function GemScreen() {
     loading: true,
     error: '',
   });
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  const handleRequestGems = () => {
+    if (user) {
+      // User is logged in, proceed with the request
+      navigate('/reqM');
+    } else {
+      // User is not logged in, show the login popup
+      setShowLoginPopup(true);
+    }
+  };
 
   useEffect(() => {
     const fetchGems = async () => {
@@ -156,10 +167,17 @@ function GemScreen() {
             <div className="req-box">
               <p className="req-txt-1">Can't find something you like?</p>
               <p className="req-txt-2">Let us help you</p>
-              <Link to={'/reqM'}>
-                <button className="req-btn">Request Gems</button>
-              </Link>
+              <button className="req-btn" onClick={handleRequestGems}>
+                Request Gems
+              </button>
             </div>
+
+            {showLoginPopup && (
+              <div className="login-popup">
+                <p><strong>Please login first !</strong></p>
+                <button className='logincheckbtn' onClick={() => setShowLoginPopup(false)}>Close</button>
+              </div>
+            )}
           </div>
         </div>
       </div>
