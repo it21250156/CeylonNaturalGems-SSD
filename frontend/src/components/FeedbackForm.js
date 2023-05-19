@@ -13,13 +13,12 @@ const FeedbackForm = () => {
   const { dispatch } = useFeedbacksContext();
   const [payment, setPayment] = useState('');
   const { user, cartData } = useAuthContext();
-  const [gems, setGems] = useState([])
-  const [jewellery, setJewelleries] = useState([])
+  const [gems, setGems] = useState([]);
+  const [jewellery, setJewelleries] = useState([]);
   const [fbInfo, setFbInfo] = useState('');
   const [rating, setRating] = useState(0);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
-
 
   const [feedCart, setFeedCart] = useState('');
   const [orders, setOrders] = useState('');
@@ -27,66 +26,61 @@ const FeedbackForm = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    console.log("check123")
+    console.log('check123');
 
     const fetchPayment = async () => {
-
       try {
-        console.log("check1")
+        console.log('check1');
         const response = await fetch('/api/payments/' + paymentid);
         const json = await response.json();
         setPayment(json);
 
         if (json?.orderID) {
-          console.log("got order ID", json?.orderID)
-          const itemList = json?.orderID
+          console.log('got order ID', json?.orderID);
+          const itemList = json?.orderID;
 
-          const gemPromises = itemList.map(item => {
-            console.log("gem check " + item);
+          const gemPromises = itemList.map((item) => {
+            console.log('gem check ' + item);
             return axios
               .get('http://localhost:4000/api/gems&jewelleries/gems/' + item)
-              .then(resp => {
-                console.log("gem response " + item, " ", resp.status);
+              .then((resp) => {
+                console.log('gem response ' + item, ' ', resp.status);
                 if (resp.status === 200) {
-                  console.log("got gem ", resp.data);
+                  console.log('got gem ', resp.data);
                   return resp.data;
                 }
               })
-              .catch(err => {
+              .catch((err) => {
                 console.log(err);
                 return null; // Return null if there was an error fetching the gem
               });
           });
 
-
-
-          const jewelPromises = itemList.map(item => {
-            console.log("jewel check " + item);
+          const jewelPromises = itemList.map((item) => {
+            console.log('jewel check ' + item);
             return axios
               .get(`http://localhost:4000/api/jewelleryes/` + item)
-              .then(res => {
+              .then((res) => {
                 if (res.status === 200) {
-                  console.log("got jewel ", res.data);
+                  console.log('got jewel ', res.data);
                   return res.data;
                 }
               })
-              .catch(err => {
+              .catch((err) => {
                 console.log(err);
                 return null; // Return null if there was an error fetching the jewel
               });
           });
 
-
-
           Promise.all([...gemPromises, ...jewelPromises])
-            .then(results => {
+            .then((results) => {
               // Handle the fetched gems and jewels
-              const gems = results.filter(result => result !== null);
+              const gems = results.filter((result) => result !== null);
               setGems(gems);
               console.log(gems);
               // Call setGems function or update the desired state/variable here
             })
-            .catch(err => {
+            .catch((err) => {
               console.log(err);
             });
         }
@@ -95,35 +89,30 @@ const FeedbackForm = () => {
       }
     };
 
-    fetchPayment()
+    fetchPayment();
+  }, []);
 
-  }, [])
+  const [gemType, setGemType] = useState('Loading..');
 
-  const [gemType, setGemType] = useState("Loading..");
-
-  const [gemQty, setGemQty] = useState("Loading..");
-
+  const [gemQty, setGemQty] = useState('Loading..');
 
   useEffect(() => {
     if (gems) {
       setGemType(() => {
-        let str = ''
+        let str = '';
 
-        gems.map(gem => {
+        gems.map((gem) => {
+          str += gem.name + ', ';
+        });
 
-          str += gem.name + ", "
-
-        })
-
-        return str.substring(0, str.length - 2)
-      })
+        return str.substring(0, str.length - 2);
+      });
 
       setGemQty(() => {
-        return gems?.length
-
-      })
+        return gems?.length;
+      });
     }
-  }, [gems])
+  }, [gems]);
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
@@ -137,13 +126,13 @@ const FeedbackForm = () => {
 
     const formData = new FormData();
     if (file) {
-      formData.append("image", file);
+      formData.append('image', file);
     }
-    formData.append("gemType", gemType);
-    formData.append("gemQty", gemQty);
-    formData.append("fbInfo", fbInfo);
-    formData.append("rating", rating);
-    formData.append("user", user);
+    formData.append('gemType', gemType);
+    formData.append('gemQty', gemQty);
+    formData.append('fbInfo', fbInfo);
+    formData.append('rating', rating);
+    formData.append('user', user);
 
     const emptyFields = [];
 
@@ -177,8 +166,8 @@ const FeedbackForm = () => {
     //   },
     // });
 
-    const response = await fetch("/api/feedbacks", {
-      method: "POST",
+    const response = await fetch('/api/feedbacks', {
+      method: 'POST',
       body: formData,
     });
     const json = await response.json();
@@ -208,21 +197,19 @@ const FeedbackForm = () => {
       <div className="title-box-feedback">
         <p className="title-feedback">Add a new Feedback</p>
       </div>
-      <div className="light-blue-bg">
+      <div className="all-fb-light-blue-bg">
         <form
           className="create"
           onSubmit={handleSubmit}
           enctype="multipart/form-data"
         >
-
           <label className="label"> Gem/Jewellery Name(s)</label>
           <input
             readOnly
             id="input"
             type="text"
             onChange={(e) => setGemType(e.target.value)}
-            value={gemType
-            }
+            value={gemType}
             className={emptyFields?.find((f) => f === 'gemType') ? 'error' : ''}
           />
 
@@ -248,7 +235,9 @@ const FeedbackForm = () => {
             className={emptyFields?.find((f) => f === 'fbInfo') ? 'error' : ''}
           ></textarea>
 
-          {emptyFields.includes('fbInfo') && <div className="error">Please provide feedback.</div>}
+          {emptyFields.includes('fbInfo') && (
+            <div className="error">Please provide feedback.</div>
+          )}
 
           <label className="label">Add Star Rating</label>
           <StarRating
@@ -263,10 +252,17 @@ const FeedbackForm = () => {
             className={emptyFields?.find((f) => f === 'rating') ? 'error' : ''}
           />
 
-          {emptyFields.includes('rating') && <div className="error">Please add a rating.</div>}
+          {emptyFields.includes('rating') && (
+            <div className="error">Please add a rating.</div>
+          )}
 
           <label className="label"> Upload Image</label>
-          <input type="file" name="image" accept="image/*" />
+          <input
+            className="feedback-input-img"
+            type="file"
+            name="image"
+            accept="image/*"
+          />
 
           <button type="submit" className="add-feedbackform-btn">
             Add Feedback

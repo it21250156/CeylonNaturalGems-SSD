@@ -1,6 +1,5 @@
 const User = require("../models/users.model.js");
 const generateToken = require("../utils/generateToken.js");
-// import jwt from 'jsonwebtoken'
 const asyncHandler = require("express-async-handler");
 
 const crypto = require('crypto');
@@ -83,30 +82,6 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid user data");
   }
 });
-
-//*************************************************** */
-
-// const createToken = (_id) => {
-//   return jwt.sign({_id}, process.env.JWT_SECRET, { expiresIn: '3d' })
-// }
-
-// // signup a user
-// const registerUser = async (req, res) => {
-//   const {title, userType ,firstName , lastName ,  email, phone , password , confirmPassword} = req.body
-
-//   try {
-//     const user = await User.signup(title, userType ,firstName , lastName ,  email, phone , password , confirmPassword)
-
-//     // create a token
-//     const token = createToken(user._id)
-
-//     res.status(200).json({email, token})
-//   } catch (error) {
-//     res.status(400).json({error: error.message})
-//   }
-// }
-
-//****************************************************** */
 
 // @desc    Get user profile
 // @route   GET /users/profile
@@ -197,7 +172,6 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-  // const user = await User.findById(req.params.id).select('-password');
 
   if (user) {
     res.json(user);
@@ -290,7 +264,7 @@ const forgotpassword = asyncHandler(async (req, res) => {
           .save()
           .then(() => {
             const transporter = nodemailer.createTransport({
-              service: "Gmail",
+              service: "ProtonMail",
               auth: {
                 user: "ceylonnaturalgems1@gmail.com",
                 pass: "Ceylon@1234",

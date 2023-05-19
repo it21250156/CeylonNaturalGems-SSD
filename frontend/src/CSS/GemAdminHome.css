@@ -40,7 +40,7 @@
 }
 
 .gem-admin-buttons::before {
-  content: "";
+  content: '';
   position: absolute;
   left: -50px;
   top: 0;
@@ -68,7 +68,7 @@
   max-width: 25rem;
 }
 
-.gem-admin-search input[type="text"] {
+.gem-admin-search input[type='text'] {
   width: 100%;
   border: none;
   border-radius: 9999px;
@@ -80,18 +80,18 @@
   transition: all 0.2s ease-in-out;
 }
 
-.gem-admin-search input[type="text"]:focus {
+.gem-admin-search input[type='text']:focus {
   outline: none;
   background-color: #fff;
   box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.2);
 }
 
-.gem-admin-search input[type="text"]::placeholder {
+.gem-admin-search input[type='text']::placeholder {
   color: #666;
   font-weight: 400;
 }
 
-.gem-admin-search input[type="text"] + svg {
+.gem-admin-search input[type='text'] + svg {
   position: absolute;
   top: 50%;
   right: 1rem;

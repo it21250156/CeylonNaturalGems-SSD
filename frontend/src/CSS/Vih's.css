@@ -1,13 +1,88 @@
-.lightBlueBox{
-    background-color: #2c74b3;
-    margin: 20px 10%;
-    padding: 20px;
-    border-radius: 20px;
+.lightBlueBox {
+  background-color: #cadefc;
+  margin: 20px 10%;
+  padding: 20px;
+  border-radius: 20px;
 }
 
-.whiteBox{
-    background-color: white;
-    margin: 20px 10%;
-    padding: 20px;
-    border-radius: 20px;
+.top-box-inst {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.top-left-box {
+  flex: 1;
+  background-color: white;
+  margin: 10px 30px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px black;
+  text-align: start;
+}
+
+.top-right-box {
+  flex: 1;
+  background-color: white;
+  margin: 10px 30px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px black;
+  font-family: bpreplay;
+}
+
+.white-box-inst {
+  background-color: white;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.gem-name-inst {
+  margin: 20px;
+  color: #144272;
+  font-family: Bebas Neue;
+  font-size: 50px;
+}
+
+.cus-name-inst {
+  color: #144272;
+  margin-left: 20px;
+}
+
+.top-table-labels {
+  font-weight: bold;
+}
+
+.inst-table-1 {
+  text-align: start;
+}
+
+.nxt-payment-btn {
+  background-color: #144272;
+  border: 2px solid #144272;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  margin: 10px;
+  color: white;
+}
+
+.nxt-payment-btn:hover {
+  background-color: white;
+  color: #144272;
+  border: 2px solid #144272;
+  transition: 0.5s;
+}
+/* report */
+
+.inst-report-text-row1{
+  color: #144272;; 
+  font-size: 25px;
+  padding: 5px;
+}
+
+.inst-report-text-row2{
+  color: #061e36;; 
+  font-size: 25px;
+  padding: 5px;
 }

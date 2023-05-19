@@ -15,7 +15,6 @@ import '../CSS/GemAdminHome.css';
 import Header from '../components/Header';
 
 const GemAdminHome = () => {
-
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const navigate = useNavigate();
@@ -26,18 +25,18 @@ const GemAdminHome = () => {
   };
 
   const { gems, dispatch } = useGemsContext();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [sortBy, setSortBy] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortBy, setSortBy] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     const fetchGems = async () => {
-      const response = await fetch("/api/gems");
+      const response = await fetch('/api/gems');
       const json = await response.json();
 
       if (response.ok) {
-        dispatch({ type: "SET_GEMS", payload: json });
+        dispatch({ type: 'SET_GEMS', payload: json });
       }
     };
 
@@ -53,41 +52,39 @@ const GemAdminHome = () => {
       gem.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    if (sortBy === "addedDate") {
+    if (sortBy === 'addedDate') {
       results = results.sort(
         (a, b) =>
-          (sortOrder === "asc" ? 1 : -1) *
+          (sortOrder === 'asc' ? 1 : -1) *
           (new Date(a.createdAt) - new Date(b.createdAt))
       );
-    } else if (sortBy === "quantity") {
+    } else if (sortBy === 'quantity') {
       results = results.sort(
-        (a, b) => (sortOrder === "asc" ? 1 : -1) * (a.quantity - b.quantity)
+        (a, b) => (sortOrder === 'asc' ? 1 : -1) * (a.quantity - b.quantity)
       );
-    } else if (sortBy === "price") {
+    } else if (sortBy === 'price') {
       results = results.sort(
-        (a, b) => (sortOrder === "asc" ? 1 : -1) * (a.price - b.price)
+        (a, b) => (sortOrder === 'asc' ? 1 : -1) * (a.price - b.price)
       );
     }
 
     setSearchResults(results);
   }, [gems, searchTerm, sortBy, sortOrder]);
 
-
   const handleSortChange = (event) => {
     const selectedSortBy = event.target.value;
 
     if (selectedSortBy === sortBy) {
-      setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+      setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
     } else {
       setSortBy(selectedSortBy);
-      setSortOrder("asc");
+      setSortOrder('asc');
     }
   };
 
-
   return (
     <>
-    <header>
+      <header>
         <div>
           <div className="background">
             <div className="headerNameDiv">
@@ -123,7 +120,8 @@ const GemAdminHome = () => {
               type="text"
               placeholder="Search by gem name"
               value={searchTerm}
-              onChange={handleSearchChange} />
+              onChange={handleSearchChange}
+            />
           </div>
         </div>
         <div class="gem-admin-sort">
@@ -140,18 +138,17 @@ const GemAdminHome = () => {
           <button
             className="gem-admin-buttons"
             onClick={() => {
-              window.location.href = "./AddGem";
+              window.location.href = './AddGem';
             }}
           >
-            {" "}
-            Add a New Gem{" "}
+            Add a New Gem
           </button>
 
           <Link to={`/GemAdminReports`}>
             <button className="gem-admin-buttons">Reports</button>
           </Link>
         </div>
-        <div className="gems">
+        <div className="card-container-ammaar">
           {searchResults.length > 0 ? (
             searchResults.map((gem) => <GemDetails gem={gem} key={gem._id} />)
           ) : (

@@ -62,6 +62,10 @@
   width: 250%;
 }
 
+.feedback-input-img {
+  width: fit-content;
+}
+
 .top-btn {
   width: 100%;
 }

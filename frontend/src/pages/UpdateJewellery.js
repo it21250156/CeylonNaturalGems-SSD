@@ -1,13 +1,13 @@
-import react, { useEffect, useState } from "react";
-import { useJewelleryesContext } from "../hooks/useJewelleryesContext";
-import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
+import react, { useEffect, useState } from 'react';
+import { useJewelleryesContext } from '../hooks/useJewelleryesContext';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from '../hooks/useAuthContext';
 
-import { Link } from "react-router-dom";
-import { useLogout } from "../hooks/useLogout";
-import axios from "axios";
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import axios from 'axios';
 
 function UpdateJewellery() {
   const { logout } = useLogout();
@@ -16,27 +16,27 @@ function UpdateJewellery() {
 
   const handleClick = () => {
     logout();
-    navigate("/");
+    navigate('/');
   };
 
   const { _id } = useParams();
   const { jewelleryes, dispatch } = useJewelleryesContext();
   const [jewellery, setJewellery] = useState({});
 
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [gender, setGender] = useState("");
-  const [gemstone, setGemstone] = useState("");
-  const [metal, setMetal] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [gender, setGender] = useState('');
+  const [gemstone, setGemstone] = useState('');
+  const [metal, setMetal] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
   const [selectedGender, setSelectedGender] = useState(jewellery.gender);
   const [selectedGemstone, setSelectedGemstone] = useState(jewellery.gemstone);
   const [selectedMetal, setSelectedMetal] = useState(jewellery.metal);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [emptyFields, setEmptyFields] = useState([]);
   const [images, setImages] = useState([]);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState('');
   const nav = useNavigate();
 
   const handleFileChange = (e) => {
@@ -52,7 +52,7 @@ function UpdateJewellery() {
       reader.readAsDataURL(file);
     } else {
       setImages([]);
-      setImageUrl("");
+      setImageUrl('');
     }
   };
 
@@ -63,53 +63,53 @@ function UpdateJewellery() {
 
     const emptyFields = [];
 
-    if (name === "") {
-      emptyFields.push("name");
+    if (name === '') {
+      emptyFields.push('name');
     }
 
-    if (type === "") {
-      emptyFields.push("type");
+    if (type === '') {
+      emptyFields.push('type');
     }
 
-    if (gender === "") {
-      emptyFields.push("gender");
+    if (gender === '') {
+      emptyFields.push('gender');
     }
 
-    if (gemstone === "") {
-      emptyFields.push("gemstone");
+    if (gemstone === '') {
+      emptyFields.push('gemstone');
     }
 
-    if (metal === "") {
-      emptyFields.push("metal");
+    if (metal === '') {
+      emptyFields.push('metal');
     }
 
-    if (description === "") {
-      emptyFields.push("description");
+    if (description === '') {
+      emptyFields.push('description');
     }
 
-    if (price === "") {
-      emptyFields.push("price");
+    if (price === '') {
+      emptyFields.push('price');
     }
 
     if (emptyFields.length > 0) {
       setEmptyFields(emptyFields);
-      setError("Please fill in all required fields.");
+      setError('Please fill in all required fields.');
       return;
     }
 
     if (images.length > 0) {
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("type", type);
-      formData.append("gender", gender);
-      formData.append("metal", metal);
-      formData.append("gemstone", gemstone);
-      formData.append("price", price);
-      formData.append("description", description);
-      formData.append("image", images[0]);
+      formData.append('name', name);
+      formData.append('type', type);
+      formData.append('gender', gender);
+      formData.append('metal', metal);
+      formData.append('gemstone', gemstone);
+      formData.append('price', price);
+      formData.append('description', description);
+      formData.append('image', images[0]);
 
       const response = await fetch(`/api/jewelleryes/${_id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         body: formData,
       });
 
@@ -119,10 +119,10 @@ function UpdateJewellery() {
         setError(json.error);
       }
 
-      Swal.fire('Jewellery details updated successfully!')
+      Swal.fire('Jewellery details updated successfully!');
     }
 
-    nav("/JewelleryAdminDashboard");
+    nav('/JewelleryAdminDashboard');
   };
 
   useEffect(() => {
@@ -179,7 +179,7 @@ function UpdateJewellery() {
 
             <ul>
               <li>
-                <Link to={"/adminHome"}>Home</Link>
+                <Link to={'/adminHome'}>Home</Link>
               </li>
             </ul>
           </nav>
@@ -187,9 +187,14 @@ function UpdateJewellery() {
       </header>
       <div className="Updatejewellery">
         {/* {JSON.stringify(jewellery)} */}
-
-        <form className="create" onSubmit={handleSubmit} encType="multipart/form-data">
-          <h3>Update Jewellery</h3>
+        <div className="darkBlueTopicBox">
+          <h3 className="pageTopic">Update Jewellery</h3>
+        </div>
+        <form
+          className="create"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="jewinputbox">
             <label className="jewAddlabel">Jewellery Name: </label>
             <div className="jewInput">
@@ -197,9 +202,9 @@ function UpdateJewellery() {
                 type="text"
                 onChange={(e) => setName(e.target.value)}
                 value={name}
-                className={emptyFields.includes("name") ? "error" : ""}
+                className={emptyFields.includes('name') ? 'error' : ''}
               />
-              {emptyFields.includes("name") && (
+              {emptyFields.includes('name') && (
                 <div className="error">Please enter a name.</div>
               )}
 
@@ -208,9 +213,9 @@ function UpdateJewellery() {
                 type="text"
                 onChange={(e) => setType(e.target.value)}
                 value={type}
-                className={emptyFields.includes("type") ? "error" : ""}
+                className={emptyFields.includes('type') ? 'error' : ''}
               />
-              {emptyFields.includes("type") && (
+              {emptyFields.includes('type') && (
                 <div className="error">Please enter a type.</div>
               )}
 
@@ -230,7 +235,7 @@ function UpdateJewellery() {
                 <option value="Female">Women</option>
               </select>
 
-              {emptyFields.includes("Gender") && (
+              {emptyFields.includes('Gender') && (
                 <div className="error">Please select a gender.</div>
               )}
 
@@ -269,7 +274,7 @@ function UpdateJewellery() {
           <option value="Ruby">Ruby</option>
           <option value="Moonstone">Moonstone</option>
         </select> */}
-              {emptyFields.includes("Metal") && (
+              {emptyFields.includes('Metal') && (
                 <div className="error">Please select a metal.</div>
               )}
 
@@ -303,7 +308,7 @@ function UpdateJewellery() {
                 <option value="Turquoies">Turquoies</option>
                 <option value="Cat's Eye">Cat's Eye</option>
               </select>
-              {emptyFields.includes("Gemstone") && (
+              {emptyFields.includes('Gemstone') && (
                 <div className="error">Please selecta gemstone.</div>
               )}
 
@@ -312,9 +317,9 @@ function UpdateJewellery() {
                 type="text"
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
-                className={emptyFields.includes("description") ? "error" : ""}
+                className={emptyFields.includes('description') ? 'error' : ''}
               />
-              {emptyFields.includes("description") && (
+              {emptyFields.includes('description') && (
                 <div className="error">Please enter a description.</div>
               )}
 
@@ -323,9 +328,9 @@ function UpdateJewellery() {
                 type="number"
                 onChange={(e) => setPrice(e.target.value)}
                 value={price}
-                className={emptyFields.includes("price") ? "error" : ""}
+                className={emptyFields.includes('price') ? 'error' : ''}
               />
-              {emptyFields.includes("price") && (
+              {emptyFields.includes('price') && (
                 <div className="error">Please enter a price.</div>
               )}
             </div>
@@ -340,14 +345,14 @@ function UpdateJewellery() {
               accept="image/jpg, image/jpeg, image/png"
               onChange={handleFileChange}
             ></input>
+
+            <button type="submit">Update Jewellery</button>
+            {error && <div className="error">{error}</div>}
           </div>
           <br />
           <br />
           <br />
           <br />
-
-          <button type="submit">Update Jewellery</button>
-          {error && <div className="error">{error}</div>}
         </form>
       </div>
     </>

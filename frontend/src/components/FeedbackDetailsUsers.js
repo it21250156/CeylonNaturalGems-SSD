@@ -2,18 +2,15 @@ import { useFeedbacksContext } from '../hooks/useFeedbackContext';
 import { Link } from 'react-router-dom';
 import StarRating from 'react-star-ratings';
 import '../CSS/UserFeedbacks.css';
+import Swal from 'sweetalert2';
 
 //DeleteCon
-import ConfirmationModal from './ConfirmationModal';
 
 //date fns
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { useEffect, useState } from 'react';
 
 const FeedbackDetailsUsers = ({ feedback }) => {
-
-  const [showModal, setShowModal] = useState(false);
-
   const { feedbacks, dispatch } = useFeedbacksContext();
 
   const handleClick = async () => {
@@ -24,35 +21,50 @@ const FeedbackDetailsUsers = ({ feedback }) => {
 
     if (response.ok) {
       dispatch({ type: 'DELETE_FEEDBACK', payload: json });
+      Swal.fire('Feedback Deleted', '', 'success');
     }
   };
 
   const handleConfirm = () => {
-    setShowModal(false);
-    handleClick();
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this Feedback?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleClick();
+      }
+    });
   };
 
   const handleCancel = () => {
-    setShowModal(false);
+    Swal.fire({
+      title: 'Deletion Cancelled',
+      text: 'Feedback deletion has been cancelled',
+      icon: 'info',
+    });
   };
-
 
   return (
     <div className="feedback-details-users">
       <p className="feedback-name">{feedback.gemType}</p>
       <div className="cols">
-        <div className="feedback-col-1">
-          <div className="img-section">
-          {feedback.feedback_img && (
-            <img
-              src={feedback.feedback_img}
-              alt="Feedback"
-              style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }}
-            />
-          )}
+        <div className="my-feedback-col-1">
+          <div>
+            {feedback.feedback_img && (
+              <img
+                className="my-feedback-img"
+                src={feedback.feedback_img}
+                alt="Feedback"
+              />
+            )}
           </div>
         </div>
-        <div className="feedback-col-2">
+        <div className="my-feedback-col-2">
           <p className="feedback-description">{feedback.fbInfo}</p>
           <StarRating
             readOnly
@@ -78,8 +90,7 @@ const FeedbackDetailsUsers = ({ feedback }) => {
           <span
             className="material-symbols-outlined"
             id="delete"
-            onClick={() => setShowModal(true)}
-
+            onClick={handleConfirm}
           >
             delete
           </span>
@@ -102,13 +113,6 @@ const FeedbackDetailsUsers = ({ feedback }) => {
           <strong>Feedback Reply:</strong> {feedback.reply}
         </p>
       )}
-      {showModal && (
-      <ConfirmationModal
-        message="Are you sure you want to delete this feedback?"
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      />
-    )}
     </div>
   );
 };

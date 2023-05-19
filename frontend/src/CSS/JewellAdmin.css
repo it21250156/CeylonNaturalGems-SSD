@@ -9,7 +9,7 @@
 body {
   background: #f1f1f1;
   margin: 0;
-  font-family: "Poppins";
+  font-family: 'Poppins';
 }
 header {
   background: #fff;
@@ -21,7 +21,8 @@ header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-} */
+}
+*/
 /* header a {
   color: #333;
   text-decoration: none;
@@ -34,37 +35,39 @@ header .container {
 
 /* homepage */
 
+
+
+.select_sort_jewel {
+  margin: 10px;
+}
+
 .jewellery-details {
-  background: #fff;
-  margin-top: 5%;
+  background: #cadefc;
+  margin: 0 100px;
   border-radius: 4px;
-  margin: 20px auto;
   padding: 20px;
   position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
 }
 
-.jewBox{
-  background-color: #7dc5ee;
-  margin-top: 3%;
-  margin-left: 15%;
-  margin-right: 15%;
-  border-radius: 20px;
+.jewBox {
+  background-color: white;
+  margin: 20px;
+  padding: 30px;
+  border-radius: 30px;
+  transition: 0.5s;
+}
+
+.jewBox:hover {
   box-shadow: 0 0 10px 5px rgba(44, 116, 179, 0.5);
-}
-
-.jewellery-details:hover {
-  border-radius: 20px;
-  margin-left: -15%;
-  margin-right: -15%;
 }
 
 .jewellery-details h4 {
   margin: 0 0 10px 0;
-  font-size: 2em;
-  color: #2c74b3;
-  
+  font-size: 40px;
+  color: #0a2647;
+  font-family: Bebas Neue;
 }
 .jewellery-details p {
   margin: 1%;
@@ -81,7 +84,7 @@ header .container {
   border-radius: 50%;
   color: #333;
 }
-.addGemButton{
+.addGemButton {
   background-color: #2c74b3;
   color: white;
   padding: 10px 15px;
@@ -90,40 +93,51 @@ header .container {
   font-size: 14px;
 }
 
-.JewdeleteButton{
-  background-color: #e42525;
+.JewdeleteButton {
+  background-color: red;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 30px;
   border: none;
-  border-radius: 5px;
-  font-size: 14px;
+  border-radius: 10px;
+  font-size: 20px;
   margin-top: 10px;
+  border: 2px solid red;
+  transition: 0.5s;
+  font-weight: 500;
 }
 
-.JewupdateButton{
+.JewupdateButton {
   background-color: #2c74b3;
-  color: rgb(0, 0, 0);
-  padding: 5px 10px;
+  color: white;
+  padding: 10px 30px;
   border: none;
-  border-radius: 5px;
-  font-size: 14px;
+  border-radius: 10px;
+  font-size: 20px;
   margin-left: 10px;
   margin-top: 10px;
+  border: 2px solid #2c74b3;
+  transition: 0.5s;
+  font-weight: 500;
 }
 
 .JewupdateButton:hover {
-  background-color: #1c537a; /* Darkened color */
+  background-color: white;
+  color: #2c74b3;
+  border: 2px solid #2c74b3;
 }
 
 .JewdeleteButton:hover {
-  background-color: #7a1c1c; /* Darkened color */
+  background-color: white; /* Darkened color */
+  color: red;
+  border: 2px solid red;
 }
 
 .addGemButton:hover {
   background-color: #1c537a; /* Darkened color */
 }
 /* new gem form */
-label, input {
+label,
+input {
   display: block;
 }
 input {
@@ -148,11 +162,9 @@ textarea {
   box-sizing: border-box;
 }
 
-
 textarea.error {
   border: 1px solid var(--error);
 }
-
 
 div.error {
   padding: 10px;
@@ -163,7 +175,8 @@ div.error {
   margin: 20px 0;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border-color: black;
 }
 
@@ -172,7 +185,7 @@ form button {
   border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   border-radius: 4px;
   cursor: pointer;
 }
@@ -188,26 +201,25 @@ input.error {
   border: 1px solid var(--error);
 }
 
-body{
+body {
   margin: 0px;
 }
 
-.background{
+.background {
   margin: 0px;
   height: 200px;
   background-color: #0a2647;
   text-align: center;
-
 }
 
-.headerName{
+.headerName {
   margin: 0px;
   color: white;
   font-family: lobster;
   font-weight: 100;
 }
 
-.headerNameDiv{
+.headerNameDiv {
   height: 200px;
   width: 100%;
   padding: 50px 0px 50px 0px;
@@ -343,7 +355,7 @@ nav li a:hover {
   cursor: pointer;
 }
 
-.modal-buttons button:first-child:hover{
+.modal-buttons button:first-child:hover {
   background-color: #a94442;
 }
 
@@ -353,27 +365,27 @@ nav li a:hover {
   cursor: pointer;
 }
 
-.modal-buttons button:last-child:hover{
+.modal-buttons button:last-child:hover {
   background-color: #1c537a;
 }
 
-.addjewbtn{
+.addjewbtn {
   width: 25%;
   margin-right: 10%;
   margin-bottom: 2%;
   border-radius: 10px;
 }
 
-.baktohomebtn{
+.baktohomebtn {
   width: 25%;
   margin-right: 10%;
   border-radius: 10px;
 }
-.addjewbtn:hover{
+.addjewbtn:hover {
   background-color: green;
 }
 
-.baktohomebtn:hover{
+.baktohomebtn:hover {
   background-color: #1aac83;
 }
 
@@ -436,38 +448,41 @@ nav li a:hover {
   width: 250%;
 }
 
-.jewdropdown{
+.jewdropdown {
   width: 15%;
   border-radius: 10px;
   height: 40px;
 }
 
-.jewhr{
+.jewhr {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 3%;
   margin-top: 1%;
 }
 
-.name{
+.name {
   border-radius: 10px;
 }
 
-.jewInput{
+.jewInput {
   width: 90%;
   margin-left: 5%;
   border-radius: 10px;
 }
 
-.jewinputbox{
-  margin-right: 5%;
-  margin-left: 5%;
-  background-color: #428bca83;
-  border-radius: 40px;
-  padding-top: 3%;
-  padding-bottom: 3%;
+.jewinputbox {
+  margin: 20px;
+  background-color: #cadefc;
+  border-radius: 20px;
+  padding: 20px 50px;
 }
 
-.jewAddlabel{
+.jewAddlabel {
   font-size: 20px;
+}
+
+.jewel-img-input {
+  width: 300px;
+  margin: 10px 50px;
 }

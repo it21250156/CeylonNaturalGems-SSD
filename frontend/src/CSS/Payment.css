@@ -1,9 +1,9 @@
-.mypayments {
+/* .mypayments {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 100px;
   padding-top: 50px;
-}
+} */
 
 .payment-details {
   background: #fff;
@@ -18,6 +18,14 @@
   margin: 0;
   font-size: 0.9em;
   color: #555;
+}
+
+.adminDel {
+  padding: 20px;
+}
+
+.del-table-cont {
+  padding: 10px;
 }
 
 .container {
@@ -145,4 +153,46 @@ div.insBtn {
   font-family: 'Poppins';
   border-radius: 4px;
   cursor: pointer;
+}
+
+.my-inst-btn {
+  width: 500px;
+  min-width: 400px;
+  font-family: Bebas Neue;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2c74b3;
+  transition: all 1000ms;
+  font-size: 30px;
+  position: relative;
+  overflow: hidden;
+  outline: 2px solid #2c74b3;
+  margin: 20px;
+}
+
+.my-inst-btn:hover {
+  color: white;
+  transform: scale(1.1);
+  outline: 2px solid white;
+  box-shadow: 4px 5px 17px -4px #268391;
+}
+
+.my-inst-btn::before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background-color: #2c74b3;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: width 1000ms;
+}
+
+.my-inst-btn:hover::before {
+  width: 250%;
 }

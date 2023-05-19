@@ -1,22 +1,21 @@
 import '../CSS/AppBW.css';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import React from 'react';
-import Axios from "axios";
+import Axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 
-import { useAuthContext } from "../hooks/useAuthContext"
-import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
-
 function MyReq() {
-  const uid = JSON.parse(localStorage.getItem("userInfo"))?._id || null;
+  const uid = JSON.parse(localStorage.getItem('userInfo'))?._id || null;
   const { logout } = useLogout();
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const [listOfReplyStatus, setListOfReplyStatus] = useState({});
-  const [sortBy, setSortBy] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [listOfRequests, setListOfRequests] = useState([]);
 
@@ -33,10 +32,16 @@ function MyReq() {
   useEffect(() => {
     Axios.get(`/getUsers`).then((response) => {
       const sortedRequests = response.data.sort((a, b) =>
-        sortBy === 'dateDescending' ? a.createdAt.localeCompare(b.createdAt) : b.createdAt.localeCompare(a.createdAt)
+        sortBy === 'dateDescending'
+          ? a.createdAt.localeCompare(b.createdAt)
+          : b.createdAt.localeCompare(a.createdAt)
       );
-      const sortedRequestsDescending = sortBy === 'dateDescending' ? sortedRequests.reverse() : sortedRequests;
-      const sortedRequestsAscending = sortBy === 'dateAscending' ? sortedRequestsDescending.reverse() : sortedRequestsDescending;
+      const sortedRequestsDescending =
+        sortBy === 'dateDescending' ? sortedRequests.reverse() : sortedRequests;
+      const sortedRequestsAscending =
+        sortBy === 'dateAscending'
+          ? sortedRequestsDescending.reverse()
+          : sortedRequestsDescending;
       setListOfRequests(sortedRequestsAscending);
       // getReplyStatus(sortedRequestsAscending);
     });
@@ -48,24 +53,25 @@ function MyReq() {
   };
 
   useEffect(() => {
-    Axios.get("/getUsers").then((response) => {
+    Axios.get('/getUsers').then((response) => {
       setListOfRequests(response.data);
     });
   }, []);
 
   useEffect(() => {
-    const results = listOfRequests.filter((request) =>
-      request.FirstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.LastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.Email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.PhoneNo.toString().includes(searchTerm) ||
-      request.GemType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.GemColor.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.GemShape.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.Weight.toString().includes(searchTerm) ||
-      request.Quantity.toString().includes(searchTerm) ||
-      request.createdAt.toLowerCase().includes(searchTerm.toLowerCase())
+    const results = listOfRequests.filter(
+      (request) =>
+        request.FirstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        request.LastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        request.Email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        request.PhoneNo.toString().includes(searchTerm) ||
+        request.GemType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        request.GemColor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        request.GemShape.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        request.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        request.Weight.toString().includes(searchTerm) ||
+        request.Quantity.toString().includes(searchTerm) ||
+        request.createdAt.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm, listOfRequests]);
@@ -107,6 +113,7 @@ function MyReq() {
         <div className="requestM">
           <div className="searchReq">
             <input
+              className="gem-search-input"
               type="text"
               placeholder="Search Requests"
               value={searchTerm}
@@ -121,9 +128,8 @@ function MyReq() {
           </select>
 
           {searchResults.map((user) => (
-            
-            <div key={user._id} className='lightBlueBodyBG'>
-              <div className='whiteBodyBG'>
+            <div key={user._id} className="lightBlueBoxReq">
+              <div className="whiteBodyBG">
                 <div className="myreq-column-1">
                   <table>
                     <tbody>
@@ -173,13 +179,24 @@ function MyReq() {
                       </tr>
                     </tbody>
                   </table>
+                  <center>
+                    <button
+                      className="repbtn"
+                      onClick={() => {
+                        window.location.href = `./reqReply/${user._id}`;
+                      }}
+                    >
+                      Reply
+                    </button>
+                  </center>
                 </div>
               </div>
 
-              <button className='repbtn' onClick={() => { window.location.href = `./reqReply/${user._id}` }}>Reply</button>
-
               <button
-                disabled={listOfReplyStatus[user._id] > 0 || listOfReplyStatus[user._id] === null}
+                disabled={
+                  listOfReplyStatus[user._id] > 0 ||
+                  listOfReplyStatus[user._id] === null
+                }
                 className="repliesbtnAdmin"
                 onClick={() => {
                   window.location.href = `./reply_av/${user._id}`;
@@ -187,9 +204,7 @@ function MyReq() {
               >
                 Your Replies
               </button>
-
             </div>
-            
           ))}
 
           <Link to={'/Myrep'}>
@@ -201,7 +216,7 @@ function MyReq() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default MyReq;

@@ -1,24 +1,24 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect } from 'react';
 
-import { Link, useParams } from "react-router-dom";
-import logger from "use-reducer-logger";
-import "../CSS/GemScreen.css";
-import Header from "../components/Header";
+import { Link, useParams } from 'react-router-dom';
+import logger from 'use-reducer-logger';
+import '../CSS/GemScreen.css';
+import Header from '../components/Header';
 
 export const JwelReducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_REQUEST":
+    case 'FETCH_REQUEST':
       return {
         ...state,
         loading: true,
       };
-    case "FETCH_SUCCESS":
+    case 'FETCH_SUCCESS':
       return {
         ...state,
         Jwl: action.payload,
         loading: false,
       };
-    case "FETCH_FAIL":
+    case 'FETCH_FAIL':
       return {
         ...state,
         loading: false,
@@ -32,25 +32,25 @@ export const JwelReducer = (state, action) => {
 function JewelScreen() {
   const params = useParams();
   const { id } = params;
-  const [Gem, setGem] = useState("");
+  const [Gem, setGem] = useState('');
 
-  localStorage.setItem("gemCartInfo", JSON.stringify(Gem));
+  localStorage.setItem('gemCartInfo', JSON.stringify(Gem));
 
   const [{ loading, error, Jwl }, dispatch] = useReducer(logger(JwelReducer), {
     Jwl: [],
     loading: true,
-    error: "",
+    error: '',
   });
 
   useEffect(() => {
     const fetchJewels = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
+      dispatch({ type: 'FETCH_REQUEST' });
       try {
         const response = await fetch(`/api/jewelleryes/${id}`);
         const json = await response.json();
-        dispatch({ type: "FETCH_SUCCESS", payload: json });
+        dispatch({ type: 'FETCH_SUCCESS', payload: json });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: 'FETCH_FAIL', payload: err.message });
       }
     };
     fetchJewels();
@@ -59,12 +59,12 @@ function JewelScreen() {
     const data = {
       cartitemid: itemid,
       cartquantity: 1,
-      cartuserid: JSON.parse(localStorage.getItem("userInfo"))._id,
+      cartuserid: JSON.parse(localStorage.getItem('userInfo'))._id,
     };
     const response = await fetch(`/api/cart/`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     });
     // await fetch(`/api/cart/user/${data.cartuserid}`)
     //   .this((res) => res.json())
@@ -86,55 +86,54 @@ function JewelScreen() {
         <div className="lightBlueBodyBG">
           <div className="whiteBodyBG">
             <div className="content-top-part">
-              <div className="img-section-large"></div>
+              <div className="img-section-large">
+                {Jwl.jewellery_img && (
+                  <img
+                    className="gem-desc-image"
+                    alt="Jewellery IMG"
+                    src={Jwl.jewellery_img}
+                  />
+                )}
+              </div>
               <div className="btns-description">
                 <p className="gem-name">{Jwl.name}</p>
                 <p className="gem-price">${Jwl.price}</p>
 
-                <div>
-                  {Jwl.jewellery_img && (
-                    <img
-                      src={Jwl.jewellery_img}
-                      style={{
-                        maxWidth: "200px",
-                        maxHeight: "200px",
-                        marginBottom: "10px",
-                      }}
-                    />
-                  )}
-                </div>
-
-                <div className="btns">
-                  <button
-                    onClick={() => handleAddToCart(Jwl._id)}
-                    className="btn-add-to-cart"
+                <div className="jewel-screen-dropdown">
+                  <label className="label-jewel-dropdown">Gem Shape</label>
+                  <select
+                    className="input-jewel-dropdown"
+                    onChange={(event) => {
+                      setGem(event.target.value);
+                    }}
                   >
-                    Add to cart
-                  </button>
+                    <option value="">Select a shape</option>
+                    <option value="Round">Round</option>
+                    <option value="Oval">Oval</option>
+                    <option value="Pear">Pear</option>
+                    <option value="Marquise">Marquise</option>
+                    <option value="Emerald">Emerald</option>
+                    <option value="Heart">Heart</option>
+                    <option value="Trillion">Trillion</option>
+                    <option value="Princess">Princess</option>
+                  </select>
                 </div>
-                <label className="label">Gem Shape</label>
-                <select
-                  className="input"
-                  onChange={(event) => {
-                    setGem(event.target.value);
-                  }}
-                >
-                  <option value="">Select a shape</option>
-                  <option value="Round">Round</option>
-                  <option value="Oval">Oval</option>
-                  <option value="Pear">Pear</option>
-                  <option value="Marquise">Marquise</option>
-                  <option value="Emerald">Emerald</option>
-                  <option value="Heart">Heart</option>
-                  <option value="Trillion">Trillion</option>
-                  <option value="Princess">Princess</option>
-                </select>
 
                 <div className="gem-desc">
                   <p>{Jwl.description}</p>
                 </div>
               </div>
             </div>
+
+            <div className="btns">
+              <button
+                onClick={() => handleAddToCart(Jwl._id)}
+                className="btn-add-to-cart"
+              >
+                Add to cart
+              </button>
+            </div>
+
             <div className="content-middle-part">
               <center>
                 <p className="details-topic">Details</p>
@@ -142,7 +141,7 @@ function JewelScreen() {
               </center>
               <div className="details-part">
                 <center>
-                  {" "}
+                  {' '}
                   <table className="detail-table">
                     <tr>
                       <td className="cl1">Type</td>
@@ -165,6 +164,7 @@ function JewelScreen() {
                 </center>
               </div>
             </div>
+            <hr className="new-arr-hr"></hr>
             <h1>New Arrivals</h1>
 
             <div className="card">
@@ -174,7 +174,7 @@ function JewelScreen() {
                 <p className="card-price">${Jwl.price}</p>
               </div>
               <Link to={`/jewells/${Jwl._id}`}>
-                <button className="card-button">Read More...</button>
+                <button className="card-button">Read More</button>
               </Link>
             </div>
           </div>

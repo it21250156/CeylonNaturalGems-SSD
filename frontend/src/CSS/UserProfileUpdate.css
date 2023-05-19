@@ -1,0 +1,81 @@
+.darkBlueTopicBoxUpdateProf {
+  background-color: #144272;
+  margin: 20px 200px;
+  padding: 40px 0;
+  border-radius: 20px;
+}
+
+.inner-lightblue-box {
+  background-color: #cadefc;
+  margin: 20px 200px;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+#input {
+  height: 44px;
+  margin: 0 50px 30px 50px;
+  width: 400px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.label {
+  font-family: legendum;
+  color: #144272;
+  font-weight: bold;
+  text-align: start;
+  margin-left: 50px;
+}
+
+#input:hover,
+#input:focus,
+#input-group:hover #input {
+  outline: none;
+  border-color: #144272;
+}
+
+#input-group:hover .label,
+#input:focus {
+  color: #144272;
+}
+
+.updateprof-btn {
+  background-color: #144272;
+  border: 2px solid #144272;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.updateprof-btn:hover {
+  background-color: white;
+  color: #144272;
+  border: 2px solid #144272;
+  transition: 0.5s;
+}
+
+.cancel-btn {
+  background-color: #0b62a8;
+  border: 2px solid #0b62a8;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-family: Bebas Neue;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.cancel-btn:hover {
+  background-color: white;
+  border: 2px solid #0b62a8;
+  color: #0b62a8;
+  transition: 0.5s;
+}

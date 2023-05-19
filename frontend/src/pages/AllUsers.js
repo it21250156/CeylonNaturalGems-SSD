@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-
 import { useAuthContext } from "../hooks/useAuthContext";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 
@@ -17,9 +14,6 @@ const AllUsers = () => {
     logout();
     navigate("/");
   };
-
-
-  //********************************************************************************************* */
 
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -149,11 +143,9 @@ const AllUsers = () => {
                         color: "green"}}>
                   {filteredData.length}</h4>
                   </p> 
+                  
 
             <br></br>
-            {/* <div className="darkBlueTopicBox">
-            <h3 className="pageTopic">All Users</h3>
-          </div> */}
           <table className="table table-striped table-hover">
             <thead>
               <tr>
@@ -186,6 +178,7 @@ const AllUsers = () => {
           ) } 
         </div>
       </div>
+      <button onClick={() => {navigate("/AllUsers/AdminUserReport")}}>Report</button>
     </>
   );
 };

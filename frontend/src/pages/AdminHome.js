@@ -62,7 +62,7 @@ const AdminHome = () => {
                   navigate('/GemAdminHome');
                 }}
               >
-                Gem Stones
+                Gemstones
               </button>
               <button
                 className="adminHome-bigBtns"

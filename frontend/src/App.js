@@ -1,61 +1,64 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthContext } from './hooks/useAuthContext';
-import Header from './components/Header';
-import React, { createContext, useState, useContext } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
+import Header from "./components/Header";
+import React, { createContext, useState, useContext } from "react";
 
 // pages & components
-import Home from './pages/Home';
+import Home from "./pages/Home";
 
 //Kalinga
-import UserLogin from './pages/UserLogin';
-import UserRegistration from './pages/UserRegistration';
-import UserProfile from './pages/UserProfile';
-import UserProfileUpdate from './pages/UserProfileUpdate';
-import AdminUsers from './pages/AdminUsers';
-import AdminHome from './pages/AdminHome';
-import ResetPassword from './pages/ChangePassword';
-import AllUsers from './pages/AllUsers';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetForgotPassword from './pages/ResetForgotPassword';
+import UserLogin from "./pages/UserLogin";
+import UserRegistration from "./pages/UserRegistration";
+import UserProfile from "./pages/UserProfile";
+import UserProfileUpdate from "./pages/UserProfileUpdate";
+import AdminUsers from "./pages/AdminUsers";
+import AdminHome from "./pages/AdminHome";
+import ResetPassword from "./pages/ChangePassword";
+import AllUsers from "./pages/AllUsers";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetForgotPassword from "./pages/ResetForgotPassword";
+import AboutUsPage from "./pages/AboutUsPage";
+import ContactUsPage from "./pages/ContactUsPage";
+import AdminUserReport from "./pages/AdminUserReport";
 
 //janith
-import Gemhome from './pages/Gemhome';
-import GemScreen from './pages/GemScreen';
+import Gemhome from "./pages/Gemhome";
+import GemScreen from "./pages/GemScreen";
 
 //bimsara
-import ReqMain from './pages/ReqMain';
-import Reply_userView from './pages/Reply_userView';
-import MyReq from './pages/MyReq';
-import RequestAdmin from './pages/RequestAdmin';
-import ReplyRequest from './pages/ReplyRequest';
-import Myreply from './pages/Myreply';
-import Reply_adminView from './pages/Reply_adminCheck';
-import RequestReport from './pages/RequesReport';
+import ReqMain from "./pages/ReqMain";
+import Reply_userView from "./pages/Reply_userView";
+import MyReq from "./pages/MyReq";
+import RequestAdmin from "./pages/RequestAdmin";
+import ReplyRequest from "./pages/ReplyRequest";
+import Myreply from "./pages/Myreply";
+import Reply_adminView from "./pages/Reply_adminCheck";
+import RequestReport from "./pages/RequesReport";
 
 //malika
-import FeedbackForm from './pages/FeedbackPage';
-import UpdateFeedback from './pages/UpdateFeedback';
-import AllFeedbacks from './pages/AllFeedbacks';
-import UserFeedbacks from './pages/UserFeedbacks';
-import AdminFeedbacks from './pages/AdminFeedbacks';
+import FeedbackForm from "./pages/FeedbackPage";
+import UpdateFeedback from "./pages/UpdateFeedback";
+import AllFeedbacks from "./pages/AllFeedbacks";
+import UserFeedbacks from "./pages/UserFeedbacks";
+import AdminFeedbacks from "./pages/AdminFeedbacks";
 
 //Vidxni
-import MyPayments from './pages/MyPayments';
-import PaymentForm from './components/PaymentForm';
-import PaymentUpdate from './components/PaymentUpdate';
-import CartPage from './pages/CartPage';
+import MyPayments from "./pages/MyPayments";
+import PaymentForm from "./components/PaymentForm";
+import PaymentUpdate from "./components/PaymentUpdate";
+import CartPage from "./pages/CartPage";
 
 // ruchira
-import JewelleryAdminDashboard from './pages/JewelleryAdminDashboard';
-import AddJewelleryes from './pages/AddJewelleryes';
-import JewelleryDetails from './components/JewelleryDetails';
-import UpdateJewellery from './pages/UpdateJewellery';
+import JewelleryAdminDashboard from "./pages/JewelleryAdminDashboard";
+import AddJewelleryes from "./pages/AddJewelleryes";
+import JewelleryDetails from "./components/JewelleryDetails";
+import UpdateJewellery from "./pages/UpdateJewellery";
 //import JewelleryAdminReport from './pages/JewelleryAdminReport';
 
 //Daham
-import JewelhomeMen from './pages/JewelhomeMen';
-import JewelScreen from './pages/JewelScreen';
-import JewelhomeWomen from './pages/JewelhomeWomen';
+import JewelhomeMen from "./pages/JewelhomeMen";
+import JewelScreen from "./pages/JewelScreen";
+import JewelhomeWomen from "./pages/JewelhomeWomen";
 
 //vihangi
 import InstallmentPlans from './pages/InstallmentPlans';
@@ -65,15 +68,17 @@ import AllInstallmentsDetailed from './pages/AllInstallmentsDetailed';
 import AdminInstallmentPlans from './pages/AdminInstallmentPlans';
 import AdminUpdatePlan from './pages/AdminUpdatePlan';
 import MyInstallments from './pages/MyInstallments';
+import MyInstallmentsDetailed from './pages/MyInstallmentsDetailed';
+import InstallmentReport from './pages/InstallmentsReport';
 
 //ammaar
-import GemAdminHome from './pages/GemAdminHome';
-import AddGem from './pages/AddGem';
-import UpdateGems from './pages/UpdateGems';
-import AdminPayments from './pages/AdminPayments';
-import AdminDelivery from './pages/AdminDelivery';
-import GemAdminReports from './pages/GemAdminReports';
-import Footer from './components/Footer';
+import GemAdminHome from "./pages/GemAdminHome";
+import AddGem from "./pages/AddGem";
+import UpdateGems from "./pages/UpdateGems";
+import AdminPayments from "./pages/AdminPayments";
+import AdminDelivery from "./pages/AdminDelivery";
+import GemAdminReports from "./pages/GemAdminReports";
+import Footer from "./components/Footer";
 
 export const RecoveryContext = createContext();
 
@@ -88,26 +93,17 @@ function App() {
             {/* kalinga */}
             <Route path="/" element={<Home />} />
             <Route path="/adminHome" element={<AdminHome />} />
-            <Route
-              path="/login"
-              element={!user ? <UserLogin /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/Register"
-              element={!user ? <UserRegistration /> : <Navigate to="/" />}
-            />
+            <Route path="/login" element={!user ? <UserLogin /> : <Navigate to="/" />} />
+            <Route path="/Register" element={!user ? <UserRegistration /> : <Navigate to="/" />} />
             <Route path="/profile/:id" element={<UserProfile />} />
-            <Route
-              path="/profile/editProfile/:id"
-              element={<UserProfileUpdate />}
-            />
-            <Route
-              path="/profile/resetPassword/:id"
-              element={<ResetPassword />}
-            />
+            <Route path="/profile/editProfile/:id" element={<UserProfileUpdate />} />
+            <Route path="/profile/resetPassword/:id" element={<ResetPassword />} />
             <Route path="/AllUsers" element={<AllUsers />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/ResetForgotPassword/:token" element={<ResetForgotPassword />} />
+            <Route path="/AboutUs" element={<AboutUsPage />} />
+            <Route path="/ContactUs" element={<ContactUsPage />} />
+            <Route path="/AllUsers/AdminUserReport" element={<AdminUserReport />} />
 
             {/* janith */}
             <Route path="/gems" element={<Gemhome />}></Route>
@@ -188,6 +184,11 @@ function App() {
               path="/AdminInstallmentPlans/AllInstallments"
               element={<AllInstallments />}
             />
+
+          <Route
+              path="/AdminInstallmentPlans/InstallmentReport"
+              element={<InstallmentReport />}
+            />
             <Route
               path="/AdminInstallmentPlans/AllInstallments/AllInstallmentsDetailed/:id"
               element={<AllInstallmentsDetailed />}
@@ -203,6 +204,11 @@ function App() {
             <Route
               path="/profile/MyPayments/MyInstallments/:id"
               element={<MyInstallments />}
+            />
+
+            <Route
+              path="/profile/MyPayments/MyInstallments/MyInstallmentsDetailed/:id"
+              element={<MyInstallmentsDetailed />}
             />
           </Routes>
         </div>

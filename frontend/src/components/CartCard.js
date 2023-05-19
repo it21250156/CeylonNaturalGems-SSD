@@ -1,14 +1,14 @@
 import '../CSS/CartCard.css';
-import { Link } from "react-router-dom";
-import "../CSS/CartCard.css";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import '../CSS/CartCard.css';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useEffect, useState } from 'react';
 
 function CartCard({ cartid, gem, jewellery }) {
   const { cartData, handleCartRemove, handleChangeQuantityCart } =
     useAuthContext();
 
-    const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
+  const jewelWithGem = JSON.parse(localStorage.getItem('gemCartInfo'));
 
   // const handleCartRemove = async () => {
   //   const response = await fetch(`/api/cart/${cartid}`, {
@@ -25,7 +25,7 @@ function CartCard({ cartid, gem, jewellery }) {
           <div className="cartimg-section">
             <div className="gem-image-container">
               {gem.gem_img && (
-                <img src={gem.gem_img} alt="Gem" className="gem-card__image" />
+                <img src={gem.gem_img} alt="Gem" className="cart-card-image" />
               )}
             </div>
           </div>
@@ -96,25 +96,23 @@ function CartCard({ cartid, gem, jewellery }) {
       {jewellery !== null && gem === null && (
         <div className="cartcard-content">
           {/* {JSON.stringify(jewellery) || "none"} */}
-          <div className="cartimg-section"></div>
+          <div className="cartimg-section">
+            {jewellery.jewellery_img && (
+              <img
+                className="cart-card-image"
+                alt="Jewellery IMG"
+                src={jewellery.jewellery_img}
+              />
+            )}
+          </div>
           <div className="name-price">
             <p className="cartcard-name">{jewellery?.name}</p>
             <p className="cartcard-price">${jewellery?.price}</p>
             <p className="cartcard-name">{jewelWithGem}</p>
           </div>
-          <div>
-            {jewellery.jewellery_img && (
-              <img
-                src={jewellery.jewellery_img}
-                style={{
-                  maxWidth: "200px",
-                  maxHeight: "200px",
-                  marginBottom: "10px",
-                }}
-              />
-            )}
-          </div>
+
           <div className="update-section"></div>
+
           <div className="btn-delete">
             <button class="btn1" onClick={() => handleCartRemove(cartid)}>
               <p class="paragraph"> Remove </p>

@@ -20,11 +20,6 @@ const getDeletedUsers = async(req , res) => {
     res.status(200).json(deletedUsers)
 }
 
-// const getDeletedUsers = asyncHandler(async (req, res) => {
-//     const deletedUsers = await deletedUser.find({});
-//     res.json(deletedUsers);
-//   });
-
 // get single deleted user
 const getDeletedUser = async(req , res) => {
     const {id} = req.params

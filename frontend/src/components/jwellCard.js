@@ -7,19 +7,20 @@ function JewelCard(Jewel) {
   return (
     <div className="card">
       <div className="card-content">
-        <div >
-            {Jwl.jewellery_img && (
-              <img
-                src={Jwl.jewellery_img}
-                style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }}
-              />
-            )}
-          </div>
+        <div>
+          {Jwl.jewellery_img && (
+            <img
+              className="jewel-card-img"
+              src={Jwl.jewellery_img}
+              alt="Jewellery IMG"
+            />
+          )}
+        </div>
         <p className="card-name">{Jwl.name}</p>
         <p className="card-price">${Jwl.price}</p>
       </div>
       <Link to={`/jwellscreen/${Jwl._id}`}>
-        <button className="card-button">Read More....</button>
+        <button className="card-button">Read More</button>
       </Link>
     </div>
   );

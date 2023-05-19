@@ -79,7 +79,6 @@ const UserProfile = () => {
 
   const user = JSON.parse(localStorage.getItem('userInfo'));
 
-  /*******************************************************/
 
   const [userData, setUserData] = useState({});
 
@@ -90,7 +89,6 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  /*******************************************************/
 
   return (
     <>
@@ -108,7 +106,6 @@ const UserProfile = () => {
               <div>
                 <button
                   className="deleteAccountBtn"
-                 // onClick={HandleDeleteAccount}
                   onClick={() => setShowModal(true)}
                 >
                   DELETE MY PROFILE
