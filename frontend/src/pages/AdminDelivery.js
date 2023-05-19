@@ -75,15 +75,15 @@ const AdminDelivery = () => {
               <li>
                 <Link to={'/adminHome'}>Home</Link>
               </li>
-              <li>
-     
-    </li>
+              <li></li>
             </ul>
           </nav>
         </div>
       </header>
-      <div className = "lightBlueBodyBG">
-      <button> <Link to="/adminDeliveryReport">Delivery Report</Link></button>
+      <div className="lightBlueBodyBG">
+        <Link to="/adminDeliveryReport">
+          <button className="my-inst-btn"> Delivery Report</button>
+        </Link>
         <div className="whiteBodyBG">
           <div className="title-box-delivery">
             <h3 className="title-delivery"> DELIVERY DETAILS </h3>
