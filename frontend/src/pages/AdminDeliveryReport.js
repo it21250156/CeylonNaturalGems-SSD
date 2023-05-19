@@ -53,7 +53,7 @@ const AdminDeliveryReport = () => {
         <div>
       {/* <h2>Delivery and Pickup Count Report</h2>
       <p>Number of Deliveries: {deliveriesCount}</p>
-      <p>Number of Pickups: {pickupsCount}</p> */}
+      <p>Number of Pickups   : {pickupsCount}</p> */}
       {/* You can use any chart library (e.g., Chart.js) to visualize the data */}
 
       <div>
