@@ -110,12 +110,7 @@ function JewelScreen() {
                     <option value="">Select a shape</option>
                     <option value="Round">Round</option>
                     <option value="Oval">Oval</option>
-                    <option value="Pear">Pear</option>
-                    <option value="Marquise">Marquise</option>
-                    <option value="Emerald">Emerald</option>
-                    <option value="Heart">Heart</option>
-                    <option value="Trillion">Trillion</option>
-                    <option value="Princess">Princess</option>
+                    <option value="Square">Square</option>
                   </select>
                 </div>
 
@@ -164,7 +159,7 @@ function JewelScreen() {
                 </center>
               </div>
             </div>
-            <hr className="new-arr-hr"></hr>
+            {/* <hr className="new-arr-hr"></hr>
             <h1>New Arrivals</h1>
 
             <div className="card">
@@ -176,7 +171,7 @@ function JewelScreen() {
               <Link to={`/jewells/${Jwl._id}`}>
                 <button className="card-button">Read More</button>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
