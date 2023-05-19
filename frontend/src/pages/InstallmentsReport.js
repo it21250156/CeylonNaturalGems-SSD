@@ -54,15 +54,15 @@ const InstallmentReport = () => {
           {
             label: 'Initial Payment',
             data: initialPaymentData,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: "rgba(54, 162, 235, 0.5)",
+            borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1
           },
           {
             label: 'Monthly Payment',
             data: monthlyPaymentData,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1
           }
         ]
@@ -99,15 +99,11 @@ const InstallmentReport = () => {
           {
             data: statusData,
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
+              '#ff6384', '#36a2eb', '#cc65fe'
               // Add more colors if needed
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
+              '#ff6384', '#36a2eb', '#cc65fe'
               // Add more colors if needed
             ],
             borderWidth: 1
@@ -127,10 +123,10 @@ const InstallmentReport = () => {
   const totalRevenue = installments.reduce((sum, installment) => sum + installment.totalAmount, 0);
 
   const totalInitialPayment = installments.reduce((sum, installment) => sum + installment.initialPayment, 0);
-  const averageInitialPayment = totalInitialPayment / installments.length;
+  const averageInitialPayment = (totalInitialPayment / installments.length).toFixed(2);
 
   const totalMonthlyPayment = installments.reduce((sum, installment) => sum + installment.monthlyPayment, 0);
-  const averageMonthlyPayment = totalMonthlyPayment / installments.length;
+  const averageMonthlyPayment = (totalMonthlyPayment / installments.length).toFixed(2);
 
   const numberOfPlans = new Set(installments.map(installment => installment.planID)).size;
   const numberOfInstallments = installments.length;

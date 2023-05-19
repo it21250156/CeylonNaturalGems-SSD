@@ -208,7 +208,7 @@ const JewelleryAddForm = () => {
             className={emptyFields.includes('price') ? 'error' : ''}
           />
           {emptyFields.includes('price') && (
-            <div className="error">Please enter a type.</div>
+            <div className="error">Please enter a price.</div>
           )}
         </div>
 
@@ -228,7 +228,7 @@ const JewelleryAddForm = () => {
       <br />
       <br />
       {emptyFields.includes('description') && (
-        <div className="error">Please enter a description.</div>
+        <div className="error">Please enter a details.</div>
       )}
 
       <button type="submit" className="addjewbtn">
