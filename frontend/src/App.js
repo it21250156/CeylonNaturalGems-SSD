@@ -47,6 +47,7 @@ import MyPayments from "./pages/MyPayments";
 import PaymentForm from "./components/PaymentForm";
 import PaymentUpdate from "./components/PaymentUpdate";
 import CartPage from "./pages/CartPage";
+import AdminDeliveryReport from "./pages/AdminDeliveryReport";
 
 // ruchira
 import JewelleryAdminDashboard from "./pages/JewelleryAdminDashboard";
@@ -139,8 +140,9 @@ function App() {
               path="/MyPayments/PaymentUpdate/:id"
               element={<PaymentUpdate />}
             />
-            <Route path="/AdminPayments" element={<AdminPayments />} />
-            <Route path="/AdminDelivery" element={<AdminDelivery />} />
+            <Route path = "/AdminPayments" element = {<AdminPayments />} />
+            <Route path = "/AdminDelivery" element = {<AdminDelivery />} />
+            <Route  path="/AdminDeliveryReport" element={<AdminDeliveryReport/>} />
 
             {/* ruchira */}
             <Route
