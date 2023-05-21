@@ -11,12 +11,6 @@
   margin-bottom: 10px;
 }
 
-.report-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: start;
-}
-
 .gem-admin-report-header {
   background-color: #f0f0f0;
   color: #333;
@@ -25,36 +19,97 @@
   text-align: left;
 }
 
-.gem-admin-report-cell {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  transition: all 0.3s ease;
+.admin-chart-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-.report-row:hover {
-  background-color: #f9f9f9;
-}
-
-.report-row:hover .gem-admin-report-cell {
-  color: #555;
-}
-
-.gem-admin-report-cell:first-child {
-  border-left: 1px solid #ccc;
-}
-
-.gem-admin-report-cell:last-child {
-  border-right: 1px solid #ccc;
-}
-
-.report-table th,
-.report-table td {
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
-
-.report-table th {
+.admin-chart-title {
+  font-size: 24px;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-/* bar graph */
+.admin-chart-container .pie-chart-container {
+  position: relative;
+  height: 300px;
+}
+
+.admin-chart-container .pie-chart-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.admin-chart-container .legend-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.admin-chart-container .legend-container .legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.admin-chart-container .legend-container .legend-item span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+}
+
+/* Add more specific styles as needed */
+
+@media (max-width: 500px) {
+  .admin-chart-container {
+    max-width: 100%;
+  }
+}
+
+.reports-gem-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gem-admin-bar-chart-container {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.admin-chart-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Customize the chart color palette */
+.chartjs-render-monitor .chart-bar {
+  background-color: #36a2eb;
+}
+
+.chartjs-render-monitor .chart-bar:nth-child(2) {
+  background-color: #ff6384;
+}
+
+.chartjs-render-monitor .chart-bar:nth-child(3) {
+  background-color: #cc65fe;
+}
+
+.chartjs-render-monitor .chart-bar:nth-child(4) {
+  background-color: #ffcd56;
+}
