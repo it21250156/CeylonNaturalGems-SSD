@@ -1,70 +1,89 @@
 const Gem = require('../models/gemModel');
 const mongoose = require('mongoose');
-const { response, json } = require('express');
 const cloudinary = require("../utils/cloudinary");
 const upload = require("../utils/multer");
+const validator = require('validator'); // Validator for input sanitization
+const winston = require('winston'); // Logger for better error handling
 
 // get all gems
 const getGems = async (req, res) => {
-  const gems = await Gem.find({}).sort({ createdAt: -1 });
-
-  res.status(200).json(gems);
+  try {
+    const gems = await Gem.find({}).sort({ createdAt: -1 });
+    res.status(200).json(gems);
+  } catch (error) {
+    winston.error(error.message, error); // Log error without exposing details
+    res.status(500).json({ error: 'Server error' });
+  }
 };
 
 // get a single gem
 const getGem = async (req, res) => {
   const { id } = req.params;
 
+  // Validate ID to prevent NoSQL injection
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such gem' });
+    return res.status(404).json({ error: 'Invalid ID' });
   }
 
-  const gem = await Gem.findById(id);
+  try {
+    const gem = await Gem.findById(id);
 
-  if (!gem) {
-    return res.status(404).json({ error: 'No such gem' });
+    if (!gem) {
+      return res.status(404).json({ error: 'No such gem' });
+    }
+
+    res.status(200).json(gem);
+  } catch (error) {
+    winston.error(error.message, error);
+    res.status(500).json({ error: 'Server error' });
   }
-
-  res.status(200).json(gem);
 };
 
 // create a new gem
 const createGem = async (req, res) => {
   try {
+    // Validate inputs using validator library
+    if (
+      !validator.isNumeric(req.body.size) ||
+      !validator.isNumeric(req.body.price) ||
+      !validator.isNumeric(req.body.quantity)
+    ) {
+      return res.status(400).json({ error: 'Invalid input data' });
+    }
+
     // Upload image to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
 
-    // Create new gem
+    // Create new gem with validated inputs
     const gem = await Gem.create({
-      name: req.body.name,
-      type: req.body.type,
-      shape: req.body.shape,
+      name: validator.escape(req.body.name),
+      type: validator.escape(req.body.type),
+      shape: validator.escape(req.body.shape),
       size: req.body.size,
       price: req.body.price,
-      color: req.body.color,
+      color: validator.escape(req.body.color),
       quantity: req.body.quantity,
-      description: req.body.description,
+      description: validator.escape(req.body.description),
       gem_img: result.secure_url,
       cloudinary_id: result.public_id
     });
 
     res.status(200).json(gem);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    winston.error(error.message, error);
+    res.status(400).json({ error: 'Error creating gem' });
   }
 };
-
 
 // delete a gem
 const deleteGem = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such gem' });
+    return res.status(404).json({ error: 'Invalid ID' });
   }
 
   try {
-    // Find gem by id
     const gem = await Gem.findById(id);
 
     if (!gem) {
@@ -79,21 +98,20 @@ const deleteGem = async (req, res) => {
 
     res.status(200).json(gem);
   } catch (err) {
-    console.log(err);
+    winston.error(err.message, err);
     res.status(500).json({ error: 'Server error' });
   }
 };
 
-//Update Gems
+// update gem
 const updateGem = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such gem' });
+    return res.status(404).json({ error: 'Invalid ID' });
   }
 
   try {
-    // Find gem by id
     let gem = await Gem.findById(id);
 
     if (!gem) {
@@ -107,39 +125,37 @@ const updateGem = async (req, res) => {
       // Upload new image to Cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 
-      // Update gem data with new values
-      gem.name = req.body.name || gem.name;
-      gem.type = req.body.type || gem.type;
-      gem.shape = req.body.shape || gem.shape;
+      // Update gem with sanitized input
+      gem.name = validator.escape(req.body.name) || gem.name;
+      gem.type = validator.escape(req.body.type) || gem.type;
+      gem.shape = validator.escape(req.body.shape) || gem.shape;
       gem.size = req.body.size || gem.size;
       gem.price = req.body.price || gem.price;
-      gem.color = req.body.color || gem.color;
+      gem.color = validator.escape(req.body.color) || gem.color;
       gem.quantity = req.body.quantity || gem.quantity;
-      gem.description = req.body.description || gem.description;
+      gem.description = validator.escape(req.body.description) || gem.description;
       gem.gem_img = result.secure_url || gem.gem_img;
       gem.cloudinary_id = result.public_id || gem.cloudinary_id;
     } else {
-      // Update gem data without changing the image
-      gem.name = req.body.name || gem.name;
-      gem.type = req.body.type || gem.type;
-      gem.shape = req.body.shape || gem.shape;
+      // Update gem without changing the image
+      gem.name = validator.escape(req.body.name) || gem.name;
+      gem.type = validator.escape(req.body.type) || gem.type;
+      gem.shape = validator.escape(req.body.shape) || gem.shape;
       gem.size = req.body.size || gem.size;
       gem.price = req.body.price || gem.price;
-      gem.color = req.body.color || gem.color;
+      gem.color = validator.escape(req.body.color) || gem.color;
       gem.quantity = req.body.quantity || gem.quantity;
-      gem.description = req.body.description || gem.description;
+      gem.description = validator.escape(req.body.description) || gem.description;
     }
 
-    // Save updated gem
     gem = await gem.save();
 
     res.status(200).json(gem);
   } catch (err) {
-    console.log(err);
+    winston.error(err.message, err);
     res.status(500).json({ error: 'Server error' });
   }
 };
-
 
 module.exports = {
   getGems,

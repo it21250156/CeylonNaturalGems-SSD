@@ -7,23 +7,15 @@ const {
   deleteGem,
   updateGem
 } = require('../controllers/gemController');
+const { protect } = require('../middleware/authMiddleware'); // Correct JWT authentication middleware
 
 const router = express.Router();
 
-// GET all gems
-router.get('/', getGems);
+// Apply JWT authentication for protected routes
+router.get('/', protect, getGems);
+router.get('/:id', protect, getGem);
+router.post('/', protect, upload.single("image"), createGem);
+router.delete('/:id', protect, deleteGem);
+router.patch('/:id', protect, upload.single("image"), updateGem);
 
-// GET a single gem
-router.get('/:id', getGem);
-
-// POST a new gem
-router.post('/', upload.single("image"), createGem);
-
-// DELETE a gem
-router.delete('/:id', deleteGem);
-
-// UPDATE a gem
-router.patch('/:id', upload.single("image"), updateGem);
-
-module.exports = router
-
+module.exports = router;
