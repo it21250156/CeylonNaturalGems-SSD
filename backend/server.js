@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer'); // Nodemailer for sending emails
 const cors = require('cors'); // CORS middleware to handle cross-origin requests
 const express = require('express'); // Express framework
 const mongoose = require('mongoose'); // MongoDB ORM
+const rateLimit = require('express-rate-limit'); // Rate limit middleware
 
 // Importing routes for various functionalities
 const userRoutes = require('./routes/userRoutes.js');
@@ -38,6 +39,16 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
+// Rate limiting middleware
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
+  message: "Too many requests from this IP, please try again later."
+});
+
+// Apply rate limiting to all API routes
+app.use('/api/', apiLimiter);
 
 // Feedback route (Malika's feature)
 app.use('/api/feedbacks', feedbackRoutes);
