@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useGemsContext } from '../hooks/useGemsContext';
-
 import { useAuthContext } from '../hooks/useAuthContext';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 import axios from 'axios';
@@ -16,7 +14,7 @@ import Header from '../components/Header';
 
 const GemAdminHome = () => {
   const { logout } = useLogout();
-  const { user } = useAuthContext();
+  const { user } = useAuthContext(); // Accessing the user from the Auth context
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -32,16 +30,25 @@ const GemAdminHome = () => {
 
   useEffect(() => {
     const fetchGems = async () => {
-      const response = await fetch('/api/gems');
-      const json = await response.json();
+      if (user) {  // Ensure user is logged in and has the token
+        const response = await fetch('/api/gems', {
+          headers: {
+            'Authorization': `Bearer ${user.token}`, // Attach the token in the Authorization header
+          },
+        });
 
-      if (response.ok) {
-        dispatch({ type: 'SET_GEMS', payload: json });
+        const json = await response.json();
+
+        if (response.ok) {
+          dispatch({ type: 'SET_GEMS', payload: json });
+        } else {
+          console.error("Failed to fetch gems:", json);
+        }
       }
     };
 
     fetchGems();
-  }, [dispatch]);
+  }, [dispatch, user]); // Depend on user so the token is always included
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
