@@ -4,6 +4,7 @@ const cors = require('cors'); // CORS middleware to handle cross-origin requests
 const express = require('express'); // Express framework
 const mongoose = require('mongoose'); // MongoDB ORM
 const rateLimit = require('express-rate-limit'); // Rate limit middleware
+const helmet = require('helmet'); // Helmet for setting security headers
 
 // Importing routes for various functionalities
 const userRoutes = require('./routes/userRoutes.js');
@@ -33,6 +34,9 @@ app.use(express.json());
 
 // Enable CORS
 app.use(cors());
+
+// Use Helmet to set various HTTP headers for security
+app.use(helmet());
 
 // Middleware to log incoming requests
 app.use((req, res, next) => {
