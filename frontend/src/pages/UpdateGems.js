@@ -4,9 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 import '../CSS/GemAddForm.css';
 import Header from '../components/Header';
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../hooks/useAuthContext'; // Import useAuthContext for token
 import Swal from 'sweetalert2';
-
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
@@ -25,10 +24,13 @@ function UpdateGems() {
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [emptyFields, setEmptyFields] = useState([]);
-  const nav = useNavigate();
   const [images, setImages] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
-
+  const nav = useNavigate();
+  
+  const { user } = useAuthContext(); // Get user context for token
+  const { logout } = useLogout();
+  
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -59,34 +61,17 @@ function UpdateGems() {
       formData.append('quantity', quantity);
       formData.append('price', price);
       formData.append('description', description);
-
       formData.append('image', images[0]);
 
       const emptyFields = [];
-      if (name === '') {
-        emptyFields.push('name');
-      }
-      if (type === '') {
-        emptyFields.push('type');
-      }
-      if (shape === '') {
-        emptyFields.push('shape');
-      }
-      if (size === '') {
-        emptyFields.push('size');
-      }
-      if (color === '') {
-        emptyFields.push('color');
-      }
-      if (quantity === '') {
-        emptyFields.push('quantity');
-      }
-      if (price === '') {
-        emptyFields.push('price');
-      }
-      if (description === '') {
-        emptyFields.push('description');
-      }
+      if (name === '') emptyFields.push('name');
+      if (type === '') emptyFields.push('type');
+      if (shape === '') emptyFields.push('shape');
+      if (size === '') emptyFields.push('size');
+      if (color === '') emptyFields.push('color');
+      if (quantity === '') emptyFields.push('quantity');
+      if (price === '') emptyFields.push('price');
+      if (description === '') emptyFields.push('description');
 
       if (emptyFields.length > 0) {
         setEmptyFields(emptyFields);
@@ -94,22 +79,28 @@ function UpdateGems() {
         return;
       }
 
-      const response = await fetch(`/api/gems/${_id}`, {
-        method: 'PATCH',
-        body: formData,
-      });
+      try {
+        const response = await fetch(`/api/gems/${_id}`, {
+          method: 'PATCH',
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${user?.token}`, // Include the token in the request headers
+          },
+        });
 
-      const json = await response.json();
+        const json = await response.json();
 
-      setGem(json); // Update gem state with the updated gem data
-
-      Swal.fire(
-        'Gem Updated',
-        'Gem details were successfully updated!',
-        'success'
-      ); // Show SweetAlert success alert
-
-      nav('/GemAdminHome');
+        if (response.ok) {
+          setGem(json); // Update gem state with the updated gem data
+          Swal.fire('Gem Updated', 'Gem details were successfully updated!', 'success'); // Show SweetAlert success alert
+          nav('/GemAdminHome');
+        } else {
+          setError(json.error);
+        }
+      } catch (err) {
+        console.error('Failed to update gem:', err);
+        setError('An error occurred while updating the gem.');
+      }
     } else {
       alert('Please upload an image');
     }
@@ -117,44 +108,44 @@ function UpdateGems() {
 
   useEffect(() => {
     const fetchGems = async () => {
-      const response = await fetch(`/api/gems/${_id}`);
-      const json = await response.json();
+      try {
+        const response = await fetch(`/api/gems/${_id}`, {
+          headers: {
+            Authorization: `Bearer ${user?.token}`, // Include the token in the request headers
+          },
+        });
+        const json = await response.json();
 
-      setGem(json);
-      console.log(json);
-
-      if (!response.ok) {
-        setError(json.error);
-        setEmptyFields(json.emptyFields);
-      }
-
-      if (response.ok) {
-        setName(json.name);
-        setType(json.type);
-        setShape(json.shape);
-        setSize(json.size);
-        setColor(json.color);
-        setQuantity(json.quantity);
-        setPrice(json.price);
-        setDescription(json.description);
-        setError(null);
-        setEmptyFields([]);
-        console.log(response);
-        setSelectedShape(json.shape);
-        setImages([json.image]);
-        setImageUrl(json.gem_img);
+        if (response.ok) {
+          setGem(json);
+          setName(json.name);
+          setType(json.type);
+          setShape(json.shape);
+          setSize(json.size);
+          setColor(json.color);
+          setQuantity(json.quantity);
+          setPrice(json.price);
+          setDescription(json.description);
+          setSelectedShape(json.shape);
+          setImages([json.image]);
+          setImageUrl(json.gem_img);
+          setError(null);
+          setEmptyFields([]);
+        } else {
+          setError(json.error);
+          setEmptyFields(json.emptyFields);
+        }
+      } catch (err) {
+        console.error('Failed to fetch gem details:', err);
+        setError('An error occurred while fetching the gem details.');
       }
     };
     fetchGems();
-  }, []);
-
-  const { logout } = useLogout();
-  const { user } = useAuthContext();
-  const navigate = useNavigate();
+  }, [_id, user?.token]); // Include user.token in dependency array
 
   const handleClick = () => {
     logout();
-    navigate('/');
+    nav('/');
   };
 
   return (
@@ -204,9 +195,7 @@ function UpdateGems() {
                       type="text"
                       onChange={(e) => setName(e.target.value)}
                       value={name}
-                      className={`gem-input ${
-                        emptyFields.includes('name') ? 'error' : ''
-                      }`}
+                      className={`gem-input ${emptyFields.includes('name') ? 'error' : ''}`}
                     />
                     {emptyFields.includes('name') && (
                       <div className="gem-admin-_error">Please enter a name.</div>
@@ -239,9 +228,7 @@ function UpdateGems() {
                       type="text"
                       onChange={(e) => setType(e.target.value)}
                       value={type}
-                      className={`gem-input ${
-                        emptyFields.includes('type') ? 'error' : ''
-                      }`}
+                      className={`gem-input ${emptyFields.includes('type') ? 'error' : ''}`}
                     />
                     {emptyFields.includes('type') && (
                       <div className="gem-admin-_error">Please enter a type.</div>
@@ -273,9 +260,7 @@ function UpdateGems() {
                       type="number"
                       onChange={(e) => setSize(e.target.value)}
                       value={size}
-                      className={`gem-input ${
-                        emptyFields.includes('size') ? 'error' : ''
-                      }`}
+                      className={`gem-input ${emptyFields.includes('size') ? 'error' : ''}`}
                     />
 
                     {emptyFields.includes('size') && (
@@ -288,9 +273,7 @@ function UpdateGems() {
                       type="text"
                       onChange={(e) => setColor(e.target.value)}
                       value={color}
-                      className={`gem-input ${
-                        emptyFields.includes('color') ? 'error' : ''
-                      }`}
+                      className={`gem-input ${emptyFields.includes('color') ? 'error' : ''}`}
                     />
 
                     {emptyFields.includes('color') && (
@@ -302,9 +285,7 @@ function UpdateGems() {
                       type="number"
                       onChange={(e) => setQuantity(e.target.value)}
                       value={quantity}
-                      className={`gem-input ${
-                        emptyFields.includes('quantity') ? 'error' : ''
-                      }`}
+                      className={`gem-input ${emptyFields.includes('quantity') ? 'error' : ''}`}
                     />
 
                     {emptyFields.includes('quantity') && (
@@ -316,9 +297,7 @@ function UpdateGems() {
                       type="number"
                       onChange={(e) => setPrice(e.target.value)}
                       value={price}
-                      className={`gem-input ${
-                        emptyFields.includes('price') ? 'error' : ''
-                      }`}
+                      className={`gem-input ${emptyFields.includes('price') ? 'error' : ''}`}
                     />
 
                     {emptyFields.includes('price') && (
@@ -333,9 +312,7 @@ function UpdateGems() {
                       type="textarea"
                       onChange={(e) => setDescription(e.target.value)}
                       value={description}
-                      className={`gem-input ${
-                        emptyFields.includes('description') ? 'error' : ''
-                      }`}
+                      className={`gem-input ${emptyFields.includes('description') ? 'error' : ''}`}
                     />
 
                     {emptyFields.includes('description') && (

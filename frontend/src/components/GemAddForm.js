@@ -5,9 +5,12 @@ import TextareaAutosize from 'react-textarea-autosize';
 import '../CSS/GemAddForm.css';
 import Header from '../components/Header';
 import Swal from 'sweetalert2';
+import { useAuthContext } from '../hooks/useAuthContext'; // Import useAuthContext for token
 
 const GemAddForm = () => {
     const { dispatch } = useGemsContext();
+    const { user } = useAuthContext(); // Get user context for token
+    const nav = useNavigate();
 
     const [name, setName] = useState('');
     const [type, setType] = useState('');
@@ -21,7 +24,6 @@ const GemAddForm = () => {
     const [error, setError] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
     const [previewImage, setPreviewImage] = useState(null);
-    const nav = useNavigate();
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -94,38 +96,42 @@ const GemAddForm = () => {
             return;
         }
 
-        const response = await fetch('/api/gems', {
-            method: 'POST',
-            body: formData,
-        });
+        try {
+            const response = await fetch('/api/gems', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    Authorization: `Bearer ${user?.token}`, // Include the token in the request headers
+                },
+            });
 
-        const json = await response.json();
+            const json = await response.json();
 
-        if (!response.ok) {
-            setError(json.error);
+            if (!response.ok) {
+                setError(json.error);
+            } else {
+                setName('');
+                setType('');
+                setShape('');
+                setSize('');
+                setColor('');
+                setQuantity('');
+                setPrice('');
+                setDescription('');
+                setError(null);
+                setEmptyFields([]);
+                Swal.fire(
+                    'Gem Added',
+                    'Gem was successfully added to the database!',
+                    'success'
+                ); // Show SweetAlert success alert
+                dispatch({ type: 'CREATE_GEM', payload: json });
+                nav('/GemAdminHome');
+            }
+        } catch (err) {
+            console.error('Failed to add gem:', err);
+            setError('An error occurred while adding the gem.');
         }
-
-        if (response.ok) {
-            setName('');
-            setType('');
-            setShape('');
-            setSize('');
-            setColor('');
-            setQuantity('');
-            setPrice('');
-            setDescription('');
-            setError(null);
-            setEmptyFields([]);
-            Swal.fire(
-                'Gem Added',
-                'Gem was successfully added to the database!',
-                'success'
-            ); // Show SweetAlert success alert
-            console.log('New Gem Added', json);
-            dispatch({ type: 'CREATE_GEM', payload: json });
-        }
-
-        nav('/GemAdminHome');
     };
 
     return (
@@ -148,8 +154,7 @@ const GemAddForm = () => {
                                         type="text"
                                         onChange={(e) => setName(e.target.value)}
                                         value={name}
-                                        className={`gem-input ${emptyFields.includes('name') ? 'error' : ''
-                                            }`}
+                                        className={`gem-input ${emptyFields.includes('name') ? 'error' : ''}`}
                                     />
                                     {emptyFields.includes('name') && (
                                         <div className="gem-admin-_error">Please enter a name.</div>
@@ -185,8 +190,7 @@ const GemAddForm = () => {
                                         type="text"
                                         onChange={(e) => setType(e.target.value)}
                                         value={type}
-                                        className={`gem-input ${emptyFields.includes('type') ? 'error' : ''
-                                            }`}
+                                        className={`gem-input ${emptyFields.includes('type') ? 'error' : ''}`}
                                     />
                                     {emptyFields.includes('type') && (
                                         <div className="gem-admin-_error">Please enter a type.</div>
@@ -219,8 +223,7 @@ const GemAddForm = () => {
                                         type="number"
                                         onChange={(e) => setSize(e.target.value)}
                                         value={size}
-                                        className={`gem-input ${emptyFields.includes('size') ? 'error' : ''
-                                            }`}
+                                        className={`gem-input ${emptyFields.includes('size') ? 'error' : ''}`}
                                     />
 
                                     {emptyFields.includes('size') && (
@@ -233,8 +236,7 @@ const GemAddForm = () => {
                                         type="text"
                                         onChange={(e) => setColor(e.target.value)}
                                         value={color}
-                                        className={`gem-input ${emptyFields.includes('color') ? 'error' : ''
-                                            }`}
+                                        className={`gem-input ${emptyFields.includes('color') ? 'error' : ''}`}
                                     />
 
                                     {emptyFields.includes('color') && (
@@ -246,8 +248,7 @@ const GemAddForm = () => {
                                         type="number"
                                         onChange={(e) => setQuantity(e.target.value)}
                                         value={quantity}
-                                        className={`gem-input ${emptyFields.includes('quantity') ? 'error' : ''
-                                            }`}
+                                        className={`gem-input ${emptyFields.includes('quantity') ? 'error' : ''}`}
                                     />
 
                                     {emptyFields.includes('quantity') && (
@@ -259,8 +260,7 @@ const GemAddForm = () => {
                                         type="number"
                                         onChange={(e) => setPrice(e.target.value)}
                                         value={price}
-                                        className={`gem-input ${emptyFields.includes('price') ? 'error' : ''
-                                            }`}
+                                        className={`gem-input ${emptyFields.includes('price') ? 'error' : ''}`}
                                     />
 
                                     {emptyFields.includes('price') && (
@@ -275,8 +275,7 @@ const GemAddForm = () => {
                                         type="textarea"
                                         onChange={(e) => setDescription(e.target.value)}
                                         value={description}
-                                        className={`gem-input ${emptyFields.includes('desc') ? 'error' : ''
-                                            }`}
+                                        className={`gem-input ${emptyFields.includes('desc') ? 'error' : ''}`}
                                     />
 
                                     {emptyFields.includes('desc') && (

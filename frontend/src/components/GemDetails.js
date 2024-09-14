@@ -1,24 +1,38 @@
 import { useState } from 'react';
 import { useGemsContext } from '../hooks/useGemsContext';
 import { Link } from 'react-router-dom';
-import ConfirmationModal from './ConfirmationModal';
 import '../CSS/GemDetails.css';
 import Swal from 'sweetalert2';
+import { useAuthContext } from '../hooks/useAuthContext'; // Import useAuthContext for token
 
 const GemDetails = ({ gem }) => {
   const { dispatch } = useGemsContext();
+  const { user } = useAuthContext(); // Get user context for token
 
+  // Function to handle gem deletion
   const handleDelete = async () => {
-    const response = await fetch('/api/gems/' + gem._id, {
-      method: 'DELETE',
-    });
+    try {
+      const response = await fetch('/api/gems/' + gem._id, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${user?.token}`, // Include the token in the request headers
+        },
+      });
 
-    if (response.ok) {
-      dispatch({ type: 'DELETE_GEM', payload: gem });
-      Swal.fire('Gem Deleted', '', 'success');
+      if (response.ok) {
+        dispatch({ type: 'DELETE_GEM', payload: gem });
+        Swal.fire('Gem Deleted', '', 'success');
+      } else {
+        const json = await response.json();
+        Swal.fire('Error', json.error || 'Failed to delete gem', 'error');
+      }
+    } catch (err) {
+      console.error('Failed to delete gem:', err);
+      Swal.fire('Error', 'An error occurred while deleting the gem.', 'error');
     }
   };
 
+  // Function to handle confirmation dialog for deletion
   const handleConfirm = () => {
     Swal.fire({
       title: 'Confirm Deletion',
@@ -30,11 +44,12 @@ const GemDetails = ({ gem }) => {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDelete();
+        handleDelete(); // Call handleDelete if confirmed
       }
     });
   };
 
+  // Function to handle cancellation of deletion
   const handleCancel = () => {
     Swal.fire({
       title: 'Deletion Cancelled',
