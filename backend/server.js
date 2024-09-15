@@ -1,63 +1,63 @@
-require("dotenv").config();
-const nodemailer = require("nodemailer");
-const cors = require("cors");
-const express = require("express");
-const mongoose = require("mongoose");
+require('dotenv').config(); // Load environment variables from .env file
+const nodemailer = require('nodemailer'); // Nodemailer for sending emails
+const cors = require('cors'); // CORS middleware to handle cross-origin requests
+const express = require('express'); // Express framework
+const mongoose = require('mongoose'); // MongoDB ORM
+const rateLimit = require('express-rate-limit'); // Rate limit middleware
+const helmet = require('helmet'); // Helmet for setting security headers
 
-
-//Kalinga
+// Importing routes for various functionalities
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const deletedUserRoutes = require('./routes/deletedUserRoutes.js');
-const userModel = require('./models/users.model.js');
-const deletedUserModel = require('./models/deletedUsersModel.js')
-// malika
 const feedbackRoutes = require('./routes/feedbacks');
-
-//janith
 const gemRoutes = require('./routes/gems');
 const cartRoutes = require('./routes/cartRoutes.js');
-
-//Daham
-
-//bimsara
-const RequestModel = require('./models/RequestModel.js');
-const ReplyModel = require('./models/Replies');
-
-//Vidxni
 const paymentRoutes = require('./routes/payments');
-
-// Ruchira
 const jewelleryRoutes = require('./routes/jewelleryes');
-
-// vihangi
 const planRoutes = require('./routes/plans');
 const installmentsRoutes = require('./routes/installments');
-
-//daham
 const jwellRoutes = require('./routes/jewellers');
-
-//ammaar
 const gemAdminRoutes = require('./routes/gemsAdmin');
 
-// express app
+// Importing models
+const userModel = require('./models/users.model.js');
+const deletedUserModel = require('./models/deletedUsersModel.js');
+const RequestModel = require('./models/RequestModel.js');
+const ReplyModel = require('./models/Replies.js');
+
+// Initialize express app
 const app = express();
 
-// middleware
+// Middleware to parse incoming JSON requests
 app.use(express.json());
+
+// Enable CORS
 app.use(cors());
 
+// Use Helmet to set various HTTP headers for security
+app.use(helmet());
+
+// Middleware to log incoming requests
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
 
-// routes
+// Rate limiting middleware
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
+  message: "Too many requests from this IP, please try again later."
+});
 
-//malika
+// Apply rate limiting to all API routes
+app.use('/api/', apiLimiter);
+
+// Feedback route (Malika's feature)
 app.use('/api/feedbacks', feedbackRoutes);
 
-//bimsara
+// Routes for managing requests and replies (Bimsara's feature)
 app.get('/getUsers', (req, res) => {
   RequestModel.find({}, (err, result) => {
     if (err) {
@@ -69,7 +69,7 @@ app.get('/getUsers', (req, res) => {
 });
 
 app.get('/getUsersRequests/:_id', (req, res) => {
-  const { _id } = req?.params;
+  const { _id } = req.params;
   RequestModel.find({ user: _id }, (err, result) => {
     if (err) {
       res.json(err);
@@ -79,17 +79,7 @@ app.get('/getUsersRequests/:_id', (req, res) => {
   });
 });
 
-// app.get('/getUsers', (req, res) => {
-//   const loggedInUserId = req.user.id; // assuming you have implemented user authentication
-//   UserModel.findById(loggedInUserId, (err, result) => {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       res.json(result);
-//     }
-//   });
-// });
-
+// Create a new user request
 app.post('/createUser', async (req, res) => {
   const user = req.body;
   const newUser = new RequestModel(user);
@@ -97,6 +87,7 @@ app.post('/createUser', async (req, res) => {
   res.json(user);
 });
 
+// Get all replies
 app.get('/getReply', (req, res) => {
   ReplyModel.find({}, (err, result) => {
     if (err) {
@@ -107,8 +98,9 @@ app.get('/getReply', (req, res) => {
   });
 });
 
+// Get replies by request ID
 app.get('/getReply/:reqId', (req, res) => {
-  const { reqId } = req?.params;
+  const { reqId } = req.params;
   ReplyModel.find({ reqId }, (err, result) => {
     if (err) {
       res.json(err);
@@ -118,14 +110,15 @@ app.get('/getReply/:reqId', (req, res) => {
   });
 });
 
+// Get replies by user ID
 app.get('/getReplyByUser/:uid', (req, res) => {
-  const { uid } = req?.params;
+  const { uid } = req.params;
   RequestModel.find({ user: uid }, (err, result) => {
     if (err) {
       res.json(err);
     } else {
       result?.data?.map((r) => {
-        ReplyModel.countDocuments({ reqId: r?._id }, (err, result2) => {
+        ReplyModel.countDocuments({ reqId: r._id }, (err, result2) => {
           if (err) {
             res.json(err);
           } else {
@@ -137,14 +130,15 @@ app.get('/getReplyByUser/:uid', (req, res) => {
   });
 });
 
+// Create a reply
 app.post('/createReply', async (req, res) => {
   const user = req.body;
   const newUser = new ReplyModel(user);
   await newUser.save();
-
   res.json(user);
 });
 
+// Update gem shape by ID
 app.put('/updateGshape', async (req, res) => {
   const newGemShape = req.body.newGemShape;
   const id = req.body.id;
@@ -153,13 +147,14 @@ app.put('/updateGshape', async (req, res) => {
     await RequestModel.findById(id, (err, updatedShape) => {
       updatedShape.GemShape = newGemShape;
       updatedShape.save();
-      res.send('update');
+      res.send('Updated');
     });
   } catch (err) {
     console.log(err);
   }
 });
 
+// Update gem color by ID
 app.put('/updateGsCl', async (req, res) => {
   const newGemColour = req.body.newGemColour;
   const id = req.body.id;
@@ -168,43 +163,30 @@ app.put('/updateGsCl', async (req, res) => {
     await RequestModel.findById(id, (err, updatedColor) => {
       updatedColor.GemColor = newGemColour;
       updatedColor.save();
-      res.send('update');
+      res.send('Updated');
     });
   } catch (err) {
     console.log(err);
   }
 });
 
+// Update gem description by ID
 app.put('/updateDes', async (req, res) => {
   const newGemDescription = req.body.newGemDescription;
   const id = req.body.id;
 
   try {
-    await RequestModel.findById(id, (err, updatedDescrition) => {
-      updatedDescrition.Description = newGemDescription;
-      updatedDescrition.save();
-      res.send('update');
+    await RequestModel.findById(id, (err, updatedDescription) => {
+      updatedDescription.Description = newGemDescription;
+      updatedDescription.save();
+      res.send('Updated');
     });
   } catch (err) {
     console.log(err);
   }
 });
 
-// app.put('/updateWt', async (req, res) => {
-//   const newGemWeight = req.body.newGemWeight;
-//   const id = req.body.id;
-
-//   try {
-//     await UserModel.findById(id, (err, updatedWeight) => {
-//       updatedWeight.Weight = newGemWeight;
-//       updatedWeight.save();
-//       res.send('update');
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
-
+// Update gem quantity by ID
 app.put('/updateQt', async (req, res) => {
   const newGemQuantity = req.body.newGemQuantity;
   const id = req.body.id;
@@ -213,26 +195,29 @@ app.put('/updateQt', async (req, res) => {
     await RequestModel.findById(id, (err, updatedQuantity) => {
       updatedQuantity.Quantity = newGemQuantity;
       updatedQuantity.save();
-      res.send('update');
+      res.send('Updated');
     });
   } catch (err) {
     console.log(err);
   }
 });
 
+// Delete a request by ID
 app.delete('/delete/:id', async (req, res) => {
   const id = req.params.id;
 
   await RequestModel.findByIdAndRemove(id).exec();
-  res.send('deleted');
+  res.send('Deleted');
 });
 
+// Delete a reply by ID
 app.delete('/deleteReply/:id', async (req, res) => {
   const { id } = req.params;
   await ReplyModel.findByIdAndDelete(id);
   res.json({ message: 'Reply deleted successfully' });
 });
 
+// Update a reply
 app.put('/updateReply', async (req, res) => {
   const { _id, reply } = req.body;
 
@@ -240,65 +225,54 @@ app.put('/updateReply', async (req, res) => {
     await ReplyModel.findById(_id, (err, upd) => {
       upd.reply = reply;
       upd.save();
-      res.send('updated');
+      res.send('Updated');
     });
   } catch (err) {
     console.log(err);
   }
 });
 
-//Kalinga
+// User management routes (Kalinga's feature)
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/deletedusers', deletedUserRoutes);
 
-app.get('/api/allCurrentAndDeletedUsers' , async (req , res ) => {
+// Get all current and deleted users
+app.get('/api/allCurrentAndDeletedUsers', async (req, res) => {
   try {
     const userData = await userModel.find();
     const deletedUserData = await deletedUserModel.find();
-    res.json({userData,deletedUserData});
+    res.json({ userData, deletedUserData });
   } catch (error) {
-    res.status(500).json({error: 'An error occurred'});
+    res.status(500).json({ error: 'An error occurred' });
   }
-})
+});
 
-//janith
+// Gem and jewelry management routes (Janith's and Ruchira's features)
 app.use('/api/gems&jewelleries', gemRoutes);
 app.use('/api/cart', cartRoutes);
 
-//Vidxni
+// Payment management routes (Vidxni's feature)
 app.use('/api/payments', paymentRoutes);
 
-// Ruchira
-app.use('/api/jewelleryes', jewelleryRoutes);
-
-// vihangi
+// Plan and installment routes (Vihangi's feature)
 app.use('/api/plans', planRoutes);
 app.use('/api/installments', installmentsRoutes);
 
-//daham
-
+// Jeweler management routes (Daham's feature)
 app.use('/api/jewells', jwellRoutes);
-app.use('/api/jewelleryes', jwellRoutes);
-// app.use('/api/jewelleryes', jwellRoutes);
-// app.use("/api/jewelleryes", jwellRoutes);
 
-//ammaar
+// Admin routes for gem management (Ammar's feature)
 app.use('/api/gems', gemAdminRoutes);
 
-//routes
-
-// connect to db
+// Connect to MongoDB and start the server
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    // listen for requests
     app.listen(process.env.PORT, () => {
-      console.log('connected to db & listening on port', process.env.PORT);
+      console.log('Connected to DB & listening on port', process.env.PORT);
     });
   })
   .catch((error) => {
     console.log(error);
   });
-
-process.env;
