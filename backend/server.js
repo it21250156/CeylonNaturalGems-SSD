@@ -4,6 +4,11 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 
+const passport = require('passport');
+const session = require('express-session');
+require('./passport-setup'); // Add this line
+const authRoutes = require('./routes/authRoutes.js');
+
 
 //Kalinga
 const userRoutes = require('./routes/userRoutes.js');
@@ -52,6 +57,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// Express session middleware
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+}));
+
+// Initialize Passport and restore session
+app.use(passport.initialize());
+app.use(passport.session());
+app.use('/auth', authRoutes);
+
 // routes
 
 //malika
@@ -78,17 +95,6 @@ app.get('/getUsersRequests/:_id', (req, res) => {
     }
   });
 });
-
-// app.get('/getUsers', (req, res) => {
-//   const loggedInUserId = req.user.id; // assuming you have implemented user authentication
-//   UserModel.findById(loggedInUserId, (err, result) => {
-//     if (err) {
-//       res.json(err);
-//     } else {
-//       res.json(result);
-//     }
-//   });
-// });
 
 app.post('/createUser', async (req, res) => {
   const user = req.body;
