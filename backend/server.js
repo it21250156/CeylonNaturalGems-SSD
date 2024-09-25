@@ -7,6 +7,13 @@ const rateLimit = require('express-rate-limit'); // Rate limit middleware
 const helmet = require('helmet'); // Helmet for setting security headers
 
 // Importing routes for various functionalities
+const passport = require('passport');
+const session = require('express-session');
+require('./passport-setup'); // Add this line
+const authRoutes = require('./routes/authRoutes.js');
+
+
+//Kalinga
 const userRoutes = require('./routes/userRoutes.js');
 const adminRoutes = require('./routes/adminRoutes.js');
 const deletedUserRoutes = require('./routes/deletedUserRoutes.js');
@@ -50,6 +57,19 @@ const apiLimiter = rateLimit({
   max: 100, // Limit each IP to 100 requests per `window` (15 minutes)
   message: "Too many requests from this IP, please try again later."
 });
+// Express session middleware
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false,
+}));
+
+// Initialize Passport and restore session
+app.use(passport.initialize());
+app.use(passport.session());
+app.use('/auth', authRoutes);
+
+// routes
 
 // Apply rate limiting to all API routes
 app.use('/api/', apiLimiter);
@@ -276,3 +296,5 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+  
