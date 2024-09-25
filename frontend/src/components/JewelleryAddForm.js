@@ -2,9 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextareaAutosize from 'react-textarea-autosize';
 import { useJewelleryesContext } from '../hooks/useJewelleryesContext';
+import Swal from 'sweetalert2';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const JewelleryAddForm = () => {
   const { dispatch } = useJewelleryesContext();
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const [name, setName] = useState('');
   const [type, setType] = useState('');
@@ -69,34 +73,44 @@ const JewelleryAddForm = () => {
     if (emptyFields.length > 0) {
       setEmptyFields(emptyFields);
       setError('Please fill in all required fields.');
+      return;
     }
 
-    const response = await fetch('/api/jewelleryes', {
-      method: 'POST',
-      body: formData,
-    });
+    try {
+      const response = await fetch('/api/jewelleryes', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      });
 
-    const json = await response.json();
+      const json = await response.json();
 
-    if (!response.ok) {
-      setError(json.error);
+      if (!response.ok) {
+        setError(json.error);
+      } else {
+        setName('');
+        setType('');
+        setGender('');
+        setMetal('');
+        setGemstone('');
+        setDescription('');
+        setPrice('');
+        setError(null);
+        setEmptyFields([]);
+        Swal.fire(
+          'Jewellery Added',
+          'Jewellery was successfully added to the database!',
+          'success'
+        );
+        dispatch({ type: 'CREATE_jewellery', payload: json });
+        navigate('/JewelleryAdminDashbord');
+      }
+    } catch (error) {
+      console.error(error);
+      setError('An error occurred while adding the jewellery.');
     }
-
-    if (response.ok) {
-      setName('');
-      setType('');
-      setGender('');
-      setMetal('');
-      setGemstone('');
-      setDescription('');
-      setPrice('');
-      setError(null);
-      setEmptyFields([]);
-      window.alert('Jewelleres was successfully add to the database!');
-      console.log('New jewellery Added', json);
-      dispatch({ type: 'CREATE_jewellery', payload: json });
-    }
-    navigator('/JewelleryAdminDashbord');
   };
 
   return (

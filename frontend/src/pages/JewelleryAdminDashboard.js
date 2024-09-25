@@ -40,6 +40,7 @@ const JewelleryAdminDashboard = () => {
 
   const { logout } = useLogout();
   const { user } = useAuthContext();
+
   const handleClick = () => {
     logout();
     navigate('/');
@@ -49,20 +50,27 @@ const JewelleryAdminDashboard = () => {
 
   useEffect(() => {
     const fetchJewelleryes = async () => {
-      const response = await fetch('/api/jewelleryes');
-      const json = await response.json();
+      if (user) {
+        const response = await fetch('/api/jewelleryes', {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
 
-      if (response.ok) {
-        setjewellery(json);
-        const filteredJewellery = json.filter(
-          (jwl) => jwl.gender === activeButton
-        );
-        setFilteredJwl(filteredJewellery);
+        const json = await response.json();
+
+        if (response.ok) {
+          setjewellery(json);
+          const filteredJewellery = json.filter(
+            (jwl) => jwl.gender === activeButton
+          );
+          setFilteredJwl(filteredJewellery);
+        }
       }
     };
 
     fetchJewelleryes();
-  }, [activeButton]);
+  }, [activeButton, user]);
 
   useEffect(() => {
     const sortedJewellery = [...filteredJwl];
